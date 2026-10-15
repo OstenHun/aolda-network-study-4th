@@ -1,0 +1,192 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="최종 IP와 링크의 다음 상대, ARP 캐시, ICMP와 HTTP의 관찰 범위를 세 문장으로 정리한다. 두 혼동과 개발 사례를 기존 교재·실습·분리 해설에 연결한다."><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"><title>3주차 핵심 정리 — 다음 홉·ARP·서비스 확인 · 아올다 네트워크</title><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+
+
+/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+
+.topic-path,.page-links{display:flex;flex-wrap:wrap;gap:.5rem 1rem}.topic-path{border-bottom:1px solid var(--line);padding:1rem 0;font-size:.85rem}.topic-path [aria-current]{font-weight:800;text-decoration-thickness:3px}.next-hop-model{background:var(--wash);padding:1.25rem;border-left:3px solid var(--brand);margin-bottom:2rem}.next-hop-model h2{margin-top:0}.next-hop-model select{font:inherit;color:var(--blue);max-width:100%;padding:.5rem}.frame-diagram{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}.frame-diagram>div{border:1px solid var(--line);background:white;padding:1rem}.local-status{font-size:.85rem;color:#466477}button:disabled{opacity:.65;cursor:default}@media(max-width:650px){.frame-diagram{grid-template-columns:1fr}}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="essentials.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 3주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html" aria-current="page">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실험</a><a href="worksheet.html">함께 설명</a><a href="personal-record.html">개인 기록</a><a href="review.html">복습 문제</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">LAN · MAC · ARP · ICMP</p><h1>3주차 핵심 정리 — 다음 홉·ARP·서비스 확인</h1><p>최종 IP와 링크의 다음 상대, ARP 캐시, ICMP와 HTTP의 관찰 범위를 세 문장으로 정리한다. 두 혼동과 개발 사례를 기존 교재·실습·분리 해설에 연결한다.</p></div><nav class="topic-path" aria-label="개념 학습 순서"><a href="recall.html">1. 복습 진단</a><a href="lan-mac.html">2. LAN·MAC</a><a href="next-hop.html">3. 다음 홉</a><a href="arp.html">4. ARP·캐시</a><a href="icmp.html">5. ICMP·ping</a></nav><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#꼭-기억할-개념-세-개">꼭 기억할 개념 세 개</a><a href="#w03-k1--최종-ip와-링크에서-보낼-mac은-다를-수-있다">W03-K1 · 최종 IP와 링크에서 보낼 MAC은 다를 수 있다</a><a href="#w03-k2--arp는-ipv4-다음-상대의-링크-주소를-찾는다">W03-K2 · ARP는 IPv4 다음 상대의 링크 주소를 찾는다</a><a href="#w03-k3--확인-도구마다-묻는-질문이-다르다">W03-K3 · 확인 도구마다 묻는 질문이 다르다</a><a href="#헷갈리는-부분-두-가지">헷갈리는 부분 두 가지</a><a href="#개발-상황으로-설명하기">개발 상황으로 설명하기</a><a href="#다음-주에-다시-설명하기">다음 주에 다시 설명하기</a></div></nav><article>
+<ul>
+<li>사용법: 기존 개념 읽기의 마지막 5분과 공통 질문 하나를 이 자료로 대체한다. 별도 발표·활동지·필수 기록은 추가하지 않는다. 기존 실습 완료 기준은 유지한다.</li>
+</ul>
+<h2 id="꼭-기억할-개념-세-개">꼭 기억할 개념 세 개</h2>
+<h3 id="w03-k1--최종-ip와-링크에서-보낼-mac은-다를-수-있다">W03-K1 · 최종 IP와 링크에서 보낼 MAC은 다를 수 있다</h3>
+<p><strong>기억 문장:</strong> 단순 Ethernet·IPv4 라우팅 모형에서 IP 목적지는 최종 대상이고, 프레임 목적 MAC은 이번 링크의 다음 상대다.</p>
+<p>원격 목적지로 가는 <code>via</code> 경로라면 첫 링크에서 보통 게이트웨이의 MAC이 필요하다. NAT 없는 모형이며 가상망·터널의 내부 동작까지 이 출력만으로 단정하지 않는다. <a href="topics/03-next-hop.md">다음 홉 교재</a>, <a href="https://man7.org/linux/man-pages/man8/ip-route.8.html">ip-route(8)</a>.</p>
+<h3 id="w03-k2--arp는-ipv4-다음-상대의-링크-주소를-찾는다">W03-K2 · ARP는 IPv4 다음 상대의 링크 주소를 찾는다</h3>
+<p><strong>기억 문장:</strong> Ethernet의 IPv4 통신에서 필요한 다음 상대의 MAC 매핑이 없으면 ARP를 사용할 수 있으며 캐시가 있으면 새 요청이 안 보일 수 있다.</p>
+<p>ARP 브로드캐스트는 해당 링크 범위에서 전달된다. 원격 서버의 MAC을 라우터 너머로 ARP 조회하는 것으로 설명하지 않는다. <code>STALE</code>은 서버 사망 판정이 아니며, IPv6 이웃 탐색을 ARP와 같게 취급하지 않는다. <a href="topics/04-arp.md">ARP 교재</a>, <a href="https://www.rfc-editor.org/rfc/rfc826.html">RFC 826</a>, <a href="https://man7.org/linux/man-pages/man8/ip-neighbour.8.html">ip-neighbour(8)</a>.</p>
+<h3 id="w03-k3--확인-도구마다-묻는-질문이-다르다">W03-K3 · 확인 도구마다 묻는 질문이 다르다</h3>
+<p><strong>기억 문장:</strong> ping의 ICMP 반응·TCP 연결·HTTP 상태는 각각 따로 관찰해야 한다.</p>
+<p>ping 성공은 HTTP 서비스 정상을 보장하지 않는다. Echo 무응답과 HTTP 응답이 함께 관찰돼도 모순이 아니다. ping의 RTT를 API 전체 응답 시간으로 쓰지 않는다. <a href="topics/05-icmp.md">ICMP 교재</a>, <a href="https://man7.org/linux/man-pages/man8/ping.8.html">ping(8)</a>.</p>
+<h2 id="헷갈리는-부분-두-가지">헷갈리는 부분 두 가지</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>자주 섞는 설명</th>
+<th>구별하는 방법</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>프레임에 게이트웨이 MAC이 있으니 IP 목적지도 게이트웨이다</td>
+<td>NAT 없는 원격 전달 모형에서 최종 IP와 첫 링크 목적 MAC의 역할을 나누어 그린다</td>
+</tr>
+<tr>
+<td>ping이 안 되거나 ARP가 안 보이면 서버가 죽었다</td>
+<td>ICMP 정책·경로·이웃 캐시·관찰 인터페이스를 확인한다. HTTP 서버 상태와는 별도 증거다</td>
+</tr>
+</tbody></table></div>
+<h2 id="개발-상황으로-설명하기">개발 상황으로 설명하기</h2>
+<p><strong>출처 구분: 스터디 자체 문항.</strong> 아래는 개념 확인용 사례이며 특정 기업의 실제 출제 문제·빈출 문항을 뜻하지 않는다.</p>
+<p>같은 시각에 허가된 목적지의 ping은 무응답, 같은 호스트의 평문 HTTP 요청은 404 응답이다. 경로는 <code>via</code>이고 첫 이웃은 <code>REACHABLE</code>, 해당 캡처 구간에 새 ARP는 없다. 모두 설명용 사례이며 진행자 실측과 다른 조건이다.</p>
+<ol>
+<li><strong>W03-D1 · 설명:</strong> HTTP·ICMP·ARP 각각에서 관찰한 사실과 아직 모르는 것은?</li>
+<li><strong>W03-D2 · 조건 변경:</strong> 이웃 상태가 <code>STALE</code>로 바뀌면 HTTP 서버 장애로 판정할 수 있을까?</li>
+<li><strong>W03-D3 · 진단:</strong> 404가 의도한 원 서버에서 나온 것인지, ARP가 안 보인 이유가 캐시인지 무엇으로 확인할까?</li>
+</ol>
+<p>기존 질문 세 개 중 관련 질문 하나의 후속 발문으로 사용한다. 먼저 말하거나 짧게 적은 뒤 <a href="answers.html#%EA%B0%9C%EB%B0%9C-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">개발 질문 해설</a>을 연다. 해설을 읽었다는 사실로 직접 수행·독립 설명 완료를 표시하지 않는다.</p>
+<h2 id="다음-주에-다시-설명하기">다음 주에 다시 설명하기</h2>
+<p>게이트웨이의 MAC이 보이는데도 IP 목적지는 원격 서버로 남을 수 있는 이유는? 다음 주 시작의 기존 복습 시간에 조건 하나를 바꾸어 다시 묻는다. 막히면 위 교재로 돌아가고 선택 분량을 줄인다.</p>
+<p><a href="../week-01/concept-index.html">전체 개념 색인</a> · <a href="../week-01/interview-references.html">면접·개발 참고자료</a> · <a href="index.html">이번 주 학습 홈</a></p>
+</article></div></main><footer class="footer"><div class="shell"><a href="../week-02/index.html">2주차 복습</a><a href="../ssh-top-down/index.html">SSH 준비</a><a href="sources.html">출처</a><a href="validation.html">검증 상태</a><a href="#main">맨 위로</a></div></footer><script>(() => {
+  // The model changes explanatory labels only; it never sends packets.
+  const destination = document.querySelector('#destination');
+  destination?.addEventListener('change', () => {
+    const remote = destination.value === 'remote';
+    document.querySelector('#mac-target').textContent = remote ? '게이트웨이의 MAC · 이웃 IP 192.0.2.1' : 'B의 MAC · 이웃 IP 192.0.2.70';
+    document.querySelector('#ip-target').textContent = remote ? '198.51.100.20 · 원격 목적지' : '192.0.2.70 · B';
+    document.querySelector('#arp-target').textContent = `매핑이 없으면 ${remote ? '192.0.2.1' : '192.0.2.70'}의 MAC을 ARP로 묻습니다. 캐시에 있으면 새 ARP가 없을 수 있습니다.`;
+  });
+  const download = document.querySelector('#download-answers');
+  if (!download) return;
+  document.body.classList.add('js-ready');
+  const fields = [...document.querySelectorAll('textarea[data-answer]')];
+  const confirmed = document.querySelector('#confirm-saved');
+  const status = document.querySelector('#download-status');
+  let dirty = false;
+  fields.forEach(field => field.addEventListener('input', () => {
+    dirty = true;
+    confirmed.disabled = true;
+    status.textContent = '내용을 바꿨습니다. 다시 내려받고 저장 파일을 확인하세요.';
+  }));
+  window.addEventListener('beforeunload', event => {
+    if (dirty) { event.preventDefault(); event.returnValue = ''; }
+  });
+  confirmed.addEventListener('click', () => {
+    dirty = false;
+    confirmed.disabled = true;
+    status.textContent = '저장 확인을 기록했습니다. 내용을 바꾸면 다시 내려받으세요.';
+  });
+  download.addEventListener('click', () => {
+    const lines = ['# '+document.title+' — 내 기록','','요약: 작성자의 기록이다. 직접 수행·시연·설명용 trace·미수행을 구분하며 빈 답은 미작성으로 남긴다.','', '작성일: '+new Date().toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'}),''];
+    fields.forEach(field => lines.push('## '+field.dataset.answer,'',field.value.trim() || '미작성',''));
+    try {
+      const url = URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/markdown;charset=utf-8'}));
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'week-03-'+document.body.dataset.page.replace('.html','')+'-my-record.md';
+      document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      confirmed.disabled = false;
+      status.textContent = '다운로드를 요청했습니다. 파일을 열어 입력 내용이 있는지 확인하세요.';
+    } catch {
+      status.textContent = '다운로드를 시작하지 못했습니다. 입력을 별도 메모장에 복사해 저장하세요.';
+    }
+  });
+})();
+</script></body></html>

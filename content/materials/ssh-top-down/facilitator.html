@@ -1,0 +1,274 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="정상 준비·접속·성공한 이유 설명을 중심으로 진행한다. 접속되면 HTTP 실습으로 이어가고 오류가 있는 참가자만 증상별로 확인한다. NAT 실패 사례는 선택 자료이며 60분 순서는 조정안이다."><title>진행자 안내 — VM 준비부터 첫 SSH 로그인까지 · 아올다 네트워크</title><style>:root{font:17px/1.85 "Malgun Gothic","Apple SD Gothic Neo",sans-serif;color:#183448;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}body{margin:0}a{color:var(--blue);text-underline-offset:4px}a:hover{text-decoration-thickness:2px}button,a,summary,textarea{touch-action:manipulation}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.wrap{max-width:1220px;margin:auto;padding:0 32px}.skip{position:absolute;top:-100px;left:12px;background:white;padding:12px;z-index:4}.skip:focus{top:12px}header{border-bottom:1px solid var(--line)}.header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:18px;padding-bottom:18px}.brand{font-size:27px;font-weight:800;text-decoration:none;color:var(--brand);letter-spacing:-.05em}.brand span{display:block;font-size:12px;letter-spacing:0;color:#466477}.header nav{display:flex;gap:24px;flex-wrap:wrap;font-size:15px}.header nav a{text-decoration:none;padding:8px 0}.header [aria-current]{font-weight:700;border-bottom:2px solid var(--brand)}.hero{padding-top:52px;padding-bottom:38px}.eyebrow{color:var(--blue);font-size:13px;font-weight:700;letter-spacing:.025em;margin:0 0 16px}h1{font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.3;letter-spacing:-.05em;max-width:27ch;text-wrap:balance;margin:0 0 24px;word-break:keep-all}.lead{max-width:66ch;color:#466477;font-size:18px;margin:0}.primary,button,.next{display:inline-block;font:inherit;font-weight:700;border:1px solid var(--blue);padding:11px 20px;min-height:46px;border-radius:5px;background:var(--blue);color:white;text-decoration:none;cursor:pointer}.primary{margin-top:28px}.primary:hover,button:hover,.next:hover{background:#063d67}.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:58px;align-items:start;border-top:1px solid var(--line);padding-top:32px}.contents{position:sticky;top:20px;max-height:calc(100dvh - 40px);overflow:auto;font-size:13px;padding-bottom:10px}.contents summary{font-weight:700;cursor:pointer;padding:8px 0}.contents nav{display:grid;gap:3px}.contents a{padding:7px 10px;border-left:2px solid var(--line);text-decoration:none;line-height:1.5}.contents a:hover{background:var(--wash);border-color:var(--brand)}main{min-width:0}article{max-width:820px}h2{font-size:1.55rem;line-height:1.5;letter-spacing:-.035em;border-top:1px solid var(--line);padding-top:35px;margin:52px 0 20px}article>h2:first-child{border:0;margin-top:0;padding-top:0}h3{font-size:1.15rem;line-height:1.55;margin-top:32px}h2,h3,h4{word-break:keep-all;scroll-margin-top:24px}a[id]{scroll-margin-top:24px}p,li{word-break:keep-all;overflow-wrap:anywhere}p{margin:16px 0}li{margin:7px 0}ul,ol{padding-left:24px}strong{color:#103f60}blockquote{margin:25px 0;padding:4px 20px;border-left:3px solid var(--brand);background:var(--wash)}pre{position:relative;overflow:auto;max-width:100%;background:#f2f6f9;border-left:3px solid #8bb9d9;padding:20px;line-height:1.7;font-size:14px;border-radius:0 7px 7px 0}code,pre{font-family:Consolas,"Courier New",monospace}code{overflow-wrap:anywhere;font-size:.91em}pre code{overflow-wrap:normal;font-size:inherit}.code-actions{display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:12px;margin-top:-10px;color:#466477}.code-actions button{font-size:12px;padding:4px 12px;min-height:38px;background:white;color:var(--blue);border-color:#8aaec6}.table-scroll{overflow:auto;margin:22px 0;border:1px solid var(--line);border-radius:6px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.75;min-width:500px}th,td{text-align:left;vertical-align:top;padding:12px 15px;border-bottom:1px solid var(--line)}th{background:var(--wash)}tr:last-child td{border:0}td code{word-break:normal}.concept{margin:30px 0;padding:24px;background:var(--wash);border:1px solid var(--line);border-radius:7px}.concept figcaption{font-weight:700;color:var(--blue);margin-bottom:18px}.diagram{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0}.diagram li{padding:12px 0;margin:0;border-top:3px solid #71aad0}.diagram strong,.diagram span{display:block}.diagram strong{font-size:15px;margin-bottom:7px}.diagram span{font-size:13px;line-height:1.75;font-variant-numeric:tabular-nums}.concept>p{font-size:12px;color:#466477;margin:14px 0 0}.notice{background:var(--wash);border-left:3px solid var(--brand);padding:20px;margin-bottom:30px;font-size:14px}.notice p{margin:8px 0 15px}.answer{display:block;margin:12px 0 20px}.answer>span{display:block;font-size:14px;font-weight:700;margin-bottom:8px}textarea{display:block;width:100%;min-width:180px;min-height:100px;resize:vertical;border:1px solid #91acbd;border-radius:4px;padding:12px;font:15px/1.7 "Malgun Gothic",sans-serif;color:#183448;background:white}td .answer{margin:0}td .answer>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}small{font-size:12px;color:#466477}body[data-page="questions.html"] article>ul{list-style:none;padding:0}.next{margin:36px 0 60px}footer{border-top:1px solid var(--line);padding-top:24px!important;padding-bottom:38px!important;font-size:13px;color:#466477}footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}[hidden]{display:none!important}@media(max-width:850px){.layout{grid-template-columns:1fr;gap:25px}.contents{position:static;max-height:none}.contents nav{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:32px}article{max-width:none}.header{align-items:flex-start}.header nav{gap:8px 18px}}@media(max-width:540px){:root{font-size:16px}.wrap{padding-left:20px;padding-right:20px}.header{display:block}.header nav{margin-top:12px;font-size:14px}.brand span{display:inline;margin-left:14px}.hero{padding-bottom:28px}h1{font-size:32px;max-width:none}.lead{font-size:16px}.contents nav{grid-template-columns:1fr}.diagram{grid-template-columns:1fr;gap:6px}.concept{padding:18px}.diagram li{padding:10px 0}.diagram span{font-size:14px}.concept>p{font-size:13px}pre{padding:14px;font-size:13px}h2{font-size:23px}table{min-width:470px}.notice{padding:16px}body[data-page="questions.html"] table{min-width:600px}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}@media print{.contents,header,footer,.code-actions,.skip,button,.next{display:none!important}.layout{display:block;border:0}.wrap{max-width:none;padding:0}.hero{padding-top:0}h1{font-size:28px}.table-scroll{overflow:visible}table{min-width:0!important}pre{white-space:pre-wrap}.concept{break-inside:avoid}textarea{min-height:70px}}
+
+.settings-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}.concept img{width:100%;height:auto}.settings-fields textarea{min-width:0}@media(max-width:540px){.settings-fields{grid-template-columns:1fr}}
+
+/* Diagram labels remain legible beside the lesson prose. */
+.diagram strong{font-size:1rem}.diagram span{font-size:.9rem}.concept>p{font-size:.85rem;line-height:1.75}
+
+/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="facilitator.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header><div class="wrap header"><a class="brand" href="index.html">아올다<span>4기 네트워크 스터디</span></a><nav aria-label="주요 학습 자료"><a href="index.html">시작</a><a href="lesson.html">접속 교재</a><a href="questions.html">내 기록</a><a href="../week-01/index.html">HTTP 실습</a></nav></div></header><div class="wrap hero"><p class="eyebrow">VM 준비부터 첫 SSH 접속까지 · 진행자·해설</p><h1>진행자 안내 — VM 준비부터 첫 SSH 로그인까지</h1><p class="lead">정상 준비·접속·성공한 이유 설명을 중심으로 진행한다. 접속되면 HTTP 실습으로 이어가고 오류가 있는 참가자만 증상별로 확인한다. NAT 실패 사례는 선택 자료이며 60분 순서는 조정안이다.</p></div><div class="wrap layout"><aside class="contents"><details open><summary>이 페이지에서</summary><nav aria-label="본문 목차"><a href="#모임-전에-확인할-것">모임 전에 확인할 것</a><a href="#60분-진행안">60분 진행안</a><a href="#접속한-사람과-막힌-사람을-함께-진행하기">접속한 사람과 막힌 사람을 함께 진행하기</a><a href="#설명이-막힐-때-던질-질문">설명이 막힐 때 던질 질문</a><a href="#기본-질문-해설">기본 질문 해설</a><a href="#짝에게-설명할-질문-해설">짝에게 설명할 질문 해설</a><a href="#마무리할-때-확인할-것">마무리할 때 확인할 것</a><a href="#기록을-읽을-때-주의할-점">기록을 읽을 때 주의할 점</a><a href="#선택-nat-질문-해설">선택 NAT 질문 해설</a></nav></details></aside><main id="main" tabindex="-1"><article>
+<h2 id="모임-전에-확인할-것">모임 전에 확인할 것</h2>
+<p><a href="lesson.html">교재</a> → <a href="questions.html">기록지</a> → 아래 해설 순서로 준비한다. 목표는 <strong>자신의 설정으로 접속하고 연결 이유를 설명하는 것</strong>이다. 오류가 없으면 진단 과제를 추가하지 않는다. NAT 사례를 이해하거나 재현해야 기본 학습이 끝나는 것은 아니다.</p>
+<p>SSH 접속에는 본인에게 허용된 계정과 인증 방식을 사용한다. <a href="lesson.html#s7">교재 S7</a>에서 서버 호스트 키 확인과 사용자 인증을 서로 다른 단계로 설명한다.</p>
+<p>시작 전 본인에게 허용된 VM·사양·접속 방법을 확인한다. 기존 자원은 다시 만들지 않는다. 새 자원이 필요하면 할당량·권한을 먼저 확인한다.</p>
+<p>VM·접속 준비와 HTTP 실습은 준비 속도에 맞춰 나누어 진행한다.</p>
+<h2 id="60분-진행안">60분 진행안</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>경과 시간</th>
+<th>활동</th>
+<th>남길 증거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0~5분</td>
+<td>S0. 목표·본인 준비 상태 확인</td>
+<td>오늘 할 일과 직접 실행 여부</td>
+</tr>
+<tr>
+<td>5~20분</td>
+<td>S1~S4. 자원·망·라우터·VM 준비 또는 기존 값 확인</td>
+<td>설정 카드·콘솔 OS 결과</td>
+</tr>
+<tr>
+<td>20~35분</td>
+<td>S5~S7. 접속 주소·VPN·규칙·SSH 로그인</td>
+<td>본인 경로·서버 키·원격 계정 결과</td>
+</tr>
+<tr>
+<td>35~43분</td>
+<td>S8. 성공한 경로를 그려 서로 설명</td>
+<td>설정의 역할과 이번 접속으로 확인한 것</td>
+</tr>
+<tr>
+<td>43~53분</td>
+<td>S9~S10. 두 셸·파일 준비 후 정상 응답과 404부터 비교</td>
+<td>준비 결과·실제 수행한 HTTP 출력</td>
+</tr>
+<tr>
+<td>53~60분</td>
+<td>짝에게 설명할 질문·기록 보관·보충 계획</td>
+<td>각자 설명한 내용과 남은 실습</td>
+</tr>
+</tbody></table></div>
+<p>생성 대기나 인증 준비가 길어지면 해당 시간에 기존 자원 읽기로 전환하거나 다음 회차로 나눈다. 모든 생성·접속·HTTP를 한 번에 완료했다고 표시하지 않는다. HTTP 전체는 <a href="../week-01/facilitator.html">기존 진행안</a>으로 이어간다. 이미 VM·접속이 준비된 사람은 앞부분을 설정 설명으로 줄이고 HTTP에 시간을 쓴다.</p>
+<h2 id="접속한-사람과-막힌-사람을-함께-진행하기">접속한 사람과 막힌 사람을 함께 진행하기</h2>
+<p><strong>접속했다면</strong> hostname·whoami 결과와 설정 카드를 대조하고 “왜 이 주소로 연결됐나?”를 설명하게 한다. 이어 두 셸·파일 전달·HTTP 실습으로 간다. 설정을 일부러 잘못 바꾸거나 NAT 장애를 재현시키지 않는다.</p>
+<p><strong>접속이 막혔다면</strong> S7의 증상표에서 현재 단계를 고른다. 5분 이상 막히면 시연·제공 자료 분석으로 전환하고 직접 실행 보충을 남긴다. 시간 초과에 경로·정책·서비스를 확인하며, 이미 사용자 인증까지 왔다면 계정·인증을 먼저 확인한다.</p>
+<p>더 살펴보고 싶다면 <a href="#nat-answers">선택 NAT 질문 해설</a>로 주소 변환과 정책의 관계를 비교한다.</p>
+<h2 id="설명이-막힐-때-던질-질문">설명이 막힐 때 던질 질문</h2>
+<p>“무엇을 설정할까?” → “이 값이면 무엇을 예상하나?” → “어느 출력으로 확인했나?” → “예상과 같거나 다른 이유는?” → “다음 VM에서도 설명할 수 있나?”</p>
+<p>초보자가 막히면 진행자가 주소 표 한 칸을 읽어 주고 다음 칸을 참가자가 채우게 한다. 용어 암기보다 현재 그림의 위치와 역할부터 설명한다. 짝 안에서 실행하고, 출력을 읽고, 설명하는 역할을 바꿔 본다. 한 사람이 실행한 결과는 그 사람의 기록으로 남긴다.</p>
+<p><a id="answers"></a></p>
+<h2 id="기본-질문-해설">기본 질문 해설</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>질문</th>
+<th>해설·작은 재확인</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q0</td>
+<td>Active와 TCP 응답만으로 셸 사용은 확인되지 않는다. 로그인 뒤 원격 대상·계정·명령 결과를 본다.</td>
+</tr>
+<tr>
+<td>Q1</td>
+<td>이미지는 OS 기반이고 IP는 네트워크·주소 할당 결과다. 새 VM의 실제 IP를 따로 확인한다.</td>
+</tr>
+<tr>
+<td>Q2</td>
+<td>/24는 앞 24비트가 같은 범위, /32는 한 주소다. 포함된 주소여도 이미 사용 중이면 임의 할당하지 않는다.</td>
+</tr>
+<tr>
+<td>Q3</td>
+<td>게이트웨이는 다음 홉이고 접속 목적지는 VM에 연결한 주소다. 라우터 외부 주소를 VM 주소로 대신하지 않는다.</td>
+</tr>
+<tr>
+<td>Q4</td>
+<td>웹 콘솔은 관리 경로로 VM의 화면과 키보드를 제공한다. SSH는 VM의 TCP 22로 들어간다. LISTEN은 서버가 기다리고 있다는 뜻이므로 PC 경로와 보안 그룹까지 확인한 것은 아니다.</td>
+</tr>
+<tr>
+<td>Q5</td>
+<td>Floating IP가 내부 IP에 연결되고 VM은 기본 게이트웨이를 통해 다른 망으로 보낸다. 각각 자기 값으로 설명하게 한다.</td>
+</tr>
+<tr>
+<td>Q6</td>
+<td>가상 포트는 VM의 네트워크 인터페이스를 망에 붙이는 자원이고 TCP 22는 SSH 서버의 통신 끝점 번호다. ingress 출발지 범위는 규칙이 적용되는 지점에서 보이는 주소와 맞아야 한다.</td>
+</tr>
+<tr>
+<td>Q7</td>
+<td>호스트 키는 서버 신원을 확인하고 계정의 인증 수단은 사용자 로그인을 인증한다. 지문 확인만으로 로그인이 끝난 것은 아니다.</td>
+</tr>
+<tr>
+<td>Q8</td>
+<td>지금 사용한 경로·대상·포트·계정에서 해당 접속이 성공했다. 모든 사용자·서비스 접근의 증거는 아니다.</td>
+</tr>
+<tr>
+<td>Q9</td>
+<td>접속 대상·hostname·whoami를 함께 대조하고 각 셸의 pwd와 원격 ls를 본다. 이름 하나만으로 동일 VM을 보장하지 않는다.</td>
+</tr>
+<tr>
+<td>Q10</td>
+<td>원격 curl의 루프백은 VM 자신이다. 404도 HTTP 응답이며 TCP 연결 실패와 다르다.</td>
+</tr>
+</tbody></table></div>
+<h2 id="짝에게-설명할-질문-해설">짝에게 설명할 질문 해설</h2>
+<ol>
+<li>VM이 바뀌면 주소·계정·서버 키를 모두 다시 확인한다. 같은 배포판이어도 같은 서버 신원이 아니다.</li>
+<li>두 창은 같은 VM의 다른 셸일 수 있다. 작업 폴더는 셸마다 따로 확인한다.</li>
+<li>SSH 성공은 TCP 22의 그 접속에 대한 증거다. 다른 포트의 리스너·정책은 별도다.</li>
+<li>127.0.0.1은 명령이 실행되는 호스트 자신이다. PC와 VM은 다르다.</li>
+</ol>
+<h2 id="마무리할-때-확인할-것">마무리할 때 확인할 것</h2>
+<p>설정 카드·본인 경로 설명·실제 SSH 로그인 증거와 짝 변형 답을 확인한다. 장애 경험은 채점하지 않는다. 기존 자원 사용자는 새 VM 생성과 구분한다. 환경 미준비자는 이해 활동과 직접 실행 미완료를 함께 기록한다.</p>
+<p><a id="nat-answers"></a></p>
+<h2 id="선택-nat-질문-해설">선택 NAT 질문 해설</h2>
+<ul>
+<li><strong>D1:</strong> 캡처 시점·필터·위치가 맞아도 VM에 도달하기 전 정책에서 막혔을 수 있다. 경로와 정책을 모두 확인해야 한다. 사용자 인증에 도달했다는 근거가 없으므로 비밀번호부터 바꾸는 것은 현재 증상을 구분하는 데 도움이 되지 않는다.</li>
+<li><strong>D2:</strong> 같은 NAT 주소를 공유하는 다른 사용자도 이 주소 조건에 일치할 수 있다. /32는 주소 하나를 뜻하며 사람 한 명을 인증하지 않는다.</li>
+<li><strong>D3:</strong> PC 송신 패킷을 캡처하지 않아 알 수 없다. NAT는 주소뿐 아니라 포트도 바꿀 수 있다.</li>
+<li><strong>D4:</strong> 앞서 SYN·SYN/ACK·ACK와 SSH 교환이 있었다. RST 하나로 중단 원인을 확정하지 않는다. 호스트 키 검사에서 멈췄다면 신뢰할 수 있는 경로로 서버 지문을 대조한 뒤 사용자 인증 여부를 별도로 확인한다.</li>
+</ul>
+<h2 id="사이트의-주소-예시">사이트의 주소 예시</h2>
+<p>주소와 VM 이름은 설명용 예시다. 본인에게 허용된 주소·계정·인증 방식은 환경 안내에서 확인한다. 비밀번호·개인 키·실제 접속 정보는 공유 답안에 넣지 않는다.</p>
+</article><a class="next" href="index.html">학습 홈으로 →</a></main></div><footer class="wrap"><p>아올다 4기 네트워크 스터디 · 설정과 출력은 각자의 환경에서 확인합니다.</p><nav aria-label="참고 자료"><a href="facilitator.html">진행자·해설</a><a href="facilitator.html#nat-answers">선택 NAT 질문</a><a href="sources.html">출처</a><a href="FACILITATOR.md" download>이 페이지 Markdown</a><a href="#main">본문 위로</a></nav></footer><script>(() => {
+  // Files work offline: no fetch, storage, analytics, or external dependencies.
+  document.querySelectorAll('pre:has(code)').forEach(pre => {
+    if (pre.querySelector('.language-text')) return;
+    const row = document.createElement('div'); row.className = 'code-actions';
+    const status = document.createElement('span'); status.setAttribute('role','status');
+    const button = document.createElement('button'); button.type='button'; button.textContent='명령 복사';
+    button.addEventListener('click', async () => {
+      const text=pre.querySelector('code').textContent;
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(text); status.textContent='복사했습니다. 실행 위치와 본인 값을 확인하세요.';
+      } catch {
+        const range=document.createRange(); range.selectNodeContents(pre.querySelector('code'));
+        const selection=window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
+        status.textContent='자동 복사가 제한됐습니다. 선택된 명령을 Ctrl+C로 복사하세요.';
+      }
+    });
+    row.append(status,button); pre.after(row);
+  });
+  const button=document.querySelector('#download');
+  if (!button) return;
+  button.hidden=false;
+  const fields=[...document.querySelectorAll('textarea')];
+  let dirty=false;
+  fields.forEach(field=>field.addEventListener('input',()=>{dirty=true;}));
+  window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue='';}});
+  button.addEventListener('click',()=>{
+    const lines=['# 내 VM 접속 기록','','요약: 작성자의 실제 설정과 실습 결과다. 비어 있는 항목은 미작성이며, 시연 관찰과 직접 실행은 작성자가 구분한다.',''];
+    fields.forEach(field=>{
+      const section=[...document.querySelectorAll('h2,h3')].filter(h=>h.compareDocumentPosition(field)&Node.DOCUMENT_POSITION_FOLLOWING).at(-1);
+      lines.push('## '+(section?section.textContent+' — ':'')+field.dataset.label,'',field.value.trim()||'미작성','');
+    });
+    try {
+      const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/markdown;charset=utf-8'}));
+      const link=document.createElement('a'); link.href=url;link.download='ssh-my-record.md';
+      document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+      dirty=false;
+      document.querySelector('#save-status').textContent='다운로드를 요청했습니다. 저장된 ssh-my-record.md를 열어 내용이 있는지 확인하세요. 이후 수정했다면 다시 내려받아야 합니다.';
+    } catch {
+      document.querySelector('#save-status').textContent='내려받기를 시작하지 못했습니다. 페이지를 닫지 말고 입력 내용을 별도 메모장에 복사해 저장하세요.';
+    }
+  });
+})();
+</script></body></html>

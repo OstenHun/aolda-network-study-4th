@@ -1,0 +1,198 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="중심 질문의 답을 AWS CIDR 설명과 Linux 경로 조회 문서에서 함께 찾는다. 검색어·읽을 절·확인할 질문을 안내하고 roadmap 연결 글은 필요한 부분만 선택한다. 원문 읽기는 공동 탐구 시간에 포함한다."><title>2주차 함께 찾아보기 — 접두사와 경로에서 근거 찾기 · 아올다 2주차</title><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style>.cidr-model{border:1px solid var(--line);padding:22px;border-radius:12px;margin:28px 0;background:var(--wash)}.cidr-model h3{margin-top:0}.model-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}select{font:inherit;padding:8px;color:var(--blue);border:1px solid #91acbd;background:white;border-radius:6px}.subnet-blocks{display:flex;margin:20px 0;border:1px solid #07548e}.subnet-blocks>div{flex:1;min-width:0;padding:16px 8px;text-align:center;background:#e6f2fc;font-size:.85rem;overflow-wrap:anywhere}.subnet-blocks>div+div{border-left:1px solid #07548e}.subnet-blocks>div:nth-child(2){background:#fff}.subnet-blocks>div:nth-child(n+3){background:#f3f6f8;color:#435e70}@media(max-width:420px){.cidr-model{padding:14px}.subnet-blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.subnet-blocks>div{border:1px solid #91acbd}}</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="articles.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html" aria-current="page">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 함께 찾아보기 — 접두사와 경로에서 근거 찾기</h1><p>중심 질문의 답을 AWS CIDR 설명과 Linux 경로 조회 문서에서 함께 찾는다. 검색어·읽을 절·확인할 질문을 안내하고 roadmap 연결 글은 필요한 부분만 선택한다. 원문 읽기는 공동 탐구 시간에 포함한다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#중심-질문에서-출발하기">중심 질문에서 출발하기</a><a href="#찾은-설명을-자기-vm에-적용하기">찾은 설명을 자기 VM에 적용하기</a><a href="#더-찾아볼-때">더 찾아볼 때</a><a href="#1-ip-주소만-보면-어느-프로그램과-어느-범위인지-알-수-있을까">1. IP 주소만 보면 어느 프로그램과 어느 범위인지 알 수 있을까?</a><a href="#2-사설-주소가-아니면-공인-주소일까">2. 사설 주소가 아니면 공인 주소일까?</a><a href="#3-24와-26은-어느-비트를-남길까">3. <code>/24</code>와 <code>/26</code>은 어느 비트를 남길까?</a><a href="#4-cidr-표기만으로-다음-홉이-정해질까">4. CIDR 표기만으로 다음 홉이 정해질까?</a><a href="#5-같은-서브넷이라면-통신도-성공할까">5. 같은 서브넷이라면 통신도 성공할까?</a><a href="#roadmap-연결-글--필요한-부분만-선택">roadmap 연결 글 — 필요한 부분만 선택</a></div></nav><article>
+<h2 id="중심-질문에서-출발하기">중심 질문에서 출발하기</h2>
+<p><a href="worksheet.html">“IP가 비슷한 두 VM은 같은 망으로 바로 통신할 수 있을까?”</a>를 함께 읽는다. 답을 먼저 발표하기보다 접두사·경로·응답 중 모르는 말을 찾아 공부한다. 공동 탐구의 5~25분 안에서 아래 두 자료의 지정 부분을 골라 읽는다. 지정 부분은 합계 약 6~8분의 읽기 시작점이다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>찾을 곳</th>
+<th>검색어와 읽을 절</th>
+<th>찾아 설명할 것</th>
+<th>다음 확인</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://aws.amazon.com/what-is/cidr/">AWS — What is CIDR?</a></td>
+<td><code>CIDR prefix notation AWS</code>, <code>CIDR /26 주소 수</code>. “Classless addresses”·“CIDR notation”의 접두사/주소 블록 설명</td>
+<td><code>/n</code>이 어떤 비트 수이고 주소 범위가 어떻게 달라지는가?</td>
+<td><a href="essentials.html#w02-k1--cidr%EC%9D%80-%EC%A3%BC%EC%86%8C-%EB%B2%94%EC%9C%84%EB%A5%BC-%EB%82%98%ED%83%80%EB%82%B8%EB%8B%A4">핵심 K1</a>·<a href="concepts.html#4-24%EC%99%80-26%EC%9D%80-%EC%96%B4%EB%94%94%EC%97%90-%EC%84%A0%EC%9D%84-%EA%B8%8B%EB%8A%94%EA%B0%80">교재 4~5절</a> → C1/C2 손계산</td>
+</tr>
+<tr>
+<td><a href="https://man7.org/linux/man-pages/man8/ip-route.8.html">Linux ip-route(8)</a></td>
+<td><code>ip route get via dev src man7</code>. 페이지 안에서 <code>ip route get</code> 설명과 <code>via</code>·<code>dev</code>·<code>src</code>를 찾기</td>
+<td>선택 경로 조회와 실제 상대 응답의 차이, 각 필드의 역할</td>
+<td><a href="essentials.html#w02-k2--%EC%8B%A4%EC%A0%9C-%EB%8B%A4%EC%9D%8C-%EC%A0%84%EB%8B%AC-%EA%B2%BD%EB%A1%9C%EB%8A%94-%EA%B2%BD%EB%A1%9C-%EC%A1%B0%ED%9A%8C%EB%A1%9C-%ED%99%95%EC%9D%B8%ED%95%9C%EB%8B%A4">핵심 K2/K3</a> → <a href="linux.html#2-%EB%AA%A9%EC%A0%81%EC%A7%80-%EA%B2%BD%EB%A1%9C-%EC%A1%B0%ED%9A%8C--%ED%8C%A8%ED%82%B7-%EC%A0%84%EC%86%A1%EC%9D%B4-%EC%95%84%EB%8B%98">P1 자기 경로</a></td>
+</tr>
+</tbody></table></div>
+<p>검색 결과 요약을 그대로 답으로 삼지 않고 원문에서 해당 조건·문장을 찾는다. 두 문서의 전체 본문을 읽을 필요는 없다. 낯선 영어·비트 계산이 막히면 진행자가 <a href="concepts.html">자체 교재</a>의 그림을 함께 읽고 다시 원문과 대조한다. 계정 가입이나 새로운 도구 설치는 요구하지 않는다.</p>
+<h2 id="찾은-설명을-자기-vm에-적용하기">찾은 설명을 자기 VM에 적용하기</h2>
+<ol>
+<li>주소와 접두사가 어떤 계산에 필요한지 말하고 C1/C2를 손으로 푼다. <a href="../../labs/week-02/subnet_check.py" download>검산기</a>는 손계산 뒤 사용한다.</li>
+<li><a href="linux.html">P1</a>의 실제 조회에서 인터페이스·주소/접두사·선택 경로를 읽는다. 예제의 <code>192.0.2.*</code>와 자기 VM 값은 섞지 않는다.</li>
+<li>한 명이 답·이유·근거를 설명하고 다른 사람이 조건을 바꾼다. 경로 조회만 했는데 실제 통신 성공까지 확인했다고 말하지 않는다.</li>
+<li>자기 설명 뒤 <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>을 열어 계산·관찰 범위·다음 진단을 대조한다.</li>
+</ol>
+<p>읽을 절·개념의 연결은 자체 안내다. 기술 정의는 <a href="https://www.rfc-editor.org/rfc/rfc4632.html#section-3.1">RFC 4632 §3.1</a>, 주소 범주는 <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">IANA 특수 목적 등록부</a>로 대조한다. 출처의 AWS VPC 예시를 현재 아올다 설정으로 취급하지 않는다.</p>
+<h2 id="더-찾아볼-때">더 찾아볼 때</h2>
+<p>아래 다섯 질문과 연결 글은 <strong>선택 길잡이</strong>다. 중심 질문이 막히는 부분만 골라 읽는다. 공동 탐구의 필수 두 자료에 더해 다섯 질문을 모두 풀거나 발표하지 않는다. 외부 링크가 열리지 않으면 개념 교재·제공 출력으로 공부하고 원문 미열람을 구분한다. 자료별 읽을 범위와 한계는 <a href="sources.html">출처 안내</a>를 참고한다.</p>
+<h2 id="1-ip-주소만-보면-어느-프로그램과-어느-범위인지-알-수-있을까">1. IP 주소만 보면 어느 프로그램과 어느 범위인지 알 수 있을까?</h2>
+<p><strong>필요할 때 선택 참고:</strong> IP Address 노드의 <a href="https://www.coursera.org/articles/ip-address">Coursera — What Is an IP Address?</a>에서 주소의 뜻과 IPv4 표기 부분만 읽는다. 1주차 <a href="../week-01/ARTICLE_LESSON.md#3-%EA%B0%99%EC%9D%80-ip%EC%97%90%EC%84%9C-%EB%91%90-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B5%AC%EB%B6%84%ED%95%A0%EA%B9%8C">IP·포트 설명</a>을 먼저 자기 말로 복습해도 된다.</p>
+<p>지난주 <code>127.0.0.1:8080</code>에서 <code>127.0.0.1</code>은 curl을 실행한 <strong>그 VM 자신</strong>의 루프백 주소이고 <code>8080</code>은 그 VM의 서버 포트였다. 이번 카드의 <code>.10</code>과 <code>.70</code>은 주소 부분만 보여 준다. 포트는 프로그램을 구분하지만, 주소에 붙은 <code>/24</code>나 <code>/26</code>은 해당 인터페이스가 어떤 주소 범위를 연결된 망으로 보는지 계산하는 데 쓰인다. <code>127/8</code>은 루프백이며 카드의 링크와 섞지 않는다. <a href="https://www.rfc-editor.org/rfc/rfc1122.html#section-3.2.1.3">RFC 1122 §3.2.1.3</a></p>
+<p><strong>서로 물을 질문:</strong> SSH로 들어간 뒤 <code>ip -br -4 addr</code>에 <code>lo</code>와 다른 인터페이스가 보이면, 지난주 HTTP 요청은 어느 인터페이스의 주소를 썼는가? 출력의 실제 주소·접두사는 카드의 예시와 같은가? 내 VM과 개인 PC를 같은 호스트로 세지 않고 설명한다.</p>
+<h2 id="2-사설-주소가-아니면-공인-주소일까">2. 사설 주소가 아니면 공인 주소일까?</h2>
+<p><strong>선택 참고:</strong> Public vs Private Addresses 노드의 <a href="https://www.avast.com/c-ip-address-public-vs-private">Avast — Public vs. Private IP Addresses</a>에서 “Public and private IP address ranges”의 세 범위만 읽는다. 글의 집 공유기·ISP 설명과 제품 안내는 이번 VM의 구조로 가져오지 않는다.</p>
+<p>사설 IPv4 범위는 <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code> 세 개다. 첫 숫자가 <code>172</code> 또는 <code>192</code>라고 모두 사설은 아니다. <code>127.0.0.0/8</code>은 루프백, <code>192.0.2.0/24</code>는 문서용이므로 <strong>RFC 1918 바깥 = 공인</strong>으로 분류할 수 없다. <a href="https://www.rfc-editor.org/rfc/rfc1918.html#section-3">RFC 1918 §3</a>, <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">IANA IPv4 Special-Purpose Address Registry</a></p>
+<p>이 글은 가정용 공유기를 중심으로 사설 주소를 설명한다. 실제 VM에서는 주소 종류와 외부 도달성을 따로 판단한다. 주소만으로 NAT, 기본 경로, 보안 그룹, 서버 대기 상태를 확인할 수 없다.</p>
+<p><strong>서로 물을 질문:</strong> 자기 VM의 <code>ip -br -4 addr</code>에서 한 주소를 고르고 정확히 어느 등록 범위에 드는지 말한다. 그 사실로 알 수 있는 것과 <code>ip -4 route</code> 또는 실제 요청을 봐야 알 수 있는 것을 분리한다. 카드 <code>192.0.2.10</code>을 공인 VM 주소로 발표하지 않는다.</p>
+<h2 id="3-24와-26은-어느-비트를-남길까">3. <code>/24</code>와 <code>/26</code>은 어느 비트를 남길까?</h2>
+<p><strong>선택 참고:</strong> Subnet Masks 노드의 <a href="https://www.coursera.org/articles/subnet-mask">Coursera — What Is a Subnet Mask?</a>에서 “What is a subnet mask?” 첫 문단과 “Use of subnet masks in subnetting”의 <code>/25</code> 예시만 읽는다. A/B/C 클래스 표와 일반적인 집 마스크 이야기는 이번 카드의 규칙으로 쓰지 않는다.</p>
+<p>IPv4는 32비트다. <code>/24</code>는 앞 24비트가 1인 <code>255.255.255.0</code>, <code>/26</code>은 앞 26비트가 1인 <code>255.255.255.192</code> 마스크에 해당한다. 주소와 마스크를 비트별 AND하면 해당 접두사로 본 네트워크 주소가 된다. <code>/26</code>은 마지막 8비트 중 앞 2비트가 범위를 나누므로 한 블록은 64개 주소다. <a href="https://www.rfc-editor.org/rfc/rfc4632.html#section-3.1">RFC 4632 §3.1</a></p>
+<p><strong>카드에 적용:</strong> C1은 A=<code>192.0.2.10/24</code>, B=<code>192.0.2.70/24</code>다. 양쪽에서 <code>.0/24</code>를 계산한다. C2는 <strong>A만</strong> <code>.10/26</code>으로 바뀌고 B는 <code>.70/24</code> 그대로다. A의 <code>.0/26</code>은 마지막 묶음 0~63, B의 <code>/24</code>는 0~255다. A에서 <code>.70</code>은 연결된 <code>/26</code> 범위 밖이고, B에서 <code>.10</code>은 연결된 <code>/24</code> 범위 안이다. 이는 양쪽의 <strong>주소 계산</strong>이며 성공한 ping 기록이 아니다.</p>
+<p><strong>서로 물을 질문:</strong> C2에서 “B는 A를 같은 망으로 보니 왕복 성공한다”라는 주장에 무엇이 빠졌는가? 두 호스트의 판단을 따로 설명하고 <a href="concepts.html#5-%EB%91%90-%EC%98%88%EC%A0%9C%EB%A1%9C-%EB%B2%94%EC%9C%84-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%95%98%EA%B8%B0">개념 교재 5절</a>의 손계산과 검산기를 대조한다.</p>
+<h2 id="4-cidr-표기만으로-다음-홉이-정해질까">4. CIDR 표기만으로 다음 홉이 정해질까?</h2>
+<p><strong>선택 참고:</strong> CIDR 노드의 <a href="https://aws.amazon.com/what-is/cidr/">AWS — What is CIDR?</a>에서 “Classless addresses”와 “CIDR notation”만 읽는다. AWS VPC 설정, 주소 등록 기관과 과거 클래스별 크기는 이번 실습 범위가 아니다.</p>
+<p><code>192.0.2.10/26</code>은 그 주소에 적용할 접두사 길이를 보여 준다. 자기 호스트에 그 주소를 설정했다면 보통 연결된 범위의 경로도 생기지만, <strong>목적지 주소를 보고 실제로 어떤 경로를 고르는지는 현재 경로표와 정책의 문제</strong>다. 더 구체적인 경로가 기본 경로보다 우선할 수 있다. <code>ip -4 route get &lt;허용된 목적지&gt;</code>는 커널의 경로 조회를 보여 주며 <code>via</code>, <code>dev</code>, <code>src</code>를 읽는다. 상대가 살아 있거나 애플리케이션이 응답한다는 뜻은 아니다. <a href="https://man7.org/linux/man-pages/man8/ip-route.8.html">ip-route(8), <code>get</code></a></p>
+<p><strong>서로 물을 질문:</strong> 자기 VM의 허용된 목적지 하나에 대한 <code>route get</code>과 <code>ip -4 route</code>에서 선택된 인터페이스·다음 홉·출발지 주소를 찾는다. 해당 경로를 고를 수 있다는 관찰과 패킷 도달·응답을 받았다는 관찰을 나누어 말한다. 문서용 카드 주소로 외부 통신을 시도할 필요는 없다.</p>
+<h2 id="5-같은-서브넷이라면-통신도-성공할까">5. 같은 서브넷이라면 통신도 성공할까?</h2>
+<p><strong>선택 참고:</strong> Subnetting 노드의 <a href="https://www.cloudflare.com/en-gb/learning/network-layer/what-is-a-subnet/">Cloudflare — What is a subnet?</a>에서 “What is a subnet?” 첫 문단과 “What is a subnet mask?”의 첫 문단만 읽는다. 편지 비유와 클래스 C <code>192.0.2.15</code> 설명은 카드 계산이나 실제 전달 순서의 근거로 쓰지 않는다.</p>
+<p>서브넷 계산은 한 호스트가 주소를 어떤 범위로 묶는지 설명한다. C1에서 양쪽의 <code>/24</code>가 일치해도 같은 링크인지, 상대가 동작하는지, 응답 경로와 정책이 허용되는지까지 보장하지 않는다. C2는 A와 B의 판단이 비대칭이다. 기본 경로와 다른 별도 경로가 없는 격리 모형이라면 A→B에는 경로가 없을 것으로 <strong>예상</strong>하지만, 자기 VM의 실제 결과는 양쪽 주소·경로와 허용된 실험의 출력으로만 확인한다. <a href="linux.html">Linux 안내</a>의 격리 실험은 사전 점검이 있을 때만 선택으로 수행한다.</p>
+<p><strong>서로 물을 질문:</strong> “주소 계산 결과”, “<code>route get</code>의 선택”, “상대의 응답” 중 우리 팀이 실제로 확인한 것은 각각 무엇인가? C1·C2 카드 설명과 자기 VM 증거를 섞지 않고 근거 위치를 가리킨다. 다음 주에는 같은 링크로 보내기로 한 뒤 상대를 찾는 ARP·ICMP로 이어 간다.</p>
+<h2 id="roadmap-연결-글--필요한-부분만-선택">roadmap 연결 글 — 필요한 부분만 선택</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>roadmap.sh term</th>
+<th>연결 글</th>
+<th>이번 범위</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IP Address</td>
+<td><a href="https://www.coursera.org/articles/ip-address">Coursera</a></td>
+<td>1주차 복습용 선택. 주소·포트·접두사를 구분할 때만 사용</td>
+</tr>
+<tr>
+<td>IPv4 vs IPv6</td>
+<td><a href="https://aws.amazon.com/compare/the-difference-between-ipv4-and-ipv6/">AWS</a>, <a href="https://kinsta.com/blog/ipv4-vs-ipv6/">Kinsta</a></td>
+<td>이번 카드는 IPv4만 계산. IPv6 비교는 선택</td>
+</tr>
+<tr>
+<td>Subnet Masks</td>
+<td><a href="https://www.coursera.org/articles/subnet-mask">Coursera</a></td>
+<td>필요한 두 절만 선택. 클래스별 기본 마스크는 암기 대상 아님</td>
+</tr>
+<tr>
+<td>CIDR</td>
+<td><a href="https://aws.amazon.com/what-is/cidr/">AWS</a></td>
+<td>필요한 두 절만 선택. VLSM·집계는 선택</td>
+</tr>
+<tr>
+<td>Public vs Private Addresses</td>
+<td><a href="https://www.avast.com/c-ip-address-public-vs-private">Avast</a></td>
+<td>세 범위를 확인할 때 선택. 공인/사설 이분법과 NAT 일반화 주의</td>
+</tr>
+<tr>
+<td>Subnetting</td>
+<td><a href="https://www.cloudflare.com/en-gb/learning/network-layer/what-is-a-subnet/">Cloudflare</a></td>
+<td>필요한 두 짧은 문단만 선택. 전달 성공 증거 아님</td>
+</tr>
+</tbody></table></div>
+<p>입문 글의 설명이 실제 VM 설정에도 적용되는지는 <a href="sources.html">공식 근거와 읽을 범위</a>를 대조한다.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="index.html">2주차 입구</a><a href="sources.html">출처와 읽을 범위</a><a href="#main">맨 위로</a></div></footer><script>(()=>{const select=document.querySelector('#prefix');if(!select)return;select.addEventListener('change',()=>{const p=Number(select.value);const blocks=document.querySelector('#blocks');blocks.innerHTML=p===24?'<div>0~255<br>A .10 · B .70</div>':'<div>0~63<br>A .10</div><div>64~127<br>B .70</div><div>128~191</div><div>192~255</div>';document.querySelector('#cidr-result').textContent=p===24?'/24: A와 B는 모두 192.0.2.0/24에 포함됩니다. 실제 통신 성공은 확인하지 않았습니다.':'/26: A는 192.0.2.0/26, B는 192.0.2.64/26입니다. 서로 다른 서브넷이며 실제 도달성은 경로와 환경을 확인해야 합니다.';});})();</script></body></html>

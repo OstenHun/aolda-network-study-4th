@@ -1,0 +1,196 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="소켓의 통신 끝점에서 TCP 연결 수립으로 이어 읽고 RTT·메시지 수·양쪽 상태 전이를 구별한다. 이번 본문은 4주차 교재의 일부 초안이며 UDP·종료·재전송 실습과 주차 전체 자료는 준비 전이다."><title>4주차 TCP — 연결 수립과 왕복 시간 · 아올다 네트워크</title><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style>/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="../week-01/index.html">아올다 <small>4기 네트워크 · 4주차</small></a><nav class="top-nav" aria-label="교재 자료"><a href="../week-01/concept-index.html">개념 색인</a><a href="concepts.html" aria-current="page">교재</a><a href="answers.html">분리 해설</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">TCP · 본문 일부 초안</p><h1>4주차 TCP — 연결 수립과 왕복 시간</h1><p>소켓의 통신 끝점에서 TCP 연결 수립으로 이어 읽고 RTT·메시지 수·양쪽 상태 전이를 구별한다. 이번 본문은 4주차 교재의 일부 초안이며 UDP·종료·재전송 실습과 주차 전체 자료는 준비 전이다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#w04-k1--소켓에서-연결-수립으로">W04-K1 · 소켓에서 연결 수립으로</a><a href="#w04-k2--rtt로-왕복-구간-읽기">W04-K2 · RTT로 왕복 구간 읽기</a><a href="#w04-k3--3-way인데-연결-준비가-왜-1-rtt인가">W04-K3 · 3-way인데 연결 준비가 왜 1 RTT인가</a><a href="#헷갈리는-부분-두-가지">헷갈리는 부분 두 가지</a><a href="#개발-상황으로-설명하기">개발 상황으로 설명하기</a><a href="#다음-학습과-준비-상태">다음 학습과 준비 상태</a></div></nav><article>
+<ul>
+<li>선수 개념: <a href="../week-01/essentials.html">IP·포트·요청</a>, <a href="../week-03/essentials.html">다음 홉과 관찰 범위</a></li>
+<li>읽기: 소켓과 끝점 → RTT → 핸드셰이크 시간축 → 개발 질문 → <a href="answers.html">분리 해설</a>. 계산은 설명 모형이며 실제 참가자 측정값이 아니다.</li>
+</ul>
+<h2 id="w04-k1--소켓에서-연결-수립으로">W04-K1 · 소켓에서 연결 수립으로</h2>
+<p>1주차에서 curl과 Python 서버는 IP·포트로 요청과 응답을 주고받았다. 운영체제의 소켓은 프로그램이 이런 통신을 사용하는 창구다. 서버의 대기 소켓과 연결된 소켓을 구별하고, TCP 흐름은 양쪽 IP·포트의 조합으로 읽는다. 포트 하나를 프로세스 ID처럼 취급하지 않는다.</p>
+<p><strong>기억 문장:</strong> 서버가 포트에서 기다리는 것과 클라이언트와 TCP 연결을 수립한 것은 서로 다른 상태다. 일반적인 연결 수립에서는 SYN → SYN-ACK → ACK로 양쪽 초기 시퀀스 번호를 확인한다. 이 메시지 순서와 다음 절의 대기 시간을 함께 읽는다. <a href="https://www.rfc-editor.org/rfc/rfc9293.html#section-3.5">RFC 9293 §3.3.2·§3.5</a>.</p>
+<p><a id="rtt"></a></p>
+<h2 id="w04-k2--rtt로-왕복-구간-읽기">W04-K2 · RTT로 왕복 구간 읽기</h2>
+<p><strong>RTT(Round Trip Time)는 보낸 지점에서 대응 응답이 돌아올 때까지의 왕복 시간이다.</strong> 측정 메시지·시작과 끝·목적지·단위를 함께 적는다. ping의 Echo 왕복, TCP의 데이터/ACK 표본, HTTP 요청 전체 경과 시간은 같은 측정값이 아니다. RTT에는 경로와 응답 생성 과정의 지연이 반영될 수 있으며 순수 전파 시간만 뜻하지 않는다. <a href="https://man7.org/linux/man-pages/man8/ping.8.html">ping(8)</a>, <a href="https://www.rfc-editor.org/rfc/rfc6298.html#section-2">RFC 6298 §2</a>.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>구별</th>
+<th>기억할 문장</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>편도와 왕복</td>
+<td>양방향 지연이 같다는 가정 없이는 편도를 RTT/2라고 단정할 수 없다</td>
+</tr>
+<tr>
+<td>대역폭·처리량과 지연</td>
+<td>전송 용량·실제 전달률을 높여도 왕복 대기 비용이 없어지는 것은 아니다</td>
+</tr>
+<tr>
+<td>객체 전송 시간</td>
+<td>크기 L bit를 속도 R bit/s로 직렬화하는 단순 비용은 L/R s다. RTT와 단위·역할이 다르다</td>
+</tr>
+<tr>
+<td>응답 전체 시간</td>
+<td>연결·TLS·서버 처리·대기·본문 전송 등 측정 구간 안의 비용을 포함할 수 있다</td>
+</tr>
+</tbody></table></div>
+<p>예를 들어 RTT 100ms인 경로에서 작은 요청을 앞 응답 뒤에 순서대로 시작하면, 전송량이 작아도 왕복 대기가 누적될 수 있다. 이 예시는 계산 모형이며 실제 성능은 별도 측정한다.</p>
+<h2 id="w04-k3--3-way인데-연결-준비가-왜-1-rtt인가">W04-K3 · 3-way인데 연결 준비가 왜 1 RTT인가</h2>
+<p>일반적인 TCP 능동/수동 연결 수립을 가정한다. TCP Fast Open·재전송·TLS는 제외하고 양방향 편도 50ms, 호스트 처리·직렬화 지연은 무시한다. SYN을 보내는 순간이 0ms다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>시각</th>
+<th>클라이언트</th>
+<th>서버</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0ms</td>
+<td>SYN 전송, SYN-SENT</td>
+<td>LISTEN</td>
+</tr>
+<tr>
+<td>50ms</td>
+<td>SYN-ACK을 기다림</td>
+<td>SYN 수신, SYN-ACK 전송, SYN-RECEIVED</td>
+</tr>
+<tr>
+<td>100ms</td>
+<td>SYN-ACK 수신, ESTABLISHED로 전이, 마지막 ACK 전송. 데이터를 이어 보낼 수 있음</td>
+<td>마지막 ACK를 기다림</td>
+</tr>
+<tr>
+<td>150ms</td>
+<td>추가 확인을 기다릴 필요 없음</td>
+<td>마지막 ACK 수신 후 ESTABLISHED</td>
+</tr>
+</tbody></table></div>
+<p><strong>3-way는 메시지 교환 단계 수다. 1 RTT는 클라이언트가 SYN을 보낸 뒤 데이터를 보낼 수 있을 때까지 기다리는 비용이다.</strong> 서버가 마지막 ACK를 받는 시점은 위의 대칭 모형에서 시작 후 1.5 RTT다. 비대칭 경로에서는 그 시점을 고정된 1.5 RTT로 일반화할 수 없다. 마지막 ACK에 데이터를 함께 싣거나 바로 이어 보낼 수 있으므로 ACK에 대한 별도 확인을 한 왕복 더 기다리지 않는다. <a href="https://www.rfc-editor.org/rfc/rfc9293.html#section-3.5">RFC 9293 §3.5·Figure 6</a>.</p>
+<p>이후 평문 HTTP 요청과 첫 응답을 기다리는 비용은 <a href="../week-06/concepts.html#request-cost">6주차 HTTP 교재</a>에서 연결한다. TCP 연결 준비와 HTTP 요청·응답을 한 단계로 섞지 않는다.</p>
+<h2 id="헷갈리는-부분-두-가지">헷갈리는 부분 두 가지</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>섞기 쉬운 설명</th>
+<th>구별할 기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>메시지가 세 번이니 3 RTT 또는 항상 1.5 RTT다</td>
+<td>메시지 수와 왕복 대기는 다르다. 시작 시점·클라이언트/서버 관점·양방향 지연 가정을 붙인다</td>
+</tr>
+<tr>
+<td>ping RTT나 프로그램 경과 시간이 곧 API 응답 시간이다</td>
+<td>어떤 메시지의 시작/끝을 쟀는지 구분한다. 서버 처리·연결·본문 전송이 포함되는지 별도 확인한다</td>
+</tr>
+</tbody></table></div>
+<h2 id="개발-상황으로-설명하기">개발 상황으로 설명하기</h2>
+<p><strong>스터디 자체 문항:</strong> 서비스 연결 지연을 설명할 때 “TCP는 3-way니까 3 RTT가 든다”는 주장을 검토한다. 연결을 시작한 순간을 0ms로 두고 호스트 처리·손실·직렬화·TLS를 무시한다.</p>
+<ol>
+<li><strong>W04-D1 · 설명:</strong> 양방향 편도 50ms일 때 클라이언트가 데이터를 보낼 수 있는 시각과 서버가 마지막 ACK를 받는 시각은?</li>
+<li><strong>W04-D2 · 조건 변경:</strong> 클라이언트→서버 30ms, 반대 방향 70ms라면 두 시각은 어떻게 바뀌는가?</li>
+<li><strong>W04-D3 · 진단:</strong> 1주차 키트의 <code>elapsed_ms</code>만으로 연결 수립 RTT를 측정했다고 말할 수 있을까? 어떤 패킷 구간·환경을 확인해야 할까?</li>
+</ol>
+<p>먼저 설명한 뒤 <a href="answers.html">분리 해설</a>을 읽는다. 기존 짧은 설명·복습 안에서 사용하며 추가 기록 칸을 요구하지 않는다.</p>
+<h2 id="다음-학습과-준비-상태">다음 학습과 준비 상태</h2>
+<p>연결 뒤 TCP 바이트 스트림·ACK·UDP·손실/재전송은 <a href="../../CURRICULUM.md#week-04">4주차 커리큘럼</a>의 남은 제작 범위다. 현재 <a href="../../labs/week-01/README.md">1주차 키트</a>는 연결 수립 패킷을 읽는 데 재사용할 수 있지만, 이번에 추가 Linux 실험이나 참가자 측정을 수행한 것은 아니다.</p>
+<p>HTTP에서 연결을 재사용하면 무엇이 줄어드는지는 <a href="../week-06/concepts.html">6주차</a>로 이어진다. <a href="../week-01/concept-index.html">전체 개념 색인</a>.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="../week-01/concept-index.html">전체 개념 색인</a><a href="#main">맨 위로</a></div></footer></body></html>

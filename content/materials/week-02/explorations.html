@@ -1,0 +1,111 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="필수 Linux 조회·두 카드 손계산·독립 설명을 마친 뒤 주소 조건과 경로 판단을 더 비교한다. 격리 마스크 변경은 권한·복구 사전 점검이 있을 때만 실행한다."><title>2주차 선택 탐구 · 아올다 2주차</title><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style>.cidr-model{border:1px solid var(--line);padding:22px;border-radius:12px;margin:28px 0;background:var(--wash)}.cidr-model h3{margin-top:0}.model-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}select{font:inherit;padding:8px;color:var(--blue);border:1px solid #91acbd;background:white;border-radius:6px}.subnet-blocks{display:flex;margin:20px 0;border:1px solid #07548e}.subnet-blocks>div{flex:1;min-width:0;padding:16px 8px;text-align:center;background:#e6f2fc;font-size:.85rem;overflow-wrap:anywhere}.subnet-blocks>div+div{border-left:1px solid #07548e}.subnet-blocks>div:nth-child(2){background:#fff}.subnet-blocks>div:nth-child(n+3){background:#f3f6f8;color:#435e70}@media(max-width:420px){.cidr-model{padding:14px}.subnet-blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.subnet-blocks>div{border:1px solid #91acbd}}</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="explorations.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 선택 탐구</h1><p>필수 Linux 조회·두 카드 손계산·독립 설명을 마친 뒤 주소 조건과 경로 판단을 더 비교한다. 격리 마스크 변경은 권한·복구 사전 점검이 있을 때만 실행한다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#사용-방식">사용 방식</a><a href="#a-내-경로의-src와-via--1015분">A. 내 경로의 <code>src</code>와 <code>via</code> — 10~15분</a><a href="#b-주소-카드의-경계--1015분">B. 주소 카드의 경계 — 10~15분</a><a href="#c-격리된-두-노드의-마스크-변경--사전-점검-뒤-1520분">C. 격리된 두 노드의 마스크 변경 — 사전 점검 뒤 15~20분</a><a href="#d-주소-분류와-접근-가능성--10분">D. 주소 분류와 접근 가능성 — 10분</a></div></nav><article>
+<h2 id="사용-방식">사용 방식</h2>
+<p><a href="worksheet.html">팀 활동</a>의 예상·명령/계산·실제 근거·수정 설명 블록을 복사해 한 과제만 고른다. 선택 과제는 공통 완료 조건을 늘리지 않는다. 제공된 출력·그림은 분석 자료로 표시하고 자기 Linux 실측으로 옮기지 않는다. 허용된 목적지만 조회하며 관리 NIC 주소·경로는 변경하지 않는다.</p>
+<h2 id="a-내-경로의-src와-via--1015분">A. 내 경로의 <code>src</code>와 <code>via</code> — 10~15분</h2>
+<p>읽기 전용 <code>ip -4 route get &lt;허용된 목적지&gt;</code>에서 선택된 <code>dev</code>·<code>src</code>·<code>via</code>를 찾아 <a href="linux.html">내 주소와 경로 조회</a>의 <code>ip -br -4 addr</code>, <code>ip -4 route</code>와 맞춘다. 허용된 같은 망 목적지와 다른 망 목적지가 모두 있다면 둘의 출력을 비교한다. <code>via</code>가 없는 결과와 기본 경로가 없는 상태를 같은 뜻으로 일반화할 수 있는가? 출력이 알려 주는 것은 <strong>로컬 경로 선택</strong>이며 상대 도착·응답은 별도 확인이 필요하다는 점을 적는다. <code>route get</code> 자체를 통신 성공으로 기록하지 않는다.</p>
+<h2 id="b-주소-카드의-경계--1015분">B. 주소 카드의 경계 — 10~15분</h2>
+<p><code>192.0.2.63/26</code>, <code>.64/26</code>, <code>.127/26</code>, <code>.128/26</code>을 각각 손으로 분류한다. 각 주소가 속한 네트워크와 브로드캐스트, 사용 가능한 호스트인지 먼저 쓰고 <a href="../../labs/week-02/subnet_check.py" download>표준 라이브러리 검산기</a>를 실행할 수 있다면 확인한다. 각 64개 묶음의 첫째·마지막 주소가 왜 일반 호스트 주소가 아닌지 설명한다. 이 카드는 문서 예제다.</p>
+<h2 id="c-격리된-두-노드의-마스크-변경--사전-점검-뒤-1520분">C. 격리된 두 노드의 마스크 변경 — 사전 점검 뒤 15~20분</h2>
+<p>진행자가 사전 점검한 격리 VM의 네트워크 네임스페이스·veth 두 노드에 한정한다. <a href="linux.html">선택 시연 절차</a>를 따라 <code>.10/24</code>와 <code>.70/24</code>의 <strong>양쪽 주소·경로표, A→B 경로 조회·ping</strong>을 확인하고, <code>.10</code> 쪽만 <code>/26</code>으로 바꾼다. 기본 경로가 없는 두 노드에서 같은 항목을 비교하고 <code>.10/24</code>로 복구한다. 주소 카드상 <code>.10</code>과 <code>.70</code>의 방향별 같은 망 판정, 실제 A→B 경로·ICMP 결과를 구분해 기록한다. B→A 조회·ping은 기본 시연에 없으며 직접 추가했다면 명령과 출력을 별도 기록한다. 반환 메시지를 미리 단정하지 말고 실측을 적는다.</p>
+<p>관리용 SSH 인터페이스·기본 경로를 직접 바꾸지 않는다. VM·권한·격리·복구를 확인할 수 없다면 <strong>텍스트 모형으로 예상만 작성</strong>하고 구성 변경 실습은 미완료로 남긴다. 이 경우 선택 과제 C를 직접 수행했다고 표시하지 않는다. 선택 미실시는 필수 P1/P2의 미완료가 아니다.</p>
+<h2 id="d-주소-분류와-접근-가능성--10분">D. 주소 분류와 접근 가능성 — 10분</h2>
+<p>내 조회 결과에서 루프백·사설 주소 여부를 분류하고, 나머지 주소가 보이면 출처를 확인한다. 주소 분류와 인터넷에서의 접근 가능성은 다른 질문이다. 실제 외부 접근 여부를 확인하지 않았다면 <code>미확인</code>으로 쓴다. 공개 IP 범위처럼 보이는 주소만으로 외부에서 연결된다고 말하지 않는다. <a href="https://www.rfc-editor.org/rfc/rfc1918">RFC 1918</a>의 사설 범위를 참고하되, 내 VM의 네트워크 정책은 실제 설정 근거가 있을 때만 설명한다.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="index.html">2주차 입구</a><a href="sources.html">출처와 읽을 범위</a><a href="#main">맨 위로</a></div></footer><script>(()=>{const select=document.querySelector('#prefix');if(!select)return;select.addEventListener('change',()=>{const p=Number(select.value);const blocks=document.querySelector('#blocks');blocks.innerHTML=p===24?'<div>0~255<br>A .10 · B .70</div>':'<div>0~63<br>A .10</div><div>64~127<br>B .70</div><div>128~191</div><div>192~255</div>';document.querySelector('#cidr-result').textContent=p===24?'/24: A와 B는 모두 192.0.2.0/24에 포함됩니다. 실제 통신 성공은 확인하지 않았습니다.':'/26: A는 192.0.2.0/26, B는 192.0.2.64/26입니다. 서로 다른 서브넷이며 실제 도달성은 경로와 환경을 확인해야 합니다.';});})();</script></body></html>

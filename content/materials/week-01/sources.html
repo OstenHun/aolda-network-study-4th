@@ -1,0 +1,205 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="roadmap.sh term의 article을 1주차 교재·실습에 연결한다. 필수는 포트·HTTP 원문 지정 부분 10분이며 나머지는 선택이다. 입문 글과 공식 검증 자료, 원문 조회와 실제 학습 완료를 구분한다."><meta name="theme-color" content="#0e76c4"><title>1주차 출처와 원문 읽기 안내 · 아올다 네트워크</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%2307548e'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='25' fill='white'%3E1%3C/text%3E%3C/svg%3E"><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="sources.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 1주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="concepts.html">개념 교재</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실습</a><a href="code-reading.html">코드 읽기</a><a href="worksheet.html">팀 활동</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">CCNA 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">1주차 학습 자료</p><h1>1주차 출처와 원문 읽기 안내</h1><p>roadmap.sh term의 article을 1주차 교재·실습에 연결한다. 필수는 포트·HTTP 원문 지정 부분 10분이며 나머지는 선택이다. 입문 글과 공식 검증 자료, 원문 조회와 실제 학습 완료를 구분한다.</p><nav class="page-links" aria-label="관련 자료"><a href="concepts.html">개념 교재 →</a><a href="linux.html">Linux 실습 →</a></nav></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#필수-읽기--총-10분-교재-30분-안에서-조절">필수 읽기 — 총 10분, 교재 30분 안에서 조절</a><a href="#선택-읽기">선택 읽기</a><a href="#진행자-검증용">진행자 검증용</a><a href="#확인-범위와-저작권">확인 범위와 저작권</a><a href="#핵심-정리와-개발-질문의-근거">핵심 정리와 개발 질문의 근거</a></div></nav><article>
+<h2 id="필수-읽기--총-10분-교재-30분-안에서-조절">필수 읽기 — 총 10분, 교재 30분 안에서 조절</h2>
+<p><a href="concepts.html">한국어 교재</a>와 <a href="articles.html">원문으로 배우기</a>를 함께 사용한다. roadmap.sh term → 연결 article → 읽을 부분 → 한국어 설명 → 실습 질문의 대응은 원문 학습 교재가 관리한다. 영어 원문을 모두 번역하거나 외부 과제를 전부 풀 필요는 없다. 원문에서 못 읽은 부분은 짝과 교재의 대응 개념을 확인한다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>자료</th>
+<th>읽을 부분</th>
+<th>시간·확인 질문</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.cloudflare.com/learning/network-layer/what-is-a-computer-port/">Port → Cloudflare</a></td>
+<td>What is a port?와 What is a port number?</td>
+<td>5분. 같은 IP에서 두 통신 끝점을 어떻게 구별하는가? 기본 80번과 키트의 8080을 구분</td>
+</tr>
+<tr>
+<td><a href="https://aws.amazon.com/compare/the-difference-between-https-and-http/">HTTP / HTTPS → AWS</a></td>
+<td>How does HTTP protocol work?의 요청·응답·상태 코드 부분</td>
+<td>5분. 404 응답과 연결 실패의 증거는 어떻게 다른가? 폼 메서드 예·TLS 상세는 제외</td>
+</tr>
+</tbody></table></div>
+<p>외부 HTTP 과제의 사이트를 호출하거나 브라우저 설정을 바꾸는 것은 이번 필수 과제가 아니다. 우리 실습은 curl의 HTTP/1.1과 Linux lo를 사용하므로 원문에 있는 브라우저 캐시·VPN·QUIC 관련 준비를 그대로 적용하지 않는다. 메시지를 관찰하는 방법을 읽고 자체 서버에 적용한다.</p>
+<h2 id="선택-읽기">선택 읽기</h2>
+<p><a href="ccna-practice.html">CCNA 연계 연습</a>에 공개 샘플의 문항 위치와 기출·연습 사이트별 채택 판단을 정리했다. 외부 문항은 원문 링크에서 풀며, 아래 저작권 안내의 자체 작성 범위는 로컬 문항·설명에 해당한다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>자료</th>
+<th>범위</th>
+<th>예상 시간·용도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://roadmap.sh/network-engineer">Network Engineer Roadmap</a></td>
+<td>1주차 term 11개의 article 연결은 <a href="articles.html#term%EA%B3%BC-article-%EB%8C%80%EC%9D%91%ED%91%9C">대응표</a> 참고</td>
+<td>선택 원문은 막힌 개념에 해당하는 부분만 읽기</td>
+</tr>
+<tr>
+<td><a href="https://www-net.cs.umass.edu/wireshark-labs/Wireshark_HTTP_v9.0.pdf">Kurose·Ross HTTP v9.0 PDF</a></td>
+<td>1절 The Basic HTTP GET/response interaction, 인쇄 페이지 2~3</td>
+<td>선택 5분. 요청·응답의 버전·상태 찾기</td>
+</tr>
+<tr>
+<td><a href="https://www.wireshark.org/docs/wsug_html_chunked/ChAdvFollowStreamSection.html">Wireshark Follow Stream</a></td>
+<td>7.2 도입과 TCP Stream 화면 설명</td>
+<td>선택 5분. 같은 흐름의 양방향 메시지 읽기</td>
+</tr>
+<tr>
+<td><a href="https://www-net.cs.umass.edu/wireshark-labs/Wireshark_Intro_v9.0.pdf">Kurose·Ross Getting Started v9.0</a></td>
+<td>인쇄 페이지 5~6의 패킷 목록·상세·바이트·필터 설명</td>
+<td>10분. Wireshark가 처음일 때 화면 읽기</td>
+</tr>
+<tr>
+<td><a href="https://curl.se/docs/manpage.html">curl 매뉴얼</a></td>
+<td>--verbose, --noproxy, --http1.1, --max-time, Exit codes</td>
+<td>10분. 실습 옵션·상태와 종료 코드 구별</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/http.server.html">Python http.server</a></td>
+<td>BaseHTTPRequestHandler, protocol_version, send_response, send_header</td>
+<td>10분. 키트 서버의 요청 처리·응답 구성 확인</td>
+</tr>
+<tr>
+<td><a href="https://nodejs.org/api/typescript.html">Node TypeScript</a></td>
+<td>Type stripping</td>
+<td>5분. 선택 Node 경로. 버전 조건은 실행 전에 확인</td>
+</tr>
+</tbody></table></div>
+<h2 id="진행자-검증용">진행자 검증용</h2>
+<ul>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110 §15.3.1, §15.5.5</a>: 200·404 의미 확인. 일반적인 404 의미와 자체 서버의 단순한 경로 분기를 구분한다. 5분.</li>
+<li><a href="https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/master/tcpdump.1.in">tcpdump 공식 매뉴얼 원본</a>: -i, -nn, -s, -w 및 종료·필터 동작 확인. 10분. 공식 웹 매뉴얼은 robots 제한으로 본문을 받지 못해 공식 저장소의 원문을 확인했다. 설치 버전의 <code>man tcpdump</code>와 실행 권한은 별도 확인한다.</li>
+<li><a href="https://www.wireshark.org/docs/wsug_html_chunked/ChStatFlowGraph.html">Wireshark Flow Graph</a>: 방향·시간에 따른 흐름 보기. 5분.</li>
+<li><a href="../REFERENCE_GUIDE.md">전체 참고자료 안내</a>: 16주 자료와 주차별 역할.</li>
+</ul>
+<h2 id="확인-범위와-저작권">확인 범위와 저작권</h2>
+<p>공식 문서와 참고 글의 읽을 범위를 교재에 연결한다. 본문을 확인하지 못한 자료와 대체 자료는 <a href="articles.html#term과-article-대응표">원문 대응표</a>에 구분했다. 외부 원문은 링크로 안내하며 본문·해답을 길게 복제하지 않는다.</p>
+<p>Kurose·Ross Wireshark Labs © 2005–2025 J.F. Kurose, K.W. Ross. <a href="https://gaia.cs.umass.edu/kurose_ross/wireshark.php">저자 안내</a>에 따라 수업에서 출처를 밝힌다. 원문 각색본을 웹에 게시한다면 원저작권·각색 사실 표시가 필요하다. 이 묶음의 코드·그림·질문·해설은 자체 작성이고 외부 강사용 해답을 사용하지 않았다. 제공 pcap은 기존 자체 Windows 개발 캡처다.</p>
+<h2 id="핵심-정리와-개발-질문의-근거">핵심 정리와 개발 질문의 근거</h2>
+<p><a href="essentials.html">핵심 정리</a>는 기존 교재와 공식 원문을 연결한 자체 설명이며 개발 사례·해설은 스터디 자체 작성이다. <a href="interview-references.html">공개 저장소·공식 문서 선정 기록</a>에 읽은 절·채택 범위·보류 이유를 정리했다. 회사별 실제 면접 출제·빈도는 확인하지 않았다.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="index.html">1주차 입구</a><a href="#main">맨 위로</a><span>아올다 4기 네트워크 스터디</span></div></footer><script>
+(() => {
+  const button = document.querySelector('#download-answers');
+  if (!button) return;
+  document.body.classList.add('js-ready');
+  const fields = [...document.querySelectorAll('textarea[data-answer]')];
+  let dirty = false;
+  fields.forEach(field => field.addEventListener('input', () => { dirty = true; }));
+  const checks = [...document.querySelectorAll('article input[type="checkbox"]')];
+  checks.forEach(box => box.addEventListener('change', () => { dirty = true; }));
+  window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+  button.addEventListener('click', () => {
+    const isTeamActivity = document.body.dataset.page === 'worksheet.html';
+    const recordSummary = isTeamActivity ? '팀 토론의 질문·근거 위치·바뀐 설명·남은 질문과 작성자의 개인 마무리다. 상세 실습 증거는 별도 보관한다.' : '작성자의 개인 답안이다. 직접 수행·제공 예제·미수행은 작성자가 구분해 적고, 빈칸은 미작성으로 남긴다.';
+    const lines = ['# ' + document.title.replace(' · 아올다 1주차', '') + ' — 내 기록', '', '요약: ' + recordSummary, '', '작성일: ' + new Date().toLocaleDateString('ko-KR'), ''];
+    fields.forEach(field => lines.push('## ' + field.dataset.answer, '', field.value.trim() || '미작성', ''));
+    if (checks.length) { lines.push('## 완료 확인', ''); checks.forEach(box => lines.push('- [' + (box.checked ? 'x' : ' ') + '] ' + box.closest('li')?.textContent.trim())); lines.push(''); }
+    const blob = new Blob([lines.join('\n')], {type:'text/markdown;charset=utf-8'});
+    const link = document.createElement('a'); link.href = URL.createObjectURL(blob);
+    link.download = isTeamActivity ? 'week-01-team-activity.md' : document.body.dataset.page.replace('.html', '') + '-my-answers.md';
+    link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 60000);
+    dirty = false;
+    document.querySelector('#download-status').textContent = '다운로드를 요청했습니다. 브라우저 다운로드 목록과 저장된 파일을 열어 내용을 확인하세요.';
+  });
+})();
+</script></body></html>

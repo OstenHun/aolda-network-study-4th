@@ -1,0 +1,489 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="실제 server.py를 요청 읽기·경로 판정·본문 만들기·응답 보내기·로그 남기기 순서로 읽는다. Python 문법을 처음 보는 사람도 출력과 연결할 수 있게 설명하며 Node 클라이언트는 선택으로 다룬다."><meta name="theme-color" content="#0e76c4"><title>코드로 따라가는 요청과 응답 · 아올다 1주차</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%2307548e'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='25' fill='white'%3E1%3C/text%3E%3C/svg%3E"><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="code-reading.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 1주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="concepts.html">개념 교재</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실습</a><a href="code-reading.html" aria-current="page">코드 읽기</a><a href="worksheet.html">팀 활동</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">CCNA 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">1주차 학습 자료</p><h1>코드로 따라가는 요청과 응답</h1><p>실제 server.py를 요청 읽기·경로 판정·본문 만들기·응답 보내기·로그 남기기 순서로 읽는다. Python 문법을 처음 보는 사람도 출력과 연결할 수 있게 설명하며 Node 클라이언트는 선택으로 다룬다.</p><nav class="page-links" aria-label="관련 자료"><a href="linux.html">Linux 실습 →</a><a href="worksheet.html">팀 활동 →</a></nav></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#1-처음에는-이-질문-하나만-따라가세요">1. 처음에는 이 질문 하나만 따라가세요</a><a href="#2-python-문법이-낯설-때-볼-작은-안내">2. Python 문법이 낯설 때 볼 작은 안내</a><a href="#3-hello-요청을-다섯-단계로-따라가기">3. hello 요청을 다섯 단계로 따라가기</a><a href="#4-코드와-터미널-출력-연결하기">4. 코드와 터미널 출력 연결하기</a><a href="#5-실제-서버-파일-읽기">5. 실제 서버 파일 읽기</a><a href="#6-코드의-뜻을-확인하는-작은-문제">6. 코드의 뜻을 확인하는 작은 문제</a><a href="#7-선택--node-클라이언트의-읽는-순서">7. 선택 — Node 클라이언트의 읽는 순서</a><a href="#다음-행동과-참고">다음 행동과 참고</a></div></nav><article><h1 id="코드로-따라가는-요청과-응답">코드로 따라가는 요청과 응답</h1>
+
+<h2 id="1-처음에는-이-질문-하나만-따라가세요">1. 처음에는 이 질문 하나만 따라가세요</h2>
+<p><strong>“내가 보낸 hello가 어디에서 읽혀서 응답에 들어갈까?”</strong> <a href="linux.html">정상 요청</a>을 한 번 실행한 뒤 2~4절을 약 10~15분 동안 읽습니다. 프로그램을 처음부터 혼자 작성하거나 모든 문법을 외우는 것은 이번 주 목표가 아닙니다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>파일·도구</th>
+<th>하는 일</th>
+<th>이번에 읽을 범위</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>server.py</code></td>
+<td>요청을 받아 상태와 본문을 정하는 Python 서버</td>
+<td>필수 실습 파일. 아래 다섯 단계부터 읽기</td>
+</tr>
+<tr>
+<td><code>curl</code></td>
+<td>서버에 요청하고 받은 내용을 보여주는 명령</td>
+<td>직접 구현할 필요 없이 명령·출력과 코드 연결</td>
+</tr>
+<tr>
+<td><code>client.mts</code></td>
+<td>연결 주소·헤더·본문을 더 나눠 출력하는 Node 클라이언트</td>
+<td>선택. 기본 실습 후 궁금한 경우에만 읽기</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-text">셸 B: curl → HTTP GET /echo?message=hello
+                        ↓ 같은 Linux 안의 TCP 연결
+셸 A: server.py → 경로 확인 → 응답 데이터 → HTTP 200 + JSON 본문
+                        ↓
+셸 B: curl 화면에 받은 상태·헤더·본문 표시
+</code></pre>
+<p>Python의 HTTP 라이브러리가 요청을 받는 일을 맡습니다. 우리 코드는 <strong>요청을 받았을 때 어떤 응답을 만들지</strong>를 정합니다. <code>/echo</code>라는 이름은 이 코드가 정한 처리 경로이며 폴더나 파일을 자동으로 열어 주는 기능이 아닙니다.</p>
+<h2 id="2-python-문법이-낯설-때-볼-작은-안내">2. Python 문법이 낯설 때 볼 작은 안내</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>코드에서 볼 모양</th>
+<th>이 파일에서는 이렇게 읽습니다</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>import json</code></td>
+<td>Python이 제공하는 JSON 처리 도구 가져오기</td>
+</tr>
+<tr>
+<td><code>class Handler(BaseHTTPRequestHandler):</code></td>
+<td>기본 HTTP 처리 기능을 바탕으로 우리 요청 처리 방법 정의하기</td>
+</tr>
+<tr>
+<td><code>def do_GET(self):</code></td>
+<td>GET 요청을 받았을 때 실행할 동작. 이 이름을 보고 HTTP 라이브러리가 호출함</td>
+</tr>
+<tr>
+<td><code>self.path</code></td>
+<td>지금 처리하는 요청의 경로와 쿼리. 예: <code>/echo?message=hello</code></td>
+</tr>
+<tr>
+<td><code>status_code = 200</code></td>
+<td>변수에 값 저장. 오른쪽 값을 왼쪽 이름으로 기억하기</td>
+</tr>
+<tr>
+<td><code>request_url.path == &quot;/echo&quot;</code></td>
+<td>두 값이 같은지 비교. 위의 <code>=</code>와 역할이 다름</td>
+</tr>
+<tr>
+<td><code>if ...:</code> / <code>else:</code></td>
+<td>조건이 맞으면 첫 블록, 아니면 다른 블록 실행</td>
+</tr>
+<tr>
+<td><code>{&quot;message&quot;: message}</code></td>
+<td><code>message</code>라는 이름과 변수의 값을 짝지은 딕셔너리</td>
+</tr>
+<tr>
+<td><code>[&quot;hello&quot;]</code> / <code>[0]</code></td>
+<td>값의 목록 / 그 목록의 첫 값. Python은 위치를 0부터 셈</td>
+</tr>
+<tr>
+<td><code>.get(&quot;message&quot;, [&quot;hello&quot;])</code></td>
+<td>message 항목이 있으면 그 목록, 없으면 기본 목록 사용</td>
+</tr>
+</tbody></table></div>
+<p><code>self</code>는 <strong>지금 요청을 처리하는 객체 자신</strong>을 가리킵니다. 요청마다 경로·클라이언트 주소 같은 정보가 그 객체에 있습니다. 들여쓰기는 같은 동작 묶음을 표시하므로 코드를 바꿀 때 그대로 유지합니다. <code>#</code> 뒤는 사람이 읽는 주석이며 실행되지 않습니다.</p>
+<h2 id="3-hello-요청을-다섯-단계로-따라가기">3. hello 요청을 다섯 단계로 따라가기</h2>
+<p>아래 값은 코드를 설명하는 예시입니다. 실제 실행 결과는 <a href="../week-01-prestudy.html#start">개인 실습 기록</a>이나 별도 증거 파일에 남기고, 함께 확인한 근거 위치와 바뀐 설명은 <a href="worksheet.html">팀 활동</a>에 적습니다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>순서</th>
+<th>코드에서 찾을 부분</th>
+<th>hello 요청에서 일어나는 일</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 요청 읽기</td>
+<td><code>urlsplit(self.path)</code></td>
+<td>경로 <code>/echo</code>와 쿼리 <code>message=hello</code>를 나눔</td>
+</tr>
+<tr>
+<td>② 응답 결정</td>
+<td><code>if request_url.path == &quot;/echo&quot;:</code></td>
+<td>맞으면 상태 200, message를 읽어 <code>{&quot;message&quot;: &quot;hello&quot;}</code> 데이터 준비. 다른 경로면 상태 404와 오류 데이터 준비</td>
+</tr>
+<tr>
+<td>③ 전송할 본문 만들기</td>
+<td><code>json.dumps(...)</code>와 <code>.encode(&quot;utf-8&quot;)</code></td>
+<td>Python 데이터를 JSON 문자열로 만든 뒤 전송할 바이트로 변환</td>
+</tr>
+<tr>
+<td>④ 응답 보내기</td>
+<td><code>send_response</code>부터 <code>wfile.write</code>까지</td>
+<td>상태·헤더를 정하고 빈 줄 뒤에 본문 바이트를 보냄</td>
+</tr>
+<tr>
+<td>⑤ 서버 기록 남기기</td>
+<td><code>response_event</code>와 <code>print(...)</code></td>
+<td>서버 터미널에 요청한 쪽·경로·상태·본문 크기 출력</td>
+</tr>
+</tbody></table></div>
+<p>②에서 <code>parse_qs</code>는 <code>message=hello</code>를 <code>{&quot;message&quot;: [&quot;hello&quot;]}</code>처럼 읽습니다. 같은 이름이 여러 번 올 수 있어 값이 목록입니다. 이 키트는 <strong>빈 값은 건너뛰고, 남은 첫 message를 사용하며, 없으면 hello</strong>를 사용합니다. 예를 들어 <code>/echo</code>, <code>/echo?message=</code>, <code>/echo?message=first&amp;message=second</code>의 메시지는 각각 <code>hello</code>, <code>hello</code>, <code>first</code>입니다.</p>
+<p>③의 딕셔너리·JSON 문자열·바이트는 서로 다른 형태입니다. Python 내부에서는 딕셔너리로 다루고, 통신할 때는 JSON 형식의 글자를 UTF-8 바이트로 보냅니다. 한글은 글자 수와 바이트 수가 다를 수 있어 <code>Content-Length</code>에는 <strong>변환한 뒤의 <code>len(body)</code></strong>를 사용합니다. 이 키트의 <code>{&quot;message&quot;: &quot;hello&quot;}</code> 본문은 공백을 포함해 20바이트입니다.</p>
+<h2 id="4-코드와-터미널-출력-연결하기">4. 코드와 터미널 출력 연결하기</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>코드</th>
+<th>curl에서 찾아볼 결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>self.send_response(status_code)</code></td>
+<td><code>&lt; HTTP/1.1 200 OK</code> 또는 <code>&lt; HTTP/1.1 404 Not Found</code></td>
+</tr>
+<tr>
+<td><code>self.send_header(&quot;Content-Type&quot;, ...)</code></td>
+<td>받은 본문이 JSON·UTF-8이라는 헤더</td>
+</tr>
+<tr>
+<td><code>self.send_header(&quot;Content-Length&quot;, str(len(body)))</code></td>
+<td>본문 바이트 수. HTTP 헤더 전체의 크기가 아님</td>
+</tr>
+<tr>
+<td><code>self.send_header(&quot;Connection&quot;, &quot;close&quot;)</code></td>
+<td>이번 키트는 응답 뒤 연결을 닫겠다는 안내</td>
+</tr>
+<tr>
+<td><code>self.end_headers()</code></td>
+<td>상태·헤더 다음에 빈 줄을 넣고 헤더 전송을 마침</td>
+</tr>
+<tr>
+<td><code>self.wfile.write(body)</code></td>
+<td><code>{&quot;message&quot;: &quot;hello&quot;}</code> 또는 오류 본문</td>
+</tr>
+</tbody></table></div>
+<p><code>send_response</code>와 <code>send_header</code>는 보낼 헤더를 준비하고 <code>end_headers</code>에서 보냅니다. 그러므로 헤더 설정 순서 뒤에 <code>end_headers()</code>, 그다음에 본문 쓰기가 옵니다. 실제 HTTP 메시지에는 curl의 표시 기호 <code>&lt;</code>가 들어 있지 않습니다.</p>
+<p><strong><code>print</code>는 네트워크로 응답을 보내는 코드가 아닙니다.</strong> <code>print</code>가 남긴 <code>event</code>, <code>client</code>, <code>path</code>, <code>status</code>, <code>bytes</code>는 셸 A의 로그이고, 클라이언트로 보내는 JSON은 ②에서 만든 <code>response_data</code>입니다. 같은 상태 값을 사용하지만 기록되는 위치와 목적이 다릅니다.</p>
+<p><code>log_message</code>는 Python의 기본 접속 로그 대신 실습용 JSON 로그를 보이게 하는 부분입니다. 처음에는 바꿀 필요가 없습니다. 이 JSON 로그도 상대가 모든 데이터를 읽었다는 확인서는 아니므로 실제 curl 출력과 함께 대조합니다.</p>
+<h2 id="5-실제-서버-파일-읽기">5. 실제 서버 파일 읽기</h2>
+<p><a href="../../labs/week-01/server.py" download>server.py 내려받기</a>. 아래 펼침에는 공유 키트와 같은 파일의 코드가 들어 있습니다. 설명만 읽고 이해가 안 되는 부분은 해당 이름을 코드에서 찾아보세요.</p>
+<details class="source-code"><summary>server.py 전체 코드 펼치기</summary><pre><code id="server-code">&quot;&quot;&quot;1주차 실습: 같은 Linux VM 안에서 요청을 받아 응답하는 작은 HTTP 서버.&quot;&quot;&quot;
+
+import argparse
+import json
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import parse_qs, urlsplit
+
+
+class Handler(BaseHTTPRequestHandler):
+    protocol_version = &quot;HTTP/1.1&quot;
+
+    def do_GET(self):
+        # BaseHTTPRequestHandler가 GET 요청을 받으면 이 메서드를 호출한다.
+        # 1. 요청 URL을 경로(/echo)와 물음표 뒤의 질의 문자열로 나눈다.
+        request_url = urlsplit(self.path)
+
+        # 2. 경로에 따라 응답 상태와 JSON 내용을 정한다.
+        if request_url.path == &quot;/echo&quot;:
+            status_code = 200
+            query_parameters = parse_qs(request_url.query)
+            # 빈 값은 건너뛴다. 남은 message가 없으면 hello, 여러 개면 첫 값을 쓴다.
+            message_values = query_parameters.get(&quot;message&quot;, [&quot;hello&quot;])
+            message = message_values[0]
+            response_data = {&quot;message&quot;: message}
+        else:
+            status_code = 404
+            response_data = {&quot;error&quot;: &quot;not found&quot;}
+
+        # 3. 화면에 보이는 글자와 실제 전송 바이트 수는 다를 수 있다.
+        # 한글도 그대로 읽히는 JSON을 만들고 UTF-8 바이트로 바꾼다.
+        body = json.dumps(response_data, ensure_ascii=False).encode(&quot;utf-8&quot;)
+
+        # 4. 상태줄과 헤더를 보낸 뒤 본문을 보낸다.
+        self.send_response(status_code)
+        self.send_header(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;)
+        self.send_header(&quot;Content-Length&quot;, str(len(body)))
+        # 요청마다 연결을 닫아 실습 로그와 패킷을 구분하기 쉽게 한다.
+        self.send_header(&quot;Connection&quot;, &quot;close&quot;)
+        self.end_headers()
+        self.wfile.write(body)
+
+        # 5. 서버에서 관찰한 요청과 응답을 한 줄의 JSON으로 남긴다.
+        response_event = {
+            &quot;event&quot;: &quot;response&quot;,
+            &quot;client&quot;: self.client_address,
+            &quot;path&quot;: self.path,
+            &quot;status&quot;: status_code,
+            &quot;bytes&quot;: len(body),
+        }
+        print(json.dumps(response_event, ensure_ascii=False), flush=True)
+
+    def log_message(self, format, *args):
+        # 기본 접속 로그 대신 위의 JSON 로그를 실습 증거로 사용한다.
+        pass
+
+
+if __name__ == &quot;__main__&quot;:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(&quot;--port&quot;, type=int, default=8080)
+    args = parser.parse_args()
+
+    # 127.0.0.1은 이 VM 안에서만 접근 가능한 루프백 주소다.
+    with ThreadingHTTPServer((&quot;127.0.0.1&quot;, args.port), Handler) as server:
+        print(json.dumps({&quot;event&quot;: &quot;listening&quot;, &quot;address&quot;: server.server_address}), flush=True)
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
+            pass  # Ctrl+C를 누르면 서버를 종료한다.
+</code></pre></details>
+
+<p>실행 순서는 파일의 위에서 아래로 한 번만 흐르는 것과 다릅니다. 먼저 import·클래스 정의를 읽고, 맨 아래 <code>if __name__ == &quot;__main__&quot;:</code>에서 서버를 시작합니다. <strong>클래스를 정의한 시점에는 <code>do_GET</code>의 본문이 실행되지 않습니다.</strong> 이후 GET 요청이 들어올 때마다 라이브러리가 <code>do_GET</code>을 호출합니다.</p>
+<p>맨 아래에서 <code>--port</code>는 명령줄로 받은 서버 포트이고 생략하면 8080입니다. <code>127.0.0.1</code>에 바인딩하므로 같은 Linux 안에서 통신합니다. <code>serve_forever()</code>가 요청을 기다리는 동안 셸 A는 그대로 두고 셸 B에서 curl을 실행합니다. A에서 Ctrl+C를 누르면 <code>KeyboardInterrupt</code>를 처리하고 서버를 닫습니다. <code>with</code>는 그 블록을 나갈 때 서버 자원을 정리합니다.</p>
+<h2 id="6-코드의-뜻을-확인하는-작은-문제">6. 코드의 뜻을 확인하는 작은 문제</h2>
+<p>먼저 예상하고, 한 번에 조건 하나만 바꿉니다. 기본 코드를 보관한 뒤 자기 실습 사본을 사용하세요. 서버 파일을 수정했다면 실행 중인 서버를 Ctrl+C로 종료하고 다시 시작해야 바뀐 코드가 적용됩니다.</p>
+<ol>
+<li>코드는 그대로 두고 URL의 <code>hello</code>만 <code>again</code>으로 바꿉니다. 코드의 어느 변수와 응답의 어느 부분이 바뀔까요?</li>
+<li>코드는 그대로 두고 <code>/missing</code>을 요청합니다. <code>else</code> 블록이 실행되는 이유와, 이때도 응답을 보내는 부분이 실행되는지 설명하세요.</li>
+<li>선택: <strong>서버 코드의 기본 메시지 <code>hello</code> 하나만 <code>hi</code>로 바꿉니다.</strong> <code>/echo</code>로 요청한 뒤, <code>/echo?message=hello</code>로 요청하면 각각 무엇이 나올까요? 확인 후 기본 코드를 복구하고 재시작하세요.</li>
+</ol>
+<p>풀이 뒤 확인: 1번은 읽은 message와 응답 본문이 바뀌고 서버 포트는 유지됩니다. 2번은 경로가 <code>/echo</code>와 달라 상태 404와 오류 본문을 만들고 같은 응답 전송 부분을 실행합니다. 3번의 메시지는 차례로 <code>hi</code>, <code>hello</code>입니다. URL에 명시한 값은 기본값보다 우선하기 때문입니다.</p>
+<h2 id="7-선택--node-클라이언트의-읽는-순서">7. 선택 — Node 클라이언트의 읽는 순서</h2>
+<p>기본 실습은 curl이면 충분합니다. Node가 이미 준비되어 있고 <strong>“받은 본문을 프로그램에서는 어떻게 읽을까?”</strong>가 궁금할 때 봅니다. <a href="../../labs/week-01/README.md" download>키트 실행 안내 <span class="source-type">(Markdown 원문)</span></a>의 명령을 사용합니다.</p>
+<p><code>callback</code>(콜백)은 어떤 일이 발생했을 때 실행하도록 넘겨 둔 함수입니다. <code>response.on(&quot;data&quot;, ...)</code>는 “데이터가 도착하면 이 함수를 실행해 달라”는 등록입니다. 파일에 적힌 순서대로 응답·연결·오류 로그가 모두 즉시 출력되는 것이 아닙니다.</p>
+<pre><code class="language-text">성공할 때의 대표 순서:
+request(요청 시작) → connected(TCP 연결) → response(상태·헤더 받음)
+  → data(본문 일부를 받음, 여러 번일 수 있음) → end(본문 읽기 끝) → body 로그
+</code></pre>
+<p>코드는 <code>data</code> 이벤트마다 본문을 모으고 <code>end</code>에서 모인 본문을 한 번 출력합니다. data 덩어리 하나가 TCP 패킷 하나라는 뜻은 아닙니다. TCP 패킷의 경계와 프로그램에 전달되는 데이터 묶음은 같다고 가정하지 않습니다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>코드·이벤트</th>
+<th>왜 필요한가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>process.argv[2]</code></td>
+<td>명령 뒤에 쓴 URL을 읽음. 없으면 기본 실습 URL 사용</td>
+</tr>
+<tr>
+<td><code>get(target, { agent: false }, ...)</code></td>
+<td>GET 요청 시작. 이 키트에서는 연결을 재사용하지 않고 관찰</td>
+</tr>
+<tr>
+<td><code>setEncoding(&quot;utf8&quot;)</code></td>
+<td>받은 본문을 UTF-8 문자열로 읽음</td>
+</tr>
+<tr>
+<td><code>body += chunk</code></td>
+<td>여러 번 올 수 있는 본문 조각을 순서대로 이어 붙임</td>
+</tr>
+<tr>
+<td><code>socket.once(&quot;connect&quot;, ...)</code></td>
+<td>연결된 뒤 실제 local·remote IP와 포트를 기록</td>
+</tr>
+<tr>
+<td><code>setTimeout</code> / <code>clearTimeout</code></td>
+<td>요청이 끝없이 기다리지 않게 3초 제한을 걸고 완료·오류 때 타이머 정리</td>
+</tr>
+<tr>
+<td><code>process.exitCode</code></td>
+<td>프로그램이 끝날 때 셸에 보고할 결과. 정상 0, HTTP 400 이상 2, 연결·전송 오류 1이라는 자체 규칙</td>
+</tr>
+</tbody></table></div>
+<p><code>elapsed_ms</code>는 이 프로그램이 요청 시작부터 잰 시간입니다. 서버 처리·실행 비용도 포함하며 순수 네트워크 지연은 아닙니다. 404에서는 HTTP 응답을 받은 뒤 종료 코드 2를 정합니다. <code>network_error</code>는 연결·전송·시간 제한 오류이며 응답을 얼마나 받았는지는 실제 로그를 함께 봅니다.</p>
+<p><a href="../../labs/week-01/client.mts" download>client.mts 내려받기</a>. TypeScript의 <code>: string</code>, <code>: object</code> 등은 값의 종류를 표시합니다. 이 실행 방식에서는 표시를 제거해 실행하므로 타입 오류를 자동 검사해 준다는 뜻은 아닙니다.</p>
+<details class="source-code"><summary>client.mts 전체 코드 펼치기</summary><pre><code id="client-code">// 선택 실습: Node.js 22.18+ 또는 24.3+의 내장 TypeScript 실행 기능을 사용한다.
+import { get } from &quot;node:http&quot;;
+import { performance } from &quot;node:perf_hooks&quot;;
+
+// 1. 명령줄 주소가 없으면 기본 /echo 주소로 요청한다.
+const urlArgument = process.argv[2];
+const target = new URL(urlArgument ?? &quot;http://127.0.0.1:8080/echo?message=hello&quot;);
+if (target.protocol !== &quot;http:&quot;) {
+  throw new Error(&quot;Week 1 uses an http:// test URL.&quot;);
+}
+
+const start = performance.now();
+const logEvent = (event: string, detail: object = {}) =&gt; {
+  const elapsedMilliseconds = Number((performance.now() - start).toFixed(2));
+  console.log(JSON.stringify({
+    event,
+    elapsed_ms: elapsedMilliseconds,
+    ...detail,
+  }));
+};
+
+// 2. 요청을 시작한다. 응답이 오면 이 콜백 안에서 상태·헤더·본문을 읽는다.
+logEvent(&quot;request&quot;, { method: &quot;GET&quot;, url: target.href });
+const request = get(target, { agent: false }, (response) =&gt; {
+  logEvent(&quot;response&quot;, { status: response.statusCode, headers: response.headers });
+
+  // data는 본문 일부가 도착할 때마다, end는 본문이 모두 도착했을 때 실행된다.
+  response.setEncoding(&quot;utf8&quot;);
+  let body = &quot;&quot;;
+  response.on(&quot;data&quot;, (chunk: string) =&gt; {
+    body += chunk;
+  });
+  response.on(&quot;end&quot;, () =&gt; {
+    clearTimeout(deadline);
+    logEvent(&quot;body&quot;, { body });
+    if ((response.statusCode ?? 0) &gt;= 400) {
+      process.exitCode = 2;
+    }
+  });
+  response.on(&quot;error&quot;, (error) =&gt; {
+    request.destroy(error);
+  });
+});
+
+// 3. TCP 연결이 만들어지면 내 주소와 상대 주소를 기록한다.
+request.on(&quot;socket&quot;, (socket) =&gt; {
+  socket.once(&quot;connect&quot;, () =&gt; {
+    logEvent(&quot;connected&quot;, {
+      local: `${socket.localAddress}:${socket.localPort}`,
+      remote: `${socket.remoteAddress}:${socket.remotePort}`,
+    });
+  });
+});
+
+// 4. 응답이 오래 걸리면 3초 후 요청을 중단한다.
+const deadline = setTimeout(() =&gt; {
+  request.destroy(new Error(&quot;lab deadline: 3000 ms&quot;));
+}, 3000);
+
+// 연결·전송 오류나 시간 초과를 기록한다. HTTP 상태를 받았는지는 response 로그로 확인한다.
+request.on(&quot;error&quot;, (error: NodeJS.ErrnoException) =&gt; {
+  clearTimeout(deadline);
+  logEvent(&quot;network_error&quot;, {
+    code: error.code ?? &quot;LAB_TIMEOUT&quot;,
+    message: error.message,
+  });
+  process.exitCode = 1;
+});
+</code></pre></details>
+
+<h2 id="다음-행동과-참고">다음 행동과 참고</h2>
+<p>코드에서 상태를 정하는 곳, 본문을 보내는 곳, 서버 로그를 남기는 곳을 가리킬 수 있다면 <a href="linux.html">Linux 실습</a>으로 돌아가 직접 확인합니다. 설명을 서로 대조할 때는 <a href="worksheet.html">팀 활동</a>을 사용합니다. 자세한 소켓 구현·스레드 원리·TypeScript 전체 문법은 이번 필수 범위가 아닙니다.</p>
+<ul>
+<li><a href="https://docs.python.org/3/library/http.server.html">Python HTTP 서버</a>: <code>BaseHTTPRequestHandler</code>, <code>do_GET</code>, 헤더·본문 처리.</li>
+<li><a href="https://docs.python.org/3/library/urllib.parse.html#urllib.parse.parse_qs">Python URL·쿼리 해석</a>: 경로 분리, 쿼리 목록과 빈 값 처리.</li>
+<li><a href="https://nodejs.org/api/http.html#httpgetoptions-callback">Node HTTP</a>: 요청·응답 이벤트. 실행한 Node 버전의 문서와 함께 확인.</li>
+</ul>
+<p>본문의 코드 흐름·예시·질문은 이 키트를 설명하기 위해 작성했습니다. 실제 Linux 실행 결과는 별도로 확인합니다.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="index.html">1주차 입구</a><a href="#main">맨 위로</a><span>아올다 4기 네트워크 스터디</span></div></footer><script>
+(() => {
+  const button = document.querySelector('#download-answers');
+  if (!button) return;
+  document.body.classList.add('js-ready');
+  const fields = [...document.querySelectorAll('textarea[data-answer]')];
+  let dirty = false;
+  fields.forEach(field => field.addEventListener('input', () => { dirty = true; }));
+  const checks = [...document.querySelectorAll('article input[type="checkbox"]')];
+  checks.forEach(box => box.addEventListener('change', () => { dirty = true; }));
+  window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+  button.addEventListener('click', () => {
+    const isTeamActivity = document.body.dataset.page === 'worksheet.html';
+    const recordSummary = isTeamActivity ? '팀 토론의 질문·근거 위치·바뀐 설명·남은 질문과 작성자의 개인 마무리다. 상세 실습 증거는 별도 보관한다.' : '작성자의 개인 답안이다. 직접 수행·제공 예제·미수행은 작성자가 구분해 적고, 빈칸은 미작성으로 남긴다.';
+    const lines = ['# ' + document.title.replace(' · 아올다 1주차', '') + ' — 내 기록', '', '요약: ' + recordSummary, '', '작성일: ' + new Date().toLocaleDateString('ko-KR'), ''];
+    fields.forEach(field => lines.push('## ' + field.dataset.answer, '', field.value.trim() || '미작성', ''));
+    if (checks.length) { lines.push('## 완료 확인', ''); checks.forEach(box => lines.push('- [' + (box.checked ? 'x' : ' ') + '] ' + box.closest('li')?.textContent.trim())); lines.push(''); }
+    const blob = new Blob([lines.join('\n')], {type:'text/markdown;charset=utf-8'});
+    const link = document.createElement('a'); link.href = URL.createObjectURL(blob);
+    link.download = isTeamActivity ? 'week-01-team-activity.md' : document.body.dataset.page.replace('.html', '') + '-my-answers.md';
+    link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 60000);
+    dirty = false;
+    document.querySelector('#download-status').textContent = '다운로드를 요청했습니다. 브라우저 다운로드 목록과 저장된 파일을 열어 내용을 확인하세요.';
+  });
+})();
+</script></body></html>

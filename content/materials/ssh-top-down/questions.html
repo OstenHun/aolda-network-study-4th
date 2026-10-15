@@ -1,0 +1,257 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="본인 VM의 설정·접속 결과와 성공한 이유를 기록한다. 오류 없이 완료할 수 있으며 실패했을 때만 진단 칸을 사용한다. 직접 생성·기존 설정 확인·제공 증거 분석을 구분한다."><title>내 VM 접속 기록 · 아올다</title><style>:root{font:17px/1.85 "Malgun Gothic","Apple SD Gothic Neo",sans-serif;color:#183448;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}body{margin:0}a{color:var(--blue);text-underline-offset:4px}a:hover{text-decoration-thickness:2px}button,a,summary,textarea{touch-action:manipulation}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.wrap{max-width:1220px;margin:auto;padding:0 32px}.skip{position:absolute;top:-100px;left:12px;background:white;padding:12px;z-index:4}.skip:focus{top:12px}header{border-bottom:1px solid var(--line)}.header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:18px;padding-bottom:18px}.brand{font-size:27px;font-weight:800;text-decoration:none;color:var(--brand);letter-spacing:-.05em}.brand span{display:block;font-size:12px;letter-spacing:0;color:#466477}.header nav{display:flex;gap:24px;flex-wrap:wrap;font-size:15px}.header nav a{text-decoration:none;padding:8px 0}.header [aria-current]{font-weight:700;border-bottom:2px solid var(--brand)}.hero{padding-top:52px;padding-bottom:38px}.eyebrow{color:var(--blue);font-size:13px;font-weight:700;letter-spacing:.025em;margin:0 0 16px}h1{font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.3;letter-spacing:-.05em;max-width:27ch;text-wrap:balance;margin:0 0 24px;word-break:keep-all}.lead{max-width:66ch;color:#466477;font-size:18px;margin:0}.primary,button,.next{display:inline-block;font:inherit;font-weight:700;border:1px solid var(--blue);padding:11px 20px;min-height:46px;border-radius:5px;background:var(--blue);color:white;text-decoration:none;cursor:pointer}.primary{margin-top:28px}.primary:hover,button:hover,.next:hover{background:#063d67}.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:58px;align-items:start;border-top:1px solid var(--line);padding-top:32px}.contents{position:sticky;top:20px;max-height:calc(100dvh - 40px);overflow:auto;font-size:13px;padding-bottom:10px}.contents summary{font-weight:700;cursor:pointer;padding:8px 0}.contents nav{display:grid;gap:3px}.contents a{padding:7px 10px;border-left:2px solid var(--line);text-decoration:none;line-height:1.5}.contents a:hover{background:var(--wash);border-color:var(--brand)}main{min-width:0}article{max-width:820px}h2{font-size:1.55rem;line-height:1.5;letter-spacing:-.035em;border-top:1px solid var(--line);padding-top:35px;margin:52px 0 20px}article>h2:first-child{border:0;margin-top:0;padding-top:0}h3{font-size:1.15rem;line-height:1.55;margin-top:32px}h2,h3,h4{word-break:keep-all;scroll-margin-top:24px}a[id]{scroll-margin-top:24px}p,li{word-break:keep-all;overflow-wrap:anywhere}p{margin:16px 0}li{margin:7px 0}ul,ol{padding-left:24px}strong{color:#103f60}blockquote{margin:25px 0;padding:4px 20px;border-left:3px solid var(--brand);background:var(--wash)}pre{position:relative;overflow:auto;max-width:100%;background:#f2f6f9;border-left:3px solid #8bb9d9;padding:20px;line-height:1.7;font-size:14px;border-radius:0 7px 7px 0}code,pre{font-family:Consolas,"Courier New",monospace}code{overflow-wrap:anywhere;font-size:.91em}pre code{overflow-wrap:normal;font-size:inherit}.code-actions{display:flex;justify-content:flex-end;align-items:center;gap:10px;font-size:12px;margin-top:-10px;color:#466477}.code-actions button{font-size:12px;padding:4px 12px;min-height:38px;background:white;color:var(--blue);border-color:#8aaec6}.table-scroll{overflow:auto;margin:22px 0;border:1px solid var(--line);border-radius:6px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.75;min-width:500px}th,td{text-align:left;vertical-align:top;padding:12px 15px;border-bottom:1px solid var(--line)}th{background:var(--wash)}tr:last-child td{border:0}td code{word-break:normal}.concept{margin:30px 0;padding:24px;background:var(--wash);border:1px solid var(--line);border-radius:7px}.concept figcaption{font-weight:700;color:var(--blue);margin-bottom:18px}.diagram{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0}.diagram li{padding:12px 0;margin:0;border-top:3px solid #71aad0}.diagram strong,.diagram span{display:block}.diagram strong{font-size:15px;margin-bottom:7px}.diagram span{font-size:13px;line-height:1.75;font-variant-numeric:tabular-nums}.concept>p{font-size:12px;color:#466477;margin:14px 0 0}.notice{background:var(--wash);border-left:3px solid var(--brand);padding:20px;margin-bottom:30px;font-size:14px}.notice p{margin:8px 0 15px}.answer{display:block;margin:12px 0 20px}.answer>span{display:block;font-size:14px;font-weight:700;margin-bottom:8px}textarea{display:block;width:100%;min-width:180px;min-height:100px;resize:vertical;border:1px solid #91acbd;border-radius:4px;padding:12px;font:15px/1.7 "Malgun Gothic",sans-serif;color:#183448;background:white}td .answer{margin:0}td .answer>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}small{font-size:12px;color:#466477}body[data-page="questions.html"] article>ul{list-style:none;padding:0}.next{margin:36px 0 60px}footer{border-top:1px solid var(--line);padding-top:24px!important;padding-bottom:38px!important;font-size:13px;color:#466477}footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}[hidden]{display:none!important}@media(max-width:850px){.layout{grid-template-columns:1fr;gap:25px}.contents{position:static;max-height:none}.contents nav{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:32px}article{max-width:none}.header{align-items:flex-start}.header nav{gap:8px 18px}}@media(max-width:540px){:root{font-size:16px}.wrap{padding-left:20px;padding-right:20px}.header{display:block}.header nav{margin-top:12px;font-size:14px}.brand span{display:inline;margin-left:14px}.hero{padding-bottom:28px}h1{font-size:32px;max-width:none}.lead{font-size:16px}.contents nav{grid-template-columns:1fr}.diagram{grid-template-columns:1fr;gap:6px}.concept{padding:18px}.diagram li{padding:10px 0}.diagram span{font-size:14px}.concept>p{font-size:13px}pre{padding:14px;font-size:13px}h2{font-size:23px}table{min-width:470px}.notice{padding:16px}body[data-page="questions.html"] table{min-width:600px}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}@media print{.contents,header,footer,.code-actions,.skip,button,.next{display:none!important}.layout{display:block;border:0}.wrap{max-width:none;padding:0}.hero{padding-top:0}h1{font-size:28px}.table-scroll{overflow:visible}table{min-width:0!important}pre{white-space:pre-wrap}.concept{break-inside:avoid}textarea{min-height:70px}}
+
+.settings-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}.concept img{width:100%;height:auto}.settings-fields textarea{min-width:0}@media(max-width:540px){.settings-fields{grid-template-columns:1fr}}
+
+/* Diagram labels remain legible beside the lesson prose. */
+.diagram strong{font-size:1rem}.diagram span{font-size:.9rem}.concept>p{font-size:.85rem;line-height:1.75}
+
+/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="questions.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header><div class="wrap header"><a class="brand" href="index.html">아올다<span>4기 네트워크 스터디</span></a><nav aria-label="주요 학습 자료"><a href="index.html">시작</a><a href="lesson.html">접속 교재</a><a href="questions.html" aria-current="page">내 기록</a><a href="../week-01/index.html">HTTP 실습</a></nav></div></header><div class="wrap hero"><p class="eyebrow">VM 준비부터 첫 SSH 접속까지 · 내 기록</p><h1>내 VM 접속 기록</h1><p class="lead">본인 VM의 설정·접속 결과와 성공한 이유를 기록한다. 오류 없이 완료할 수 있으며 실패했을 때만 진단 칸을 사용한다. 직접 생성·기존 설정 확인·제공 증거 분석을 구분한다.</p></div><div class="wrap layout"><aside class="contents"><details open><summary>이 페이지에서</summary><nav aria-label="본문 목차"><a href="#사용하는-방법">사용하는 방법</a><a href="#내-설정-카드">내 설정 카드</a><a href="#단계별-질문">단계별 질문</a><a href="#접속한-뒤-남길-것">접속한 뒤 남길 것</a><a href="#짝에게-설명해-보기">짝에게 설명해 보기</a><a href="#오류가-있을-때만-작성">오류가 있을 때만 작성</a><a href="#마무리">마무리</a></nav></details></aside><main id="main" tabindex="-1"><article><aside class="notice"><strong>접속 정보는 본인 값으로 확인하세요.</strong><p>이 사이트의 주소·VM 이름은 설명용으로 바꾼 예시입니다. 실제 IP와 VPN 설정은 팀 안내에서 확인합니다. 본인에게 허용된 계정과 인증 방식을 사용합니다.</p></aside><aside class="notice"><strong>기록은 자동 저장되지 않습니다.</strong><p>페이지를 닫거나 새로고침하기 전에 Markdown 파일을 내려받으세요. 파일을 다시 불러오는 기능과 기기 간 동기화는 없습니다. 비밀번호와 개인 키는 적지 마세요.</p><button id="download" type="button" hidden>내 기록 내려받기 (.md)</button><p id="save-status" role="status"></p><noscript>JavaScript가 꺼져 있으면 별도 메모장에 기록해 저장하세요.</noscript></aside>
+<h2 id="사용하는-방법">사용하는 방법</h2>
+<p><a href="lesson.html">교재</a>를 읽으며 내 설정과 실행 결과를 남긴다. 먼저 생각한 답이 있으면 적고, 확인한 뒤에는 어떤 출력 때문에 그렇게 설명할 수 있는지 덧붙인다. 처음에 답을 모르겠다면 설정을 확인한 뒤 돌아와도 된다. <a href="facilitator.html#answers">해설</a>은 먼저 답한 뒤 읽는다.</p>
+<ul>
+<li><label class="answer" for="answer-11"><span id="answer-label-11">이름과 팀</span><textarea id="answer-11" data-label="이름과 팀" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-12"><span id="answer-label-12">실제 날짜·시각·장소</span><textarea id="answer-12" data-label="실제 날짜·시각·장소" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-13"><span id="answer-label-13">수행 방식</span><textarea id="answer-13" data-label="수행 방식" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+</ul>
+<p>직접 생성, 기존 자원 확인, 시연 관찰, 제공 자료 분석 중 실제로 한 활동을 적는다.</p>
+<h2 id="내-설정-카드">내 설정 카드</h2>
+<div class="settings-fields"><label class="answer" for="answer-1"><span id="answer-label-1">프로젝트·허용된 사양·할당량</span><textarea id="answer-1" data-label="프로젝트·허용된 사양·할당량" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-2"><span id="answer-label-2">VM 이름·이미지·Flavor·볼륨</span><textarea id="answer-2" data-label="VM 이름·이미지·Flavor·볼륨" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-3"><span id="answer-label-3">네트워크·서브넷 CIDR</span><textarea id="answer-3" data-label="네트워크·서브넷 CIDR" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-4"><span id="answer-label-4">VM 내부 IP·게이트웨이</span><textarea id="answer-4" data-label="VM 내부 IP·게이트웨이" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-5"><span id="answer-label-5">라우터·외부 네트워크</span><textarea id="answer-5" data-label="라우터·외부 네트워크" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-6"><span id="answer-label-6">Floating IP·연결 대상</span><textarea id="answer-6" data-label="Floating IP·연결 대상" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-7"><span id="answer-label-7">PC 선택 인터페이스·로컬 주소·목적지 prefix</span><textarea id="answer-7" data-label="PC 선택 인터페이스·로컬 주소·목적지 prefix" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-8"><span id="answer-label-8">실제 VM 가상 포트·보안 그룹</span><textarea id="answer-8" data-label="실제 VM 가상 포트·보안 그룹" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-9"><span id="answer-label-9">TCP 22 규칙의 방향·출발지</span><textarea id="answer-9" data-label="TCP 22 규칙의 방향·출발지" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-10"><span id="answer-label-10">콘솔의 SSH LISTEN·호스트 키 대조 결과</span><textarea id="answer-10" data-label="콘솔의 SSH LISTEN·호스트 키 대조 결과" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></div>
+<p>본인에게 허용된 계정과 인증 방식으로 로그인한다. 비밀번호·개인 키는 기록하지 않는다. 예제의 설정은 본인 환경의 값과 구분한다.</p>
+<h2 id="단계별-질문">단계별 질문</h2>
+<h3 id="q0-active-화면과-로그인-후-명령-결과는-각각-무엇을-확인해-줄까">Q0. Active 화면과 로그인 후 명령 결과는 각각 무엇을 확인해 줄까?</h3>
+<ul>
+<li><label class="answer" for="answer-14"><span id="answer-label-14">먼저 생각한 답</span><textarea id="answer-14" aria-labelledby="q0-active-화면과-로그인-후-명령-결과는-각각-무엇을-확인해-줄까 answer-label-14" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-15"><span id="answer-label-15">확인한 설정이나 출력</span><textarea id="answer-15" aria-labelledby="q0-active-화면과-로그인-후-명령-결과는-각각-무엇을-확인해-줄까 answer-label-15" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-16"><span id="answer-label-16">확인한 뒤 내 설명</span><textarea id="answer-16" aria-labelledby="q0-active-화면과-로그인-후-명령-결과는-각각-무엇을-확인해-줄까 answer-label-16" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q1-같은-이미지면-ip도-같은가">Q1. 같은 이미지면 IP도 같은가?</h3>
+<ul>
+<li><label class="answer" for="answer-17"><span id="answer-label-17">먼저 생각한 답</span><textarea id="answer-17" aria-labelledby="q1-같은-이미지면-ip도-같은가 answer-label-17" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-18"><span id="answer-label-18">확인한 설정이나 출력</span><textarea id="answer-18" aria-labelledby="q1-같은-이미지면-ip도-같은가 answer-label-18" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-19"><span id="answer-label-19">확인한 뒤 내 설명</span><textarea id="answer-19" aria-labelledby="q1-같은-이미지면-ip도-같은가 answer-label-19" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q2-24와-32는-어떤-주소-묶음인가">Q2. /24와 /32는 어떤 주소 묶음인가?</h3>
+<ul>
+<li><label class="answer" for="answer-20"><span id="answer-label-20">먼저 생각한 답</span><textarea id="answer-20" aria-labelledby="q2-24와-32는-어떤-주소-묶음인가 answer-label-20" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-21"><span id="answer-label-21">확인한 설정이나 출력</span><textarea id="answer-21" aria-labelledby="q2-24와-32는-어떤-주소-묶음인가 answer-label-21" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-22"><span id="answer-label-22">확인한 뒤 내 설명</span><textarea id="answer-22" aria-labelledby="q2-24와-32는-어떤-주소-묶음인가 answer-label-22" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q3-게이트웨이와-vm의-ssh-접속-주소는-어떻게-다를까">Q3. 게이트웨이와 VM의 SSH 접속 주소는 어떻게 다를까?</h3>
+<ul>
+<li><label class="answer" for="answer-23"><span id="answer-label-23">먼저 생각한 답</span><textarea id="answer-23" aria-labelledby="q3-게이트웨이와-vm의-ssh-접속-주소는-어떻게-다를까 answer-label-23" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-24"><span id="answer-label-24">확인한 설정이나 출력</span><textarea id="answer-24" aria-labelledby="q3-게이트웨이와-vm의-ssh-접속-주소는-어떻게-다를까 answer-label-24" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-25"><span id="answer-label-25">확인한 뒤 내 설명</span><textarea id="answer-25" aria-labelledby="q3-게이트웨이와-vm의-ssh-접속-주소는-어떻게-다를까 answer-label-25" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q4-콘솔-로그인listen과-pc-ssh는-무엇이-다른가">Q4. 콘솔 로그인·LISTEN과 PC SSH는 무엇이 다른가?</h3>
+<ul>
+<li><label class="answer" for="answer-26"><span id="answer-label-26">먼저 생각한 답</span><textarea id="answer-26" aria-labelledby="q4-콘솔-로그인listen과-pc-ssh는-무엇이-다른가 answer-label-26" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-27"><span id="answer-label-27">확인한 설정이나 출력</span><textarea id="answer-27" aria-labelledby="q4-콘솔-로그인listen과-pc-ssh는-무엇이-다른가 answer-label-27" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-28"><span id="answer-label-28">확인한 뒤 내 설명</span><textarea id="answer-28" aria-labelledby="q4-콘솔-로그인listen과-pc-ssh는-무엇이-다른가 answer-label-28" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q5-내-floating-ip내부-ip게이트웨이는-각각-어떤-역할인가">Q5. 내 Floating IP·내부 IP·게이트웨이는 각각 어떤 역할인가?</h3>
+<ul>
+<li><label class="answer" for="answer-29"><span id="answer-label-29">먼저 생각한 답</span><textarea id="answer-29" aria-labelledby="q5-내-floating-ip내부-ip게이트웨이는-각각-어떤-역할인가 answer-label-29" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-30"><span id="answer-label-30">확인한 설정이나 출력</span><textarea id="answer-30" aria-labelledby="q5-내-floating-ip내부-ip게이트웨이는-각각-어떤-역할인가 answer-label-30" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-31"><span id="answer-label-31">확인한 뒤 내 설명</span><textarea id="answer-31" aria-labelledby="q5-내-floating-ip내부-ip게이트웨이는-각각-어떤-역할인가 answer-label-31" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q6-가상-포트-id-tcp-22-허용할-출발지-주소는-각각-무엇을-가리킬까">Q6. 가상 포트 ID, TCP 22, 허용할 출발지 주소는 각각 무엇을 가리킬까?</h3>
+<ul>
+<li><label class="answer" for="answer-32"><span id="answer-label-32">먼저 생각한 답</span><textarea id="answer-32" aria-labelledby="q6-가상-포트-id-tcp-22-허용할-출발지-주소는-각각-무엇을-가리킬까 answer-label-32" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-33"><span id="answer-label-33">확인한 설정이나 출력</span><textarea id="answer-33" aria-labelledby="q6-가상-포트-id-tcp-22-허용할-출발지-주소는-각각-무엇을-가리킬까 answer-label-33" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-34"><span id="answer-label-34">확인한 뒤 내 설명</span><textarea id="answer-34" aria-labelledby="q6-가상-포트-id-tcp-22-허용할-출발지-주소는-각각-무엇을-가리킬까 answer-label-34" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q7-서버-호스트-키와-사용자-인증은-누구를-확인하나">Q7. 서버 호스트 키와 사용자 인증은 누구를 확인하나?</h3>
+<ul>
+<li><label class="answer" for="answer-35"><span id="answer-label-35">먼저 생각한 답</span><textarea id="answer-35" aria-labelledby="q7-서버-호스트-키와-사용자-인증은-누구를-확인하나 answer-label-35" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-36"><span id="answer-label-36">확인한 설정이나 출력</span><textarea id="answer-36" aria-labelledby="q7-서버-호스트-키와-사용자-인증은-누구를-확인하나 answer-label-36" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-37"><span id="answer-label-37">확인한 뒤 내 설명</span><textarea id="answer-37" aria-labelledby="q7-서버-호스트-키와-사용자-인증은-누구를-확인하나 answer-label-37" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q8-이번-로그인-성공으로-어디까지-확인했나">Q8. 이번 로그인 성공으로 어디까지 확인했나?</h3>
+<ul>
+<li><label class="answer" for="answer-38"><span id="answer-label-38">먼저 생각한 답</span><textarea id="answer-38" aria-labelledby="q8-이번-로그인-성공으로-어디까지-확인했나 answer-label-38" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-39"><span id="answer-label-39">확인한 설정이나 출력</span><textarea id="answer-39" aria-labelledby="q8-이번-로그인-성공으로-어디까지-확인했나 answer-label-39" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-40"><span id="answer-label-40">확인한 뒤 내 설명</span><textarea id="answer-40" aria-labelledby="q8-이번-로그인-성공으로-어디까지-확인했나 answer-label-40" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q9-두-셸과-파일이-같은-vm에-있음을-어떻게-확인했나">Q9. 두 셸과 파일이 같은 VM에 있음을 어떻게 확인했나?</h3>
+<ul>
+<li><label class="answer" for="answer-41"><span id="answer-label-41">먼저 생각한 답</span><textarea id="answer-41" aria-labelledby="q9-두-셸과-파일이-같은-vm에-있음을-어떻게-확인했나 answer-label-41" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-42"><span id="answer-label-42">확인한 설정이나 출력</span><textarea id="answer-42" aria-labelledby="q9-두-셸과-파일이-같은-vm에-있음을-어떻게-확인했나 answer-label-42" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-43"><span id="answer-label-43">확인한 뒤 내 설명</span><textarea id="answer-43" aria-labelledby="q9-두-셸과-파일이-같은-vm에-있음을-어떻게-확인했나 answer-label-43" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h3 id="q10-ssh-뒤-curl의-루프백은-어디인가-404는-연결-실패인가">Q10. SSH 뒤 curl의 루프백은 어디인가? 404는 연결 실패인가?</h3>
+<ul>
+<li><label class="answer" for="answer-44"><span id="answer-label-44">먼저 생각한 답</span><textarea id="answer-44" aria-labelledby="q10-ssh-뒤-curl의-루프백은-어디인가-404는-연결-실패인가 answer-label-44" data-label="먼저 생각한 답" rows="3" placeholder="확인 전 예상과 이유를 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-45"><span id="answer-label-45">확인한 설정이나 출력</span><textarea id="answer-45" aria-labelledby="q10-ssh-뒤-curl의-루프백은-어디인가-404는-연결-실패인가 answer-label-45" data-label="확인한 설정이나 출력" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-46"><span id="answer-label-46">확인한 뒤 내 설명</span><textarea id="answer-46" aria-labelledby="q10-ssh-뒤-curl의-루프백은-어디인가-404는-연결-실패인가 answer-label-46" data-label="확인한 뒤 내 설명" rows="3" placeholder="확인한 근거로 설명하세요."></textarea></label></li>
+</ul>
+<h2 id="접속한-뒤-남길-것">접속한 뒤 남길 것</h2>
+<ul>
+<li><label class="answer" for="answer-47"><span id="answer-label-47">PC에서 실행한 SSH 명령</span><textarea id="answer-47" data-label="PC에서 실행한 SSH 명령" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-48"><span id="answer-label-48">서버 호스트 키 대조·사용자 인증 결과(비밀정보 제외)</span><textarea id="answer-48" data-label="서버 호스트 키 대조·사용자 인증 결과(비밀정보 제외)" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-49"><span id="answer-label-49">원격 <code>hostname</code>, <code>whoami</code>, <code>pwd</code> 결과</span><textarea id="answer-49" data-label="원격 hostname, whoami, pwd 결과" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-50"><span id="answer-label-50">두 번째 셸·server.py 원격 위치</span><textarea id="answer-50" data-label="두 번째 셸·server.py 원격 위치" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-51"><span id="answer-label-51">내 설정으로 그린 경로</span><textarea id="answer-51" data-label="내 설정으로 그린 경로" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-52"><span id="answer-label-52">이 경로에서 VPN·라우터·Floating IP·보안 그룹·SSH 서버가 각각 한 일</span><textarea id="answer-52" data-label="이 경로에서 VPN·라우터·Floating IP·보안 그룹·SSH 서버가 각각 한 일" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+</ul>
+<p>그림에는 출발지(src)와 목적지(dst), TCP 포트를 붙인다. 실제 캡처하지 않은 VM 수신 src나 임시 포트는 미관찰로 남긴다. 정상 접속을 위해 모든 중간 지점의 패킷을 캡처할 필요는 없다.</p>
+<h2 id="짝에게-설명해-보기">짝에게 설명해 보기</h2>
+<ol>
+<li>접속할 VM이 바뀌면 주소·계정·호스트 키 중 무엇을 다시 확인해야 할까?</li>
+<li>같은 VM에 창을 두 개 열면 호스트가 두 대가 되는가? 각 셸의 현재 폴더는 항상 같은가?</li>
+<li>TCP 22 로그인이 됐으니 모든 포트도 접근 가능하다고 할 수 있는가?</li>
+<li>PC에서 실행한 curl과 원격 Linux에서 실행한 curl의 127.0.0.1은 같은 곳인가?</li>
+</ol>
+<label class="answer" for="answer-63"><span id="answer-label-63">짝에게 설명한 기록</span><textarea id="answer-63" data-label="짝에게 설명한 기록" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label>
+<h2 id="오류가-있을-때만-작성">오류가 있을 때만 작성</h2>
+<div class="settings-fields"><label class="answer" for="answer-59"><span id="answer-label-59">실제 증상과 발생 단계</span><textarea id="answer-59" data-label="실제 증상과 발생 단계" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><label class="answer" for="answer-60"><span id="answer-label-60">확인할 가설</span><textarea id="answer-60" data-label="확인할 가설" rows="3" placeholder="아직 검증하지 않은 원인 가설을 적으세요."></textarea></label><label class="answer" for="answer-61"><span id="answer-label-61">명령과 실제 관찰</span><textarea id="answer-61" data-label="명령과 실제 관찰" rows="3" placeholder="직접 확인한 설정·명령·출력을 적으세요."></textarea></label><label class="answer" for="answer-62"><span id="answer-label-62">수정 후 다시 확인한 결과</span><textarea id="answer-62" data-label="수정 후 다시 확인한 결과" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></div>
+<p>성공했다면 해당 없음으로 남긴다. <a href="lesson.html#s7">교재의 증상표</a>와 <a href="facilitator.html#nat-answers">선택 NAT 해설</a>은 필요한 경우에만 읽는다. 사례 분석을 본인 장애 해결로 기록하지 않는다.</p>
+<h2 id="마무리">마무리</h2>
+<ul>
+<li><label class="answer" for="answer-53"><span id="answer-label-53">설정 확인·경로 설명</span><textarea id="answer-53" data-label="설정 확인·경로 설명" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-54"><span id="answer-label-54">본인 VM 생성</span><textarea id="answer-54" data-label="본인 VM 생성" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><small>미실시 / 기존 자원 사용이면 해당 없음으로 표시</small></li>
+<li><label class="answer" for="answer-55"><span id="answer-label-55">SSH 로그인·대상과 계정 확인</span><textarea id="answer-55" data-label="SSH 로그인·대상과 계정 확인" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-56"><span id="answer-label-56">셸 두 개·파일 전달</span><textarea id="answer-56" data-label="셸 두 개·파일 전달" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+<li><label class="answer" for="answer-57"><span id="answer-label-57">HTTP 네 상태·패킷 분석</span><textarea id="answer-57" data-label="HTTP 네 상태·패킷 분석" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label><small>미실시. <a href="../week-01-prestudy.html">1주차 개인 실습 기록</a>에 예상·관찰을 남기고 원출력·pcap은 별도 보관한다. <a href="../week-01/worksheet.html">팀활동</a>에는 질문·근거 위치·바뀐 설명을 남긴다.</small></li>
+<li><label class="answer" for="answer-58"><span id="answer-label-58">다음 보충할 항목과 확인 방법</span><textarea id="answer-58" data-label="다음 보충할 항목과 확인 방법" rows="3" placeholder="직접 확인한 내용만 적으세요."></textarea></label></li>
+</ul>
+<p>오류 경험 유무를 완료 기준으로 삼지 않는다.</p>
+</article><a class="next" href="../week-01/linux.html">Linux HTTP 실습으로 →</a></main></div><footer class="wrap"><p>아올다 4기 네트워크 스터디 · 설정과 출력은 각자의 환경에서 확인합니다.</p><nav aria-label="참고 자료"><a href="facilitator.html">진행자·해설</a><a href="facilitator.html#nat-answers">선택 NAT 질문</a><a href="sources.html">출처</a><a href="QUESTIONS.md" download>이 페이지 Markdown</a><a href="#main">본문 위로</a></nav></footer><script>(() => {
+  // Files work offline: no fetch, storage, analytics, or external dependencies.
+  document.querySelectorAll('pre:has(code)').forEach(pre => {
+    if (pre.querySelector('.language-text')) return;
+    const row = document.createElement('div'); row.className = 'code-actions';
+    const status = document.createElement('span'); status.setAttribute('role','status');
+    const button = document.createElement('button'); button.type='button'; button.textContent='명령 복사';
+    button.addEventListener('click', async () => {
+      const text=pre.querySelector('code').textContent;
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(text); status.textContent='복사했습니다. 실행 위치와 본인 값을 확인하세요.';
+      } catch {
+        const range=document.createRange(); range.selectNodeContents(pre.querySelector('code'));
+        const selection=window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
+        status.textContent='자동 복사가 제한됐습니다. 선택된 명령을 Ctrl+C로 복사하세요.';
+      }
+    });
+    row.append(status,button); pre.after(row);
+  });
+  const button=document.querySelector('#download');
+  if (!button) return;
+  button.hidden=false;
+  const fields=[...document.querySelectorAll('textarea')];
+  let dirty=false;
+  fields.forEach(field=>field.addEventListener('input',()=>{dirty=true;}));
+  window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue='';}});
+  button.addEventListener('click',()=>{
+    const lines=['# 내 VM 접속 기록','','요약: 작성자의 실제 설정과 실습 결과다. 비어 있는 항목은 미작성이며, 시연 관찰과 직접 실행은 작성자가 구분한다.',''];
+    fields.forEach(field=>{
+      const section=[...document.querySelectorAll('h2,h3')].filter(h=>h.compareDocumentPosition(field)&Node.DOCUMENT_POSITION_FOLLOWING).at(-1);
+      lines.push('## '+(section?section.textContent+' — ':'')+field.dataset.label,'',field.value.trim()||'미작성','');
+    });
+    try {
+      const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/markdown;charset=utf-8'}));
+      const link=document.createElement('a'); link.href=url;link.download='ssh-my-record.md';
+      document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+      dirty=false;
+      document.querySelector('#save-status').textContent='다운로드를 요청했습니다. 저장된 ssh-my-record.md를 열어 내용이 있는지 확인하세요. 이후 수정했다면 다시 내려받아야 합니다.';
+    } catch {
+      document.querySelector('#save-status').textContent='내려받기를 시작하지 못했습니다. 페이지를 닫지 말고 입력 내용을 별도 메모장에 복사해 저장하세요.';
+    }
+  });
+})();
+</script></body></html>

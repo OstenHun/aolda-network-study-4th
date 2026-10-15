@@ -1,0 +1,314 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="IPv4 주소와 접두사로 같은 서브넷을 계산하고 Linux 경로와 비교한다. /24·/26의 범위와 게이트웨이를 익히며, 주소 계산과 실제 통신 성공을 구별하는 2주차 교재다."><title>주소는 같은데, 망도 같을까? · 아올다 2주차</title><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style>.cidr-model{border:1px solid var(--line);padding:22px;border-radius:12px;margin:28px 0;background:var(--wash)}.cidr-model h3{margin-top:0}.model-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}select{font:inherit;padding:8px;color:var(--blue);border:1px solid #91acbd;background:white;border-radius:6px}.subnet-blocks{display:flex;margin:20px 0;border:1px solid #07548e}.subnet-blocks>div{flex:1;min-width:0;padding:16px 8px;text-align:center;background:#e6f2fc;font-size:.85rem;overflow-wrap:anywhere}.subnet-blocks>div+div{border-left:1px solid #07548e}.subnet-blocks>div:nth-child(2){background:#fff}.subnet-blocks>div:nth-child(n+3){background:#f3f6f8;color:#435e70}@media(max-width:420px){.cidr-model{padding:14px}.subnet-blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.subnet-blocks>div{border:1px solid #91acbd}}</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="concepts.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html" aria-current="page">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>주소는 같은데, 망도 같을까?</h1><p>IPv4 주소와 접두사로 같은 서브넷을 계산하고 Linux 경로와 비교한다. /24·/26의 범위와 게이트웨이를 익히며, 주소 계산과 실제 통신 성공을 구별하는 2주차 교재다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#1-지난주-요청에서-주소만-꺼내-보기">1. 지난주 요청에서 주소만 꺼내 보기</a><a href="#2-ip는-인터페이스에-붙는다">2. IP는 인터페이스에 붙는다</a><a href="#3-사설공인루프백을-구별하기">3. 사설·공인·루프백을 구별하기</a><a href="#4-24와-26은-어디에-선을-긋는가">4. /24와 /26은 어디에 선을 긋는가</a><a href="#5-두-예제로-범위-직접-구하기">5. 두 예제로 범위 직접 구하기</a><a href="#6-같은-서브넷-계산-다음에는-경로를-읽는다">6. 같은 서브넷 계산 다음에는 경로를 읽는다</a><a href="#7-마스크만-다르면-양쪽-판단도-다르다">7. 마스크만 다르면 양쪽 판단도 다르다</a><a href="#8-책을-덮고-두-문장으로-설명하기">8. 책을 덮고 두 문장으로 설명하기</a></div></nav><article>
+<p>기억할 문장과 구별을 다시 찾을 때는 <a href="essentials.html">이번 주 핵심 정리</a>를 사용한다. CIDR·경로·도달성을 구별한 뒤 공동 질문의 조건을 바꿔 다시 설명해 본다.</p>
+<h2 id="1-지난주-요청에서-주소만-꺼내-보기">1. 지난주 요청에서 주소만 꺼내 보기</h2>
+<p>지난주에는 <code>http://127.0.0.1:8080/echo</code>로 요청했다. <code>127.0.0.1</code>은 어느 호스트로 보낼지, <code>8080</code>은 그 호스트의 어느 프로그램으로 보낼지를 가리켰다. 이번 주에는 포트를 잠시 내려놓고 묻는다. <strong>내가 이 IP로 보내려면 어느 인터페이스로 나가야 할까?</strong></p>
+<p>먼저 예상해 보자. A가 <code>192.0.2.10</code>, B가 <code>192.0.2.70</code>이면 같은 망일까? 주소 앞 세 묶음이 같다는 이유만으로 답을 정할 수 있을까? <strong>접두사 길이</strong>를 알아야 각 호스트가 보는 서브넷 범위를 계산할 수 있다. 그다음 실제 어느 인터페이스·다음 홉으로 보낼지는 경로 설정을 확인한다.</p>
+<p>본문의 <code>192.0.2.0/24</code>는 문서 예시용 주소다. 아올다의 실제 IP가 아니며, 예시 목적지로 외부 통신을 시도하라는 뜻도 아니다. <a href="https://www.rfc-editor.org/rfc/rfc5737#section-3">RFC 5737 §3</a>에 근거한다.</p>
+<p><strong>이번 주 읽는 순서:</strong> 내 주소 확인 → 주소 종류 → 비트와 CIDR → 범위 계산 → 경로 판단 → 마스크 한 조건 변경. 교재 전체 읽기는 약 25~30분의 개인 참고 경로다. 공동 탐구에서는 <a href="articles.html">함께 찾아보기</a>의 두 공식 자료와 필요한 교재 절을 선택해 읽는다. 필요한 개념을 읽은 뒤 주소 카드와 자기 VM의 경로를 설명해 본다. 계산이 막히면 예제 두 개에 시간을 더 쓴다.</p>
+<h2 id="2-ip는-인터페이스에-붙는다">2. IP는 인터페이스에 붙는다</h2>
+<p>인터페이스는 운영체제가 통신을 주고받는 접점이다. 물리 랜 카드일 수도 있고 VM의 가상 NIC일 수도 있다. 한 호스트에 여러 인터페이스와 여러 주소가 있을 수 있으므로 “컴퓨터 하나에 IP 하나”로 외우지 않는다.</p>
+<p>아래는 <strong>설명용 출력이며 실측이 아니다.</strong> 실제 인터페이스 이름은 <code>eth0</code>, <code>ens3</code> 등 환경마다 다르다.</p>
+<pre><code class="language-text">$ ip -br -4 addr
+lo       UNKNOWN    127.0.0.1/8
+ens3     UP         192.0.2.10/24
+</code></pre>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>읽을 자리</th>
+<th>뜻</th>
+<th>지금 확인할 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>lo</code></td>
+<td>자기 호스트 내부의 루프백 인터페이스</td>
+<td>지난주 자기 서버 요청과 연결</td>
+</tr>
+<tr>
+<td><code>ens3</code></td>
+<td>이 예시의 가상 NIC 이름</td>
+<td>내 VM에서는 이름이 무엇인지</td>
+</tr>
+<tr>
+<td><code>192.0.2.10</code></td>
+<td>이 인터페이스의 IPv4 주소</td>
+<td>실제 출력에서 직접 기록</td>
+</tr>
+<tr>
+<td><code>/24</code></td>
+<td>앞 24비트를 네트워크 부분으로 보는 접두사 길이</td>
+<td>IP와 붙여서 기록</td>
+</tr>
+<tr>
+<td><code>UP</code></td>
+<td>인터페이스의 상태 정보</td>
+<td>이것만으로 인터넷·HTTP 성공을 결론내리지 않기</td>
+</tr>
+</tbody></table></div>
+<p><code>lo</code>의 <code>UNKNOWN</code> 표시는 루프백 고장의 증거가 아니다. 인터페이스 상태, 경로 존재, 상대의 응답은 서로 다른 관찰이다. 실제 조회 명령과 출력 보관은 <a href="linux.html">Linux 안내</a>를 따른다.</p>
+<p><strong>말로 확인:</strong> SSH로 들어간 VM에서 <code>127.0.0.1</code>은 개인 노트북일까, VM 자신일까? 지난주 curl을 실행했던 위치를 기준으로 설명한다.</p>
+<h2 id="3-사설공인루프백을-구별하기">3. 사설·공인·루프백을 구별하기</h2>
+<p>사설 주소는 여러 조직이 내부에서 반복해 쓸 수 있는 주소다. <a href="https://www.rfc-editor.org/rfc/rfc1918#section-3">RFC 1918 §3</a>의 세 범위는 다음과 같다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>범위</th>
+<th>CIDR</th>
+<th>경계 확인</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10.0.0.0 ~ 10.255.255.255</td>
+<td><code>10.0.0.0/8</code></td>
+<td>10으로 시작하는 범위</td>
+</tr>
+<tr>
+<td>172.16.0.0 ~ 172.31.255.255</td>
+<td><code>172.16.0.0/12</code></td>
+<td>172 전체가 아님. 172.32.0.1은 밖</td>
+</tr>
+<tr>
+<td>192.168.0.0 ~ 192.168.255.255</td>
+<td><code>192.168.0.0/16</code></td>
+<td>192 전체가 아님</td>
+</tr>
+</tbody></table></div>
+<p>공인 주소는 인터넷에서 전역적으로 쓰이는 주소 체계에 속한다. 그러나 주소를 가졌다는 사실만으로 외부에서 내 서버로 들어올 수 있지는 않다. 실제 경로, 방화벽·보안 그룹, 프로그램의 대기 주소·포트를 함께 확인해야 한다. 사설 주소의 인터넷 접속도 NAT 같은 별도 구성에 달려 있으며, 원리는 11주차에서 다룬다.</p>
+<p><code>127.0.0.0/8</code>은 루프백 범위다. <code>127.0.0.1</code>은 그중 흔히 쓰는 주소이며 RFC 1918 사설 대역과는 역할이 다르다. <code>192.0.2.0/24</code>는 문서 예시용이고 <code>169.254.0.0/16</code>은 링크 로컬이다. <strong>RFC 1918에 없으면 무조건 공인 주소</strong>라는 이분법은 틀린다. <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">IANA 특수 목적 IPv4 등록부</a>에서 구분을 확인할 수 있다.</p>
+<p>이번 주에는 특수 주소 전체를 암기하지 않는다. 내 VM의 주소가 어느 범위에 속하는지와, 그것으로 무엇까지 말할 수 있는지만 설명한다.</p>
+<p><strong>원문으로 확인:</strong> <a href="articles.html#2-%EC%82%AC%EC%84%A4-%EC%A3%BC%EC%86%8C%EA%B0%80-%EC%95%84%EB%8B%88%EB%A9%B4-%EA%B3%B5%EC%9D%B8-%EC%A3%BC%EC%86%8C%EC%9D%BC%EA%B9%8C">Public vs Private Addresses 질문</a>에서 필요한 주소 범위를 선택 확인한다. 집 공유기 사례를 내 VM 설정으로 옮기기 전에 실제 주소·경로를 따로 확인한다.</p>
+<h2 id="4-24와-26은-어디에-선을-긋는가">4. /24와 /26은 어디에 선을 긋는가</h2>
+<p>IPv4는 32비트이고, 우리가 읽는 네 개의 숫자는 8비트씩을 십진수로 표현한 것이다. 각 묶음은 0~255다. CIDR의 <code>/n</code>은 앞에서부터 네트워크 부분으로 사용하는 비트 수다. <code>/26</code>은 <code>/24</code>보다 네트워크 부분이 2비트 길고, 개별 주소를 구분할 부분은 2비트 짧다.</p>
+<pre><code class="language-text">주소 192.0.2.70 = 11000000.00000000.00000010.01000110
+/24 마스크       11111111.11111111.11111111.00000000
+                └───────── 앞 24비트 ─────────┘ 8비트
+/26 마스크       11111111.11111111.11111111.11000000
+                └─────────── 앞 26비트 ──────────┘ 6비트
+</code></pre>
+<p>마스크에서 1인 자리는 네트워크 부분을 남기고, 0인 자리는 지운다. 주소와 마스크를 비트별 AND하면 네트워크 주소가 된다. AND는 두 비트가 모두 1일 때만 1이다. <a href="https://www.rfc-editor.org/rfc/rfc4632#section-3.1">RFC 4632 §3.1</a>은 접두사 표기와 주소 블록 크기를 설명한다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>접두사</th>
+<th>마스크</th>
+<th>주소 전체 개수</th>
+<th>이 교재의 일반적인 서브넷에서 호스트에 할당할 수 있는 개수</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/24</code></td>
+<td><code>255.255.255.0</code></td>
+<td>2⁸ = 256</td>
+<td>254</td>
+</tr>
+<tr>
+<td><code>/26</code></td>
+<td><code>255.255.255.192</code></td>
+<td>2⁶ = 64</td>
+<td>62</td>
+</tr>
+</tbody></table></div>
+<p>일반적인 <code>/24</code>·<code>/26</code> 서브넷에서 맨 앞은 네트워크 주소, 맨 뒤는 브로드캐스트 주소라 호스트에 할당하지 않는다. <code>2^(32−n)−2</code>를 모든 접두사에 적용하지는 않는다. <code>/31</code> 점대점과 <code>/32</code>는 별도이며 선택 탐구로 남긴다. 클라우드 플랫폼이 일부 주소를 추가로 예약하면 실제 할당 가능 수는 더 작을 수 있다.</p>
+<p><strong>먼저 예상:</strong> <code>/24</code>를 <code>/26</code>으로 바꾸면 주소 범위는 넓어질까, 좁아질까? 컴퓨터 수를 센 뒤 답을 읽는다.</p>
+<p><strong>원문으로 확인:</strong> <a href="articles.html#3-24%EC%99%80-26%EC%9D%80-%EC%96%B4%EB%8A%90-%EB%B9%84%ED%8A%B8%EB%A5%BC-%EB%82%A8%EA%B8%B8%EA%B9%8C">Subnet Masks 질문</a>의 <code>/25</code> 예시에서 마스크와 접두사의 관계만 확인한 뒤 이 교재의 <code>/24</code>·<code>/26</code>을 직접 계산한다.</p>
+<h2 id="5-두-예제로-범위-직접-구하기">5. 두 예제로 범위 직접 구하기</h2>
+<h3 id="예제-a--192027024">예제 A — 192.0.2.70/24</h3>
+<p>앞 24비트, 즉 앞 세 묶음이 네트워크 부분이다. 마지막 묶음 8비트를 모두 0으로 하면 <code>192.0.2.0</code>, 모두 1로 하면 <code>192.0.2.255</code>다.</p>
+<ul>
+<li>네트워크: <code>192.0.2.0/24</code></li>
+<li>브로드캐스트: <code>192.0.2.255</code></li>
+<li>일반 호스트 범위: <code>192.0.2.1</code> ~ <code>192.0.2.254</code></li>
+<li><code>.10</code>과 <code>.70</code>은 이 <code>/24</code> 범위에 함께 들어간다.</li>
+</ul>
+<h3 id="예제-b--192027026">예제 B — 192.0.2.70/26</h3>
+<p>마지막 묶음에서 네트워크 비트가 두 개 더 생긴다. 블록 크기는 64이므로 0, 64, 128, 192에서 각각 시작한다. <strong>70은 64 이상, 128 미만</strong>이므로 두 번째 블록이다.</p>
+<pre><code class="language-text">70의 마지막 8비트    01000110
+192의 마지막 8비트   11000000   ← /26 마스크의 마지막 묶음
+AND 결과             01000000 = 64
+</code></pre>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>네트워크</th>
+<th>전체 마지막 묶음</th>
+<th>일반 호스트 마지막 묶음</th>
+<th>브로드캐스트 마지막 묶음</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>192.0.2.0/26</code></td>
+<td>0~63</td>
+<td>1~62</td>
+<td>63</td>
+</tr>
+<tr>
+<td><code>192.0.2.64/26</code></td>
+<td>64~127</td>
+<td>65~126</td>
+<td>127</td>
+</tr>
+<tr>
+<td><code>192.0.2.128/26</code></td>
+<td>128~191</td>
+<td>129~190</td>
+<td>191</td>
+</tr>
+<tr>
+<td><code>192.0.2.192/26</code></td>
+<td>192~255</td>
+<td>193~254</td>
+<td>255</td>
+</tr>
+</tbody></table></div>
+<p><code>.70/26</code>의 네트워크는 <code>.64/26</code>, 브로드캐스트는 <code>.127</code>이다. <code>.10/26</code>은 <code>.0/26</code>에 속하므로 서로 다른 서브넷이다. 외울 것은 “끝자리가 0이면 네트워크”가 아니라 <strong>주어진 접두사로 경계를 계산하는 방법</strong>이다.</p>
+<section class="cidr-model" aria-label="접두사 비교 모형"><h3>같은 두 주소, 접두사를 바꾸면?</h3><p>실제 네트워크가 아닌 계산 모형입니다. A는 192.0.2.10, B는 192.0.2.70이며 <strong>양쪽 접두사를 함께</strong> 바꿉니다. 뒤의 격리 실습에서는 A만 바꾸므로 조건이 다릅니다.</p><div class="model-controls"><label for="prefix">접두사</label><select id="prefix"><option value="24">/24 · 256개 단위</option><option value="26">/26 · 64개 단위</option></select></div><div id="blocks" class="subnet-blocks"><div>0~255<br>A .10 · B .70</div></div><p id="cidr-result" role="status">/24: A와 B는 모두 192.0.2.0/24에 포함됩니다. 실제 통신 성공은 확인하지 않았습니다.</p><noscript><p>/26에서는 A가 0~63, B가 64~127 범위입니다. 위 표로 같은 비교를 할 수 있습니다.</p></noscript></section>
+
+<p>손으로 먼저 풀고 <a href="../../labs/week-02/subnet_check.py" download>Python 검산 도구</a>로 확인한다. 계산기가 알려주는 것은 범위이며 실제 상대가 켜져 있는지, 응답할지는 알려주지 않는다.</p>
+<h2 id="6-같은-서브넷-계산-다음에는-경로를-읽는다">6. 같은 서브넷 계산 다음에는 경로를 읽는다</h2>
+<p>단순한 한 인터페이스 환경에서 연결된 서브넷 목적지는 해당 링크로 보낸다. 다른 망의 목적지는 그 망으로 가는 경로가 필요하고, 흔히 게이트웨이가 다음 전달 상대가 된다. 기본 경로는 더 구체적인 경로가 없을 때 사용하는 후보이지 모든 패킷이 반드시 지나는 길이 아니다.</p>
+<p>아래는 <strong>설명용 출력</strong>이다. <code>via</code>는 다음 홉, <code>dev</code>는 나갈 인터페이스, <code>src</code>는 선택된 출발지 주소를 읽는 단서다.</p>
+<pre><code class="language-text">$ ip -4 route
+default via 192.0.2.1 dev ens3
+192.0.2.0/24 dev ens3 proto kernel scope link src 192.0.2.10
+</code></pre>
+<pre><code class="language-text">내 VM (.10/24) ── ens3 ── 같은 링크의 상대 (.70/24)
+                      └─ 게이트웨이 (.1) ── 다른 망
+</code></pre>
+<p>이 그림은 기본 모델이다. 아올다 실제 토폴로지나 NAT 배치를 확인한 결과가 아니다. 다중 인터페이스·정책 라우팅·더 구체적인 호스트 경로 등이 있으면 주소의 모양만 보고 실제 경로를 단정할 수 없다. 이 주에는 구성을 바꾸기보다 <code>ip -4 route get 목적지</code>로 커널이 고르는 경로를 확인한다. 이 명령은 경로 조회이며 ping처럼 상대 응답을 검사하지 않는다. <a href="https://git.kernel.org/pub/scm/network/iproute2/iproute2.git/tree/man/man8/ip-route.8">iproute2의 ip-route 설명</a>을 참고했다.</p>
+<p><strong>원문으로 확인:</strong> <a href="articles.html#4-cidr-%ED%91%9C%EA%B8%B0%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EB%8B%A4%EC%9D%8C-%ED%99%89%EC%9D%B4-%EC%A0%95%ED%95%B4%EC%A7%88%EA%B9%8C">CIDR 질문</a>의 지정 절에서 접두사 표기와 자기 VM의 현재 경로표를 구분한다.</p>
+<p><strong>틀린 설명 고치기:</strong> “같은 서브넷이고 인터페이스가 UP이니 HTTP도 성공한다.” 상대 상태·연결된 링크·중복 주소·정책·대기 중인 프로그램 중 무엇을 더 확인할지 말해 본다.</p>
+<h2 id="7-마스크만-다르면-양쪽-판단도-다르다">7. 마스크만 다르면 양쪽 판단도 다르다</h2>
+<p>격리된 두 노드 A와 B가 하나의 가상 링크로 연결되어 있다고 하자. 라우터와 기본 경로는 없다. 다음은 <strong>실험 전 예측</strong>이다. 실제 Linux 실행 결과는 <a href="linux.html#%EA%B0%9C%EC%9D%B8-%EC%8B%A4%EC%8A%B5-%EC%A6%9D%EA%B1%B0-%EB%B3%B4%EA%B4%80">개인 실습 증거</a>로 보관하고, 팀 활동에는 그 위치와 함께 확인한 설명을 남긴다.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>먼저 풀 질문</th>
+<th>근거 확인</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C1 — A <code>.10/24</code>, B <code>.70/24</code></td>
+<td>각자 어떤 범위로 묶을까?</td>
+<td>P2 손계산 뒤 검산</td>
+</tr>
+<tr>
+<td>C2 — A만 <code>.10/26</code>, B는 <code>.70/24</code></td>
+<td>두 방향의 판단이 같을까? 경로는 있을까?</td>
+<td>양쪽 범위·주어진 경로 조건</td>
+</tr>
+<tr>
+<td>선택 복구 — A를 <code>.10/24</code>로 되돌림</td>
+<td>원래 상태로 돌아갔다고 무엇으로 확인할까?</td>
+<td>실제 실행했다면 동일 조건 재조회·요청/복구</td>
+</tr>
+</tbody></table></div>
+<p>“숫자가 비슷하니 같은 망”이라는 주장에 어떤 정보가 빠졌는지 설명한다. 양쪽 판단과 응답 경로를 나눠 보고, <a href="articles.html#5-%EA%B0%99%EC%9D%80-%EC%84%9C%EB%B8%8C%EB%84%B7%EC%9D%B4%EB%9D%BC%EB%A9%B4-%ED%86%B5%EC%8B%A0%EB%8F%84-%EC%84%B1%EA%B3%B5%ED%95%A0%EA%B9%8C">Subnetting 선택 질문</a>의 계산·경로 조회·도달 증거를 구분한다. C1/C2의 완성 풀이와 흔한 오답은 <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>에서 자기 설명 뒤 비교한다.</p>
+<p>실제 실험은 <a href="linux.html">Linux 안내의 격리 실습</a>대로 진행자가 사전 점검한 환경에서만 한다. SSH 관리 인터페이스를 바꾸는 과제가 아니다. 준비되지 않았다면 선택 실험을 실행하지 않는다. <a href="sample-output.html">제공 출력</a>을 읽었다면 제공 분석으로 표시한다. 선택 미실시는 필수 P1/P2의 완료를 막지 않으며 실제 실행/복구를 했다고 쓰지는 않는다.</p>
+<p>다음 주에는 “같은 링크로 보내기로 결정한 뒤, 상대의 MAC 주소는 어떻게 알아낼까?”를 ARP·ICMP로 확인한다. 이번 주에 ARP 캐시 초기화나 라우터 구축까지 끝낼 필요는 없다.</p>
+<h2 id="8-책을-덮고-두-문장으로-설명하기">8. 책을 덮고 두 문장으로 설명하기</h2>
+<ol>
+<li>“<code>192.0.2.70/26</code>의 범위는 ___이다. 그 이유는 ___이다.”</li>
+<li>“주소 계산 결과와 실제 통신 성공은 ___ 때문에 구별해야 한다.”</li>
+</ol>
+<p>이제 <a href="worksheet.html">공동 질문</a>으로 돌아가 임시 답을 설명하고 <a href="linux.html">Linux P1/P2</a>로 확인한다. 자기 설명 뒤 <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>과 비교하고 <a href="review.html">복습 문제</a>를 개인 시간에 푼다. 공개 시험·기출 연계는 <a href="ccna-practice.html">별도 문제</a>에서 먼저 풀고 해설을 연다. 전체 출처와 읽을 범위는 <a href="sources.html">자료 안내</a>에 모았다.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="index.html">2주차 입구</a><a href="sources.html">출처와 읽을 범위</a><a href="#main">맨 위로</a></div></footer><script>(()=>{const select=document.querySelector('#prefix');if(!select)return;select.addEventListener('change',()=>{const p=Number(select.value);const blocks=document.querySelector('#blocks');blocks.innerHTML=p===24?'<div>0~255<br>A .10 · B .70</div>':'<div>0~63<br>A .10</div><div>64~127<br>B .70</div><div>128~191</div><div>192~255</div>';document.querySelector('#cidr-result').textContent=p===24?'/24: A와 B는 모두 192.0.2.0/24에 포함됩니다. 실제 통신 성공은 확인하지 않았습니다.':'/26: A는 192.0.2.0/26, B는 192.0.2.64/26입니다. 서로 다른 서브넷이며 실제 도달성은 경로와 환경을 확인해야 합니다.';});})();</script></body></html>

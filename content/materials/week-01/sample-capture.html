@@ -1,0 +1,180 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Windows 개발 환경에서 수집한 예제 pcapng로 200·404·연결 거부·복구의 패킷 근거를 찾는다. 직접 Linux 캡처와 구분하며, 이 파일의 번호와 포트를 자기 실습에 복사하지 않는다."><meta name="theme-color" content="#0e76c4"><title>1주차 제공 캡처 분석 — 네 상태를 패킷에서 찾기 · 아올다 네트워크</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%2307548e'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='25' fill='white'%3E1%3C/text%3E%3C/svg%3E"><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="sample-capture.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 1주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="concepts.html">개념 교재</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실습</a><a href="code-reading.html">코드 읽기</a><a href="worksheet.html">팀 활동</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">CCNA 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">1주차 학습 자료</p><h1>1주차 제공 캡처 분석 — 네 상태를 패킷에서 찾기</h1><p>Windows 개발 환경에서 수집한 예제 pcapng로 200·404·연결 거부·복구의 패킷 근거를 찾는다. 직접 Linux 캡처와 구분하며, 이 파일의 번호와 포트를 자기 실습에 복사하지 않는다.</p><nav class="page-links" aria-label="관련 자료"><a href="linux.html">Linux 실습 →</a><a href="worksheet.html">팀 활동 →</a></nav></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#이-자료를-쓰는-때">이 자료를 쓰는 때</a><a href="#wireshark에서-찾는-순서">Wireshark에서 찾는 순서</a><a href="#먼저-답하고-근거-확인하기">먼저 답하고 근거 확인하기</a><a href="#개인-실습-기록에-옮길-때">개인 실습 기록에 옮길 때</a></div></nav><article>
+<h2 id="이-자료를-쓰는-때">이 자료를 쓰는 때</h2>
+<p>자기 Linux에서 <code>lo</code> 직접 캡처가 막혀도 패킷 읽기 활동은 진행한다. <a href="../qa/week-01-local.pcapng">예제 캡처 파일</a>을 내려받아 Wireshark에서 열고, 관찰한 값은 <a href="../week-01-prestudy.html#capture">개인 실습 기록</a>이나 별도 증거 파일에 제공 예제 분석임을 표시한다. <a href="worksheet.html">팀 활동</a>의 <strong>다룬 질문과 근거</strong>에는 확인한 파일·패킷 위치를 짧게 남긴다. 캡처를 열지 않고 아래 표만 읽은 경우에는 패킷 분석을 완료했다고 표시하지 않는다. 자기 Linux의 curl 출력과 이 Windows 캡처는 서로 다른 실행이다.</p>
+<p>이 파일은 Windows 루프백에서 Python 서버와 선택 Node 클라이언트로 수집한 예제다. 서버 포트는 <strong>59995</strong>이며 Linux 실습 기본값 8080과 다르다.</p>
+<h2 id="wireshark에서-찾는-순서">Wireshark에서 찾는 순서</h2>
+<ol>
+<li><a href="../qa/week-01-local.pcapng">week-01-local.pcapng</a>을 저장해 Wireshark로 연다. 화면 위 <strong>표시 필터</strong>에 <code>tcp.port == 59995</code>를 넣는다. <code>tcp.port == 8080</code>은 자기 Linux 실습용이며 이 파일에서는 결과가 없다.</li>
+<li>목록의 <strong>No.</strong> 열로 아래 표의 번호를 찾는다. Source/Destination은 모두 <code>127.0.0.1</code>이므로 포트와 화살표 방향도 함께 본다. 요청 쪽 임시 포트는 네 번의 시도에서 각각 59996·59997·59998·59999다.</li>
+<li>HTTP로 보이지 않으면 해당 TCP 패킷에서 <strong>Analyze → Decode As → HTTP</strong>를 선택해 포트 59995를 지정한다. 요청 패킷을 선택한 뒤 <strong>Follow → TCP Stream</strong>을 열면 그 연결의 요청과 응답을 이어서 볼 수 있다. 패킷 번호는 목록에서, 메시지 내용은 Stream과 패킷 상세에서 확인한다.</li>
+<li>4→8, 17→21, 27→28, 32→36 순으로 확인한다. HTTP 헤더와 본문은 서로 다른 패킷에 표시될 수 있다. 아래 번호 하나가 HTTP 응답의 모든 바이트를 담는다는 뜻은 아니다.</li>
+</ol>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>상황</th>
+<th>요청 쪽에서 찾기</th>
+<th>상대 쪽에서 찾기</th>
+<th>판단할 근거</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>정상</td>
+<td>4: <code>59996 → 59995</code>, <code>GET /echo?message=hello</code></td>
+<td>6: HTTP 200 헤더, 8: 200과 JSON 본문</td>
+<td>요청 경로와 200 응답이 같은 포트 쌍에 있다</td>
+</tr>
+<tr>
+<td>없는 경로</td>
+<td>17: <code>59997 → 59995</code>, <code>GET /missing</code></td>
+<td>19: HTTP 404 헤더, 21: 404와 오류 본문</td>
+<td>서버가 응답했으므로 연결 실패가 아니다</td>
+</tr>
+<tr>
+<td>서버 중지 뒤</td>
+<td>27: <code>59998 → 59995</code>, TCP SYN</td>
+<td>28: <code>59995 → 59998</code>, TCP RST/ACK</td>
+<td>연결 거부이며 이 시도에는 HTTP 상태 줄이 없다</td>
+</tr>
+<tr>
+<td>재시작 뒤</td>
+<td>32: <code>59999 → 59995</code>, <code>GET /echo?message=again</code></td>
+<td>34: HTTP 200 헤더, 36: 200과 JSON 본문</td>
+<td>같은 서버 포트로 다시 응답을 받았다</td>
+</tr>
+</tbody></table></div>
+<p>RST만으로 어떤 프로세스를 누가 중지했는지는 알 수 없다. 이 자료의 서버 중지·재시작은 예제의 실행 조건이다. 실제 장애에서는 프로세스 상태와 로그도 함께 확인한다.</p>
+<h2 id="먼저-답하고-근거-확인하기">먼저 답하고 근거 확인하기</h2>
+<ol>
+<li>정상과 404의 <strong>클라이언트 임시 포트</strong>는 각각 무엇인가? 두 상태 모두 HTTP 응답을 받았다는 근거 번호를 하나씩 고른다.</li>
+<li>404 시도에서 17번과 21번의 방향은 어떻게 다른가? <code>404</code>를 <code>서버에 연결할 수 없음</code>으로 적어도 되는가?</li>
+<li>중지 뒤 27번 다음의 28번은 어떤 TCP 표시를 갖는가? 이 시도에서 HTTP 404나 200을 찾을 수 있는가?</li>
+<li>복구 시 서버 포트는 유지되는가? 메시지 값과 임시 포트는 정상 시도와 같은가?</li>
+</ol>
+<p>확인 기준: 정상의 임시 포트는 59996, 404는 59997이다. 8번과 21번에서 각각 200·404 응답 본문을 확인할 수 있다. 17번은 클라이언트에서 서버로, 21번은 서버에서 클라이언트로 간다. 중지 뒤 28번에는 RST/ACK가 있고 HTTP 응답은 없다. 복구는 서버 포트 59995를 유지하지만 임시 포트가 59999이고 메시지는 <code>again</code>이다. 이 마지막 메시지 변경은 제공 예제의 조건이므로 자기 Linux E4의 기준 <code>hello</code>와 동일한 실행으로 합치지 않는다.</p>
+<h2 id="개인-실습-기록에-옮길-때">개인 실습 기록에 옮길 때</h2>
+<p>파일명, Windows 루프백 예제, 서버 포트 59995, 내가 확인한 패킷 번호·주소·양쪽 포트·HTTP 상태 또는 상태 없음, 직접 캡처가 막힌 이유를 적는다. 자기 Linux의 실제 포트·번호·출력 칸은 별도로 유지한다. 예제 분석은 패킷 읽기 증거가 되지만 자기 Linux 직접 캡처나 E1~E4 직접 실행의 증거는 아니다.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="index.html">1주차 입구</a><a href="#main">맨 위로</a><span>아올다 4기 네트워크 스터디</span></div></footer><script>
+(() => {
+  const button = document.querySelector('#download-answers');
+  if (!button) return;
+  document.body.classList.add('js-ready');
+  const fields = [...document.querySelectorAll('textarea[data-answer]')];
+  let dirty = false;
+  fields.forEach(field => field.addEventListener('input', () => { dirty = true; }));
+  const checks = [...document.querySelectorAll('article input[type="checkbox"]')];
+  checks.forEach(box => box.addEventListener('change', () => { dirty = true; }));
+  window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
+  button.addEventListener('click', () => {
+    const isTeamActivity = document.body.dataset.page === 'worksheet.html';
+    const recordSummary = isTeamActivity ? '팀 토론의 질문·근거 위치·바뀐 설명·남은 질문과 작성자의 개인 마무리다. 상세 실습 증거는 별도 보관한다.' : '작성자의 개인 답안이다. 직접 수행·제공 예제·미수행은 작성자가 구분해 적고, 빈칸은 미작성으로 남긴다.';
+    const lines = ['# ' + document.title.replace(' · 아올다 1주차', '') + ' — 내 기록', '', '요약: ' + recordSummary, '', '작성일: ' + new Date().toLocaleDateString('ko-KR'), ''];
+    fields.forEach(field => lines.push('## ' + field.dataset.answer, '', field.value.trim() || '미작성', ''));
+    if (checks.length) { lines.push('## 완료 확인', ''); checks.forEach(box => lines.push('- [' + (box.checked ? 'x' : ' ') + '] ' + box.closest('li')?.textContent.trim())); lines.push(''); }
+    const blob = new Blob([lines.join('\n')], {type:'text/markdown;charset=utf-8'});
+    const link = document.createElement('a'); link.href = URL.createObjectURL(blob);
+    link.download = isTeamActivity ? 'week-01-team-activity.md' : document.body.dataset.page.replace('.html', '') + '-my-answers.md';
+    link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 60000);
+    dirty = false;
+    document.querySelector('#download-status').textContent = '다운로드를 요청했습니다. 브라우저 다운로드 목록과 저장된 파일을 열어 내용을 확인하세요.';
+  });
+})();
+</script></body></html>

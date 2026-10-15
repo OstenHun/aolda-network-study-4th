@@ -1,0 +1,179 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="LAN·MAC·ARP·ICMP를 앞선 HTTP·주소·경로 개념과 연결하는 자체 복습 8문항이다. 먼저 근거를 적고 별도 해설과 비교한다. 예시 출력은 아올다 실측이 아니다."><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"><title>3주차 복습 — 내 설명의 근거 찾기 · 아올다 3주차</title><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+
+
+/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+
+.topic-path,.page-links{display:flex;flex-wrap:wrap;gap:.5rem 1rem}.topic-path{border-bottom:1px solid var(--line);padding:1rem 0;font-size:.85rem}.topic-path [aria-current]{font-weight:800;text-decoration-thickness:3px}.next-hop-model{background:var(--wash);padding:1.25rem;border-left:3px solid var(--brand);margin-bottom:2rem}.next-hop-model h2{margin-top:0}.next-hop-model select{font:inherit;color:var(--blue);max-width:100%;padding:.5rem}.frame-diagram{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}.frame-diagram>div{border:1px solid var(--line);background:white;padding:1rem}.local-status{font-size:.85rem;color:#466477}button:disabled{opacity:.65;cursor:default}@media(max-width:650px){.frame-diagram{grid-template-columns:1fr}}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="review.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 3주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실험</a><a href="worksheet.html">함께 설명</a><a href="personal-record.html">개인 기록</a><a href="review.html" aria-current="page">복습 문제</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">LAN · MAC · ARP · ICMP</p><h1>3주차 복습 — 내 설명의 근거 찾기</h1><p>LAN·MAC·ARP·ICMP를 앞선 HTTP·주소·경로 개념과 연결하는 자체 복습 8문항이다. 먼저 근거를 적고 별도 해설과 비교한다. 예시 출력은 아올다 실측이 아니다.</p></div><nav class="topic-path" aria-label="개념 학습 순서"><a href="recall.html">1. 복습 진단</a><a href="lan-mac.html">2. LAN·MAC</a><a href="next-hop.html">3. 다음 홉</a><a href="arp.html">4. ARP·캐시</a><a href="icmp.html">5. ICMP·ping</a></nav><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#풀기-전에">풀기 전에</a><a href="#비교와-보충">비교와 보충</a><a href="#핵심-개념을-다시-찾을-때">핵심 개념을 다시 찾을 때</a></div></nav><article>
+<h2 id="풀기-전에">풀기 전에</h2>
+<p>20분을 제안한다. 용어 하나로 끝내지 말고 “어떤 조건에서, 어떤 출력으로 알 수 있는가?”를 적는다. <a href="answers.html">해설</a>은 답을 쓴 뒤 연다. 아래 주소와 MAC은 설명용이며 명령 실행 대상이 아니다. 실습 결과를 묻는 문제도 수행하지 않았다면 <code>미수행</code>으로 적는다.</p>
+<h3 id="q1--앞선-관찰의-범위">Q1 — 앞선 관찰의 범위</h3>
+<p>어떤 학습자가 VM의 127.0.0.1:8080에서 HTTP 200·404·중지 뒤 연결 거부·복구를 관찰하고 lo에서 캡처했다고 하자. 이 자료로 ① 다른 학습자도 모두 실습했다, ② PC→VM SSH 경로가 캡처됐다, ③ VM 내부 프로그램의 HTTP/TCP 흐름을 관찰했다 중 무엇을 말할 수 있는가? lo에서 Ethernet ARP를 찾도록 요구해도 되는가?</p>
+<div class="answer-box"><label for="answer-Q1">Q1 — 앞선 관찰의 범위</label><textarea id="answer-Q1" data-answer="Q1 — 앞선 관찰의 범위" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h3 id="q2--ipportmac의-역할">Q2 — IP·port·MAC의 역할</h3>
+<p>VM의 curl이 다른 호스트의 HTTP 서버에 요청한다고 하자. 최종 목적지 IPv4, TCP 목적지 port, 첫 IP 패킷을 담은 Ethernet 프레임의 목적지 MAC은 각각 무엇을 식별하는가? HTTP 404를 받았을 때 “그 서버와 연결되지 않았다”고 설명할 수 있는가?</p>
+<div class="answer-box"><label for="answer-Q2">Q2 — IP·port·MAC의 역할</label><textarea id="answer-Q2" data-answer="Q2 — IP·port·MAC의 역할" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h3 id="q3--같은-링크의-상대">Q3 — 같은 링크의 상대</h3>
+<p>설명용 Ethernet LAN에서 A는 <code>192.0.2.10/24</code>, B는 <code>192.0.2.70/24</code>다. A의 경로 조회는 다음과 같다.</p>
+<pre><code class="language-text">192.0.2.70 dev eth0 src 192.0.2.10
+</code></pre>
+<p>A의 이웃표에 B의 매핑이 없다고 가정한다. ARP 질문의 대상 IP, 요청 프레임의 목적지 MAC, 응답 뒤 ICMP Echo Request의 목적지 IP와 목적지 MAC을 쓰라. 실제 클라우드에서는 같은 /24 계산만으로 응답을 보장할 수 있는가?</p>
+<div class="answer-box"><label for="answer-Q3">Q3 — 같은 링크의 상대</label><textarea id="answer-Q3" data-answer="Q3 — 같은 링크의 상대" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h3 id="q4--다른-망의-상대">Q4 — 다른 망의 상대</h3>
+<p>A에서 허가된 원격 목적지를 조회한 설명용 결과다.</p>
+<pre><code class="language-text">198.51.100.20 via 192.0.2.1 dev eth0 src 192.0.2.10
+192.0.2.1 dev eth0 lladdr 02:00:00:00:00:01 REACHABLE
+</code></pre>
+<p>NAT가 없는 단순 라우팅 모형이다. ARP가 필요하면 어느 IP를 묻는가? 첫 IP 패킷을 담은 프레임의 목적지 MAC과 IP 패킷의 목적지 IP를 각각 적고, 원격 서버 MAC이 이 출력에 없는 이유를 설명하라.</p>
+<div class="answer-box"><label for="answer-Q4">Q4 — 다른 망의 상대</label><textarea id="answer-Q4" data-answer="Q4 — 다른 망의 상대" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h3 id="q5--캐시가-있으면">Q5 — 캐시가 있으면</h3>
+<p>캡처를 시작하고 ping을 2회 보냈다. ICMP 요청·응답은 보이지만 ARP 요청이 없다. 이웃 행에는 MAC과 <code>REACHABLE</code>이 보인다. “ARP가 필요 없는 네트워크”라고 결론 내려도 되는가? <code>STALE</code>은 “서버가 죽었다”는 뜻인가? 이번 기본 실험에서 캐시를 지우는가?</p>
+<div class="answer-box"><label for="answer-Q5">Q5 — 캐시가 있으면</label><textarea id="answer-Q5" data-answer="Q5 — 캐시가 있으면" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h3 id="q6--관찰이-막히면">Q6 — 관찰이 막히면</h3>
+<p>① 이웃 행에 <code>INCOMPLETE</code>만 있음, ② 조회에 <code>local ... dev lo</code>가 보임, ③ tcpdump 권한이 없음, ④ 가상 NIC에서 자신의 흐름만 보임을 만났다. 각각 확인할 것과 기록해야 할 한계를 한 줄씩 적으라. <code>FAILED</code>만으로 HTTP 프로세스 상태를 알 수 있는가?</p>
+<div class="answer-box"><label for="answer-Q6">Q6 — 관찰이 막히면</label><textarea id="answer-Q6" data-answer="Q6 — 관찰이 막히면" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h3 id="q7--ping과-http">Q7 — ping과 HTTP</h3>
+<p>허가된 대상의 ping은 시간 초과지만 HTTP는 404를 반환했다. 어떤 서비스·프로토콜은 관찰됐고 무엇은 아직 모르는가? 반대로 ping이 응답하고 curl 연결이 거부됐다면 무엇을 추가 확인하는가? ICMP Echo에는 TCP의 port가 있는가?</p>
+<div class="answer-box"><label for="answer-Q7">Q7 — ping과 HTTP</label><textarea id="answer-Q7" data-answer="Q7 — ping과 HTTP" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h3 id="q8--독립-설명과-증거">Q8 — 독립 설명과 증거</h3>
+<p>자기 실험 또는 제공 trace 중 하나를 골라 최종 목적지 IP와 링크의 다음 상대를 그려라. “경로 결정 → 다음 홉 선택 → 이웃 매핑 → 프레임 전달 → ICMP 응답 해석”을 2분 설명으로 연결한다. 근거 줄/패킷 번호, 직접 실행 여부, 예상과 달랐던 점, 아직 모르는 점을 포함한다. 실제로 확인하지 않은 MAC·정책을 만들어 넣지 않는다.</p>
+<div class="answer-box"><label for="answer-Q8">Q8 — 독립 설명과 증거</label><textarea id="answer-Q8" data-answer="Q8 — 독립 설명과 증거" rows="5" placeholder="내 답과 판단 근거를 적으세요."></textarea></div><h2 id="비교와-보충">비교와 보충</h2>
+<p><a href="answers.html">분리 해설</a>과 대조해 바뀐 설명 하나를 남긴다. Q3·Q4가 막히면 <a href="next-hop.html">다음 홉</a>, Q5·Q6은 <a href="arp.html">ARP</a>, Q7은 <a href="icmp.html">ICMP</a>를 다시 읽는다. 이후 TCP/UDP와 서비스 port의 차이는 4주차로 이어진다.</p>
+<h2 id="핵심-개념을-다시-찾을-때">핵심 개념을 다시 찾을 때</h2>
+<p><a href="essentials.html">핵심 정리</a>의 기억 문장을 가리고 같은 현상을 설명해 본다. 개발 사례는 기존 복습의 관련 문항 대신 선택할 수 있으며 필수 문항을 누적하지 않는다. 답·조건·다음에 볼 근거를 구별하고 <a href="answers.html#%EA%B0%9C%EB%B0%9C-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>과 비교한다.</p>
+<div class="save-bar"><p><strong>입력은 자동 저장되지 않습니다.</strong> 내려받은 파일을 열어 확인한 뒤 저장 확인을 누르세요. 상세 실험 출력은 개인 기록에 보관합니다.</p><noscript><p>JavaScript가 꺼져 있으면 Markdown 양식이나 메모장에 기록하세요.</p></noscript><button class="js-only" id="download-answers" type="button">내 기록 Markdown 내려받기</button> <button class="js-only" id="confirm-saved" type="button" disabled>저장 파일 확인했어요</button><p id="download-status" role="status"></p></div><nav class="page-links" aria-label="다음 학습"><a href="index.html">3주차 입구</a></nav></article></div></main><footer class="footer"><div class="shell"><a href="../week-02/index.html">2주차 복습</a><a href="../ssh-top-down/index.html">SSH 준비</a><a href="sources.html">출처</a><a href="validation.html">검증 상태</a><a href="#main">맨 위로</a></div></footer><script>(() => {
+  // The model changes explanatory labels only; it never sends packets.
+  const destination = document.querySelector('#destination');
+  destination?.addEventListener('change', () => {
+    const remote = destination.value === 'remote';
+    document.querySelector('#mac-target').textContent = remote ? '게이트웨이의 MAC · 이웃 IP 192.0.2.1' : 'B의 MAC · 이웃 IP 192.0.2.70';
+    document.querySelector('#ip-target').textContent = remote ? '198.51.100.20 · 원격 목적지' : '192.0.2.70 · B';
+    document.querySelector('#arp-target').textContent = `매핑이 없으면 ${remote ? '192.0.2.1' : '192.0.2.70'}의 MAC을 ARP로 묻습니다. 캐시에 있으면 새 ARP가 없을 수 있습니다.`;
+  });
+  const download = document.querySelector('#download-answers');
+  if (!download) return;
+  document.body.classList.add('js-ready');
+  const fields = [...document.querySelectorAll('textarea[data-answer]')];
+  const confirmed = document.querySelector('#confirm-saved');
+  const status = document.querySelector('#download-status');
+  let dirty = false;
+  fields.forEach(field => field.addEventListener('input', () => {
+    dirty = true;
+    confirmed.disabled = true;
+    status.textContent = '내용을 바꿨습니다. 다시 내려받고 저장 파일을 확인하세요.';
+  }));
+  window.addEventListener('beforeunload', event => {
+    if (dirty) { event.preventDefault(); event.returnValue = ''; }
+  });
+  confirmed.addEventListener('click', () => {
+    dirty = false;
+    confirmed.disabled = true;
+    status.textContent = '저장 확인을 기록했습니다. 내용을 바꾸면 다시 내려받으세요.';
+  });
+  download.addEventListener('click', () => {
+    const lines = ['# '+document.title+' — 내 기록','','요약: 작성자의 기록이다. 직접 수행·시연·설명용 trace·미수행을 구분하며 빈 답은 미작성으로 남긴다.','', '작성일: '+new Date().toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'}),''];
+    fields.forEach(field => lines.push('## '+field.dataset.answer,'',field.value.trim() || '미작성',''));
+    try {
+      const url = URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/markdown;charset=utf-8'}));
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'week-03-'+document.body.dataset.page.replace('.html','')+'-my-record.md';
+      document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      confirmed.disabled = false;
+      status.textContent = '다운로드를 요청했습니다. 파일을 열어 입력 내용이 있는지 확인하세요.';
+    } catch {
+      status.textContent = '다운로드를 시작하지 못했습니다. 입력을 별도 메모장에 복사해 저장하세요.';
+    }
+  });
+})();
+</script></body></html>

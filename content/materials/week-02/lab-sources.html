@@ -1,0 +1,169 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Linux 주소·경로 조회와 Python 주소 계산에 필요한 공식 문서를 연결한다. 선택 격리 실습은 네임스페이스·veth·ping 문서를 참고하며 실제 실행 전 권한·커널 지원·복구 절차를 확인한다."><title>2주차 실습 명령의 공식 참고자료 · 아올다 2주차</title><style>
+:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
+.js-only{display:none}.js-ready .js-only{display:inline-block}
+</style><style>.cidr-model{border:1px solid var(--line);padding:22px;border-radius:12px;margin:28px 0;background:var(--wash)}.cidr-model h3{margin-top:0}.model-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}select{font:inherit;padding:8px;color:var(--blue);border:1px solid #91acbd;background:white;border-radius:6px}.subnet-blocks{display:flex;margin:20px 0;border:1px solid #07548e}.subnet-blocks>div{flex:1;min-width:0;padding:16px 8px;text-align:center;background:#e6f2fc;font-size:.85rem;overflow-wrap:anywhere}.subnet-blocks>div+div{border-left:1px solid #07548e}.subnet-blocks>div:nth-child(2){background:#fff}.subnet-blocks>div:nth-child(n+3){background:#f3f6f8;color:#435e70}@media(max-width:420px){.cidr-model{padding:14px}.subnet-blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.subnet-blocks>div{border:1px solid #91acbd}}</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
+:root {
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+body { letter-spacing: normal; word-spacing: normal; }
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a {
+  word-break: normal;
+  overflow-wrap: break-word;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+/* Prose and learning media have different reading needs. */
+p, li, dd, dt, figcaption, summary, label, th, td, button, nav a { word-break: keep-all; }
+article > p, article > ul, article > ol, article > blockquote,
+.reading > p, .reading > ul, .reading > ol { max-width: 42rem; }
+li { max-width: none; }
+p { margin-block: 1rem; }
+.reading { max-width: none; }
+.wrap, .shell { width: 100%; max-width: 1380px; margin-inline: auto; }
+article, .hero { max-width: none; }
+.hero > p:not(.eyebrow), .hero .lead, .hero .lede { max-width: 42rem; }
+.notice { max-width: none; font-size: .9rem; line-height: 1.75; }
+.notice p { max-width: 42rem; }
+.lead, .lede { max-width: 42rem; }
+.layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.contents { font-size: .82rem; }
+.contents a { padding: 7px 8px; }
+.document-layout { display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 40px; align-items: start; padding-top: 28px; }
+.document-layout:not(:has(> .toc)) { grid-template-columns: minmax(0, 1fr); }
+.document-layout article { padding-top: 0; }
+.document-layout article > h2:first-child, .document-layout article > h1:first-child + h2 { margin-top: 0; }
+.document-layout > .toc { position: sticky; top: 24px; margin: 0; padding: 14px; max-height: calc(100dvh - 48px); overflow: auto; font-size: .82rem; border-radius: 8px; }
+.document-layout .toc-links { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: inherit; }
+.document-layout .toc-links a { padding-block: 5px; }
+.reading, .chapters, article { min-width: 0; }
+.reading > pre, .reading > .table-scroll, figure, .table-scroll, .cidr-model { max-width: 100%; }
+figcaption { max-width: 48rem; }
+.hero { padding-top: 34px; }
+.layout:not(:has(.contents)) { grid-template-columns: minmax(0, 1fr); }
+article > .answer-box { max-width: 48rem; }
+.save-bar p, .note p { max-width: 42rem; }
+.book-layout { grid-template-columns: 192px minmax(0, 1fr); gap: 40px; }
+.duplex p { text-align: center; }
+.reading > p { margin-block: 1.1rem; }
+h1, h2, h3, h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.4; max-width: none; }
+h2 { line-height: 1.5; }
+h3, h4 { line-height: 1.6; }
+.eyebrow, .section-number, .model-tag { letter-spacing: normal; }
+main, article, section, .chapters, figure, .messages > div, .contrast > div { min-width: 0; }
+code { word-break: normal; overflow-wrap: anywhere; letter-spacing: normal; }
+p code, li code { display: inline-block; max-width: 100%; vertical-align: baseline; }
+pre code { display: inline; }
+pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.75; }
+pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+.table-scroll, .table-wrap { max-width: 100%; overflow-x: auto; }
+table { font-size: .88rem; line-height: 1.75; }
+th, td { padding: .75rem .85rem; vertical-align: top; }
+figcaption, .small { font-size: .88rem; line-height: 1.75; }
+nav a, .chapter-nav a, .page-links a { line-height: 1.65; }
+.toc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem 1.5rem; }
+.toc-links a { display: block; padding-block: .25rem; }
+p a, li a, td a, dd a { overflow-wrap: anywhere; text-underline-offset: .2em; }
+textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
+@media (max-width: 980px) {
+  .book-layout { grid-template-columns: 1fr; gap: 0; }
+  .document-layout, .layout { grid-template-columns: 1fr; gap: 24px; }
+  .document-layout > .toc, .contents { position: static; max-height: none; }
+  .document-layout .toc-links, .contents nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .book-layout nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: none; margin-bottom: 18px; }
+  .book-layout nav strong { grid-column: 1 / -1; }
+}
+@media (max-width: 650px) {
+  :root { font-size: 17px; }
+  p, li, dd, figcaption { word-break: keep-all; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.4rem; }
+  .hero p, .lead, .lede { font-size: 1rem; }
+  .messages, .contrast { grid-template-columns: 1fr; }
+  figure { padding: 18px; }
+  .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+}
+@media print {
+  :root { font-size: 10pt; }
+  p, li, .reading, .wrap, .shell, article > p, article > ul, article > ol, .reading > p { max-width: none; }
+  .document-layout, .book-layout, .layout { display: block; }
+  pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="lab-sources.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 실습 명령의 공식 참고자료</h1><p>Linux 주소·경로 조회와 Python 주소 계산에 필요한 공식 문서를 연결한다. 선택 격리 실습은 네임스페이스·veth·ping 문서를 참고하며 실제 실행 전 권한·커널 지원·복구 절차를 확인한다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#참가자에게-필요한-원문">참가자에게 필요한 원문</a><a href="#선택-격리-실습의-참고자료">선택 격리 실습의 참고자료</a><a href="#실행-전-확인">실행 전 확인</a></div></nav><article>
+<h2 id="참가자에게-필요한-원문">참가자에게 필요한 원문</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>자료</th>
+<th>읽을 부분과 질문</th>
+<th>이 키트에서의 역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://man7.org/linux/man-pages/man8/ip-address.8.html">ip-address(8)</a>, <a href="https://man7.org/linux/man-pages/man8/ip.8.html">ip(8)</a></td>
+<td><code>ip address show</code>, <code>-4</code>, <code>-brief</code> 옵션. 인터페이스 주소/접두사를 어디서 보는가?</td>
+<td>실제 Linux 주소 조회 명령의 근거</td>
+</tr>
+<tr>
+<td><a href="https://man7.org/linux/man-pages/man8/ip-route.8.html">ip-route(8)</a></td>
+<td><code>ip route show</code>, <code>ip route get</code>, <code>default via</code> 예제. 경로 조회와 상대 응답이 왜 다른가?</td>
+<td>경로표·선택 경로 판독의 근거</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/ipaddress.html">Python ipaddress</a></td>
+<td><code>IPv4Interface</code>, <code>.network</code>, 네트워크/브로드캐스트/마스크와 멤버십. C1·C2를 검산한다.</td>
+<td>표준 라이브러리 계산. Python의 <code>is_private</code>는 RFC 1918 사설망과 뜻이 완전히 같지 않아 키트는 주소 분류에 사용하지 않음</td>
+</tr>
+<tr>
+<td><a href="https://www.rfc-editor.org/rfc/rfc1918">RFC 1918 §3</a></td>
+<td><code>10/8</code>, <code>172.16/12</code>, <code>192.168/16</code> 세 사설 범위. 자기 주소가 어느 범위인지 확인한다.</td>
+<td>사설 주소의 정의</td>
+</tr>
+<tr>
+<td><a href="https://www.rfc-editor.org/rfc/rfc5737">RFC 5737 §3–4</a></td>
+<td><code>192.0.2.0/24</code>의 문서용 지위. 카드 주소를 실제 인터넷 대상으로 해석하지 않는다.</td>
+<td>합성 카드·격리 예제 주소 선택의 근거</td>
+</tr>
+<tr>
+<td><a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">IANA IPv4 특수 용도 등록부</a></td>
+<td><code>127.0.0.0/8</code>과 문서용 주소의 용도를 확인한다.</td>
+<td>루프백·특수 주소 구분</td>
+</tr>
+</tbody></table></div>
+<p>영문 원문을 전부 읽는 과제가 아니다. 2주차에는 주소/접두사·경로 조회·사설/루프백/문서용 주소만 확인한다. 명령 실행 전 자신의 Linux에서 <code>ip</code>·Python 사용 가능 여부를 확인한다.</p>
+<h2 id="선택-격리-실습의-참고자료">선택 격리 실습의 참고자료</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
+<thead>
+<tr>
+<th>자료</th>
+<th>확인한 범위</th>
+<th>채택 판단</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://man7.org/linux/man-pages/man8/ip-netns.8.html">ip-netns(8)</a>, <a href="https://man7.org/linux/man-pages/man7/network_namespaces.7.html">network_namespaces(7)</a>, <a href="https://man7.org/linux/man-pages/man8/ip-link.8.html">ip-link(8)</a></td>
+<td>네임스페이스의 독립 경로표·장치, <code>ip netns add/exec/del</code>, veth 링크.</td>
+<td>선택 실습에 직접 사용. Linux 권한과 커널 지원은 현장에서 확인</td>
+</tr>
+<tr>
+<td><a href="https://man7.org/linux/man-pages/man8/ping.8.html">iputils ping(8)</a></td>
+<td><code>-n</code>, <code>-c</code>, <code>-W</code>와 종료 상태.</td>
+<td>격리된 두 노드 사이에만 ICMP 한 번씩 보내며 실제 출력은 현장에서 기록</td>
+</tr>
+<tr>
+<td><a href="https://github.com/iproute2/iproute2">iproute2 소스 저장소</a></td>
+<td>Linux 네트워크 도구의 공식 소스 미러와 GPL-2.0 표시.</td>
+<td>명령 구현을 복제하지 않고 설치된 <code>ip</code> 도구를 사용</td>
+</tr>
+</tbody></table></div>
+<p>이 실습의 Python·셸 코드, 카드 질문, 합성 출력은 자체 작성했다. 외부 문서·코드의 본문이나 랩 파일을 복제하지 않고 링크와 필요한 읽을 범위만 제공한다. <code>iproute2</code>는 GPL-2.0 표시가 있는 별도 도구이며, Python은 <a href="https://docs.python.org/3/license.html">PSF 라이선스</a>의 별도 표준 라이브러리다. RFC·IANA 원문은 정의와 근거로 인용한 것이지 이 키트의 저작물로 주장하지 않는다.</p>
+<h2 id="실행-전-확인">실행 전 확인</h2>
+<p><a href="sample-output.html">제공 출력</a>은 학습용 예시다. 실제 출력은 인터페이스 이름·설정·배포판에 따라 달라질 수 있다. 선택 격리 실습은 허가된 Linux에서 필요한 권한·커널 지원과 생성→변경→복구→정리 절차를 먼저 확인한다. SSH 관리 인터페이스나 기본 경로는 바꾸지 않는다.</p>
+</article></div></main><footer class="footer"><div class="shell"><a href="index.html">2주차 입구</a><a href="sources.html">출처와 읽을 범위</a><a href="#main">맨 위로</a></div></footer><script>(()=>{const select=document.querySelector('#prefix');if(!select)return;select.addEventListener('change',()=>{const p=Number(select.value);const blocks=document.querySelector('#blocks');blocks.innerHTML=p===24?'<div>0~255<br>A .10 · B .70</div>':'<div>0~63<br>A .10</div><div>64~127<br>B .70</div><div>128~191</div><div>192~255</div>';document.querySelector('#cidr-result').textContent=p===24?'/24: A와 B는 모두 192.0.2.0/24에 포함됩니다. 실제 통신 성공은 확인하지 않았습니다.':'/26: A는 192.0.2.0/26, B는 192.0.2.64/26입니다. 서로 다른 서브넷이며 실제 도달성은 경로와 환경을 확인해야 합니다.';});})();</script></body></html>
