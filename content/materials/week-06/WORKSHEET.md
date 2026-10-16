@@ -17,7 +17,7 @@ DNS가 IP를 알려 줬다는 사실만으로 HTTP 응답까지 보장할 수 �
 
 ## 보조 질문 · 연결을 다시 쓰면 무엇이 줄까?
 
-상품 응답을 받은 뒤 리뷰 요청을 보내는 코드가 있다. 같은 연결을 쓰면 두 요청도 동시에 처리될까? [RFC 9112 §9.3 첫 세 문단](https://www.rfc-editor.org/rfc/rfc9112.html#section-9.3)에서 재사용 조건을 찾고 [교재의 RTT 표](CONCEPTS.md#request-cost)를 읽는다. RTT=80ms·객체 3개로 바꿔 계산한다. 캐시 재검증이 304를 받으면 새 연결 비용도 항상 없어지는지 묻는다.
+상품 응답을 받은 뒤 리뷰 요청을 보내는 코드가 있다. 같은 연결을 쓰면 두 요청도 동시에 처리될까? [RFC 9112 §9.3](https://www.rfc-editor.org/rfc/rfc9112.html#section-9.3)의 도입 두 문단과 `In order to remain persistent`로 시작하는 문단에서 재사용 조건을 찾고 [교재의 RTT 표](CONCEPTS.md#request-cost)를 읽는다. RTT=80ms·객체 3개로 바꿔 계산한다. 캐시 재검증이 304를 받으면 새 연결 비용도 항상 없어지는지 묻는다.
 
 시간이 남으면 [실습 A2](LINUX.md#reuse-lab)의 같은 프로세스/별도 프로세스·`/close`를 비교한다. 코드를 함께 시작하는 것과 실제 프로토콜의 다중화를 구별한다. 개발 사례 W06-D1~D3의 해설은 [별도 페이지](ANSWERS.md#development)에서 나중에 읽는다.
 

@@ -7,7 +7,7 @@
 | 우선순위 | 공식 자료·지정 범위 | 읽는 목적·돌아갈 교재 |
 | --- | --- | --- |
 | 중심 | [curl SSL Certificates](https://curl.se/docs/sslcerts.html)의 Verification, [RFC 9525 §6.3](https://www.rfc-editor.org/rfc/rfc9525.html#section-6.3) | 기본 검증·CA 지정과 이름 비교. 영문이 막히면 [W06-K3](CONCEPTS.md#tls-identity)의 세 조건 표 |
-| 선택 보조 | [RFC 9112 §9.3](https://www.rfc-editor.org/rfc/rfc9112.html#section-9.3) 첫 세 문단 | 지속 연결·본문 경계. [RTT 계산](CONCEPTS.md#request-cost)과 실습 ID 비교 |
+| 선택 보조 | [RFC 9112 §9.3](https://www.rfc-editor.org/rfc/rfc9112.html#section-9.3)의 도입 두 문단과 `In order to remain persistent`로 시작하는 문단 | 지속 연결·본문 경계. [RTT 계산](CONCEPTS.md#request-cost)과 실습 ID 비교 |
 | 필요할 때 | [RFC 9111 §4.3](https://www.rfc-editor.org/rfc/rfc9111.html#section-4.3) 도입부, [OpenSSH 호스트 키 확인](https://man.openbsd.org/ssh#VERIFYING_HOST_KEYS) | 검증자·304, 호스트 신뢰. 캐시 흐름·SSH 제공 기록으로 돌아가기 |
 
 중심 두 짧은 범위는 공동 탐색 시간에 나눠 읽는다. 선택 문서를 모두 사전 과제로 쌓지 않는다. 문서에서 필요한 문장/필드를 찾은 뒤 한국어 교재와 실제 요청으로 연결하며 읽기 소요 시간은 참가자에 따라 조정한다.
