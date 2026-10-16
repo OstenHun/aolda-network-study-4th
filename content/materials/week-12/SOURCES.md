@@ -20,7 +20,8 @@
 
 | 공식 자료 | 확인한 절·주장 | 적용 조건·분량 |
 | --- | --- | --- |
-| [Cisco AP FAQ](https://www.cisco.com/c/en/us/support/docs/smb/wireless/cisco-small-business-100-series-wireless-access-points/smb5305-wireless-access-points-frequently-asked-questions.html) | 1 What is WAP,3 What is SSID,4 Multiple SSIDs | AP/SSID의 역할과 다중 SSID. 선택3분. 제품별 최대 수·설정 절차는 일반화하지 않음 |
+| [Cisco AP 소개](https://www.cisco.com/site/us/en/learn/topics/small-business/what-is-an-access-point.html) | What is a wireless access point? 도입·Root access point 문단 | 무선 단말과 유선 LAN을 잇는 AP의 역할. 선택2분. 뒤 설치·보안 설정과 성능·로밍 홍보는 채택하지 않음 |
+| [Cisco AP FAQ](https://www.cisco.com/c/en/us/support/docs/smb/wireless/cisco-small-business-100-series-wireless-access-points/smb5305-wireless-access-points-frequently-asked-questions.html) | 3 What is SSID,4 What are Multiple SSIDs | SSID의 역할과 다중 SSID. 선택3분. 제품별 최대 수·설정 절차는 일반화하지 않음 |
 | [Juniper Wi-Fi Mini-PIM](https://www.juniper.net/documentation/us/en/hardware/srx300-srx550-hm/topics/topic-map/srx-series-wifi-mpim.html) | Virtual Access Point Configuration Overview의 첫 문단 | 한 물리 장비/여러 가상 AP·SSID/BSSID 구별의 제품 예. 선택2분, 플랫폼 설치는 제외 |
 | [Apple Wi-Fi 권고](https://support.apple.com/en-us/102766) | Security·Hidden network·Bands·Channel·Channel width | WPA3/WPA2-AES·숨김의 한계·2.4/5/6GHz·채널/폭. 선택5분, Apple 제품 운용 권고이며 성능 보장 아님 |
 | [Cisco Ethernet collisions](https://www.cisco.com/c/en/us/support/docs/interfaces-modules/port-adapters/12768-eth-collisions.html) | Prerequisites 앞 반이중 주석·What Are Collisions?의 네 단계 | CD·랜덤 대기, 전이중에서 검출 비활성. 선택3분. 오래된 카운터/공유 Ethernet 운용을 현대 전이중 링크에 일반화하지 않음 |
@@ -28,7 +29,7 @@
 | [RFC4301 §4.1](https://www.rfc-editor.org/rfc/rfc4301.html#section-4.1) | transport/tunnel mode·안쪽/바깥 IP와 게이트웨이 | 터널 양끝·보호 경계. 선택4분, 실제 VPN 초기 구축은 제외 |
 | [RFC4303 §1](https://www.rfc-editor.org/rfc/rfc4303.html#section-1)·[§3.1.2](https://www.rfc-editor.org/rfc/rfc4303.html#section-3.1.2) | §1의 보안 서비스 세 조합·§3.1.2 tunnel mode 헤더/보호 범위 | 터널과 암호화가 동의어가 아님, 구성한 ESP 보호. 선택4분, 협상/암호 상세는 후속 |
 | [RFC2784 §2](https://www.rfc-editor.org/rfc/rfc2784.html#section-2) | GRE 캡슐화 구조 | 캡슐화 자체와 암호화 구별의 보조 예. 선택2분, GRE 설치는 하지 않음 |
-| [ip-route(8) 매뉴얼](https://man7.org/linux/man-pages/man8/ip-route.8.html) | DESCRIPTION의 ip route get·via·dev·src | 로컬 경로 조회/선택과 실제 송신 구별. 선택3분, 최장 접두사는 7주 교재, 단일 main table 가정은 제공 파일을 따름 |
+| [ip-route(8) 매뉴얼](https://www.man7.org/linux/man-pages/man8/ip-route.8.html) | DESCRIPTION의 ip route get·via·dev·src | 로컬 경로 조회/선택과 실제 송신 구별. 선택3분, 최장 접두사는 7주 교재, 단일 main table 가정은 제공 파일을 따름 |
 | [Network Engineer roadmap](https://roadmap.sh/network-engineer) | Wireless·VPN·Network Architectures | 학습 범위 지도, 명령/알고리즘 근거로 쓰지 않음 |
 
 ## 제공 자료·문제의 출처와 한계

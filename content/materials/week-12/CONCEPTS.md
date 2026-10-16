@@ -6,9 +6,9 @@
 
 **기억 문장:** 무선 연결은 로컬 무선 구간의 상태이며 인터넷·서버 도달성은 추가로 확인한다.
 
-AP(access point)는 무선 단말을 네트워크에 연결하는 장치다. 이 예의 AP는 무선 프레임과 유선 LAN 사이를 잇는다. 가정용 공유기는 AP·스위치·라우터·NAT·DHCP 기능을 한 상자에 담기도 한다. 기능이 함께 있다고 역할까지 같아지지는 않는다.
+AP(access point)는 무선 단말을 네트워크에 연결하는 장치다. 이 예의 AP는 무선 프레임과 유선 LAN 사이를 잇는다. [Cisco의 AP 소개 도입과 Root access point](https://www.cisco.com/site/us/en/learn/topics/small-business/what-is-an-access-point.html)에서 이 역할을 확인한다. 가정용 공유기는 AP·스위치·라우터·NAT·DHCP 기능을 한 상자에 담기도 한다. 기능이 함께 있다고 역할까지 같아지지는 않는다.
 
-SSID는 사용자가 고르는 무선 네트워크 이름이다. BSSID는 개별 BSS(무선 기본 서비스 집합)를 식별하며 보통 MAC 주소 형식이다. 한 AP가 여러 SSID/BSSID를 제공하거나 여러 AP가 같은 SSID를 제공할 수 있다. 이름만으로 같은 장치·같은 VLAN·신뢰할 상대라고 판단하지 않는다. [Cisco의 AP·SSID 설명](https://www.cisco.com/c/en/us/support/docs/smb/wireless/cisco-small-business-100-series-wireless-access-points/smb5305-wireless-access-points-frequently-asked-questions.html)을 참고한다.
+SSID는 사용자가 고르는 무선 네트워크 이름이다. BSSID는 개별 BSS(무선 기본 서비스 집합)를 식별하며 보통 MAC 주소 형식이다. 한 AP가 여러 SSID/BSSID를 제공하거나 여러 AP가 같은 SSID를 제공할 수 있다. 이름만으로 같은 장치·같은 VLAN·신뢰할 상대라고 판단하지 않는다. [Cisco FAQ의 SSID·다중 SSID 설명](https://www.cisco.com/c/en/us/support/docs/smb/wireless/cisco-small-business-100-series-wireless-access-points/smb5305-wireless-access-points-frequently-asked-questions.html)을 참고한다.
 
 | 필드 | 읽는 방법 | 이것만으로 모르는 것 |
 | --- | --- | --- |
