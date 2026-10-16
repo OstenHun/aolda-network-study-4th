@@ -11,18 +11,18 @@
 
 | 자료와 정확한 시작·끝 | 읽는 목적·함께 찾을 것 |
 | --- | --- |
-| [RFC 2328 §1.1 Protocol overview](https://www.rfc-editor.org/rfc/rfc2328.html#section-1.1)의 `In a link-state routing protocol`로 시작해 `by flooding`으로 끝나는 문단, 이어 `All routers run`으로 시작해 `as leaves`로 끝나는 문단 | 연결 정보를 누가 알리고 누가 계산하는가. 페이지 머리말이 문단 사이에 끼어 있어도 이어 읽는다. 교재 W10-K1·Q4 |
-| [RFC 2328 §7.1 The Hello Protocol](https://www.rfc-editor.org/rfc/rfc2328.html#section-7.1)의 첫 문단, [§10.1 Neighbor states](https://www.rfc-editor.org/rfc/rfc2328.html#section-10.1)의 `Full` 항목 | Hello의 양방향 이웃 유지와 Full의 인접 상태. §7.1 첫 문단의 DR 언급은 이번 point-to-point 실습에서 다루지 않음. W10-K2·A1·Q5 |
+| [RFC 2328 §1.1 Protocol overview](https://www.rfc-editor.org/rfc/rfc2328.html#page-6)의 `In a link-state routing protocol`로 시작해 `by flooding`으로 끝나는 문단, 이어 `All routers run`으로 시작해 `as leaves`로 끝나는 문단 | 연결 정보를 누가 알리고 누가 계산하는가. 페이지 머리말이 문단 사이에 끼어 있어도 이어 읽는다. 교재 W10-K1·Q4 |
+| [RFC 2328 §7.1 The Hello Protocol](https://www.rfc-editor.org/rfc/rfc2328.html#page-52)의 첫 문단, [§10.1 Neighbor states](https://www.rfc-editor.org/rfc/rfc2328.html#page-83)의 `Full` 항목 | Hello의 양방향 이웃 유지와 Full의 인접 상태. §7.1 첫 문단의 DR 언급은 이번 point-to-point 실습에서 다루지 않음. W10-K2·A1·Q5 |
 | [RFC 2453 §3.4 Distance Vector Algorithms](https://www.rfc-editor.org/rfc/rfc2453.html#section-3.4)에서 `Let D(i,j)`로 시작하는 정의·두 식과, `It turns out`으로 시작해 `picks the smallest`로 끝나는 문단 | 이웃의 광고값+이웃까지 비용에서 최소를 고르는 이유. 중간의 간단한 증명 설명은 함께 읽어도 됨. W10-K1·Q3 |
 
-링크가 절 처음으로 이동하지 않으면 문서 안에서 위 영문 시작 구절을 찾는다. 영어 용어 대응은 topology=연결 구조, flooding=정보를 이웃으로 계속 전파, neighbor=이웃, metric=경로 비용, convergence=변화 뒤 안정 과정이다. 식을 읽기 전에 모든 용어를 외우지 않아도 된다.
+RFC 2328 링크는 해당 절이 시작하는 쪽으로 이동한다. 그 페이지는 하위 절 앵커를 제공하지 않으므로 위 영문 시작 구절로 지정 문단을 찾는다. Full 항목은 §10.1의 뒤쪽인 원문86쪽에 있다. 영어 용어 대응은 topology=연결 구조, flooding=정보를 이웃으로 계속 전파, neighbor=이웃, metric=경로 비용, convergence=변화 뒤 안정 과정이다. 식을 읽기 전에 모든 용어를 외우지 않아도 된다.
 
 ## 교재와 명령의 근거
 
 | 공식 문서·실제로 적용한 범위 | 이 교재에서 확인하는 주장 |
 | --- | --- |
-| [RFC 2328 §2.2](https://www.rfc-editor.org/rfc/rfc2328.html#section-2.2) 첫 두 문단, [§16.1](https://www.rfc-editor.org/rfc/rfc2328.html#section-16.1)의 후보 선택·비용 갱신 단계 | 자신을 루트로 경로 계산, 전달에는 다음 홉 사용. 자체 4노드 그림/값은 원문 복제가 아님 |
-| [RFC 2328 §1.2](https://www.rfc-editor.org/rfc/rfc2328.html#section-1.2)의 AS·Router ID·area 관련 정의, §1.1·§7.1·§10.1 | AS 내부·영역·이웃/인접/Full·수렴의 역할. LSA 필드 전체는 필수 읽기에서 제외 |
+| [RFC 2328 §2.2](https://www.rfc-editor.org/rfc/rfc2328.html#page-21) 첫 두 문단, [§16.1](https://www.rfc-editor.org/rfc/rfc2328.html#page-161)의 후보 선택·비용 갱신 단계 | 자신을 루트로 경로 계산, 전달에는 다음 홉 사용. 자체 4노드 그림/값은 원문 복제가 아님 |
+| [RFC 2328 §1.2](https://www.rfc-editor.org/rfc/rfc2328.html#page-8)의 AS·Router ID·area 관련 정의, §1.1·§7.1·§10.1 | AS 내부·영역·이웃/인접/Full·수렴의 역할. LSA 필드 전체는 필수 읽기에서 제외 |
 | [RFC 4271 §1.1](https://www.rfc-editor.org/rfc/rfc4271.html#section-1.1)의 AS·EBGP/IBGP·IGP 정의, [§3](https://www.rfc-editor.org/rfc/rfc4271.html#section-3)의 첫 두 문단, [§9.1.1](https://www.rfc-editor.org/rfc/rfc4271.html#section-9.1.1)의 선호도 정책, [§9.1.3](https://www.rfc-editor.org/rfc/rfc4271.html#section-9.1.3)의 외부 광고 정책 | 도달 정보·AS 경로·선택/광고 정책. P/Q와 AS65001은 자체 예시이며 AS 경로 길이만으로 선택한다고 설명하지 않음 |
 | [FRR 10.5 OSPFv2](https://docs.frrouting.org/en/stable-10.5/ospfd.html)의 OSPF Configuration·OSPF router·OSPF interface·Showing Information | router-id, area, point-to-point, cost, passive, Hello/Dead, neighbor/interface/database 조회. 명령은 제공10.5.1 이미지에서 확인하는 구성에 적용 |
 | [FRR Basic Setup](https://docs.frrouting.org/en/stable-10.5/setup.html#daemons-configuration-file), [VTYSH](https://docs.frrouting.org/en/stable-10.5/vtysh.html), [Zebra Standard Commands](https://docs.frrouting.org/en/stable-10.5/zebra.html#standard-commands) | 데몬·통합 구성·vtysh 실행과 interface shutdown/no shutdown. 새 컨테이너에서만 실행 |
