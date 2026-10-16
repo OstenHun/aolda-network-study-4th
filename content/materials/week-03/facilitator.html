@@ -108,12 +108,12 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <li><input disabled="" type="checkbox"> 허용된 Linux VM 접속과 <code>ip</code>·<code>ping</code>·<code>tcpdump</code>·<code>timeout</code>을 확인한다. 설치·권한 변경은 기본 실습이 아니다.</li>
 <li><input disabled="" type="checkbox"> 허용할 IPv4 대상과 범위를 확인한다. 다른 참가자 VM은 이미 존재하고 같은 네트워크이며 양측 권한이 확인된 경우에만 쓴다.</li>
 <li><input disabled="" type="checkbox"> <code>ip -4 route get TARGET</code>의 <code>dev</code>·<code>via</code>와 <code>ip -o link show dev IFACE</code>의 <code>link/ether</code>를 확인한다. <code>lo</code>·비 Ethernet이면 직접 ARP 절차를 요구하지 않는다.</li>
-<li><input disabled="" type="checkbox"> 제한된 필터와 <code>sudo -n</code> 캡처 권한을 사전 확인한다. 권한이 없으면 <a href="../../labs/week-03/sample-trace.txt">가상 패킷 예제</a>를 쓴다.</li>
+<li><input disabled="" type="checkbox"> 제한된 필터와 <code>sudo -n</code> 캡처 권한을 사전 확인한다. 캡처 권한이 없으면 패킷 분석에만 <a href="../../labs/week-03/sample-trace.txt">가상 패킷 예제</a>를 쓰고 가능한 조회·ping은 직접 수행한다.</li>
 <li><input disabled="" type="checkbox"> 공유할 기록에서 실제 주소·호스트명·계정과 비밀정보를 가렸는지 확인한다.</li>
 </ul>
-<p><a href="../../labs/week-03/LINUX.md">실행 절차</a>의 중단 조건과 권한 경계를 먼저 확인한다. 예제의 결과를 본인 환경의 관찰로 기록하지 않는다.</p>
+<p><a href="linux.html">실행 절차</a>의 중단 조건과 권한 경계를 먼저 확인한다. 예제의 결과를 본인 환경의 관찰로 기록하지 않는다.</p>
 <h2 id="사전-공동학습-60분--중심-질문을-함께-탐구">사전 공동학습 60분 — 중심 질문을 함께 탐구</h2>
-<div class="table-scroll"><table>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
 <th>시간</th>
@@ -149,7 +149,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </tbody></table></div>
 <p>시간은 제안이며 공동 탐색이 더 필요하면 보조 질문을 줄인다. 공식 절은 <a href="sources.html">출처</a>, 탐색이 막힐 때는 주제별 한국어 교재를 사용한다. 한 명의 설명 뒤 다른 사람이 조건을 바꾸어 묻고 설명자는 질문·회차마다 교대한다. 가상 패킷 예제를 실제 아올다 관찰로 쓰지 않는다. 장비 역할은 교육용 모형이며 현재 아올다의 물리/가상망 구성을 확정하지 않는다.</p>
 <h2 id="오프라인-실습-60분--필수-두-실험">오프라인 실습 60분 — 필수 두 실험</h2>
-<div class="table-scroll"><table>
+<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
 <th>시간</th>
@@ -169,8 +169,8 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </tr>
 <tr>
 <td>17~30분</td>
-<td>실험 B: 각자 예상 뒤 12초/16패킷 이내 캡처와 승인 대상 ping 2회, 전후 이웃 비교</td>
-<td>상세 필터·시간·패킷/0개는 개인 기록/원파일</td>
+<td>실험 B: 승인 대상 ping 2회·전후 이웃 비교. 패킷은 12초/16패킷 이내 직접 캡처 또는 제공 trace 분석</td>
+<td>본인 ping·이웃 조회와 직접 캡처 또는 제공 분석의 출처</td>
 </tr>
 <tr>
 <td>30~45분</td>
@@ -188,9 +188,9 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <td>직접 수행·제공 분석·보충 상태</td>
 </tr>
 </tbody></table></div>
-<p>도구·승인·권한 문제 해결이 5분을 넘으면 제공된 패킷 예제로 이동한다. 제한된 캡처가 실패해도 <code>ip</code> 조회는 가능하면 기록한다. 원본 출력과 예상·패킷 분석, 스스로 다시 확인한 결과는 <a href="personal-record.html">개인 실습 메모</a> 또는 별도 파일에 한 번 보관한다. 실습 메모 양식은 참고용이며 자유로운 노트를 사용해도 된다. 진행자가 설명한 결과를 참가자별 완료로 집계하지 않는다. 주소·경로·방화벽·SSH 관리·이웃 캐시 삭제는 수행하지 않는다.</p>
+<p>환경 문제 해결이 5분을 넘으면 가능한 직접 조회·ping을 먼저 진행하고 막힌 부분만 제공 trace로 분석한다. 캡처 도구·권한만 없는 경우 조회·ping을 건너뛰지 않는다. 캡처 미실행과 실제 0패킷을 구분한다. 원본 출력과 예상·패킷 분석, 스스로 다시 확인한 결과는 <a href="personal-record.html">개인 실습 메모</a> 또는 별도 파일에 한 번 보관한다. 실습 메모 양식은 참고용이며 자유로운 노트를 사용해도 된다. 진행자가 설명한 결과를 참가자별 완료로 집계하지 않는다. 주소·경로·방화벽·SSH 관리·이웃 캐시 삭제는 수행하지 않는다.</p>
 <h2 id="판정과-다음-질문">판정과 다음 질문</h2>
-<p>필수 실습을 마쳤는지 <strong>각자</strong> 확인한다. A의 조회 결과, B의 허용 대상 ping·캡처 결과나 실행하지 못한 이유, 목적지 IP와 다음 홉 MAC을 표시한 그림을 살펴본다. 질문에 답한 설명과 스스로 다시 확인한 결과도 함께 본다. 가상 패킷 예제만 분석한 사람은 개념 분석 완료와 직접 실행 미완료를 따로 기록한다. <code>INCOMPLETE</code>·<code>FAILED</code>·행 없음·ARP 미관찰은 실패를 숨길 이유가 아니다. ping 응답만으로 HTTP 서비스 성공을 결론 내리지 않는지 확인한다. 다음 주 TCP/UDP에서 “IP 패킷이 도착한 뒤 어느 프로그램으로 가는가?”로 연결한다.</p>
+<p>필수 실습을 마쳤는지 <strong>각자</strong> 확인한다. A의 조회 결과, B의 허용 대상 ping 결과와 직접 캡처 또는 제공 trace 분석, 실행하지 못한 단계의 이유, 목적지 IP와 다음 홉 MAC을 표시한 그림을 살펴본다. 질문에 답한 설명과 스스로 다시 확인한 결과도 함께 본다. 조회·ping 없이 제공 예제만 분석했다면 직접 수행은 보충으로 남긴다. 직접 조회·ping과 제공 패킷 분석을 마쳤다면 직접 캡처를 추가 필수로 요구하지 않는다. <code>INCOMPLETE</code>·<code>FAILED</code>·행 없음·ARP 미관찰은 실패를 숨길 이유가 아니다. ping 응답만으로 HTTP 서비스 성공을 결론 내리지 않는지 확인한다. 다음 주 TCP/UDP에서 “IP 패킷이 도착한 뒤 어느 프로그램으로 가는가?”로 연결한다.</p>
 </article></div></main><footer class="footer"><div class="shell"><a href="../week-02/index.html">2주차 복습</a><a href="../ssh-top-down/index.html">SSH 준비</a><a href="sources.html">출처</a><a href="validation.html">검증 상태</a><a href="#main">맨 위로</a></div></footer><script>(() => {
   // The model changes explanatory labels only; it never sends packets.
   const destination = document.querySelector('#destination');
