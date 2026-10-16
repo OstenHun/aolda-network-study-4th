@@ -1,0 +1,62 @@
+# Three router-to-router bridges; no host network or published ports.
+# start-router.sh removes the default uplink before FRR starts; NAT is off.
+# Keep all seven downloaded lab files together in a new personal folder.
+name: aolda-w10
+x-router: &router
+  image: quay.io/frrouting/frr:10.5.1
+  command: ["/bin/sh", "/start-router.sh"]
+  cap_add: [NET_ADMIN, NET_RAW, SYS_ADMIN]
+  sysctls:
+    net.ipv4.ip_forward: "1"
+    net.ipv4.conf.all.rp_filter: "0"
+    net.ipv4.conf.default.rp_filter: "0"
+services:
+  r1:
+    <<: *router
+    hostname: r1
+    volumes:
+      - ./daemons.txt:/etc/frr/daemons:ro
+      - ./start-router.sh:/start-router.sh:ro
+      - ./vtysh.txt:/etc/frr/vtysh.conf:ro
+      - ./r1.txt:/etc/frr/frr.conf:ro
+    networks:
+      l12: {ipv4_address: 172.30.12.11, interface_name: eth12}
+      l13: {ipv4_address: 172.30.13.11, interface_name: eth13}
+  r2:
+    <<: *router
+    hostname: r2
+    volumes:
+      - ./daemons.txt:/etc/frr/daemons:ro
+      - ./start-router.sh:/start-router.sh:ro
+      - ./vtysh.txt:/etc/frr/vtysh.conf:ro
+      - ./r2.txt:/etc/frr/frr.conf:ro
+    networks:
+      l12: {ipv4_address: 172.30.12.12, interface_name: eth12}
+      l23: {ipv4_address: 172.30.23.12, interface_name: eth23}
+  r3:
+    <<: *router
+    hostname: r3
+    volumes:
+      - ./daemons.txt:/etc/frr/daemons:ro
+      - ./start-router.sh:/start-router.sh:ro
+      - ./vtysh.txt:/etc/frr/vtysh.conf:ro
+      - ./r3.txt:/etc/frr/frr.conf:ro
+    networks:
+      l13: {ipv4_address: 172.30.13.13, interface_name: eth13}
+      l23: {ipv4_address: 172.30.23.13, interface_name: eth23}
+networks:
+  l12:
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    ipam:
+      config: [{subnet: 172.30.12.0/24}]
+  l13:
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    ipam:
+      config: [{subnet: 172.30.13.0/24}]
+  l23:
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    ipam:
+      config: [{subnet: 172.30.23.0/24}]

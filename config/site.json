@@ -275,6 +275,22 @@
         "tag": "공동 질문 · 실습",
         "arrow": "→"
       }
+    },
+    {
+      "id": "week-10",
+      "label": "10주차 · 동적 라우팅·OSPF",
+      "prefix": "materials/week-10/",
+      "entry": "materials/week-10/index.html",
+      "section": "common",
+      "number": "10",
+      "sidebar_title": "동적 라우팅·OSPF",
+      "nav": [],
+      "home": {
+        "title": "링크가 끊기면 경로표는 누가 고칠까?",
+        "description_html": "LS·DV 계산 · OSPF 이웃·경로 · 링크 단절과 복구",
+        "tag": "공동 질문 · 실습",
+        "arrow": "→"
+      }
     }
   ],
   "documents": {
@@ -694,6 +710,70 @@
       "source": "materials/week-09/SOURCES.md",
       "output": "materials/week-09/sources.html",
       "group": "week-09",
+      "kind": "lesson",
+      "label": "공식 출처"
+    },
+    {
+      "id": "week10-index",
+      "source": "materials/week-10/README.md",
+      "output": "materials/week-10/index.html",
+      "group": "week-10",
+      "kind": "lesson",
+      "label": "학습 안내"
+    },
+    {
+      "id": "week10-worksheet",
+      "source": "materials/week-10/WORKSHEET.md",
+      "output": "materials/week-10/worksheet.html",
+      "group": "week-10",
+      "kind": "lesson",
+      "label": "함께 찾을 질문"
+    },
+    {
+      "id": "week10-concepts",
+      "source": "materials/week-10/CONCEPTS.md",
+      "output": "materials/week-10/concepts.html",
+      "group": "week-10",
+      "kind": "lesson",
+      "label": "동적 라우팅·OSPF"
+    },
+    {
+      "id": "week10-linux",
+      "source": "materials/week-10/LINUX.md",
+      "output": "materials/week-10/linux.html",
+      "group": "week-10",
+      "kind": "lesson",
+      "label": "OSPF 실습·구성 읽기"
+    },
+    {
+      "id": "week10-review",
+      "source": "materials/week-10/REVIEW.md",
+      "output": "materials/week-10/review.html",
+      "group": "week-10",
+      "kind": "review",
+      "label": "복습 문제"
+    },
+    {
+      "id": "week10-answers",
+      "source": "materials/week-10/ANSWERS.md",
+      "output": "materials/week-10/answers.html",
+      "group": "week-10",
+      "kind": "lesson",
+      "label": "분리 해설"
+    },
+    {
+      "id": "week10-facilitator",
+      "source": "materials/week-10/FACILITATOR.md",
+      "output": "materials/week-10/facilitator.html",
+      "group": "week-10",
+      "kind": "lesson",
+      "label": "진행자 안내"
+    },
+    {
+      "id": "week10-sources",
+      "source": "materials/week-10/SOURCES.md",
+      "output": "materials/week-10/sources.html",
+      "group": "week-10",
       "kind": "lesson",
       "label": "공식 출처"
     }
