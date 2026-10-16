@@ -1,0 +1,264 @@
+{
+  "kind": "synthetic teaching example, not measured traffic",
+  "conditions": "same-host loopback HTTP; new connection; serial; no DNS/TLS; seconds",
+  "latency": {
+    "normal": [
+      {
+        "n": 1,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.002,
+        "total_s": 0.003
+      },
+      {
+        "n": 2,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.003,
+        "total_s": 0.004
+      },
+      {
+        "n": 3,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.004,
+        "total_s": 0.005
+      },
+      {
+        "n": 4,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.003,
+        "total_s": 0.004
+      },
+      {
+        "n": 5,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.002,
+        "total_s": 0.003
+      }
+    ],
+    "delayed": [
+      {
+        "n": 1,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.202,
+        "total_s": 0.203
+      },
+      {
+        "n": 2,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.203,
+        "total_s": 0.204
+      },
+      {
+        "n": 3,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.204,
+        "total_s": 0.205
+      },
+      {
+        "n": 4,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.203,
+        "total_s": 0.204
+      },
+      {
+        "n": 5,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.202,
+        "total_s": 0.203
+      }
+    ],
+    "recovered": [
+      {
+        "n": 1,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.002,
+        "total_s": 0.003
+      },
+      {
+        "n": 2,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.003,
+        "total_s": 0.004
+      },
+      {
+        "n": 3,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.004,
+        "total_s": 0.005
+      },
+      {
+        "n": 4,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.003,
+        "total_s": 0.004
+      },
+      {
+        "n": 5,
+        "http": 200,
+        "curl_exit": 0,
+        "connect_s": 0.001,
+        "first_s": 0.002,
+        "total_s": 0.003
+      }
+    ]
+  },
+  "proxy": {
+    "both": {
+      "enabled": [
+        "a",
+        "b"
+      ],
+      "health": {
+        "a": true,
+        "b": true
+      },
+      "eligible": [
+        "a",
+        "b"
+      ],
+      "requests": [
+        "a",
+        "b",
+        "a",
+        "b",
+        "a",
+        "b"
+      ],
+      "http": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ]
+    },
+    "excluded": {
+      "enabled": [
+        "a"
+      ],
+      "health": {
+        "a": true,
+        "b": true
+      },
+      "eligible": [
+        "a"
+      ],
+      "requests": [
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a"
+      ],
+      "http": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ]
+    },
+    "stopped": {
+      "enabled": [
+        "a",
+        "b"
+      ],
+      "health": {
+        "a": true,
+        "b": false
+      },
+      "eligible": [
+        "a"
+      ],
+      "requests": [
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a"
+      ],
+      "http": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ]
+    },
+    "recovered": {
+      "enabled": [
+        "a",
+        "b"
+      ],
+      "health": {
+        "a": true,
+        "b": true
+      },
+      "eligible": [
+        "a",
+        "b"
+      ],
+      "requests": [
+        "a",
+        "b",
+        "a",
+        "b",
+        "a",
+        "b"
+      ],
+      "http": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ]
+    },
+    "all_down": {
+      "enabled": [
+        "a",
+        "b"
+      ],
+      "health": {
+        "a": false,
+        "b": false
+      },
+      "eligible": [],
+      "status_http": 200,
+      "echo_http": 503
+    }
+  }
+}

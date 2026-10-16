@@ -1,0 +1,16 @@
+round,cwnd_smss,model
+0,1,synthetic_classic_round_boundary
+1,2,synthetic_classic_round_boundary
+2,4,synthetic_classic_round_boundary
+3,8,synthetic_classic_round_boundary
+4,9,synthetic_classic_round_boundary
+5,10,synthetic_classic_round_boundary
+6,11,synthetic_classic_round_boundary
+7,12,synthetic_classic_round_boundary
+8,6,synthetic_classic_round_boundary
+9,7,synthetic_classic_round_boundary
+10,8,synthetic_classic_round_boundary
+11,1,synthetic_classic_round_boundary
+12,2,synthetic_classic_round_boundary
+13,4,synthetic_classic_round_boundary
+14,5,synthetic_classic_round_boundary
