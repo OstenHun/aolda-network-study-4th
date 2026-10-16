@@ -34,8 +34,9 @@ IP 주소와 포트를 배웠어도 연결 실패와 HTTP 오류를 구별하기
 - **[6주차 · HTTP·TLS·SSH](https://ostenhun.github.io/aolda-network-study-4th/materials/week-06/index.html)**: HTTP 메시지·재사용·캐시, TLS 신원 검증과 SSH 인증을 다룬다. 같은 IP인데 이름이 다르면 왜 HTTPS가 거절될까?
 - **[7주차 · 정적 경로](https://ostenhun.github.io/aolda-network-study-4th/materials/week-07/index.html)**: 최장 접두사·다음 홉·왕복 경로·TTL을 다룬다. 가는 경로가 있는데 왜 응답은 돌아오지 않을까?
 - **[8주차 · 중간 복습·IPv6](https://ostenhun.github.io/aolda-network-study-4th/materials/week-08/index.html)**: 전체 요청 흐름·RTT·손실 복구 모형·IPv6/NDP를 비교하고 단일 장애를 진단한다. 같은 요청을 다시 보내면 무엇을 생략할까?
+- **[9주차 · 링크·VLAN·STP·LACP](https://ostenhun.github.io/aolda-network-study-4th/materials/week-09/index.html)**: MAC 학습·VLAN·STP 경로·LACP 멤버 전환과 오류 검출을 다룬다. 같은 스위치인데 왜 닿지 않을까?
 
-16주 공통 과정을 순서대로 준비하고 있다. 현재 공개 범위는 VM·SSH 준비와 1~8주차 자료다. 전체 과정과 후속 SRE·플랫폼·클라우드 심화 자료는 아직 모두 갖춰지지 않았다. 실습 완료 여부는 각자가 실행한 결과로 확인한다.
+16주 공통 과정을 순서대로 준비하고 있다. 현재 공개 범위는 VM·SSH 준비와 1~9주차 자료다. 전체 과정과 후속 SRE·플랫폼·클라우드 심화 자료는 아직 모두 갖춰지지 않았다. 실습 완료 여부는 각자가 실행한 결과로 확인한다.
 
 ## 어떻게 공부하면 좋을까
 

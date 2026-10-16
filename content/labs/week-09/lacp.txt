@@ -1,0 +1,14 @@
+{
+  "bridges": {"S1": 1, "S2": 2},
+  "hosts": {
+    "A": {"switch": "S1", "vlan": 10, "mac": "02:00:00:00:09:01"},
+    "B": {"switch": "S2", "vlan": 10, "mac": "02:00:00:00:09:02"}
+  },
+  "links": {
+    "po1": {"ends": ["S1", "S2"], "up": true, "vlans": [10, 20]}
+  },
+  "lacp": {
+    "modes": {"S1": "active", "S2": "passive"},
+    "members": {"m1": true, "m2": true}
+  }
+}

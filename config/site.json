@@ -259,6 +259,22 @@
         "tag": "교재 · 실습 · 복습",
         "arrow": "→"
       }
+    },
+    {
+      "id": "week-09",
+      "label": "9주차 · 링크·VLAN·STP·LACP",
+      "prefix": "materials/week-09/",
+      "entry": "materials/week-09/index.html",
+      "section": "common",
+      "number": "09",
+      "sidebar_title": "링크·VLAN·STP·LACP",
+      "nav": [],
+      "home": {
+        "title": "같은 스위치인데 왜 닿지 않을까?",
+        "description_html": "MAC·VLAN · STP 경로 전환 · LACP 멤버 전환",
+        "tag": "공동 질문 · 실습",
+        "arrow": "→"
+      }
     }
   ],
   "documents": {
@@ -614,6 +630,70 @@
       "source": "materials/week-08/SOURCES.md",
       "output": "materials/week-08/sources.html",
       "group": "week-08",
+      "kind": "lesson",
+      "label": "공식 출처"
+    },
+    {
+      "id": "week09-index",
+      "source": "materials/week-09/README.md",
+      "output": "materials/week-09/index.html",
+      "group": "week-09",
+      "kind": "lesson",
+      "label": "학습 안내"
+    },
+    {
+      "id": "week09-worksheet",
+      "source": "materials/week-09/WORKSHEET.md",
+      "output": "materials/week-09/worksheet.html",
+      "group": "week-09",
+      "kind": "lesson",
+      "label": "함께 찾을 질문"
+    },
+    {
+      "id": "week09-concepts",
+      "source": "materials/week-09/CONCEPTS.md",
+      "output": "materials/week-09/concepts.html",
+      "group": "week-09",
+      "kind": "lesson",
+      "label": "링크·VLAN·STP·LACP"
+    },
+    {
+      "id": "week09-linux",
+      "source": "materials/week-09/LINUX.md",
+      "output": "materials/week-09/linux.html",
+      "group": "week-09",
+      "kind": "lesson",
+      "label": "격리 실습·코드 읽기"
+    },
+    {
+      "id": "week09-review",
+      "source": "materials/week-09/REVIEW.md",
+      "output": "materials/week-09/review.html",
+      "group": "week-09",
+      "kind": "review",
+      "label": "복습 문제"
+    },
+    {
+      "id": "week09-answers",
+      "source": "materials/week-09/ANSWERS.md",
+      "output": "materials/week-09/answers.html",
+      "group": "week-09",
+      "kind": "lesson",
+      "label": "분리 해설"
+    },
+    {
+      "id": "week09-facilitator",
+      "source": "materials/week-09/FACILITATOR.md",
+      "output": "materials/week-09/facilitator.html",
+      "group": "week-09",
+      "kind": "lesson",
+      "label": "진행자 안내"
+    },
+    {
+      "id": "week09-sources",
+      "source": "materials/week-09/SOURCES.md",
+      "output": "materials/week-09/sources.html",
+      "group": "week-09",
       "kind": "lesson",
       "label": "공식 출처"
     }
