@@ -17,7 +17,7 @@
 
 ## 선택 보조 질문 · W09-D2
 
-세 스위치를 삼각형으로 연결했다. 평소 쓰지 않는 포트가 있는데 링크 하나를 끊자 전달 경로가 달라졌다. IP 경로를 바꾼 것일까? [Cisco STP](https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lsw-span-tree-prot.html)의 **Using the Spanning Tree Protocol with the EtherSwitch Network Module** 첫 두 문단을 함께 읽고, 루프·차단·재계산을 찾는다. 이 절은 필수 개념 읽기이며, 이 보조 발문으로 토론을 늘리는 것은 선택이다. 기본 루트/포트 설명은 [K2](CONCEPTS.md#stp)에서 읽는다.
+세 스위치를 삼각형으로 연결했다. 평소 쓰지 않는 포트가 있는데 링크 하나를 끊자 전달 경로가 달라졌다. IP 경로를 바꾼 것일까? [Cisco STP](https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lsw-span-tree-prot.html)의 **Using the Spanning Tree Protocol with the EtherSwitch Network Module**에서 **Multiple active paths**와 **STP defines a tree**로 시작하는 두 문단을 함께 읽고, 루프·차단·재계산을 찾는다. 이 절은 필수 개념 읽기이며, 이 보조 발문으로 토론을 늘리는 것은 선택이다. 기본 루트/포트 설명은 [K2](CONCEPTS.md#stp)에서 읽는다.
 
 ## 선택 보조 질문 · W09-D3
 
