@@ -1,6 +1,6 @@
 # 네트워크 핵심 개념 색인
 
-요약: 공개 교재의 핵심 개념과 이후 학습 주제를 찾는 색인이다. 현재 1~15주차를 연결하며 후속 이론·심화 교재의 계획을 구별한다.
+요약: 공개 교재의 핵심 개념과 이후 학습 주제를 찾는 색인이다. 현재 1~16주차를 연결하며 후속 이론·심화 교재의 계획을 구별한다.
 
 - 사용법: 처음에는 해당 주차 교재와 함께 읽고, 복습할 때는 아래에서 막힌 개념을 찾는다. 개념별 설명과 답은 연결된 교재에서 읽는다.
 
@@ -23,6 +23,8 @@
 | 13 · W13-K1~K3 | 가상 자원·양끝 서비스/정책·MTU/MSS/PMTUD | Neutron port와 TCP port, MTU와 MSS·DNS와 신원/응답 | [교재](week-13/CONCEPTS.md) · [직접 실습/제공 분석](week-13/LINUX.md) · [개발 질문 해설](week-13/ANSWERS.md#development) |
 | 14 · W14-K1~K3 | 지연 네 성분·병목·BDP/윈도·고전 혼잡·프록시 | 전체 시간과 망 RTT, 설정/상태와 실제 요청·단일 호스트 전환 | [교재](week-14/CONCEPTS.md) · [직접 실습](week-14/LINUX.md) · [개발 질문 해설](week-14/ANSWERS.md#development) |
 | 15 · W15-K1~K3 | 소켓 경계·부분 수신·EOF·시간제한·제한된 자동 기록 | 호출과 메시지/세그먼트, timeout과 처리 실패·멱등성 | [교재](week-15/CONCEPTS.md) · [직접 실습/코드 지도](week-15/LINUX.md) · [개발 질문 해설](week-15/ANSWERS.md) |
+
+| 16 · W16-K1~K3 | 정상 기준·경쟁 가설·구별 관찰·최소 변경·복구 | 증상과 원인, 정상 응답과 업무 성공·독립 이해 | [교재](week-16/CONCEPTS.md) · [학습자 실습](week-16/LINUX.md) · [C16](week-16/CHECKPOINT.md) · [개발 질문 해설](week-16/ANSWERS.md#development) |
 
 ## 이후 주차에 이어갈 범위
 
@@ -47,4 +49,4 @@
 
 기억 문장을 가리고 현상을 먼저 설명한다. 다음에는 조건 하나를 바꾸어 결론이 유지되는지 묻는다. 답이 막히면 해당 개념의 원문·그림·분리 해설로 돌아간다. 다음 주 시작의 기존 복습 시간에 앞 주차 질문 하나를 다시 사용한다. 읽기를 마쳤거나 해설을 보았다는 이유만으로 학습을 통과했다고 기록하지 않는다.
 
-외부 문제를 찾을 때는 [면접·개발 참고자료 선정](INTERVIEW_REFERENCES.md)을 사용한다. 학습 홈: [1주차](week-01/index.html) · [2주차](week-02/index.html) · [3주차](week-03/index.html) · [4주차](week-04/README.md) · [5주차](week-05/README.md) · [6주차](week-06/README.md) · [7주차](week-07/README.md) · [8주차](week-08/README.md) · [9주차](week-09/README.md) · [10주차](week-10/README.md) · [11주차](week-11/README.md) · [12주차](week-12/README.md) · [13주차](week-13/README.md) · [14주차](week-14/README.md) · [15주차](week-15/README.md).
+외부 문제를 찾을 때는 [면접·개발 참고자료 선정](INTERVIEW_REFERENCES.md)을 사용한다. 학습 홈: [1주차](week-01/index.html) · [2주차](week-02/index.html) · [3주차](week-03/index.html) · [4주차](week-04/README.md) · [5주차](week-05/README.md) · [6주차](week-06/README.md) · [7주차](week-07/README.md) · [8주차](week-08/README.md) · [9주차](week-09/README.md) · [10주차](week-10/README.md) · [11주차](week-11/README.md) · [12주차](week-12/README.md) · [13주차](week-13/README.md) · [14주차](week-14/README.md) · [15주차](week-15/README.md) · [16주차](week-16/README.md).
