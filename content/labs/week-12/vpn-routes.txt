@@ -1,0 +1,65 @@
+# 교육용 가공 자료. 실제 VPN/캡처/명령 실행 결과 아님.
+# Linux main table 형식의 선택 행. IPv4 단일 테이블, 정책 라우팅/VRF/ECMP 없음.
+# eth0=원격 단말의 기존 유선 LAN, tun0=가상 터널 인터페이스 이름 예시.
+# 특정 VPN 제품/IPsec 구현의 설치 설정이 아니다.
+# 이름 대신 IP로 HTTP /health를 요청. DNS·IPv6는 이 자료로 검증하지 않음.
+# 기존 LAN은 VPN에 닿는 바깥 경로. 집 라우터 이후 NAT/전달 상세는 생략.
+
+[V0: 접속 전]
+주소: eth0 192.168.50.10/24
+default via 192.168.50.1 dev eth0
+192.168.50.0/24 dev eth0 proto kernel scope link src 192.168.50.10
+ip route get 10.60.30.20
+10.60.30.20 via 192.168.50.1 dev eth0 src 192.168.50.10
+조건 카드: 기존 LAN 게이트웨이는 10.60.30.0/24로 전달하지 않음.
+HTTP 요청 실패. route get 자체가 실패하는 것은 아님.
+
+[V1: 분할 터널 접속 뒤, 기준]
+주소: eth0 192.168.50.10/24, tun0 10.250.0.2/24
+default via 192.168.50.1 dev eth0
+10.60.30.0/24 via 10.250.0.1 dev tun0
+10.250.0.0/24 dev tun0 proto kernel scope link src 10.250.0.2
+192.168.50.0/24 dev eth0 proto kernel scope link src 192.168.50.10
+ip route get 10.60.30.20
+10.60.30.20 via 10.250.0.1 dev tun0 src 10.250.0.2
+ip route get 198.51.100.20
+198.51.100.20 via 192.168.50.1 dev eth0 src 192.168.50.10
+ip route get 203.0.113.80
+203.0.113.80 via 192.168.50.1 dev eth0 src 192.168.50.10
+VPN 설정 카드: 신뢰할 피어와 인증 완료, 단말↔VPN GW 암호화·무결성 보호 활성.
+바깥 IP(단말 LAN에서): 192.168.50.10 -> VPN 끝점 198.51.100.20
+안쪽 요청: 10.250.0.2:51000 -> 10.60.30.20:8080 TCP
+GW 복호화 뒤: 같은 안쪽 요청, 이 흐름에 NAT 없음
+GW 정책: VPN 사용자 10.250.0.0/24 -> 서버 10.60.30.20 TCP8080 allow
+서버: 10.60.30.20/24, default via 10.60.30.1, TCP8080 LISTEN
+GW 서버측: 10.60.30.1/24, VPN 10.250.0.0/24 반환 가능
+반환 정책: 이 허용 흐름의 응답 허용
+안쪽 응답: 10.60.30.20:8080 -> 10.250.0.2:51000 TCP
+client: HTTP 200
+server: GET /health 200, source 10.250.0.2
+보호 범위: 단말↔GW는 암호화, GW↔HTTP 서버는 이 VPN의 보호 밖.
+
+[V2: V1에서 GW 접근 규칙 한 항목만 drop]
+주소/세 route get/터널/서버/반환 경로: V1과 동일
+client: timeout at 3.0 s, HTTP response none
+GW: 복호화 성공, 해당 요청의 TCP8080 DROP counter 증가
+server: LISTEN maintained, no new GET for this request
+복원 카드: 해당 GW 규칙만 allow로 복원. 예상은 V1의 200/새 GET.
+
+[V3: V1에서 서버망 경로 한 항목만 누락]
+10.60.30.0/24 via 10.250.0.1 dev tun0 행만 없음. 나머지 V1 조건 유지.
+ip route get 10.60.30.20
+10.60.30.20 via 192.168.50.1 dev eth0 src 192.168.50.10
+기존 LAN GW는 해당 서버망으로 전달하지 않음. server에 새 GET 없음.
+복원 카드: 준비된 VPN의 서버망 경로를 원상 복원하고 V1의 route get/요청과 비교.
+
+[V4: 정상 종료 비교]
+VPN 종료 뒤 tun0와 VPN 설치 경로 제거, 기존 eth0/default 유지 -> V0와 비교.
+관리 SSH/기본 경로를 임의로 삭제하는 명령을 실행하지 않음.
+
+[조건 변경 카드: 경로만 계산, 실제 설정 명령 아님]
+V1에 10.60.30.0/25 via 192.168.50.1 dev eth0 추가 시 10.60.30.20은 어디로?
+전체 IPv4 터널 예: default via 10.250.0.1 dev tun0,
+  198.51.100.20/32 via 192.168.50.1 dev eth0, 나머지 연결 경로 유지.
+203.0.113.80과 VPN 끝점의 경로를 각각 계산한다.
+DNS·IPv6·다른 예외와 실제 보호 협상은 별도 자료가 필요하다.

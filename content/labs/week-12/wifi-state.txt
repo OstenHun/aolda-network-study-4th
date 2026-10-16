@@ -1,0 +1,45 @@
+# 교육용 가공 자료. 실제 캡처/측정 아님. 주소·BSSID·시각은 예시.
+# 모든 요청: TCP HTTP http://10.60.30.20:8080/health, 프록시 없음.
+# 동일 서버는 세 경우 모두 LISTEN, 동일 /health 응답 200을 제공한다고 가정.
+# A와 C는 같은 위치/연결/요청 조건, C는 GW 정책 한 항목만 allow -> drop.
+# B는 위치만 변경한 별도 비교. 지연 1회로 인과관계/평균 성능을 확정하지 않음.
+
+[A: 기준]
+iw dev wlan0 link
+Connected to 02:00:00:12:00:01 (on wlan0)
+        SSID: Study-Staff
+        freq: 2437
+        signal: -48 dBm
+        tx bitrate: 72.2 MBit/s
+설정 카드: channel 6, width 20 MHz, WPA3-Personal, VLAN 10
+주소 카드: wlan0 10.60.10.10/24, default via 10.60.10.1
+ip route get 10.60.30.20
+10.60.30.20 via 10.60.10.1 dev wlan0 src 10.60.10.10
+client: HTTP 200, total 0.020 s
+GW: allow rule match +1, forward to server VLAN 30
+server: GET /health 200, source 10.60.10.10
+
+[B: 위치만 변경한 비교]
+Connected to 02:00:00:12:00:01 (on wlan0)
+        SSID: Study-Staff
+        freq: 2437
+        signal: -76 dBm
+        tx bitrate: 13.0 MBit/s
+주소/경로/정책/서버: A와 동일
+client: HTTP 200, total 0.180 s
+server: GET /health 200, source 10.60.10.10
+복원 비교: 원래 위치에서 A의 연결/주소/경로와 같은 조건으로 다시 요청한다.
+주의: 위 시간은 만든 예시 값이다. 실제 복원 측정값은 제공하지 않는다.
+
+[C: 정책만 변경한 비교]
+Connected to 02:00:00:12:00:01 (on wlan0)
+        SSID: Study-Staff
+        freq: 2437
+        signal: -48 dBm
+        tx bitrate: 72.2 MBit/s
+주소/경로/서버: A와 동일
+client: timeout at 3.0 s, HTTP response none
+GW: new request 10.60.10.10 -> 10.60.30.20 TCP8080 DROP, rule counter 증가
+server: LISTEN maintained, no new GET from this request
+복원 조건 카드: 해당 요청의 GW 규칙을 allow로 되돌리고 A와 같은 요청을 비교한다.
+예상: A와 같은 HTTP 200·새 GET. 이것은 복구 예상이며 실제 측정이 아니다.
