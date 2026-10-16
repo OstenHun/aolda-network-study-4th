@@ -8,7 +8,7 @@
 
 | 자료 | 읽을 절·채택 범위 |
 | --- | --- |
-| [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html) | §3.2.1 레코드와 TTL, §4.3.1 질의/응답·재귀, §4.3.4 캐시, §5.3.3 리졸버 알고리즘 |
+| [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html) | §3.6 레코드와 TTL, §4.3.1 질의/응답·재귀, §5.3.2 캐시, §5.3.3 리졸버 알고리즘 |
 | [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html) | §3.4.1 A, §4.1 메시지 플래그·응답 코드, §4.2 UDP/TCP 전송. 전체 DNS 구현 과제는 제외 |
 | [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html#section-2) | §2 AAAA의 IPv6 주소. IPv6 경로/자동 설정은 이번 범위 밖 |
 | [RFC 2131](https://www.rfc-editor.org/rfc/rfc2131.html) | §3.1 Figure 3 초기 할당, §4.1 포트·전달, §4.4.5 갱신·T1/T2·만료 |
