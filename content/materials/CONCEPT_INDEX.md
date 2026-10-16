@@ -1,6 +1,6 @@
 # 네트워크 핵심 개념 색인
 
-요약: 공개 교재의 핵심 개념과 이후 학습 주제를 찾는 색인이다. 현재 1~4주차와 6주차 일부 본문을 연결하며 후속 이론·심화 교재의 계획을 구별한다.
+요약: 공개 교재의 핵심 개념과 이후 학습 주제를 찾는 색인이다. 현재 1~5주차와 6주차 일부 본문을 연결하며 후속 이론·심화 교재의 계획을 구별한다.
 
 - 사용법: 처음에는 해당 주차 교재와 함께 읽고, 복습할 때는 아래에서 막힌 개념을 찾는다. 개념별 설명과 답은 연결된 교재에서 읽는다.
 
@@ -12,6 +12,7 @@
 | 2 · W02-K1~K3 | CIDR·경로 선택·도달성 | 주소 범위와 실제 통신, 사설 주소와 접근 허용 | [핵심 3·혼동 2·개발 사례 1](week-02/ESSENTIALS.md), 한쪽 마스크만 다를 때 |
 | 3 · W03-K1~K3 | 다음 홉·ARP 캐시·프로토콜별 확인 | 최종 IP와 목적 MAC, ping과 HTTP | [핵심 3·혼동 2·개발 사례 1](week-03/ESSENTIALS.md), ping 실패·HTTP 404의 해석 |
 | 4 · W04-K1~K3 | 소켓·RTT·TCP 연결 수립, 스트림/데이터그램·SEQ/ACK 연결 | 전달과 처리, 흐름 제어와 혼잡 제어 | [TCP·UDP 교재](week-04/CONCEPTS.md) · [실습](week-04/LINUX.md) · [분리 해설](week-04/ANSWERS.md) |
+| 5 · W05-K1~K3 | 재귀/권한 DNS·A/AAAA·캐시/TTL·DHCP 임대/옵션 | 이름 해석과 서비스 성공, 설정 전달과 이름 질의 | [DNS·DHCP 교재](week-05/CONCEPTS.md#dns-roles) · [직접 실습·제공 분석](week-05/LINUX.md) · [W05-D1~D3 해설](week-05/ANSWERS.md#development) |
 | 6 · W06-K1~K3 · 본문 일부 | HTTP 메시지·연결 재사용 | 요청 비용·다중화·keepalive 구별 | [HTTP 교재](week-06/CONCEPTS.md) · [분리 해설](week-06/ANSWERS.md) |
 
 ## 이후 주차에 이어갈 범위
@@ -21,7 +22,7 @@
 | 주차 | 개념을 개발 판단으로 연결하기 |
 | --- | --- |
 | 4 | [TCP·UDP 교재](week-04/CONCEPTS.md): SEQ/ACK·타이머·stop-and-wait/파이프라이닝, 흐름/혼잡 제어 구별 |
-| 5 | DNS·캐시·TTL → 이름 해석 성공과 서비스 정상, 변경 전파 |
+| 5 | [DNS·DHCP 교재](week-05/CONCEPTS.md): 캐시·TTL → 이름 해석 성공과 서비스 정상, 변경 전파 |
 | 6 | HTTP/TLS → 연결 재사용과 다중화, 인증서·인증·암호화, 요청 의존성 |
 | 7~8 | [7주](../CURRICULUM.md#week-07) 전달·왕복 경로 → [8주](../CURRICULUM.md#week-08) GBN/SR 모형·전체 흐름·IPv6/ARP/NDP |
 | 9~10 | [9주](../CURRICULUM.md#week-09) 오류 검출·VLAN/STP/LACP → [10주](../CURRICULUM.md#week-10) LS/DV 계산·AS/BGP 정책·OSPF 직접 장애 전환 |
@@ -37,4 +38,4 @@
 
 기억 문장을 가리고 현상을 먼저 설명한다. 다음에는 조건 하나를 바꾸어 결론이 유지되는지 묻는다. 답이 막히면 해당 개념의 원문·그림·분리 해설로 돌아간다. 다음 주 시작의 기존 복습 시간에 앞 주차 질문 하나를 다시 사용한다. 읽기를 마쳤거나 해설을 보았다는 이유만으로 학습을 통과했다고 기록하지 않는다.
 
-외부 문제를 찾을 때는 [면접·개발 참고자료 선정](INTERVIEW_REFERENCES.md)을 사용한다. 학습 홈: [1주차](week-01/index.html) · [2주차](week-02/index.html) · [3주차](week-03/index.html) · [4주차](week-04/README.md).
+외부 문제를 찾을 때는 [면접·개발 참고자료 선정](INTERVIEW_REFERENCES.md)을 사용한다. 학습 홈: [1주차](week-01/index.html) · [2주차](week-02/index.html) · [3주차](week-03/index.html) · [4주차](week-04/README.md) · [5주차](week-05/README.md).

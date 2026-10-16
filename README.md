@@ -30,9 +30,10 @@ IP 주소와 포트를 배웠어도 연결 실패와 HTTP 오류를 구별하기
 - **[2주차 · IPv4와 서브넷](https://ostenhun.github.io/aolda-network-study-4th/materials/week-02/index.html)**: IPv4, 서브넷 마스크, CIDR, 주소 범위와 경로를 다룬다. IP가 비슷하면 같은 네트워크일까?
 - **[3주차 · LAN과 다음 홉](https://ostenhun.github.io/aolda-network-study-4th/materials/week-03/index.html)**: LAN, MAC 주소, 다음 홉, ARP 캐시, ICMP와 ping을 다룬다. 패킷은 누구에게 먼저 갈까?
 - **[4주차 · TCP와 UDP](https://ostenhun.github.io/aolda-network-study-4th/materials/week-04/index.html)**: 소켓, RTT, 연결 수립, 바이트 스트림과 데이터그램, SEQ/ACK를 다룬다. TCP가 데이터를 전달하면 프로그램의 처리도 끝난 것일까?
+- **[5주차 · DNS와 DHCP](https://ostenhun.github.io/aolda-network-study-4th/materials/week-05/index.html)**: 재귀/권한 DNS, A/AAAA, 캐시·TTL과 DHCP 임대·설정 옵션을 다룬다. 이름에서 IP를 찾았는데 왜 요청은 실패할까?
 - **[6주차 · HTTP 연결 재사용](https://ostenhun.github.io/aolda-network-study-4th/materials/week-06/concepts.html)**: HTTP 메시지, 연결 재사용과 요청 비용을 다룬다. 연결을 재사용하면 무엇이 줄어들까?
 
-16주 공통 과정을 순서대로 준비하고 있다. 현재 공개 범위는 VM·SSH 준비와 1~4주차 자료, 6주차 본문 일부다. 전체 과정과 후속 SRE·플랫폼·클라우드 심화 자료는 아직 모두 갖춰지지 않았다. 실습 완료 여부는 각자가 실행한 결과로 확인한다.
+16주 공통 과정을 순서대로 준비하고 있다. 현재 공개 범위는 VM·SSH 준비와 1~5주차 자료, 6주차 본문 일부다. 전체 과정과 후속 SRE·플랫폼·클라우드 심화 자료는 아직 모두 갖춰지지 않았다. 실습 완료 여부는 각자가 실행한 결과로 확인한다.
 
 ## 어떻게 공부하면 좋을까
 
