@@ -47,6 +47,10 @@
           "label": "학습 안내"
         },
         {
+          "path": "materials/week-01/worksheet.html",
+          "label": "함께 찾을 질문"
+        },
+        {
           "path": "materials/week-01/concepts.html",
           "label": "개념 교재"
         },
@@ -55,22 +59,18 @@
           "label": "Linux 실습"
         },
         {
-          "path": "materials/week-01/worksheet.html",
-          "label": "팀 활동"
-        },
-        {
           "path": "materials/week-01/review.html",
           "label": "복습 문제"
         },
         {
           "path": "materials/week-01/answers.html",
-          "label": "해설"
+          "label": "분리 해설"
         }
       ],
       "home": {
         "title": "요청 하나를 끝까지 따라가기",
         "description_html": "클라이언트·서버 · IP와 포트 · <span class=\"keep-phrase\">HTTP 요청과 응답</span>",
-        "tag": "교재 · 실습 · 복습",
+        "tag": "공동 질문 · 실습",
         "arrow": "→"
       }
     },
@@ -137,6 +137,10 @@
           "label": "학습 안내"
         },
         {
+          "path": "materials/week-03/worksheet.html",
+          "label": "함께 찾을 질문"
+        },
+        {
           "path": "materials/week-03/recall.html",
           "label": "복습 진단"
         },
@@ -161,22 +165,18 @@
           "label": "Linux 실험"
         },
         {
-          "path": "materials/week-03/worksheet.html",
-          "label": "함께 설명"
-        },
-        {
           "path": "materials/week-03/review.html",
           "label": "복습 문제"
         },
         {
           "path": "materials/week-03/answers.html",
-          "label": "해설"
+          "label": "분리 해설"
         }
       ],
       "home": {
         "title": "패킷은 누구에게 먼저 갈까?",
         "description_html": "LAN·MAC · 다음 홉 · ARP와 ICMP",
-        "tag": "주제별 교재 · 실험",
+        "tag": "공동 질문 · 실습",
         "arrow": "→"
       }
     },
