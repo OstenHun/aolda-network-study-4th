@@ -11,7 +11,7 @@
 
 두 장치가 같은 스위치에 연결되어 있고 IP/마스크도 맞는데 통신하지 못한다. 케이블은 살아 있고 장치가 속한 VLAN은 아직 모른다. 접두사 계산 외에 무엇을 확인해야 하며, 그 판단을 어떤 근거로 설명할까?
 
-모두 [Cisco access/trunk](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5000/sw/layer2/503_n1_1/Cisco_n5k_layer2_config_gd_rel_503_N1_1_chapter6.html)의 **Understanding Access and Trunk Interfaces** 두 항목과 **Understanding IEEE 802.1Q Encapsulation** 첫 문단을 찾는다. 목적은 포트 소속과 VLAN 식별이 전달 범위를 어떻게 바꾸는지 읽는 것이다. 제품 설정 명령 전체는 읽지 않는다. 영문이 막히면 [K1](CONCEPTS.md#mac-vlan)로 돌아온다.
+모두 [Cisco access/trunk](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5000/sw/layer2/503_n1_1/Cisco_n5k_layer2_config_gd_rel_503_N1_1_chapter6.html)의 **Understanding Access and Trunk Interfaces** 두 항목과 **Understanding IEEE 802.1Q Encapsulation** 첫 두 문단을 찾는다. 목적은 포트 소속과 VLAN 식별이 전달 범위를 어떻게 바꾸는지 읽는 것이다. 제품 설정 명령 전체는 읽지 않는다. 영문이 막히면 [K1](CONCEPTS.md#mac-vlan)로 돌아온다.
 
 한 사람이 근거를 설명한 뒤 다른 사람은 [실습 A](LINUX.md#lab-a)에서 `vlan B 20`이라는 한 조건을 고른다. 예상→실행→출력→복구를 연결해 처음 설명이 맞는지 확인한다.
 
