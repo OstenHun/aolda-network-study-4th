@@ -116,7 +116,7 @@ ip -o link show
 ip -4 route get &quot;$TARGET&quot;
 ip -4 neigh show
 </code></pre>
-<p><code>route get</code>의 <code>dev</code>·<code>src</code>·<code>via</code>, 해당 <code>ip -o link show</code> 행의 <code>link/ether</code>와 MAC을 찾아 카드에 옮긴다. <code>IFACE</code>를 <strong>출력에서 확인한 <code>dev</code> 이름</strong>으로 수동 입력하고 아래에서 재확인한다. 장치명은 VM마다 다르다. <code>link/ether</code>가 아니거나 <code>lo</code>라면 Ethernet/ARP 직접 관찰 범위에서 제외하고 제공 trace로 전환한다.</p>
+<p><code>route get</code>의 <code>dev</code>·<code>src</code>·<code>via</code>, 해당 <code>ip -o link show</code> 행의 <code>link/ether</code>와 MAC을 찾아 카드에 옮긴다. <code>IFACE</code>를 <strong>출력에서 확인한 <code>dev</code> 이름</strong>으로 수동 입력하고 아래에서 재확인한다. 장치명은 VM마다 다르다. <code>link/ether</code>가 아니거나 <code>lo</code>라면 Ethernet/ARP 직접 관찰 범위에서 제외하고 제공된 패킷 예제로 전환한다.</p>
 <pre><code class="language-sh">IFACE=&#39;route-get에서-확인한-dev-이름으로-교체&#39;
 ip -o link show dev &quot;$IFACE&quot;
 ip -4 neigh show dev &quot;$IFACE&quot;
@@ -124,7 +124,7 @@ ip -4 neigh show dev &quot;$IFACE&quot;
 <p>이웃 표에서 <code>via</code>가 있으면 게이트웨이 IPv4 행을, 없으면 <code>TARGET</code> 행을 찾는다. 처음부터 행이 없거나 <code>STALE</code>인 것은 가능한 출발 상태다. <code>INCOMPLETE</code>·<code>FAILED</code>라면 성공한 MAC으로 적지 않는다. 인터페이스가 다르거나 값이 불명확하면 실행을 멈추고 진행자에게 확인한다.</p>
 <p><strong>근거:</strong> 실제 명령과 출력 일부, 읽은 <code>dev</code>·내 MAC·다음 상대 IPv4·이웃 상태를 기록한다. 이웃 표가 비면 <code>행 없음</code>이라고 적는다. 출력에서 불필요한 주소·호스트명은 공유 전에 가린다. <strong>복구:</strong> 이 실험은 조회만 하므로 구성 복구가 없다. 오류는 원문과 환경 상태를 남긴다.</p>
 <h2 id="필수-실험-b--제한된-ping패킷-관찰">필수 실험 B — 제한된 ping·패킷 관찰</h2>
-<p>진행자가 대상·NIC·캡처 권한을 확인한 뒤에만 시작한다. 같은 VM에 셸 A(캡처), 셸 B(ping)를 연다. <code>tcpdump</code>가 없거나 비대화식 <code>sudo</code>가 허용되지 않으면 설치·권한 변경을 요구하지 않고 <a href="../../labs/week-03/sample-trace.txt">합성 trace</a>로 전환한다. 캡처는 <strong>선택한 NIC의 ARP와 해당 대상과의 ICMP</strong>만 대상으로 하며 SSH 패킷을 수집하지 않는다. ARP에는 같은 NIC의 다른 ARP가 짧게 섞일 수 있으므로 공유 전에 검토한다.</p>
+<p>진행자가 대상·NIC·캡처 권한을 확인한 뒤에만 시작한다. 같은 VM에 셸 A(캡처), 셸 B(ping)를 연다. <code>tcpdump</code>가 없거나 비대화식 <code>sudo</code>가 허용되지 않으면 설치·권한 변경을 요구하지 않고 <a href="../../labs/week-03/sample-trace.txt">가상 패킷 예제</a>로 전환한다. 캡처는 <strong>선택한 NIC의 ARP와 해당 대상과의 ICMP</strong>만 대상으로 하며 SSH 패킷을 수집하지 않는다. ARP에는 같은 NIC의 다른 ARP가 짧게 섞일 수 있으므로 공유 전에 검토한다.</p>
 <p><strong>예상:</strong> 셸 A를 시작하기 전에 다음 상대의 ARP 요청·응답이 새로 보일지, ICMP Echo 요청·응답이 보일지 생각하거나 짧게 말한다. 자세한 메모는 선택이다. 이웃 항목이 이미 있으면 새 ARP 요청이 없을 수 있다. ICMP 응답이 없어도 원인을 하나로 정하지 않는다.</p>
 <p>셸 A에서 아래를 실행한다. <code>TARGET</code>과 <code>IFACE</code>를 위에서 검증한 <strong>같은 값</strong>으로 넣고, 시작·종료 시각을 적는다. <code>-c 16</code>과 <code>timeout 12</code>는 패킷 수와 시간을 모두 제한한다. <code>-n</code>은 이름 조회를 막고 <code>-e</code>는 Ethernet 주소를 표시한다. <code>timeout</code> 종료 코드 124는 시간 제한으로 끝났다는 뜻이며 실험 실패 판정이 아니다.</p>
 <pre><code class="language-sh">TARGET=&#39;위에서-승인받고-route-get한-IPv4로-교체&#39;
@@ -154,7 +154,7 @@ ip -4 neigh show dev &quot;$IFACE&quot;
 </thead>
 <tbody><tr>
 <td>승인 대상·권한·VM 접속 없음</td>
-<td>합성 trace의 같은 망/게이트웨이 사례에서 다음 MAC과 ICMP를 찾는다</td>
+<td>가상 패킷 예제의 같은 망/게이트웨이 사례에서 다음 MAC과 ICMP를 찾는다</td>
 <td>A/B 직접 실행 미완료</td>
 </tr>
 <tr>
@@ -174,12 +174,12 @@ ip -4 neigh show dev &quot;$IFACE&quot;
 </tr>
 <tr>
 <td>ICMP Echo만 보이거나 응답 없음</td>
-<td>캡처 위치·필터·대상 정책·상대 상태를 미확정 가설로 적는다</td>
+<td>캡처 위치·필터·대상 정책·상대 상태를 확인되지 않은 가설로 적는다</td>
 <td>응답 성공으로 표시하지 않음</td>
 </tr>
 </tbody></table></div>
 <p>가상 NIC의 캡처는 해당 VM에서 보이는 트래픽만 보여준다. 물리 스위치나 다른 VM의 모든 프레임을 본 것으로 설명하지 않는다. 1주차 <code>lo</code> HTTP 캡처에서 Ethernet ARP가 없는 것은 정상적인 구분 사례다. <a href="../../labs/week-03/PERSONAL_RECORD.md">개인 기록지</a>에 직접 실행과 제공 예제 분석을 각각 체크한다.</p>
-<p>명령 옵션의 근거: <a href="https://man7.org/linux/man-pages/man8/ip-route.8.html">ip route get</a>, <a href="https://man7.org/linux/man-pages/man8/ip-neighbour.8.html">ip neigh show와 상태</a>, <a href="https://github.com/the-tcpdump-group/tcpdump/blob/master/tcpdump.1.in">tcpdump의 인터페이스·필터·개수·링크 헤더 옵션</a>, <a href="https://man7.org/linux/man-pages/man1/timeout.1.html">timeout 종료 상태</a>. 2026-10-13 진행자 VM 한 대에서 조회·ping·pcap 저장 경로를 검증했다. 참가자 화면 출력 명령을 수동 두 셸로 실행한 것과 팀원별 환경·수행은 별도 확인 대상이다.</p>
+<p>명령 옵션의 근거: <a href="https://man7.org/linux/man-pages/man8/ip-route.8.html">ip route get</a>, <a href="https://man7.org/linux/man-pages/man8/ip-neighbour.8.html">ip neigh show와 상태</a>, <a href="https://github.com/the-tcpdump-group/tcpdump/blob/master/tcpdump.1.in">tcpdump의 인터페이스·필터·개수·링크 헤더 옵션</a>, <a href="https://man7.org/linux/man-pages/man1/timeout.1.html">timeout 종료 상태</a>.</p>
 </article></div></main><footer class="footer"><div class="shell"><a href="../week-02/index.html">2주차 복습</a><a href="../ssh-top-down/index.html">SSH 준비</a><a href="sources.html">출처</a><a href="validation.html">검증 상태</a><a href="#main">맨 위로</a></div></footer><script>(() => {
   // The model changes explanatory labels only; it never sends packets.
   const destination = document.querySelector('#destination');

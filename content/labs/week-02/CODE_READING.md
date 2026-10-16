@@ -101,7 +101,7 @@ print(f"A 기준으로 B 포함: {a_answer}")
 
 ## 셸 — 오류가 나도 정리 경로를 유지하기
 
-`set -euo pipefail`에서 `-u`는 없는 변수 사용을 오류로 처리하고, `pipefail`은 파이프 중간 실패를 상태에 반영한다. 현재 실험에는 파이프가 없지만 이후 명령을 추가할 때도 이 설정을 유지한다. `-e`에는 예외가 있어 ‘모든 실패에서 즉시 종료’라고 읽으면 안 된다. 이 스크립트의 실험 2처럼 `if`가 결과를 검사하는 명령은 실패를 직접 처리한다. [GNU Bash — set](https://www.gnu.org/s/bash/manual/html_node/The-Set-Builtin.html)
+`set -euo pipefail`에서 `-u`는 없는 변수 사용을 오류로 처리하고, `pipefail`은 파이프 중간 실패를 상태에 반영한다. 이 실험에는 파이프가 없지만 이후 명령을 추가할 때도 이 설정을 유지한다. `-e`에는 예외가 있어 ‘모든 실패에서 즉시 종료’라고 읽으면 안 된다. 이 스크립트의 실험 2처럼 `if`가 결과를 검사하는 명령은 실패를 직접 처리한다. [GNU Bash — set](https://www.gnu.org/s/bash/manual/html_node/The-Set-Builtin.html)
 
 `trap cleanup EXIT`는 종료할 때 `cleanup()`을 호출하라는 약속이다. Ctrl+C의 `INT`는 130, `TERM`은 143으로 종료하도록 연결했다. 정리 함수는 다음 순서로 읽는다.
 
@@ -110,14 +110,14 @@ print(f"A 기준으로 B 포함: {a_answer}")
 3. 생성에 성공한 A·B 공간만 삭제한다. 모든 이름을 한꺼번에 지우지 않는다.
 4. 삭제가 실패하면 정확한 자원 이름을 출력한다. 실험이 성공했어도 정리가 실패했다면 실패로 종료하며, 원래 실험이 실패했다면 그 상태를 보존한다.
 
-이 정리는 실행 가능한 종료 경로에 대한 장치다. `SIGKILL`·시스템 중단처럼 trap이 실행될 수 없는 경우나 삭제 오류에서는 자원이 남을 수 있다. 다른 프로세스가 공간을 계속 사용해도 삭제가 즉시 완결되지 않을 수 있다. 첫 출력의 이번 실행 이름과 `ip netns list`를 진행자와 대조한다. 이름을 확인하지 않은 일괄 삭제를 하지 않는다. [GNU Bash — trap](https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html) · [ip-netns의 삭제 조건](https://man7.org/linux/man-pages/man8/ip-netns.8.html)
+이 정리 함수는 종료 절차를 밟을 때 실행된다. `SIGKILL`·시스템 중단처럼 trap이 실행될 수 없는 경우나 삭제 오류에서는 자원이 남을 수 있다. 다른 프로세스가 공간을 계속 사용해도 삭제가 바로 끝나지 않을 수 있다. 첫 출력의 이번 실행 이름과 `ip netns list`를 진행자와 대조한다. 이름을 확인하지 않은 일괄 삭제를 하지 않는다. [GNU Bash — trap](https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html) · [ip-netns의 삭제 조건](https://man7.org/linux/man-pages/man8/ip-netns.8.html)
 
 ## 읽은 뒤 서로 설명할 질문
 
 1. C2에서 두 방향의 `in` 결과가 다른 이유를 주소 범위로 설명한다. 그 결과로 ping 성공까지 말할 수 있을까?
 2. 실험 2는 어느 주소만 바꾸는가? `route get`과 `ping`은 각각 무엇을 확인하는가?
 3. 실험 2의 예상 실패 뒤에도 복구가 실행되는 이유와 실험 1 실패 시 흐름을 비교한다.
-4. B 공간 생성에 실패했다면 정리 대상은 무엇인가? 생성 표식이 없다면 무엇을 잘못 지울 수 있는가?
+4. B 공간 생성에 실패했다면 정리 대상은 무엇인가? 생성 여부를 기록하지 않았다면 무엇을 잘못 지울 수 있는가?
 5. 접두사 복구와 자원 정리는 어떻게 다른가? 삭제 오류는 어디에 남는가?
 
 직접 실행했다면 [개인 실습 증거](LINUX.md#개인-실습-증거-보관)에 명령·출력과 남은 질문을 보관한다. 위 표의 예상이나 코드 읽기만 수행했다면 실제 Linux 관찰과 구분한다.

@@ -38,4 +38,3 @@ echo $?
 Node 키트 종료 코드는 정상 0, HTTP 400 이상 2, 연결 등 오류 1이다. 기본 curl의 404 전송 완료는 0이므로 혼동하지 않는다. 서버 response 로그의 client·path·status와 대조한다. Node 클라이언트에는 프록시 설정을 구성하지 않았다.
 
 공식 출처는 [SOURCES](../../materials/week-01/SOURCES.md), 예제 패킷은 [제공 캡처 안내](../../materials/week-01/SAMPLE_CAPTURE.md)에서 확인한다.
-

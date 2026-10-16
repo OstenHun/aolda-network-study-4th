@@ -15,7 +15,7 @@
 
 ## 필요한 부분만 선택해 읽기
 
-| 로드맵 term | 연결 글 | 읽을 범위와 주의점 |
+| 로드맵 용어 | 연결 글 | 읽을 범위와 주의점 |
 | --- | --- | --- |
 | IP Address | [Coursera — What Is an IP Address?](https://www.coursera.org/articles/ip-address) | 1주차 IP/port 복습용 선택. 본문의 `224.128.240.8`은 일반 단일 호스트 주소 예로 쓰지 않음. 2주차 접두사·경로 검증의 근거는 아님 |
 | IPv4 vs IPv6 | [AWS](https://aws.amazon.com/compare/the-difference-between-ipv4-and-ipv6/), [Kinsta](https://kinsta.com/blog/ipv4-vs-ipv6/) | IPv4 카드 중심이므로 선택·후속. IPv6를 배우는 주차에 비교 |
@@ -47,7 +47,7 @@ RFC의 주소 정의와 `ip-route`의 경로 선택 설명을 카드 계산·자
 
 ## 기출과 문제의 출처
 
-[기출·공개 시험 연계 문제](CCNA_PRACTICE.md)에서 문항마다 원문 위치를 확인한다. [문제 출처 안내](QUESTION_SOURCES.md)에서 대학 이전 시험·제삼자 사이트·자체 문제의 차이와 풀이 범위를 확인한다. [별도 해설](CCNA_ANSWERS.md)은 스터디가 검산한 설명이며 공식 채점표와 구별한다.
+[기출·공개 시험 연계 문제](CCNA_PRACTICE.md)에서 문항마다 원문 위치를 확인한다. [문제 출처 안내](QUESTION_SOURCES.md)에서 대학의 과거 시험·제삼자 사이트·자체 문제의 차이와 풀이 범위를 확인한다. [별도 해설](CCNA_ANSWERS.md)은 스터디가 검산한 설명이며 공식 채점표와 구별한다.
 
 외부 문제의 전문·보기·공식 해설을 묶음에 대량 복제하지 않는다. 위치·짧은 인용·자체 활동 안내로 연결하며, 자체 문제는 실제 출제 문제로 표시하지 않는다.
 

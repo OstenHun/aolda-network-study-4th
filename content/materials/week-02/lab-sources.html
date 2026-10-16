@@ -129,7 +129,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <tr>
 <td><a href="https://www.rfc-editor.org/rfc/rfc5737">RFC 5737 §3–4</a></td>
 <td><code>192.0.2.0/24</code>의 문서용 지위. 카드 주소를 실제 인터넷 대상으로 해석하지 않는다.</td>
-<td>합성 카드·격리 예제 주소 선택의 근거</td>
+<td>가상 주소 카드·격리 예제 주소 선택의 근거</td>
 </tr>
 <tr>
 <td><a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">IANA IPv4 특수 용도 등록부</a></td>
@@ -163,7 +163,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <td>명령 구현을 복제하지 않고 설치된 <code>ip</code> 도구를 사용</td>
 </tr>
 </tbody></table></div>
-<p>이 실습의 Python·셸 코드, 카드 질문, 합성 출력은 자체 작성했다. 외부 문서·코드의 본문이나 랩 파일을 복제하지 않고 링크와 필요한 읽을 범위만 제공한다. <code>iproute2</code>는 GPL-2.0 표시가 있는 별도 도구이며, Python은 <a href="https://docs.python.org/3/license.html">PSF 라이선스</a>의 별도 표준 라이브러리다. RFC·IANA 원문은 정의와 근거로 인용한 것이지 이 키트의 저작물로 주장하지 않는다.</p>
+<p>이 실습의 Python·셸 코드, 카드 질문, 가상 출력은 자체 작성했다. 외부 문서·코드의 본문이나 랩 파일을 복제하지 않고 링크와 필요한 읽을 범위만 제공한다. <code>iproute2</code>는 GPL-2.0 표시가 있는 별도 도구이며, Python은 <a href="https://docs.python.org/3/license.html">PSF 라이선스</a>의 별도 표준 라이브러리다. RFC·IANA 원문은 정의와 근거로 인용한 것이지 이 키트의 저작물로 주장하지 않는다.</p>
 <h2 id="실행-전-확인">실행 전 확인</h2>
 <p><a href="sample-output.html">제공 출력</a>은 학습용 예시다. 실제 출력은 인터페이스 이름·설정·배포판에 따라 달라질 수 있다. 선택 격리 실습은 허가된 Linux에서 필요한 권한·커널 지원과 생성→변경→복구→정리 절차를 먼저 확인한다. SSH 관리 인터페이스나 기본 경로는 바꾸지 않는다.</p>
 </article></div></main><footer class="footer"><div class="shell"><a href="index.html">2주차 입구</a><a href="sources.html">출처와 읽을 범위</a><a href="#main">맨 위로</a></div></footer><script>(()=>{const select=document.querySelector('#prefix');if(!select)return;select.addEventListener('change',()=>{const p=Number(select.value);const blocks=document.querySelector('#blocks');blocks.innerHTML=p===24?'<div>0~255<br>A .10 · B .70</div>':'<div>0~63<br>A .10</div><div>64~127<br>B .70</div><div>128~191</div><div>192~255</div>';document.querySelector('#cidr-result').textContent=p===24?'/24: A와 B는 모두 192.0.2.0/24에 포함됩니다. 실제 통신 성공은 확인하지 않았습니다.':'/26: A는 192.0.2.0/26, B는 192.0.2.64/26입니다. 서로 다른 서브넷이며 실제 도달성은 경로와 환경을 확인해야 합니다.';});})();</script></body></html>

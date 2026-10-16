@@ -27,9 +27,9 @@ jobs:
           cache: npm
       - name: Install fixed authoring dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Test course and lesson integration
+      - name: Test authoring and public content boundaries
         run: npm test
-      - name: Validate public sources and build
+      - name: Validate public sources, assembled copy, and links
         run: python tools/build-site.py
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'

@@ -16,12 +16,11 @@
 | [iproute2 ss 매뉴얼](https://raw.githubusercontent.com/iproute2/iproute2/main/man/man8/ss.8) | -l·-n·-t와 대기 소켓 조회. S4 |
 | [WireGuard 개념·Cryptokey Routing](https://www.wireguard.com/#cryptokey-routing) | UDP 캡슐화, 송신 목적지·수신 출발지와 AllowedIPs. S5 |
 | [Microsoft Find-NetRoute](https://learn.microsoft.com/en-us/powershell/module/nettcpip/find-netroute?view=windowsserver2025-ps) | 목적지에 적합한 로컬 주소·경로 조회. S5 |
-| [RFC 3022 §2](https://www.rfc-editor.org/rfc/rfc3022.html#section-2) | 주소·포트 변환과 역방향 매핑. NAT_CASE S8; 아올다 장비 구현 증거는 아님 |
-| [RFC 9293 §3.5](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.5) | TCP 연결 수립과 3-way handshake. NAT_CASE S8 |
-| [tcpdump 프로젝트 매뉴얼 소스](https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/master/tcpdump.1.in) | -i·-nn·TCP 출력 형식·flags. NAT_CASE S7·S8. 웹 매뉴얼 페이지 오류로 프로젝트 원본을 확인 |
+| [RFC 3022 §2](https://www.rfc-editor.org/rfc/rfc3022.html#section-2) | 주소·포트 변환과 역방향 매핑. 주소 변환·선택 NAT 질문; 아올다 장비 구현 증거는 아님 |
+| [RFC 9293 §3.5](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.5) | TCP 연결 수립과 3-way handshake. 주소 변환·선택 NAT 질문 |
+| [tcpdump 프로젝트 매뉴얼 소스](https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/master/tcpdump.1.in) | -i·-nn·TCP 출력 형식·flags. 패킷 관찰·선택 NAT 질문. 웹 매뉴얼 페이지 오류로 프로젝트 원본을 확인 |
 | [OpenSSH ssh](https://man.openbsd.org/ssh) · [ssh-keygen](https://man.openbsd.org/ssh-keygen) | 호스트 키 검증·사용자 인증, -l 지문 표시. S7 |
 
 ## 사이트의 주소 예시
 
 주소와 VM 이름은 설명용 예시다. 본인에게 허용된 주소·계정·인증 방식은 환경 안내에서 확인한다. 비밀번호·개인 키·실제 접속 정보는 공유 답안에 넣지 않는다.
-

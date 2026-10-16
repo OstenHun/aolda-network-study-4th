@@ -2,7 +2,7 @@
 from pathlib import Path, PurePosixPath
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
-from html import escape
+from html import escape, unescape
 import xml.etree.ElementTree as ET
 import json
 import re
@@ -94,12 +94,39 @@ def check_capture(data):
     return packets
 
 
+def check_learner_context(text):
+    """Reject private workflow/roster stubs in both lessons and downloadable prose."""
+    text = unescape(re.sub(r'<[^>]+>', '', text))
+    patterns = (
+        r'\((?:진행자 보관 자료|팀 내부 안내)\)',
+        r'(?:핵심 정리 적용|현재 적용|사용자 요청|사용자 보고)',
+        r'(?:목·금\s*오프라인은\s*확정|인당\s*VM\s*두\s*대\s*사용\s*가능|사용자\s*제공\s*조건)',
+        r'상태:\s*draft',
+        r'(?:A팀|B팀|참가자\s*\d+명|공통 로그인)',
+        r'ubuntu\s*계정\s*(?:에\s*비밀번호|\+\s*비밀번호)',
+    )
+    if any(re.search(pattern, text) for pattern in patterns):
+        raise ValueError('Private workflow, roster, or shared login policy in learner content')
+
+
+def validate_public_output(payload):
+    """Check assembled pages, including shared navigation/search and downloads."""
+    for name, data in payload.items():
+        if name.endswith(('.html', '.md')):
+            try:
+                check_learner_context(data.decode('utf-8'))
+            except ValueError as error:
+                raise ValueError(f'{name}: {error}') from error
+
+
 def check_public_sources():
     # This covers the repository source, not just files served by Pages.
     patterns = {
         "private key": r"-----BEGIN [A-Z ]*PRIVATE KEY-----",
         "GitHub credential": r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})",
         "API credential": r"\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}",
+        "AWS access key": r"\b(?:AKIA|ASIA)[A-Z0-9]{16}\b",
+        "Google API key": r"\bAIza[A-Za-z0-9_-]{35}\b",
         "local user path": r"(?i)[A-Z]:[\\/]Users[\\/][^\s<>]+|/ho" + r"me/[^/\s]+/",
         "internal service": r"https?://(?:console\.aolda\.net|(?:app\.)?notion\.(?:com|so))",
         "email address": r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}",
@@ -121,6 +148,11 @@ def check_public_sources():
         for label, pattern in patterns.items():
             if re.search(pattern, text):
                 raise ValueError(f"{path.relative_to(ROOT)}: {label}")
+        if path.is_relative_to(CONTENT) and path.suffix in ('.md', '.html'):
+            try:
+                check_learner_context(text)
+            except ValueError as error:
+                raise ValueError(f"{path.relative_to(ROOT)}: {error}") from error
     return len(files)
 
 
@@ -251,6 +283,7 @@ def validate_links(payload):
 def build():
     source_count = check_public_sources()
     payload = make_payload()
+    validate_public_output(payload)
     pages, links = validate_links(payload)
     output = generated_folder('dist')
     payload[".nojekyll"] = b""

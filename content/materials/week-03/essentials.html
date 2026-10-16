@@ -102,7 +102,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 .topic-path,.page-links{display:flex;flex-wrap:wrap;gap:.5rem 1rem}.topic-path{border-bottom:1px solid var(--line);padding:1rem 0;font-size:.85rem}.topic-path [aria-current]{font-weight:800;text-decoration-thickness:3px}.next-hop-model{background:var(--wash);padding:1.25rem;border-left:3px solid var(--brand);margin-bottom:2rem}.next-hop-model h2{margin-top:0}.next-hop-model select{font:inherit;color:var(--blue);max-width:100%;padding:.5rem}.frame-diagram{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}.frame-diagram>div{border:1px solid var(--line);background:white;padding:1rem}.local-status{font-size:.85rem;color:#466477}button:disabled{opacity:.65;cursor:default}@media(max-width:650px){.frame-diagram{grid-template-columns:1fr}}
 </style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="essentials.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 3주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html" aria-current="page">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실험</a><a href="worksheet.html">함께 설명</a><a href="personal-record.html">개인 기록</a><a href="review.html">복습 문제</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">LAN · MAC · ARP · ICMP</p><h1>3주차 핵심 정리 — 다음 홉·ARP·서비스 확인</h1><p>최종 IP와 링크의 다음 상대, ARP 캐시, ICMP와 HTTP의 관찰 범위를 세 문장으로 정리한다. 두 혼동과 개발 사례를 기존 교재·실습·분리 해설에 연결한다.</p></div><nav class="topic-path" aria-label="개념 학습 순서"><a href="recall.html">1. 복습 진단</a><a href="lan-mac.html">2. LAN·MAC</a><a href="next-hop.html">3. 다음 홉</a><a href="arp.html">4. ARP·캐시</a><a href="icmp.html">5. ICMP·ping</a></nav><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#꼭-기억할-개념-세-개">꼭 기억할 개념 세 개</a><a href="#w03-k1--최종-ip와-링크에서-보낼-mac은-다를-수-있다">W03-K1 · 최종 IP와 링크에서 보낼 MAC은 다를 수 있다</a><a href="#w03-k2--arp는-ipv4-다음-상대의-링크-주소를-찾는다">W03-K2 · ARP는 IPv4 다음 상대의 링크 주소를 찾는다</a><a href="#w03-k3--확인-도구마다-묻는-질문이-다르다">W03-K3 · 확인 도구마다 묻는 질문이 다르다</a><a href="#헷갈리는-부분-두-가지">헷갈리는 부분 두 가지</a><a href="#개발-상황으로-설명하기">개발 상황으로 설명하기</a><a href="#다음-주에-다시-설명하기">다음 주에 다시 설명하기</a></div></nav><article>
 <ul>
-<li>사용법: 기존 개념 읽기의 마지막 5분과 공통 질문 하나를 이 자료로 대체한다. 별도 발표·활동지·필수 기록은 추가하지 않는다. 기존 실습 완료 기준은 유지한다.</li>
+<li>사용법: 개념 읽기의 마지막 5분에 사용하고, 공통 질문 하나를 이 사례와 연결한다. 별도 발표·활동지·필수 기록은 추가하지 않는다. 기존 실습 완료 기준은 유지한다.</li>
 </ul>
 <h2 id="꼭-기억할-개념-세-개">꼭 기억할 개념 세 개</h2>
 <h3 id="w03-k1--최종-ip와-링크에서-보낼-mac은-다를-수-있다">W03-K1 · 최종 IP와 링크에서 보낼 MAC은 다를 수 있다</h3>
@@ -110,7 +110,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <p>원격 목적지로 가는 <code>via</code> 경로라면 첫 링크에서 보통 게이트웨이의 MAC이 필요하다. NAT 없는 모형이며 가상망·터널의 내부 동작까지 이 출력만으로 단정하지 않는다. <a href="topics/03-next-hop.md">다음 홉 교재</a>, <a href="https://man7.org/linux/man-pages/man8/ip-route.8.html">ip-route(8)</a>.</p>
 <h3 id="w03-k2--arp는-ipv4-다음-상대의-링크-주소를-찾는다">W03-K2 · ARP는 IPv4 다음 상대의 링크 주소를 찾는다</h3>
 <p><strong>기억 문장:</strong> Ethernet의 IPv4 통신에서 필요한 다음 상대의 MAC 매핑이 없으면 ARP를 사용할 수 있으며 캐시가 있으면 새 요청이 안 보일 수 있다.</p>
-<p>ARP 브로드캐스트는 해당 링크 범위에서 전달된다. 원격 서버의 MAC을 라우터 너머로 ARP 조회하는 것으로 설명하지 않는다. <code>STALE</code>은 서버 사망 판정이 아니며, IPv6 이웃 탐색을 ARP와 같게 취급하지 않는다. <a href="topics/04-arp.md">ARP 교재</a>, <a href="https://www.rfc-editor.org/rfc/rfc826.html">RFC 826</a>, <a href="https://man7.org/linux/man-pages/man8/ip-neighbour.8.html">ip-neighbour(8)</a>.</p>
+<p>ARP 브로드캐스트는 해당 링크 범위에서 전달된다. 원격 서버의 MAC을 라우터 너머로 ARP 조회하는 것으로 설명하지 않는다. <code>STALE</code>은 서버가 중지됐다는 뜻은 아니며, IPv6 이웃 탐색을 ARP와 같게 취급하지 않는다. <a href="topics/04-arp.md">ARP 교재</a>, <a href="https://www.rfc-editor.org/rfc/rfc826.html">RFC 826</a>, <a href="https://man7.org/linux/man-pages/man8/ip-neighbour.8.html">ip-neighbour(8)</a>.</p>
 <h3 id="w03-k3--확인-도구마다-묻는-질문이-다르다">W03-K3 · 확인 도구마다 묻는 질문이 다르다</h3>
 <p><strong>기억 문장:</strong> ping의 ICMP 반응·TCP 연결·HTTP 상태는 각각 따로 관찰해야 한다.</p>
 <p>ping 성공은 HTTP 서비스 정상을 보장하지 않는다. Echo 무응답과 HTTP 응답이 함께 관찰돼도 모순이 아니다. ping의 RTT를 API 전체 응답 시간으로 쓰지 않는다. <a href="topics/05-icmp.md">ICMP 교재</a>, <a href="https://man7.org/linux/man-pages/man8/ping.8.html">ping(8)</a>.</p>
@@ -133,13 +133,13 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </tbody></table></div>
 <h2 id="개발-상황으로-설명하기">개발 상황으로 설명하기</h2>
 <p><strong>출처 구분: 스터디 자체 문항.</strong> 아래는 개념 확인용 사례이며 특정 기업의 실제 출제 문제·빈출 문항을 뜻하지 않는다.</p>
-<p>같은 시각에 허가된 목적지의 ping은 무응답, 같은 호스트의 평문 HTTP 요청은 404 응답이다. 경로는 <code>via</code>이고 첫 이웃은 <code>REACHABLE</code>, 해당 캡처 구간에 새 ARP는 없다. 모두 설명용 사례이며 진행자 실측과 다른 조건이다.</p>
+<p>같은 시각에 허가된 목적지의 ping은 무응답, 같은 호스트의 평문 HTTP 요청은 404 응답이다. 경로는 <code>via</code>이고 첫 이웃은 <code>REACHABLE</code>, 해당 캡처 구간에 새 ARP는 없다. 모두 설명을 위해 정한 조건이며 실제 측정 결과가 아니다.</p>
 <ol>
 <li><strong>W03-D1 · 설명:</strong> HTTP·ICMP·ARP 각각에서 관찰한 사실과 아직 모르는 것은?</li>
 <li><strong>W03-D2 · 조건 변경:</strong> 이웃 상태가 <code>STALE</code>로 바뀌면 HTTP 서버 장애로 판정할 수 있을까?</li>
 <li><strong>W03-D3 · 진단:</strong> 404가 의도한 원 서버에서 나온 것인지, ARP가 안 보인 이유가 캐시인지 무엇으로 확인할까?</li>
 </ol>
-<p>기존 질문 세 개 중 관련 질문 하나의 후속 발문으로 사용한다. 먼저 말하거나 짧게 적은 뒤 <a href="answers.html#%EA%B0%9C%EB%B0%9C-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">개발 질문 해설</a>을 연다. 해설을 읽었다는 사실로 직접 수행·독립 설명 완료를 표시하지 않는다.</p>
+<p>기존 질문 세 개 중 관련 있는 질문 하나에 이어서 묻는다. 먼저 말하거나 짧게 적은 뒤 <a href="answers.html#%EA%B0%9C%EB%B0%9C-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">개발 질문 해설</a>을 연다. 해설을 읽는 것과 직접 실행하거나 스스로 설명하는 것은 구분한다.</p>
 <h2 id="다음-주에-다시-설명하기">다음 주에 다시 설명하기</h2>
 <p>게이트웨이의 MAC이 보이는데도 IP 목적지는 원격 서버로 남을 수 있는 이유는? 다음 주 시작의 기존 복습 시간에 조건 하나를 바꾸어 다시 묻는다. 막히면 위 교재로 돌아가고 선택 분량을 줄인다.</p>
 <p><a href="../week-01/concept-index.html">전체 개념 색인</a> · <a href="../week-01/interview-references.html">면접·개발 참고자료</a> · <a href="index.html">이번 주 학습 홈</a></p>

@@ -27,7 +27,7 @@ ip -4 route get "$TARGET"
 ip -4 neigh show
 ```
 
-`route get`의 `dev`·`src`·`via`, 해당 `ip -o link show` 행의 `link/ether`와 MAC을 찾아 카드에 옮긴다. `IFACE`를 **출력에서 확인한 `dev` 이름**으로 수동 입력하고 아래에서 재확인한다. 장치명은 VM마다 다르다. `link/ether`가 아니거나 `lo`라면 Ethernet/ARP 직접 관찰 범위에서 제외하고 제공 trace로 전환한다.
+`route get`의 `dev`·`src`·`via`, 해당 `ip -o link show` 행의 `link/ether`와 MAC을 찾아 카드에 옮긴다. `IFACE`를 **출력에서 확인한 `dev` 이름**으로 수동 입력하고 아래에서 재확인한다. 장치명은 VM마다 다르다. `link/ether`가 아니거나 `lo`라면 Ethernet/ARP 직접 관찰 범위에서 제외하고 제공된 패킷 예제로 전환한다.
 
 ```sh
 IFACE='route-get에서-확인한-dev-이름으로-교체'
@@ -41,7 +41,7 @@ ip -4 neigh show dev "$IFACE"
 
 ## 필수 실험 B — 제한된 ping·패킷 관찰
 
-진행자가 대상·NIC·캡처 권한을 확인한 뒤에만 시작한다. 같은 VM에 셸 A(캡처), 셸 B(ping)를 연다. `tcpdump`가 없거나 비대화식 `sudo`가 허용되지 않으면 설치·권한 변경을 요구하지 않고 [합성 trace](sample-trace.txt)로 전환한다. 캡처는 **선택한 NIC의 ARP와 해당 대상과의 ICMP**만 대상으로 하며 SSH 패킷을 수집하지 않는다. ARP에는 같은 NIC의 다른 ARP가 짧게 섞일 수 있으므로 공유 전에 검토한다.
+진행자가 대상·NIC·캡처 권한을 확인한 뒤에만 시작한다. 같은 VM에 셸 A(캡처), 셸 B(ping)를 연다. `tcpdump`가 없거나 비대화식 `sudo`가 허용되지 않으면 설치·권한 변경을 요구하지 않고 [가상 패킷 예제](sample-trace.txt)로 전환한다. 캡처는 **선택한 NIC의 ARP와 해당 대상과의 ICMP**만 대상으로 하며 SSH 패킷을 수집하지 않는다. ARP에는 같은 NIC의 다른 ARP가 짧게 섞일 수 있으므로 공유 전에 검토한다.
 
 **예상:** 셸 A를 시작하기 전에 다음 상대의 ARP 요청·응답이 새로 보일지, ICMP Echo 요청·응답이 보일지 생각하거나 짧게 말한다. 자세한 메모는 선택이다. 이웃 항목이 이미 있으면 새 ARP 요청이 없을 수 있다. ICMP 응답이 없어도 원인을 하나로 정하지 않는다.
 
@@ -78,13 +78,12 @@ ip -4 neigh show dev "$IFACE"
 
 | 상태 | 이어서 할 일 | 직접 수행 기록 |
 | --- | --- | --- |
-| 승인 대상·권한·VM 접속 없음 | 합성 trace의 같은 망/게이트웨이 사례에서 다음 MAC과 ICMP를 찾는다 | A/B 직접 실행 미완료 |
+| 승인 대상·권한·VM 접속 없음 | 가상 패킷 예제의 같은 망/게이트웨이 사례에서 다음 MAC과 ICMP를 찾는다 | A/B 직접 실행 미완료 |
 | `ip`·`ping`·`tcpdump`·`timeout` 없음 또는 `sudo -n` 거부 | 가능한 조회만 하고 도구·권한 상태를 적는다. 설치는 사전 환경 확인 뒤 별도 결정 | 미실행 단계 명시 |
 | `dev lo`, `link/ether` 아님 | loopback/비 Ethernet 환경이라고 기록하고 합성 Ethernet 예제를 분석한다 | ARP 직접 관찰 미완료 |
 | ARP가 안 보임, 이웃 `STALE`/행 없음 | 캐시·GC·캡처 타이밍과 다른 가능성을 적는다. 캐시 flush·추가 무허가 ping을 하지 않는다 | 관찰된 그대로 기록 |
-| ICMP Echo만 보이거나 응답 없음 | 캡처 위치·필터·대상 정책·상대 상태를 미확정 가설로 적는다 | 응답 성공으로 표시하지 않음 |
+| ICMP Echo만 보이거나 응답 없음 | 캡처 위치·필터·대상 정책·상대 상태를 확인되지 않은 가설로 적는다 | 응답 성공으로 표시하지 않음 |
 
 가상 NIC의 캡처는 해당 VM에서 보이는 트래픽만 보여준다. 물리 스위치나 다른 VM의 모든 프레임을 본 것으로 설명하지 않는다. 1주차 `lo` HTTP 캡처에서 Ethernet ARP가 없는 것은 정상적인 구분 사례다. [개인 기록지](PERSONAL_RECORD.md)에 직접 실행과 제공 예제 분석을 각각 체크한다.
 
-명령 옵션의 근거: [ip route get](https://man7.org/linux/man-pages/man8/ip-route.8.html), [ip neigh show와 상태](https://man7.org/linux/man-pages/man8/ip-neighbour.8.html), [tcpdump의 인터페이스·필터·개수·링크 헤더 옵션](https://github.com/the-tcpdump-group/tcpdump/blob/master/tcpdump.1.in), [timeout 종료 상태](https://man7.org/linux/man-pages/man1/timeout.1.html). 2026-10-13 진행자 VM 한 대에서 조회·ping·pcap 저장 경로를 검증했다. 참가자 화면 출력 명령을 수동 두 셸로 실행한 것과 팀원별 환경·수행은 별도 확인 대상이다.
-
+명령 옵션의 근거: [ip route get](https://man7.org/linux/man-pages/man8/ip-route.8.html), [ip neigh show와 상태](https://man7.org/linux/man-pages/man8/ip-neighbour.8.html), [tcpdump의 인터페이스·필터·개수·링크 헤더 옵션](https://github.com/the-tcpdump-group/tcpdump/blob/master/tcpdump.1.in), [timeout 종료 상태](https://man7.org/linux/man-pages/man1/timeout.1.html).

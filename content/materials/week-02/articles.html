@@ -98,7 +98,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 }
 </style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="articles.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html" aria-current="page">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 함께 찾아보기 — 접두사와 경로에서 근거 찾기</h1><p>중심 질문의 답을 AWS CIDR 설명과 Linux 경로 조회 문서에서 함께 찾는다. 검색어·읽을 절·확인할 질문을 안내하고 roadmap 연결 글은 필요한 부분만 선택한다. 원문 읽기는 공동 탐구 시간에 포함한다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#중심-질문에서-출발하기">중심 질문에서 출발하기</a><a href="#찾은-설명을-자기-vm에-적용하기">찾은 설명을 자기 VM에 적용하기</a><a href="#더-찾아볼-때">더 찾아볼 때</a><a href="#1-ip-주소만-보면-어느-프로그램과-어느-범위인지-알-수-있을까">1. IP 주소만 보면 어느 프로그램과 어느 범위인지 알 수 있을까?</a><a href="#2-사설-주소가-아니면-공인-주소일까">2. 사설 주소가 아니면 공인 주소일까?</a><a href="#3-24와-26은-어느-비트를-남길까">3. <code>/24</code>와 <code>/26</code>은 어느 비트를 남길까?</a><a href="#4-cidr-표기만으로-다음-홉이-정해질까">4. CIDR 표기만으로 다음 홉이 정해질까?</a><a href="#5-같은-서브넷이라면-통신도-성공할까">5. 같은 서브넷이라면 통신도 성공할까?</a><a href="#roadmap-연결-글--필요한-부분만-선택">roadmap 연결 글 — 필요한 부분만 선택</a></div></nav><article>
 <h2 id="중심-질문에서-출발하기">중심 질문에서 출발하기</h2>
-<p><a href="worksheet.html">“IP가 비슷한 두 VM은 같은 망으로 바로 통신할 수 있을까?”</a>를 함께 읽는다. 답을 먼저 발표하기보다 접두사·경로·응답 중 모르는 말을 찾아 공부한다. 공동 탐구의 5~25분 안에서 아래 두 자료의 지정 부분을 골라 읽는다. 지정 부분은 합계 약 6~8분의 읽기 시작점이다.</p>
+<p><a href="worksheet.html">“IP가 비슷한 두 VM은 같은 망으로 바로 통신할 수 있을까?”</a>를 함께 읽는다. 답을 먼저 발표하기보다 접두사·경로·응답 중 모르는 용어를 찾아 공부한다. 공동 탐구의 5~25분 안에서 아래 두 자료의 지정 부분을 골라 읽는다. 지정 부분을 읽는 데는 합계 약 6~8분이 걸린다.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
@@ -127,7 +127,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <li>주소와 접두사가 어떤 계산에 필요한지 말하고 C1/C2를 손으로 푼다. <a href="../../labs/week-02/subnet_check.py" download>검산기</a>는 손계산 뒤 사용한다.</li>
 <li><a href="linux.html">P1</a>의 실제 조회에서 인터페이스·주소/접두사·선택 경로를 읽는다. 예제의 <code>192.0.2.*</code>와 자기 VM 값은 섞지 않는다.</li>
 <li>한 명이 답·이유·근거를 설명하고 다른 사람이 조건을 바꾼다. 경로 조회만 했는데 실제 통신 성공까지 확인했다고 말하지 않는다.</li>
-<li>자기 설명 뒤 <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>을 열어 계산·관찰 범위·다음 진단을 대조한다.</li>
+<li>자기 설명 뒤 <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>을 열어 계산·관찰 범위·다음에 확인할 것을 대조한다.</li>
 </ol>
 <p>읽을 절·개념의 연결은 자체 안내다. 기술 정의는 <a href="https://www.rfc-editor.org/rfc/rfc4632.html#section-3.1">RFC 4632 §3.1</a>, 주소 범주는 <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">IANA 특수 목적 등록부</a>로 대조한다. 출처의 AWS VPC 예시를 현재 아올다 설정으로 취급하지 않는다.</p>
 <h2 id="더-찾아볼-때">더 찾아볼 때</h2>
@@ -144,7 +144,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <h2 id="3-24와-26은-어느-비트를-남길까">3. <code>/24</code>와 <code>/26</code>은 어느 비트를 남길까?</h2>
 <p><strong>선택 참고:</strong> Subnet Masks 노드의 <a href="https://www.coursera.org/articles/subnet-mask">Coursera — What Is a Subnet Mask?</a>에서 “What is a subnet mask?” 첫 문단과 “Use of subnet masks in subnetting”의 <code>/25</code> 예시만 읽는다. A/B/C 클래스 표와 일반적인 집 마스크 이야기는 이번 카드의 규칙으로 쓰지 않는다.</p>
 <p>IPv4는 32비트다. <code>/24</code>는 앞 24비트가 1인 <code>255.255.255.0</code>, <code>/26</code>은 앞 26비트가 1인 <code>255.255.255.192</code> 마스크에 해당한다. 주소와 마스크를 비트별 AND하면 해당 접두사로 본 네트워크 주소가 된다. <code>/26</code>은 마지막 8비트 중 앞 2비트가 범위를 나누므로 한 블록은 64개 주소다. <a href="https://www.rfc-editor.org/rfc/rfc4632.html#section-3.1">RFC 4632 §3.1</a></p>
-<p><strong>카드에 적용:</strong> C1은 A=<code>192.0.2.10/24</code>, B=<code>192.0.2.70/24</code>다. 양쪽에서 <code>.0/24</code>를 계산한다. C2는 <strong>A만</strong> <code>.10/26</code>으로 바뀌고 B는 <code>.70/24</code> 그대로다. A의 <code>.0/26</code>은 마지막 묶음 0~63, B의 <code>/24</code>는 0~255다. A에서 <code>.70</code>은 연결된 <code>/26</code> 범위 밖이고, B에서 <code>.10</code>은 연결된 <code>/24</code> 범위 안이다. 이는 양쪽의 <strong>주소 계산</strong>이며 성공한 ping 기록이 아니다.</p>
+<p><strong>카드에 적용:</strong> C1은 A=<code>192.0.2.10/24</code>, B=<code>192.0.2.70/24</code>다. 양쪽에서 <code>.0/24</code>를 계산한다. C2는 <strong>A만</strong> <code>.10/26</code>으로 바뀌고 B는 <code>.70/24</code> 그대로다. A의 <code>.0/26</code>은 마지막 묶음 0~63, B의 <code>/24</code>는 0~255다. A에서 <code>.70</code>은 연결된 <code>/26</code> 범위 밖이고, B에서 <code>.10</code>은 연결된 <code>/24</code> 범위 안이다. 이는 양쪽의 <strong>주소 계산 결과</strong>다. ping이 성공했다는 기록은 아니다.</p>
 <p><strong>서로 물을 질문:</strong> C2에서 “B는 A를 같은 망으로 보니 왕복 성공한다”라는 주장에 무엇이 빠졌는가? 두 호스트의 판단을 따로 설명하고 <a href="concepts.html#5-%EB%91%90-%EC%98%88%EC%A0%9C%EB%A1%9C-%EB%B2%94%EC%9C%84-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%95%98%EA%B8%B0">개념 교재 5절</a>의 손계산과 검산기를 대조한다.</p>
 <h2 id="4-cidr-표기만으로-다음-홉이-정해질까">4. CIDR 표기만으로 다음 홉이 정해질까?</h2>
 <p><strong>선택 참고:</strong> CIDR 노드의 <a href="https://aws.amazon.com/what-is/cidr/">AWS — What is CIDR?</a>에서 “Classless addresses”와 “CIDR notation”만 읽는다. AWS VPC 설정, 주소 등록 기관과 과거 클래스별 크기는 이번 실습 범위가 아니다.</p>
@@ -158,7 +158,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
-<th>roadmap.sh term</th>
+<th>roadmap.sh 용어</th>
 <th>연결 글</th>
 <th>이번 범위</th>
 </tr>

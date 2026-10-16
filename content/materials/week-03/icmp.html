@@ -107,7 +107,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 ping: A -- ICMP Echo Request --&gt; B -- Echo Reply --&gt; A ?
 HTTP: A -- TCP + HTTP request --&gt; B:8080 -- HTTP response --&gt; A ?
 </code></pre>
-<p>Linux에서는 <a href="linux.html">실습 절차</a>에 따라 승인된 실제 IPv4에 <code>ping -4 -n -c 2 -W 2 -w 8 &quot;$TARGET&quot;</code>을 한 번만 실행한다. 총 2패킷·전체 기한 8초이며 대상·경로·인터페이스를 먼저 확인한다. 함께 <code>ip -4 route get &lt;허용된 IPv4&gt;</code>로 경로를, <code>ip -4 neigh show</code>로 첫 이웃 상태를 조회하면 실패 해석의 폭이 좁아진다. 다음 중 어떤 증거를 실제로 얻었는지 <strong>개인 실습 기록</strong>에 구분해 남긴다.</p>
+<p>Linux에서는 <a href="linux.html">실습 절차</a>에 따라 승인된 실제 IPv4에 <code>ping -4 -n -c 2 -W 2 -w 8 &quot;$TARGET&quot;</code>을 한 번만 실행한다. 총 2패킷·전체 기한 8초이며 대상·경로·인터페이스를 먼저 확인한다. 함께 <code>ip -4 route get &lt;허용된 IPv4&gt;</code>로 경로를, <code>ip -4 neigh show</code>로 첫 이웃 상태를 조회하면 실패 원인을 좁힐 수 있다. 다음 중 어떤 증거를 실제로 얻었는지 <strong>개인 실습 기록</strong>에 구분해 남긴다.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
@@ -132,7 +132,7 @@ HTTP: A -- TCP + HTTP request --&gt; B:8080 -- HTTP response --&gt; A ?
 <td>다른 프로토콜까지 모두 실패하는지</td>
 </tr>
 </tbody></table></div>
-<p>ping 실패는 ICMP 차단, 경로·정책, 상대의 응답 설정 등 여러 원인으로 생길 수 있다. 응답이 없다면 먼저 대상·경로·이웃 정보와 정책을 확인하고, HTTP 상태는 별도 HTTP 요청·서버 로그로 판단한다. 반대로 ping 성공도 HTTP 200을 보장하지 않는다. 1주차의 <strong>404는 HTTP 응답이 도착한 결과</strong>, 서버 중지 때의 <strong>연결 거부는 HTTP 응답 전의 TCP 실패</strong>였다. ICMP Echo 실패를 둘 중 하나로 바로 번역하지 않는다.</p>
+<p>ping 실패는 ICMP 차단, 경로·정책, 상대의 응답 설정 등 여러 원인으로 생길 수 있다. 응답이 없다면 먼저 대상·경로·이웃 정보와 정책을 확인하고, HTTP 상태는 별도 HTTP 요청·서버 로그로 판단한다. 반대로 ping 성공도 HTTP 200을 보장하지 않는다. 1주차의 <strong>404는 HTTP 응답이 도착한 결과</strong>, 서버 중지 때의 <strong>연결 거부는 HTTP 응답 전의 TCP 실패</strong>였다. ICMP Echo 실패를 둘 중 하나와 같은 뜻으로 해석하지 않는다.</p>
 <h2 id="예측과-확인">예측과 확인</h2>
 <p>“ping은 실패했지만 <code>curl</code>은 HTTP 200을 받았다”는 설명용 상황을 생각해 보자. 모순인가? 각 도구가 검사한 메시지와 가능한 정책 차이를 적는다. 실제 Linux VM에서 같은 결과가 나왔다면 시각·목적지·명령·출력을 함께 남겨야 한다.</p>
 <p><strong>확인 질문:</strong> <code>ping</code> 두 번에 응답이 없을 때 “서버 프로그램이 중지됐다”를 확인하려면 어떤 별도 증거가 필요한가? 최소 두 가지를 적는다.</p>

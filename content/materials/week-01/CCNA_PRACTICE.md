@@ -69,4 +69,3 @@ TCP와 UDP의 연결·전달 특성을 두 문장으로 비교해 본다. UDP를
 | [Cisco 공식 CCNA 안내](https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html) | Cisco U. 연습시험 연결 확인. 로그인 후 문제·가격·이용 권한은 미확인 | 추가 공식 경로. 필수 구매·가입 조건은 아님 |
 
 [Cisco 시험 정책](https://www.cisco.com/site/us/en/learn/training-certifications/exams/policies.html)은 실제 시험 문제·답·그림을 비공개 자산으로 명시한다. C6은 기출 표방 사이트에 실린 질문의 짧은 인용이며, 공식 공개 기출 또는 자유 재배포가 허가된 문항이라는 뜻은 아니다.
-

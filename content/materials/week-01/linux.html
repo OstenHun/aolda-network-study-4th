@@ -96,8 +96,8 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
   .document-layout, .book-layout, .layout { display: block; }
   pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 }
-</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="linux.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 1주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="concepts.html">개념 교재</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html" aria-current="page">Linux 실습</a><a href="code-reading.html">코드 읽기</a><a href="worksheet.html">팀 활동</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">CCNA 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">1주차 학습 자료</p><h1>1주차 Linux 실행 안내</h1><p>같은 Linux VM에서 Python 서버와 curl을 실행해 정상 응답·404·연결 실패·복구를 비교한다. lo에서 캡처한 패킷과 출력을 대조하며, 안내의 예시와 자신이 실행한 결과를 구분한다. 개인별 준비와 수행은 별도로 확인한다.</p><nav class="page-links" aria-label="관련 자료"><a href="concepts.html">개념 교재 →</a><a href="worksheet.html">팀 활동 →</a></nav></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#읽기-순서와-준비--미팅-전-2040분">읽기 순서와 준비 — 미팅 전 20~40분</a><a href="#터미널이-처음이라면--명령을-넣기-전에">터미널이 처음이라면 — 명령을 넣기 전에</a><a href="#1-서버-시작--셸-a">1. 서버 시작 — 셸 A</a><a href="#2-정상-요청--셸-b">2. 정상 요청 — 셸 B</a><a href="#3-경로-변경--셸-b">3. 경로 변경 — 셸 B</a><a href="#4-중지와-복구--a와-b">4. 중지와 복구 — A와 B</a><a href="#5-lo-캡처와-pc-분석--추가-셸-c">5. lo 캡처와 PC 분석 — 추가 셸 C</a><a href="#6-짝-조건-독립-재현--15분">6. 짝 조건 독립 재현 — 15분</a><a href="#환경이-막힐-때">환경이 막힐 때</a><a href="#종료와-완료-증거">종료와 완료 증거</a></div></nav><article>
-<h2 id="읽기-순서와-준비--미팅-전-2040분">읽기 순서와 준비 — 미팅 전 20~40분</h2>
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="linux.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 1주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="concepts.html">개념 교재</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html" aria-current="page">Linux 실습</a><a href="code-reading.html">코드 읽기</a><a href="worksheet.html">팀 활동</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">CCNA 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">1주차 학습 자료</p><h1>1주차 Linux 실행 안내</h1><p>같은 Linux VM에서 Python 서버와 curl을 실행해 정상 응답·404·연결 실패·복구를 비교한다. lo에서 캡처한 패킷과 출력을 대조하며, 안내의 예시와 자신이 실행한 결과를 구분한다. 개인별 준비와 수행은 별도로 확인한다.</p><nav class="page-links" aria-label="관련 자료"><a href="concepts.html">개념 교재 →</a><a href="worksheet.html">팀 활동 →</a></nav></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#읽기-순서와-준비--미팅-전-2040분">읽기 순서와 준비 — 모임 전 20~40분</a><a href="#터미널이-처음이라면--명령을-넣기-전에">터미널이 처음이라면 — 명령을 넣기 전에</a><a href="#1-서버-시작--셸-a">1. 서버 시작 — 셸 A</a><a href="#2-정상-요청--셸-b">2. 정상 요청 — 셸 B</a><a href="#3-경로-변경--셸-b">3. 경로 변경 — 셸 B</a><a href="#4-중지와-복구--a와-b">4. 중지와 복구 — A와 B</a><a href="#5-lo-캡처와-pc-분석--추가-셸-c">5. lo 캡처와 PC 분석 — 추가 셸 C</a><a href="#6-짝-조건-독립-재현--15분">6. 짝이 정한 조건으로 다시 실행하기 — 15분</a><a href="#환경이-막힐-때">환경이 막힐 때</a><a href="#종료와-완료-증거">종료와 완료 증거</a></div></nav><article>
+<h2 id="읽기-순서와-준비--미팅-전-2040분">읽기 순서와 준비 — 모임 전 20~40분</h2>
 <p><a href="concepts.html">개념 교재</a>를 읽은 뒤 이 안내에 따라 실습한다. 네 상태의 상세 예상·출력·패킷은 <a href="../week-01-prestudy.html#start">개인 실습 기록</a>이나 별도 증거 파일에 남긴다. <a href="worksheet.html">팀 활동</a>에는 함께 확인한 질문·근거 위치·바뀐 설명·남은 질문을 짧게 적는다.</p>
 <p>실습은 다음 순서로 진행한다. 아래 번호는 모임 횟수가 아니라 <strong>실습 단계</strong>를 뜻한다.</p>
 <ol>
@@ -106,9 +106,9 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <li><strong>6단계:</strong> 짝과 조건 하나를 정해 바꾸고, 각자 같은 실험을 다시 실행한다.</li>
 </ol>
 <p>안내에 나온 <strong>기대 결과는 제공 코드로 예상한 동작</strong>이다. 자신이 실행해서 얻은 결과와 구분해 기록한다.</p>
-<p>모임은 사전 공동학습 1회와 오프라인 실습 1회로 운영하는 안을 제안한 상태다. 모임 배치는 진행자 안내를 따른다.</p>
+<p>개념 학습과 Linux 실습은 준비 속도에 맞춰 나누어 진행한다.</p>
 <p>실습은 본인에게 허용된 Linux VM에서 진행한다. 접속 주소·계정·인증 방식은 환경 안내를 따른다. 이 HTTP 실습을 위해 VM을 새로 만들거나 방화벽을 바꿀 필요는 없다.</p>
-<p>시작하기 전에 다음을 확인한다. 개인별로 준비를 마쳤는지는 아직 확인되지 않았으므로, 막히는 항목은 진행자와 함께 점검한다.</p>
+<p>시작하기 전에 다음을 확인한다. 막히는 항목은 진행자와 함께 점검한다.</p>
 <ul>
 <li>내 VM에 접속할 수 있는가?</li>
 <li>Python과 curl이 준비되어 있는가?</li>
@@ -121,11 +121,11 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
                 server.py와 pcap도 이 Linux에 위치
 </code></pre>
 <p>실행할 파일은 VM에도 있어야 한다. 개인 PC에서 내려받은 파일이 Linux VM에 자동으로 복사되지는 않는다. 진행자가 안내한 SFTP 또는 scp로 실습 파일을 VM에 옮긴다. 접속 주소와 파일 위치도 진행자 안내를 따른다.</p>
-<p>운영자가 관리하는 원본 문서는 Windows 프로젝트 폴더에 두고, Linux에는 실습에 쓸 사본을 전달한다.</p>
+<p>실습에 필요한 파일을 Linux에 옮긴 뒤 파일 위치를 확인한다.</p>
 <h3 id="터미널이-처음이라면--명령을-넣기-전에">터미널이 처음이라면 — 명령을 넣기 전에</h3>
 <p><strong>터미널</strong>은 명령을 입력하고 결과를 보는 창이다. <strong>셸</strong>은 입력한 명령을 해석해 실행하는 프로그램이다.</p>
 <p>아래 코드 상자의 명령을 한 줄씩 입력하고 Enter를 누른다. 화면에 보이는 <code>$</code> 같은 입력 대기 표시(프롬프트)는 복사하지 않는다.</p>
-<p>이 안내에서는 터미널 창을 A·B·C로 구분한다. A·B·C는 셸을 구별하는 이름이다.</p>
+<p>터미널 창 A·B·C는 같은 VM의 셸을 구별하는 이름이다.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
@@ -266,8 +266,8 @@ echo $?
 </ol>
 <p><a href="sample-capture.html">제공 Windows 캡처 분석 안내</a>의 포트는 <strong>59995</strong>, 필터는 <code>tcp.port == 59995</code>다. 예제 분석은 자기 Linux 직접 캡처와 구분하고 서로 다른 실행의 출력·패킷을 하나로 합치지 않는다. 직접 캡처가 막혀도 패킷 분석은 수행한다.</p>
 <p>lo는 Linux 내부 통신이다. PC Wi-Fi, VM 가상 NIC, 라우터, ARP, 보안 그룹 경유의 증거로 쓰지 않는다. 번호·개수·임시 포트는 고정 정답이 아니다.</p>
-<h2 id="6-짝-조건-독립-재현--15분">6. 짝 조건 독립 재현 — 15분</h2>
-<p>팀 안의 짝 또는 3인 그룹에서 진행한다. 한 사람이 조건을 정하면 다른 사람이 자기 Linux에서 예상·명령·실행·설명을 하고 교대한다. 3인은 실행·근거 확인·설명 역할을 바꾸며 모두 직접 수행한다. 두 모임 초안에서는 10분을 배정하며 시간이 부족하면 개인 보충으로 남긴다. 다음 중 하나만 선택한다.</p>
+<h2 id="6-짝-조건-독립-재현--15분">6. 짝이 정한 조건으로 다시 실행하기 — 15분</h2>
+<p>팀 안의 짝 또는 3인 그룹에서 진행한다. 한 사람이 조건을 정하면 다른 사람이 자기 Linux에서 예상·명령·실행·설명을 하고 교대한다. 3인은 실행·근거 확인·설명 역할을 바꾸며 모두 직접 수행한다. 시간이 부족하면 마치지 못한 실험을 개인 보충으로 남긴다. 다음 중 하나만 선택한다.</p>
 <ul>
 <li>메시지: hello → pair. 경로·포트 유지.</li>
 <li>경로: <code>/echo?message=hello</code> → <code>/missing?message=hello</code>. 쿼리(<code>message=hello</code>)와 포트는 유지한다.</li>

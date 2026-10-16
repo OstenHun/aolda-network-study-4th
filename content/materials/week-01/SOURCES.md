@@ -1,10 +1,10 @@
 # 1주차 출처와 원문 읽기 안내
 
-요약: roadmap.sh term의 article을 1주차 교재·실습에 연결한다. 필수는 포트·HTTP 원문 지정 부분 10분이며 나머지는 선택이다. 입문 글과 공식 검증 자료, 원문 조회와 실제 학습 완료를 구분한다.
+요약: roadmap.sh의 용어별 참고 글을 1주차 교재·실습과 함께 읽는다. 필수는 포트·HTTP 원문 지정 부분 10분이며 나머지는 선택이다. 입문 글과 공식 검증 자료, 원문을 읽은 것과 직접 설명·실습한 것을 구분한다.
 
 ## 필수 읽기 — 총 10분, 교재 30분 안에서 조절
 
-[한국어 교재](CONCEPTS.md)와 [원문으로 배우기](ARTICLE_LESSON.md)를 함께 사용한다. roadmap.sh term → 연결 article → 읽을 부분 → 한국어 설명 → 실습 질문의 대응은 원문 학습 교재가 관리한다. 영어 원문을 모두 번역하거나 외부 과제를 전부 풀 필요는 없다. 원문에서 못 읽은 부분은 짝과 교재의 대응 개념을 확인한다.
+[한국어 교재](CONCEPTS.md)와 [원문으로 배우기](ARTICLE_LESSON.md)를 함께 사용한다. roadmap.sh 용어 → 연결된 글 → 읽을 부분 → 한국어 설명 → 실습 질문의 대응은 원문 학습 교재가 관리한다. 영어 원문을 모두 번역하거나 외부 과제를 전부 풀 필요는 없다. 원문에서 못 읽은 부분은 짝과 교재의 대응 개념을 확인한다.
 
 | 자료 | 읽을 부분 | 시간·확인 질문 |
 | --- | --- | --- |
@@ -19,7 +19,7 @@
 
 | 자료 | 범위 | 예상 시간·용도 |
 | --- | --- | --- |
-| [Network Engineer Roadmap](https://roadmap.sh/network-engineer) | 1주차 term 11개의 article 연결은 [대응표](ARTICLE_LESSON.md#term과-article-대응표) 참고 | 선택 원문은 막힌 개념에 해당하는 부분만 읽기 |
+| [Network Engineer Roadmap](https://roadmap.sh/network-engineer) | 1주차 용어 11개의 참고 글은 [대응표](ARTICLE_LESSON.md#term과-article-대응표) 참고 | 선택 원문은 막힌 개념에 해당하는 부분만 읽기 |
 | [Kurose·Ross HTTP v9.0 PDF](https://www-net.cs.umass.edu/wireshark-labs/Wireshark_HTTP_v9.0.pdf) | 1절 The Basic HTTP GET/response interaction, 인쇄 페이지 2~3 | 선택 5분. 요청·응답의 버전·상태 찾기 |
 | [Wireshark Follow Stream](https://www.wireshark.org/docs/wsug_html_chunked/ChAdvFollowStreamSection.html) | 7.2 도입과 TCP Stream 화면 설명 | 선택 5분. 같은 흐름의 양방향 메시지 읽기 |
 | [Kurose·Ross Getting Started v9.0](https://www-net.cs.umass.edu/wireshark-labs/Wireshark_Intro_v9.0.pdf) | 인쇄 페이지 5~6의 패킷 목록·상세·바이트·필터 설명 | 10분. Wireshark가 처음일 때 화면 읽기 |
@@ -43,4 +43,3 @@ Kurose·Ross Wireshark Labs © 2005–2025 J.F. Kurose, K.W. Ross. [저자 안�
 ## 핵심 정리와 개발 질문의 근거
 
 [핵심 정리](ESSENTIALS.md)는 기존 교재와 공식 원문을 연결한 자체 설명이며 개발 사례·해설은 스터디 자체 작성이다. [공개 저장소·공식 문서 선정 기록](../INTERVIEW_REFERENCES.md)에 읽은 절·채택 범위·보류 이유를 정리했다. 회사별 실제 면접 출제·빈도는 확인하지 않았다.
-

@@ -1,6 +1,6 @@
 # 1주차 원문으로 배우기 — 요청 하나를 설명하는 다섯 질문
 
-요약: roadmap.sh의 1주차 term에 연결된 article을 개념 설명과 Linux HTTP 실습으로 잇는다. 포트·HTTP 지정 부분은 필수 10분, 나머지는 선택 읽기다. 원문 확인과 실제 실습 완료를 구분한다.
+요약: roadmap.sh의 1주차 용어에 연결된 글을 읽고 Linux HTTP 실습과 비교한다. 포트·HTTP 지정 부분은 필수 10분, 나머지는 선택 읽기다. 원문 확인과 실제 실습 완료를 구분한다.
 
 ## 이 자료를 읽는 방법
 
@@ -77,11 +77,13 @@ HTTP 클라이언트는 요청을 보내고 서버는 상태 코드와 필요한
 
 **자기 설명:** “404이므로 서버가 꺼져 있다”라는 말에 반박할 근거를 내 출력에서 찾는다. [개념 교재 6~7절](concepts.html#chapter-6)과 비교한다.
 
-## term과 article 대응표
+<a id="term과-article-대응표"></a>
 
-아래 표는 Network Engineer 로드맵의 term과 참고 article을 연결한다. 링크와 본문은 바뀔 수 있다. Temok 본문은 확인하지 못했으므로 설명의 근거로 단독 사용하지 않는다.
+## 용어별 참고 글
 
-| term | 로드맵에 연결된 article | 이번 교재에서의 적용 |
+아래 표는 Network Engineer 로드맵의 용어와 참고 글을 연결한다. 링크와 본문은 바뀔 수 있다. Temok 본문은 확인하지 못했으므로 설명의 근거로 단독 사용하지 않는다.
+
+| 용어 | 로드맵에 연결된 글 | 이번 교재에서 읽을 부분 |
 | --- | --- | --- |
 | What are Networks? | [IBM](https://www.ibm.com/think/topics/networking) | 1절 정의만 선택. 메일 전달·클라우드 상세는 제외 |
 | How does the Internet Work? | [roadmap.sh guide](https://roadmap.sh/guides/what-is-internet) · [Cloudflare](https://www.cloudflare.com/en-gb/learning/network-layer/how-does-the-internet-work/) · [MDN](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/How_does_the_Internet_work) | MDN을 1절 선택 원문으로 사용. 나머지는 대체 읽기 |
@@ -97,7 +99,6 @@ HTTP 클라이언트는 요청을 보내고 서버는 상태 코드와 필요한
 
 ## 진행자 확인과 적용 한계
 
-입문 article에는 간단한 비유·일반화·오래된 설명이 섞일 수 있다. Port 글의 80번 일반화는 RFC 9110 §4.2.1로 보완했다. AWS 글의 폼 전송을 PUT으로 설명한 예와 TLS 키 교환 절차는 이번 교재로 옮기지 않았다. HTTP 메서드 의미는 RFC 9110, 향후 TLS 1.3은 해당 명세를 기준으로 준비한다. Coursera의 IP 주소 예 `224.128.240.8`은 일반 유니캐스트 호스트 주소 예제로 사용하지 않는다. IP·서브넷의 상세 검증은 2주차 범위다.
+입문 글에는 간단한 비유·일반화·오래된 설명이 섞일 수 있다. Port 글의 80번 일반화는 RFC 9110 §4.2.1로 보완했다. AWS 글의 폼 전송을 PUT으로 설명한 예와 TLS 키 교환 절차는 이번 교재로 옮기지 않았다. HTTP 메서드 의미는 RFC 9110, 향후 TLS 1.3은 해당 명세를 기준으로 준비한다. Coursera의 IP 주소 예 `224.128.240.8`은 일반 유니캐스트 호스트 주소 예제로 사용하지 않는다. IP·서브넷의 상세 검증은 2주차 범위다.
 
 RFC 1122는 호스트·루프백·계층의 기초 설명에 사용한다. 최신 모든 프로토콜 구현을 설명하는 자료로 취급하지 않는다. 원문은 [출처 안내](SOURCES.md)에서 확인한다.
-

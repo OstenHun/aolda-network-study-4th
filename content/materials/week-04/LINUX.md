@@ -99,13 +99,13 @@ python3 transport_lab.py udp client --timeout 3
 sudo timeout 15 tcpdump -i lo -nn -s 96 -c 24 'tcp port 18404 or udp port 18404'
 ```
 
-SYN/SYN-ACK/ACK, 데이터의 seq·ack·length, FIN/ACK 또는 실제 나타난 종료를 같은 TCP 흐름으로 짝짓는다. UDP에서는 TCP 핸드셰이크가 있는지 구별한다. 15초·24패킷 제한은 조회용이며 Ctrl+C로 먼저 멈춰도 된다. 내용이 짧아 캡처 개수가 적을 수 있다. 루프백 캡처는 Ethernet ARP나 PC→VM 경로의 근거가 아니다. 재전송이 안 보이면 [합성 시간축](CONCEPTS.md#reliability)으로 손실을 분석한다.
+SYN/SYN-ACK/ACK, 데이터의 seq·ack·length, FIN/ACK 또는 실제 나타난 종료를 같은 TCP 흐름으로 짝짓는다. UDP에서는 TCP 핸드셰이크가 있는지 구별한다. 15초·24패킷 제한은 조회용이며 Ctrl+C로 먼저 멈춰도 된다. 내용이 짧아 캡처 개수가 적을 수 있다. 루프백 캡처는 Ethernet ARP나 PC→VM 경로의 근거가 아니다. 재전송이 안 보이면 [가상 시간축](CONCEPTS.md#reliability)으로 손실을 분석한다.
 
 <span id="code-reading"></span>
 
 ## 코드 읽기 · 입력에서 종료까지
 
-[실제 Python 원문](../../labs/week-04/transport_lab.py)을 옆에 둔다. 코드를 새로 구현하는 과제는 아니다. 필수 참가자 코드는 이 파일 하나이며 선택 캡처 명령은 코드 실행과 별개다.
+[실제 Python 원문](../../labs/week-04/transport_lab.py)을 옆에 둔다. 코드를 새로 구현하는 과제는 아니다. 필수 실습에 필요한 코드는 이 파일 하나이며 선택 캡처 명령은 코드 실행과 별개다.
 
 | 단계·함수 | 하는 일과 처음 읽을 문법 |
 | --- | --- |
@@ -124,7 +124,7 @@ SYN/SYN-ACK/ACK, 데이터의 seq·ack·length, FIN/ACK 또는 실제 나타난 
 
 파일 없음은 현재 폴더·파일명을, 연결 거절은 실행 위치·TCP 서버 대기·양쪽 포트를, 주소 사용 중은 `ss`와 본인 프로세스를 확인한다. 시간 초과는 서버 출력·시작 순서·같은 VM 여부를 확인한다. 다른 사람의 프로세스를 임의 종료하지 않는다. 본인 서버만 실행 셸에서 Ctrl+C로 끝내고 `ss`로 본인 대기 소켓이 남지 않았는지 확인한다. TIME-WAIT는 프로세스가 계속 실행된다는 뜻이 아니다.
 
-본인 정상/조건 변경/복구 출력과 실행 위치를 한 번 보관한다. 제공 분석만 했다면 직접 실행 보충을 남긴다. [학습 홈](README.md) · [복습](REVIEW.md) · [공식 출처](SOURCES.md).
+본인 정상/조건 변경/복구 출력과 실행 위치를 한 번 보관한다. 제공 자료만 분석했다면 직접 실행할 실습을 보충 항목에 적는다. [학습 홈](README.md) · [복습](REVIEW.md) · [공식 출처](SOURCES.md).
 
 ## C04 · 앞선 근거와 이어 설명하기
 

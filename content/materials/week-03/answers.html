@@ -144,7 +144,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </tbody></table></div>
 <p><code>FAILED</code>는 이웃 도달성 확인 실패 상태다. HTTP 프로세스 중지까지 증명하지 않는다. 경로·L2 전달·정책·대상 상태 등 추가 근거가 필요하다. 비 Ethernet 장치·특수 경로는 단순 모형에서 분리한다.</p>
 <h3 id="q7--ping과-http">Q7 — ping과 HTTP</h3>
-<p>HTTP 404가 관찰됐으므로 해당 요청의 응용 응답 경로가 있었다. Echo Reply가 없다는 것은 제한된 ping 관찰 결과다. ICMP 제한·손실·경로 차이 등은 가설로 두고 근거 없이 한 원인으로 확정하지 않는다.</p>
+<p>HTTP 404가 관찰됐으므로 해당 요청에 대한 응답이 돌아왔다. Echo Reply가 없다는 것은 제한된 ping 관찰 결과다. ICMP 제한·손실·경로 차이 등은 가설로 두고 근거 없이 한 원인으로 확정하지 않는다.</p>
 <p>ping 응답은 그 시점의 ICMP 왕복 근거이며 TCP port의 대기·응용 정상까지 말해 주지 않는다. curl 연결 거부가 있으면 정확한 대상 IP·port·바인딩·대기 소켓·관련 정책을 허가된 조회로 확인한다. 1주차처럼 서버 로그·<code>ss</code>·curl 출력이 판단 근거다. ICMP Echo는 TCP/UDP port를 사용하지 않으며 identifier·sequence로 요청·응답을 대응한다.</p>
 <h3 id="q8--독립-설명과-증거">Q8 — 독립 설명과 증거</h3>
 <p>정답 그림의 값은 사람마다 다르다. 다음 기준으로 확인한다.</p>
@@ -159,8 +159,8 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <h2 id="개발-질문-해설">개발 질문 해설</h2>
 <p><a href="essentials.html">핵심 정리의 자체 문항</a>을 먼저 설명한 뒤 비교한다.</p>
 <ol>
-<li><strong>W03-D1:</strong> HTTP 응답은 수신했지만 요청한 자원은 404로 표현됐다. ICMP는 이번 시도에 Echo Reply가 없고 원인은 미확인이다. 새 ARP가 없다는 사실은 캐시·관찰 시점과 함께 해석한다. <code>REACHABLE</code> 이웃은 다음 홉의 최근 도달성 단서이며 원격 HTTP 앱의 건강 상태가 아니다.</li>
-<li><strong>W03-D2:</strong> 아니다. <code>STALE</code>은 해당 매핑의 도달성 확인이 오래됐다는 상태이며 서버 프로세스 사망을 뜻하지 않는다. 허가된 서비스 요청·로그·경로 등으로 확인한다.</li>
+<li><strong>W03-D1:</strong> HTTP 응답은 수신했지만 요청한 자원은 404로 표현됐다. ICMP는 이번 시도에 Echo Reply가 없고 원인은 미확인이다. 새 ARP가 없다는 사실은 캐시·관찰 시점과 함께 해석한다. <code>REACHABLE</code> 이웃은 다음 홉의 최근 도달성 단서이며 원격 HTTP 앱이 정상인지 알려 주지는 않는다.</li>
+<li><strong>W03-D2:</strong> 아니다. <code>STALE</code>은 해당 매핑의 도달성 확인이 오래됐다는 상태이며 서버 프로세스가 종료됐다는 뜻은 아니다. 허가된 서비스 요청·로그·경로 등으로 확인한다.</li>
 <li><strong>W03-D3:</strong> 요청 대상·프록시 구성·서버 로그를 맞추고, 경로의 다음 홉과 캡처 NIC·이웃표·시각을 대조한다. 캐시 초기화를 기본 과제로 추가하지 않는다. 확인하지 못하면 추정으로 남긴다.</li>
 </ol>
 <p><strong>흔한 오답:</strong> ‘ping 실패=서버 중지’, ‘ARP 미관찰=ARP 불필요’, ‘게이트웨이 MAC=최종 서버 MAC’. <strong>설명 확인:</strong> 도구별 관찰과 한계를 구분하고 다음에 볼 증거를 제시한다. 실제로 실행하지 않은 사례는 자체 실측으로 기록하지 않는다.</p>

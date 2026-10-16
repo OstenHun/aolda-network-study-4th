@@ -98,7 +98,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 }
 </style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="facilitator.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 진행자 안내 — 질문에서 기존 VM 실습으로</h1><p>중심 질문 하나를 공동 검색·공부·한 명 설명·조건 변경으로 다루고 기존 VM의 P1 조회·P2 계산/검산으로 확인한다. 공식 자료와 계산·조회 결과를 연결해 설명을 확인하며 격리 마스크 변경은 선택으로 다룬다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#이번-주-목표">이번 주 목표</a><a href="#시작-전-준비">시작 전 준비</a><a href="#사전-공동학습-60분--같이-찾아-답하기">사전 공동학습 60분 — 같이 찾아 답하기</a><a href="#오프라인-60분--p1p2와-개인-확인">오프라인 60분 — P1·P2와 개인 확인</a><a href="#선택-데모와-완료-판정">선택 데모와 완료 판정</a><a href="#다음-주로-이어가기">다음 주로 이어가기</a></div></nav><article>
 <h2 id="이번-주-목표">이번 주 목표</h2>
-<p>중심 질문은 “IP가 비슷한 두 VM은 같은 망으로 바로 통신할 수 있을까?”다. 학부 개념은 CIDR/비트·주소 범위, 운영 연결은 자기 VM의 주소·경로·관찰 범위, 면접식 확인은 이유→접두사 변경→다음 진단이다.</p>
+<p>중심 질문은 “IP가 비슷한 두 VM은 같은 망으로 바로 통신할 수 있을까?”다. CIDR과 비트로 주소 범위를 계산하고 자기 VM의 주소·경로를 읽는다. 설명을 확인할 때는 이유를 묻고, 접두사를 바꾼 뒤 무엇을 더 확인해야 할지 묻는다.</p>
 <p><a href="worksheet.html">공동 질문</a> → <a href="articles.html">공식 자료 찾기</a>·<a href="essentials.html">핵심 개념</a> → <a href="linux.html">P1·P2</a> → 자기 설명 → <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>로 연결한다. 핵심 3개·혼동 2개·개발 사례 1개는 이 흐름 안에서 재사용한다. 답이 막히면 해당 교재 절로 돌아가며 별도 발표·필수 문항을 더하지 않는다.</p>
 <h2 id="시작-전-준비">시작 전 준비</h2>
 <p>둘 또는 셋이 함께 자료를 읽고 설명·근거 확인 역할을 나눈다. 설명자는 질문이나 회차마다 바꾼다. 아래 시간표는 각 60분으로 진행할 때의 예시이며 이해와 실습 속도에 맞춰 조정한다.</p>
@@ -179,7 +179,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <tr>
 <td>50~55분</td>
 <td>필요한 <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>과 비교하고 바뀐 설명 확인</td>
-<td>정답 열람과 독립 설명 구별</td>
+<td>해설 확인과 독립 설명 구별</td>
 </tr>
 <tr>
 <td>55~60분</td>
@@ -187,9 +187,9 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <td>다음에 확인할 조건</td>
 </tr>
 </tbody></table></div>
-<p>필수는 두 실험 묶음과 개인 확인이다. 계산/조회가 밀리면 보조 질문·시험 연계·선택 데모를 줄인다. 환경 때문에 제공 자료로 공부했다면 개념 확인과 본인 실행 미완료를 나눈다. 긴 전체 발표를 추가해 실습을 밀어내지 않는다.</p>
+<p>두 실험을 진행하고 각자의 이해를 확인하는 것이 필수다. 계산이나 조회에 시간이 더 걸리면 보조 질문·시험 연계·선택 데모를 줄인다. 환경 때문에 제공 자료로 공부했다면 개념 확인과 본인 실행 미완료를 나눈다. 긴 전체 발표를 추가해 실습을 밀어내지 않는다.</p>
 <h2 id="선택-데모와-완료-판정">선택 데모와 완료 판정</h2>
-<p>격리 마스크 변경은 필수 과제가 아니다. 미선택/미실시는 필수 미완료로 기록하지 않는다. 실행을 선택한 경우 <a href="linux.html">Linux 안내</a>의 격리 네임스페이스/veth에서 C1→A만 <code>/26</code>→C1 복구와 자원 정리를 확인한다. 기본 시연의 조회/요청 방향은 A→B이며 B→A를 실측했다고 쓰지 않는다. 실제 관찰하지 못한 동작은 예상/제공 분석으로 구분한다.</p>
+<p>격리 마스크 변경은 필수 과제가 아니다. 선택 실험을 하지 않았다는 이유로 필수 실습을 미완료로 기록하지 않는다. 실행을 선택한 경우 <a href="linux.html">Linux 안내</a>의 격리 네임스페이스/veth에서 C1→A만 <code>/26</code>→C1 복구와 자원 정리를 확인한다. 기본 시연의 조회/요청 방향은 A→B이며 B→A를 실측했다고 쓰지 않는다. 실제 관찰하지 못한 동작은 예상/제공 분석으로 구분한다.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
@@ -200,7 +200,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </thead>
 <tbody><tr>
 <td>개념/추론</td>
-<td>주소·접두사·경로·응답을 구별하고 C1/C2 양쪽 범위를 이유와 설명</td>
+<td>주소·접두사·경로·응답을 구별하고 C1/C2 양쪽 범위와 그 이유를 설명</td>
 <td>숫자만 맞힘, 같은 범위=통신 성공으로 단정</td>
 </tr>
 <tr>
@@ -214,7 +214,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <td>본인 검산/조건 변경 미실시</td>
 </tr>
 <tr>
-<td>설명/다음 진단</td>
+<td>설명/다음에 확인할 것</td>
 <td>소그룹 후속 질문에 현재 근거와 더 볼 것을 답함</td>
 <td>발표자 답을 읽기만 함, 조회를 실제 응답으로 표시</td>
 </tr>

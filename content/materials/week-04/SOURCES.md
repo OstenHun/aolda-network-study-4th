@@ -1,6 +1,6 @@
 # 4주차 · 공식 출처와 읽을 범위
 
-요약: TCP·UDP와 소켓 예제를 확인할 공식 절을 연결한다. 긴 원문을 복제하지 않고 자체 질문·합성 시간축으로 설명하며 표준의 역할과 실제 운영체제 출력의 차이를 구별한다.
+요약: TCP·UDP와 소켓 예제를 확인할 공식 절을 연결한다. 긴 원문을 복제하지 않고 자체 질문·가상 시간축으로 설명하며 표준의 역할과 실제 운영체제 출력의 차이를 구별한다.
 
 ## 함께 읽을 출발점
 
@@ -18,11 +18,10 @@
 - [RFC 5681 §2·§3](https://www.rfc-editor.org/rfc/rfc5681.html#section-2): 수신 윈도와 혼잡 윈도의 역할. 이번에는 흐름/혼잡 제어의 대상을 구별하며 알고리즘·성능 계산은 후속으로 둔다.
 - [Python 3.12 socket API](https://docs.python.org/3.12/library/socket.html): `accept`, `recv`, `recvfrom`, `sendall`, `sendto`, `settimeout`, 컨텍스트 관리자. 반환값·시간 제한·예외 처리를 확인한다.
 - [iproute2 ss(8)](https://man7.org/linux/man-pages/man8/ss.8.html): `-t`, `-u`, `-l`, `-a`, `-n`과 포트 필터. 배포판 버전별 출력 차이는 현장 도움말과 대조한다.
-- [roadmap.sh Network Engineer](https://roadmap.sh/network-engineer): Core Protocols의 TCP/UDP 학습 위치. 기술 세부의 판정은 위 RFC·API 원문과 직접 관찰을 따른다.
+- [roadmap.sh Network Engineer](https://roadmap.sh/network-engineer): Core Protocols의 TCP/UDP 학습 위치. 기술 내용을 확인할 때는 위 RFC·API 원문과 직접 관찰한 결과를 대조한다.
 
 ## 자체 자료의 성격
 
-W04-D1~D3·복습 아홉 문항·공동 질문·SEQ/ACK 시간축·소켓 코드는 이 스터디의 자체 자료다. 기업 기출이나 공식 채용 범위로 표시하지 않는다. 기존 TCP/RTT 초안의 가정과 질문 ID를 유지하며 연결 이후 내용을 추가했다. 패킷 표는 실제 캡처가 아니며 예제 포트·루프백 주소는 실제 서비스 접속 값이 아니다.
+W04-D1~D3·복습 아홉 문항·공동 질문·SEQ/ACK 시간축·소켓 코드는 이 스터디의 자체 자료다. 기업 기출이나 공식 채용 범위로 표시하지 않는다. 패킷 표는 실제 캡처가 아니며 예제 포트·루프백 주소는 실제 서비스 접속 값이 아니다.
 
 [교재](CONCEPTS.md) · [실습 코드 읽기](LINUX.md#code-reading) · [학습 홈](README.md)
-
