@@ -2,6 +2,8 @@
 from pathlib import Path, PurePosixPath
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
+from html import escape
+import xml.etree.ElementTree as ET
 import json
 import re
 import shutil
@@ -16,7 +18,8 @@ from lesson_html import LessonHTML
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
 MD_LINK = re.compile(r'\[[^\]]*\]\(([^\s)]+)(?:\s+"[^\"]*")?\)')
-HEAD = '<meta name="robots" content="noindex,nofollow">'
+HEAD = '<meta name="robots" content="index,follow">'
+SITE_URL = 'https://ostenhun.github.io/aolda-network-study-4th/'
 ALLOWED_SUFFIXES = {".html", ".md", ".txt", ".py", ".sh", ".mts", ".pcapng", ".svg"}
 
 
@@ -197,7 +200,29 @@ def make_payload(catalog=None, content=None):
     home = (ROOT / "tools/templates/study-home.html").read_text(encoding="utf-8")
     payload["index.html"] = home.replace("__HEAD__", HEAD).replace('__COURSE_PATH__', home_courses(catalog)).encode()
     apply_theme(payload, ROOT, catalog)
+    apply_search_metadata(payload)
     return payload
+
+
+def apply_search_metadata(payload):
+    """Index public lessons; keep the compatibility redirect out of search."""
+    namespace = 'http://www.sitemaps.org/schemas/sitemap/0.9'
+    sitemap = ET.Element('urlset', xmlns=namespace)
+    for name in sorted(payload):
+        if not name.endswith('.html'):
+            continue
+        html = payload[name].decode()
+        if 'http-equiv="refresh"' in html:
+            continue
+        # Legacy source pages retain their historical metadata; published pages
+        # share the current public indexing policy without changing lesson DOM.
+        html = re.sub(r'<meta\b(?=[^>]*\bname=[\"\']robots[\"\'])[^>]*>', '', html, flags=re.I)
+        html = re.sub(r'<link\b(?=[^>]*\brel=[\"\']canonical[\"\'])[^>]*>', '', html, flags=re.I)
+        url = SITE_URL + ('' if name == 'index.html' else name)
+        metadata = HEAD + '<link rel="canonical" href="' + escape(url, quote=True) + '">'
+        payload[name] = html.replace('</head>', metadata + '</head>', 1).encode()
+        ET.SubElement(ET.SubElement(sitemap, 'url'), 'loc').text = url
+    payload['sitemap.xml'] = ET.tostring(sitemap, encoding='utf-8', xml_declaration=True)
 
 
 def validate_links(payload):

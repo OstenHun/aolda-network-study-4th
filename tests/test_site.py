@@ -5,6 +5,7 @@ import json
 import re
 import sys
 import unittest
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
@@ -123,6 +124,25 @@ class IntegratedAuthoring(unittest.TestCase):
                     self.assertIn(element, output, name)
             for script in re.findall(r'<script\b[\s\S]*?</script>', raw.decode()):
                 self.assertIn(script, output, name)
+
+    def test_public_indexing_and_sitemap(self):
+        expected_urls = set()
+        for name in self.pages:
+            html = self.payload[name].decode()
+            if 'http-equiv="refresh"' in html:
+                self.assertIn('noindex,nofollow', html)
+                continue
+            self.assertNotIn('noindex', html, name)
+            self.assertNotIn('nofollow', html, name)
+            self.assertEqual(html.count('name="robots"'), 1, name)
+            url = builder.SITE_URL + ('' if name == 'index.html' else name)
+            self.assertEqual(html.count('rel="canonical"'), 1, name)
+            self.assertIn('rel="canonical" href="' + url + '"', html, name)
+            expected_urls.add(url)
+        sitemap = ET.fromstring(self.payload['sitemap.xml'])
+        locations = [node.text for node in sitemap.findall('{*}url/{*}loc')]
+        self.assertEqual(len(locations), len(set(locations)))
+        self.assertEqual(set(locations), expected_urls)
 
     def test_missing_link_and_anchor_fail(self):
         for link in ('missing.html', 'concepts.html#missing-anchor'):

@@ -22,6 +22,16 @@
 
 배포 후 홈·주차별 깊은 링크·앵커·검색·모바일 메뉴·실습 모형·답안 Markdown 다운로드를 확인한다. 관련 전체 페이지를 100% 읽기 크기로 확인하고, 화면 변경이 없을 때도 데스크톱과 모바일에서 경로·자산 누락을 점검한다. 소스는 공개되지만 배포에는 `dist/`만 포함한다.
 
+## 검색과 AI 학습 활용
+
+2026-10-16 검색·AI 학습 활용 요청에 따라 공개 학습 페이지는 검색 색인 허용을 기준으로 한다. 빌드는 기존 HTML의 과거 `noindex,nofollow`를 공개 출력에서 `index,follow`로 바꾸고, Astro 교재에도 같은 기준을 적용한다. 기존 RTT 이동 페이지는 검색에서 제외하며 사이트맵에도 넣지 않는다. 내부 원본이나 비공개 사이트의 접근 범위는 이 설정으로 바뀌지 않는다.
+
+빌드 시 공개 HTML별 대표 주소(`canonical`)와 [사이트맵](https://ostenhun.github.io/aolda-network-study-4th/sitemap.xml)을 생성한다. 홈의 대표 주소는 기본 학습 주소이고 나머지는 실제 `.html` 주소다. 출처 Markdown·코드·캡처를 검색용 별도 페이지로 만들거나 수정 시각을 임의로 넣지 않는다. README는 학습 대상·주제와 질문·자료의 역할·학습 순서·원문과 공식 출처를 안내해 사람과 검색 시스템이 공개 자료의 범위를 파악할 수 있게 한다. AI 학습 도구의 사용법이나 프롬프트 모음으로 구성하지 않는다.
+
+[Google의 AI 검색 안내](https://developers.google.com/search/docs/appearance/ai-features)에 따르면 AI Overviews·AI Mode의 참고 링크가 되려면 검색 색인과 스니펫 표시가 가능해야 한다. 특별한 AI 파일이나 전용 구조화 데이터는 필수가 아니며, 요구사항을 갖춰도 수집·색인·노출은 보장되지 않는다. 이 안내는 Google 검색의 AI 기능에 관한 것으로 모든 AI 서비스의 동작을 뜻하지 않는다. Gemini의 학습·일부 grounding 제어는 [Google-Extended 안내](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers#google-extended)를 별도로 따른다.
+
+배포 후 실제 HTML의 robots·canonical과 사이트맵 응답을 확인한다. Search Console에 소유권 확인이 되어 있다면 사이트맵 제출과 URL 검사로 수집·색인 상태를 확인할 수 있다. 빌드 성공이나 검색 허용 설정만으로 실제 색인·AI 인용 완료를 기록하지 않는다. 프로젝트 Pages의 하위 경로에 놓인 `robots.txt`는 호스트 루트의 규칙을 대신할 수 없으므로 형식적인 파일을 추가하지 않는다.
+
 ## 이전과 복구
 
 2026-10-16 사용자 요청에 따라 GitHub Pages만 공개 운영한다. 기존 ChatGPT 사이트는 소유자만 접근하도록 비공개 전환했고 공개 안내·공유에는 Pages 주소를 사용한다. 기존 소스·버전 이력은 보관하며 비공개 주소에서 Pages로 자동 리디렉션하지 않는다. 기존 사이트의 재공개는 별도 요청 때 진행한다.
