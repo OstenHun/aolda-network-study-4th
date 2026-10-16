@@ -1,0 +1,40 @@
+{
+  "a": {
+    "router": false,
+    "addresses": ["192.0.2.10"],
+    "neighbors": {"192.0.2.1": "r1"},
+    "routes": [
+      {"prefix": "192.0.2.0/24", "via": "direct", "kind": "connected"},
+      {"prefix": "0.0.0.0/0", "via": "192.0.2.1", "kind": "static"}
+    ]
+  },
+  "r1": {
+    "router": true,
+    "addresses": ["192.0.2.1", "198.51.100.1"],
+    "neighbors": {"192.0.2.10": "a", "198.51.100.2": "r2"},
+    "routes": [
+      {"prefix": "192.0.2.0/24", "via": "direct", "kind": "connected"},
+      {"prefix": "198.51.100.0/30", "via": "direct", "kind": "connected"},
+      {"prefix": "203.0.113.0/24", "via": "198.51.100.2", "kind": "static"}
+    ]
+  },
+  "r2": {
+    "router": true,
+    "addresses": ["198.51.100.2", "203.0.113.1"],
+    "neighbors": {"198.51.100.1": "r1", "203.0.113.20": "b"},
+    "routes": [
+      {"prefix": "198.51.100.0/30", "via": "direct", "kind": "connected"},
+      {"prefix": "203.0.113.0/24", "via": "direct", "kind": "connected"},
+      {"prefix": "192.0.2.0/24", "via": "198.51.100.1", "kind": "static"}
+    ]
+  },
+  "b": {
+    "router": false,
+    "addresses": ["203.0.113.20"],
+    "neighbors": {"203.0.113.1": "r2"},
+    "routes": [
+      {"prefix": "203.0.113.0/24", "via": "direct", "kind": "connected"},
+      {"prefix": "0.0.0.0/0", "via": "203.0.113.1", "kind": "static"}
+    ]
+  }
+}
