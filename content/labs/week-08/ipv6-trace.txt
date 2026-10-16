@@ -1,0 +1,24 @@
+Self-authored, simplified examples; not Linux output or packet measurements.
+L and E are DIFFERENT environments, not one continuous capture.
+
+L: one host, loopback lo, IPv6 enabled; no Ethernet neighbour resolution.
+Example address: inet 127.0.0.1/8 scope host lo
+Example address: inet6 ::1/128 scope host lo
+Example local route lookup: local ::1 dev lo src ::1
+L1 lo ::1 -> ::1 ICMPv6 Echo Request id=8 seq=1
+L2 lo ::1 -> ::1 ICMPv6 Echo Reply   id=8 seq=1
+
+E: isolated Ethernet link, documentation addresses, empty neighbour cache.
+A=2001:db8:8:1::10/64 MAC 02:00:00:00:00:10
+B=2001:db8:8:1::20/64 MAC 02:00:00:00:00:20
+Example link-local address: fe80::10/64 scope link (range fe80::/10)
+Example on-link route: 2001:db8:8:1::/64 dev eth0
+No default IPv6 route is assumed. No external connectivity is claimed.
+E1 A -> ff02::1:ff00:20 NS target=2001:db8:8:1::20
+E2 B -> A NA target=2001:db8:8:1::20 link-address=02:00:00:00:00:20
+E3 A -> B ICMPv6 Echo Request id=9 seq=1
+E4 B -> A ICMPv6 Echo Reply   id=9 seq=1
+NS=Neighbor Solicitation, NA=Neighbor Advertisement (ICMPv6 NDP).
+Echo Request/Reply are ICMPv6 but are not neighbour-address queries.
+An existing valid neighbour entry can remove the need for E1/E2.
+No router discovery, address configuration or outside IPv6 is demonstrated.

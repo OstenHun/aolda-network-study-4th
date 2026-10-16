@@ -1,0 +1,37 @@
+Self-authored teaching events; not a capture or executable program.
+Data units: 0,1,2,3. Only first DATA 1 is lost; every ACK arrives.
+Window=4 for GBN/SR. No number wrapping, checksum errors, fast retransmit,
+congestion control or extra reordering. Gaps below are event order, not time.
+ACK 0 returns before recovery timeout. SR ACK 2/3 arrive before their timers.
+
+stop-and-wait: ACK n confirms unit n; only one outstanding unit.
+S0 send 0 -> receive 0 -> ACK 0
+S1 send 1 -> LOST -> timeout 1
+S2 resend 1 -> receive 1 -> ACK 1
+S3 first send 2 -> receive 2 -> ACK 2
+S4 first send 3 -> receive 3 -> ACK 3
+Retransmitted set={1}; 2/3 were not outstanding when 1 was lost.
+
+GBN: ACK n confirms all units through n. Receiver discards out-of-order units.
+One timer for oldest unacknowledged unit; restart when base advances.
+G0 send 0,1,2,3
+G1 receive 0 -> ACK 0; DATA 1 lost
+G2 receive 2 -> discard -> ACK 0
+G3 receive 3 -> discard -> ACK 0
+G4 ACK 0 has advanced sender base to 1; timeout for base 1
+G5 resend outstanding 1,2,3 -> receive in order -> ACK 1,2,3
+Retransmitted set={1,2,3}.
+
+SR: ACK n confirms unit n only. Receiver buffers in-window out-of-order units.
+Independent per-unit timers; ACK 2/3 cancel those timers before expiration.
+R0 send 0,1,2,3
+R1 receive 0 -> deliver 0 -> ACK 0; DATA 1 lost
+R2 receive 2 -> buffer -> ACK 2
+R3 receive 3 -> buffer -> ACK 3
+R4 timeout unit 1 -> resend 1 -> ACK 1
+R5 receiver can now deliver 1,2,3 in order
+Retransmitted set={1}.
+
+Changed condition: only last unit 3 lost; ACK 0..2 arrive before timeout.
+All three retransmitted sets={3}.
+Actual TCP uses byte sequence numbers/cumulative ACK, not this unit ACK notation.
