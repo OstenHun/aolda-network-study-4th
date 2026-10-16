@@ -6,8 +6,33 @@ def authoring_example(builder):
     catalog = copy.deepcopy(builder.read_catalog(builder.ROOT))
     content = builder.collect_content()
     prefix = 'materials/authoring-example/'
-    content[prefix + 'CONCEPTS.md'] = content['materials/week-04/CONCEPTS.md']
-    content[prefix + 'ANSWERS.md'] = content['materials/week-04/ANSWERS.md']
+    content[prefix + 'INDEX.md'] = '''# 비공개 심화 시험 홈
+
+요약: index.html 경로와 심화 등록의 연결을 확인하는 비공개 입력이다.
+
+## 읽기 순서
+
+[교재](CONCEPTS.md) → [복습](REVIEW.md) → [해설](ANSWERS.md).
+'''.encode()
+    # Keep this fixture independent of a course's growing set of sibling links.
+    content[prefix + 'CONCEPTS.md'] = '''# TCP 연결 비용 읽기
+
+요약: 연결 수립의 왕복 시간과 메시지 수를 구별하는 비공개 시험 입력이다.
+
+<span id="rtt"></span>
+
+## 연결 준비
+
+계산 모형을 읽고 [분리 해설](ANSWERS.md)로 확인한다.
+'''.encode()
+    content[prefix + 'ANSWERS.md'] = '''# 연결 비용 해설
+
+요약: 비공개 시험 문항의 계산 가정을 확인한다.
+
+## 조건 확인
+
+[교재](CONCEPTS.md#rtt)로 돌아간다.
+'''.encode()
     content[prefix + 'REVIEW.md'] = '''# TCP 연결 비용 복습
 
 요약: RTT와 서버 상태를 구별해 설명하고 조건을 바꿔 확인한다. 답안은 개인 파일로 내려받으며 자동 저장되거나 제출되지 않는다.
@@ -35,10 +60,10 @@ def authoring_example(builder):
 '''.encode()
     catalog['groups'].append({
         'id': 'authoring-example', 'label': 'TCP 연결 비용',
-        'prefix': prefix, 'entry': prefix + 'concepts.html',
+        'prefix': prefix, 'entry': prefix + 'index.html',
         'section': 'advanced', 'number': '예시', 'sidebar_title': 'TCP 연결 비용',
         'nav': [], 'home': {'title': 'TCP 연결 비용 읽기', 'description_html': 'RTT · 조건 변경 · 설명과 복습', 'tag': '교재 · 복습', 'arrow': '→'}
     })
-    for source, output, kind, label in [('CONCEPTS', 'concepts', 'lesson', '개념 교재'), ('REVIEW', 'review', 'review', '복습 문제'), ('ANSWERS', 'answers', 'lesson', '분리 해설')]:
+    for source, output, kind, label in [('INDEX', 'index', 'lesson', '시험 홈'), ('CONCEPTS', 'concepts', 'lesson', '개념 교재'), ('REVIEW', 'review', 'review', '복습 문제'), ('ANSWERS', 'answers', 'lesson', '분리 해설')]:
         catalog['lessons'].append({'id': 'example-' + output, 'source': prefix + source + '.md', 'output': prefix + output + '.html', 'group': 'authoring-example', 'kind': kind, 'label': label})
     return catalog, content

@@ -3,7 +3,7 @@
 요약: 이 저장소는 공개 교재·실습과 GitHub Pages의 정본이다. 내부 기록·접속 정보는 넣지 않고, 교재의 조건과 실제 관찰을 보존하며 빌드·화면·기능을 확인한다.
 
 - 먼저 README.md와 docs/OPERATIONS.md를 읽는다.
-- 기존 `content/`의 Markdown과 관련 HTML을 함께 대조한다. 새 교재는 docs/AUTHORING.md를 따라 Markdown과 config/site.json으로 생성하며 HTML을 중복 작성하지 않는다. `dist/`는 직접 수정하지 않는다.
+- 기존 `content/`의 Markdown과 관련 HTML을 함께 대조한다. 사용자 지침(2026-10-16)에 따라 새 주차는 Astro를 기본으로 하며 docs/AUTHORING.md를 따라 Markdown과 config/site.json으로 생성한다. HTML을 중복 작성하지 않고 `dist/`는 직접 수정하지 않는다. 기존 정상 교재를 일괄 이전하지 않는다.
 - 기존 1주차 교재와 실제 수행 이력은 보존하고, 학습 방식 개편은 2주차 이후 요청 범위에만 적용한다.
 - 참가자 이름·명단·시간표, 실제 IP·VPN·VM 식별자, 원시 운영 증거, 내부 링크·자격 증명은 커밋하지 않는다.
 - 예제·제공 캡처·브라우저 모형과 실제 참가자 수행을 구분한다. 없는 결과를 만들지 않는다.

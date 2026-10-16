@@ -41,7 +41,7 @@ class CatalogContracts(unittest.TestCase):
             builder.validate_catalog(self.catalog, self.content)
 
     def test_summary_and_review_ids(self):
-        source = self.catalog['lessons'][1]['source']
+        source = next(page['source'] for page in self.catalog['lessons'] if page['id'] == 'example-review')
         self.content[source] = ('# 복습\n\n요약: ' + '가' * 201 + '\n\n## Q1. 질문\n').encode()
         with self.assertRaises(ValueError):
             builder.validate_catalog(self.catalog, self.content)
@@ -59,7 +59,10 @@ class IntegratedAuthoring(unittest.TestCase):
 
     def test_complete_site_links_and_anchors(self):
         page_count, link_count = builder.validate_links(self.payload)
-        self.assertEqual(page_count, 65)
+        expected = {name for name in self.content if name.endswith('.html')}
+        expected.add('index.html')
+        expected.update(page['output'] for page in self.catalog['lessons'])
+        self.assertEqual(page_count, len(expected))
         self.assertGreater(link_count, 3471)
 
     def test_new_pages_in_home_sidebar_and_search(self):
@@ -80,7 +83,7 @@ class IntegratedAuthoring(unittest.TestCase):
         self.assertIn('href="answers.html"', review)
         self.assertIn('download href="CONCEPTS.md"', review)
         self.assertIn('&lt;a href="ANSWERS.md"&gt;', review)
-        self.assertIn('1~3', review)
+        self.assertIn('1~3', review)  # Literal lesson text, not the course count.
 
     def test_review_fields_tables_and_script(self):
         review = self.payload['materials/authoring-example/review.html'].decode()
@@ -89,6 +92,25 @@ class IntegratedAuthoring(unittest.TestCase):
         self.assertIn('class="table-scroll"', review)
         self.assertIn('../../assets/lesson-answers.js', review)
         self.assertIn('rtt', self.pages['materials/authoring-example/concepts.html'].ids)
+
+    def test_nested_index_has_final_relative_links(self):
+        index = self.payload['materials/authoring-example/index.html'].decode()
+        self.assertIn('href="concepts.html"', index)
+        self.assertIn('href="review.html"', index)
+        self.assertIn('href="../../assets/lesson.css"', index)
+        self.assertNotIn('example-index.html', self.payload)
+
+    def test_official_brand_assets_on_deep_pages(self):
+        for name in ('index.html', 'materials/week-01/concepts.html', 'materials/week-04/review.html'):
+            html = self.payload[name].decode()
+            self.assertNotIn('study-logo-mark', html)
+            self.assertIn('aria-label="아올다 학습 홈"', html)
+            self.assertEqual(html.count('rel="icon"'), 1)
+            self.assertIn('assets/aolda-logo.svg', html)
+            self.assertIn('assets/aolda-icon.svg', html)
+        for name in ('aolda-logo.svg', 'aolda-icon.svg'):
+            original = (ROOT / 'content/assets' / name).read_bytes()
+            self.assertEqual(self.payload['assets/' + name], original)
 
     def test_old_sources_body_scripts_and_styles_unchanged(self):
         baseline = builder.collect_content()

@@ -1,0 +1,131 @@
+# 4주차 · 기존 VM에서 TCP·UDP 확인하기
+
+요약: 기존 Linux VM의 루프백에서 작은 Python 예제를 실행하고 메시지 경계·소켓 상태를 비교한다. 포트 하나를 바꾸고 복구하며 앱 출력·패킷·제공 시간축의 증거 범위를 구별한다.
+
+## 준비와 실행 위치
+
+새 VM을 만들지 않는다. 기존 VM에 SSH로 연 셸 두 개를 A/B로 사용하고, 필요하면 조회·캡처용 C를 연다. 모든 명령은 같은 VM에서 실행한다. `127.0.0.1`은 그 VM이며 PC의 localhost가 아니다. IP·경로·방화벽·SSH 설정은 바꾸지 않는다.
+
+<a download href="../../labs/week-04/transport_lab.py">transport_lab.py 내려받기</a>를 사용해 평소 허용된 파일 전달 경로로 VM의 개인 작업 폴더에 둔다. 아래 명령은 그 파일이 있는 폴더 기준이다. Python 표준 라이브러리만 사용한다.
+
+```sh
+pwd
+ls -l transport_lab.py
+python3 --version
+python3 transport_lab.py --help
+ss -ltn 'sport = :18404'
+ss -lun 'sport = :18404'
+```
+
+파일 이름과 Python 3 실행을 확인한다. 두 `ss` 결과에 이미 다른 서버가 있으면 종료시키지 말고 본인 실험의 양쪽 포트를 같은 빈 비특권 포트로 바꾼다. 예제는 루프백에만 바인딩한다. 조회 명령이 없거나 권한이 막히면 진행자에게 확인하고 직접 실행이 안 된 범위를 남긴다.
+
+<span id="experiment-a"></span>
+
+## 실습 A · 정상 송수신과 경계
+
+### TCP · 대기 소켓에서 연결 소켓으로
+
+셸 A에서 서버를 실행한다. `TCP LISTEN`이 나온 뒤 60초 안에 셸 B를 실행한다. 서버는 연결 한 번만 처리하고 끝나며, 다시 실험할 때 매번 새로 시작한다.
+
+```sh
+python3 transport_lab.py tcp server
+```
+
+아직 클라이언트를 실행하기 전에 셸 B에서 `ss -ltn 'sport = :18404'`로 LISTEN을 확인한 뒤 아래 클라이언트를 실행한다.
+
+```sh
+python3 transport_lab.py tcp client
+```
+
+서버의 `accepted`와 클라이언트의 `local`·`peer`에서 양쪽 IP·port를 짝짓는다. 클라이언트 임시 포트는 실행마다 달라질 수 있다. `TCP chunk`는 앱이 읽은 청크이며 TCP 패킷 번호가 아니다. 양쪽 `app message/reply`의 전체 값은 `b'hellonetwork\n'`여야 한다. 출력은 정상 기준이며 본인 실행 결과는 따로 확인한다.
+
+조건 하나를 바꿔 보려면 서버를 다시 시작하고 클라이언트만 `--read-size 1`을 붙인다. 전체 응답은 같고 한 번에 읽는 최대 바이트 수가 달라진다. 서버도 읽기 크기를 바꾸고 싶다면 다음 독립 실행에서 서버에만 적용한다. 한 번에 양쪽을 바꾸지 않는다.
+
+```sh
+python3 transport_lab.py tcp client --read-size 1
+```
+
+이 예제는 빨리 종료되므로 `ss -tn`에서 ESTAB를 못 볼 수 있다. 못 본 상태를 관찰했다고 적지 않는다. 연결/종료 패킷은 아래 선택 캡처나 1주차의 본인/제공 HTTP 캡처로 읽는다.
+
+### UDP · 데이터그램 두 개
+
+TCP 서버가 끝났는지 확인한 뒤 셸 A에서 UDP 서버를 시작한다. 셸 B에서 `ss -lun 'sport = :18404'`를 보고 클라이언트를 실행한다. UDP의 bound/UNCONN을 TCP LISTEN·연결 수립과 동일시하지 않는다.
+
+```sh
+# 셸 A
+python3 transport_lab.py udp server
+```
+
+```sh
+# 셸 B
+python3 transport_lab.py udp client
+```
+
+서버는 데이터그램 두 개를 각각 읽고 되돌린 뒤 끝난다. 정상 기준은 `b'hello'`, `b'network\n'`를 별도 데이터그램으로 읽는 것이다. 수신 버퍼 64 byte는 두 고정 메시지보다 크다. `--read-size`는 TCP 읽기에만 쓰므로 UDP에서는 바꾸지 않는다. 정상 루프백에서 두 개가 모두 도착해도 UDP가 모든 환경에서 신뢰성을 보장한다는 증거는 아니다.
+
+비교를 마치면 TCP의 두 send 호출·여러 recv 청크·하나의 앱 메시지, UDP의 두 sendto·두 데이터그램을 자신의 출력에 대응한다. 길이와 경계는 다르며 호출 횟수를 패킷 수로 세지 않는다.
+
+<span id="experiment-b"></span>
+
+## 실습 B · 포트 하나 변경하고 복구하기
+
+18405가 다른 프로그램에 사용되지 않는지 먼저 `ss -ltn 'sport = :18405'`와 `ss -lun 'sport = :18405'`로 확인한다. 같은 VM의 비어 있는 포트를 비교 대상으로 사용한다.
+
+1. 셸 A의 TCP 서버를 기본 포트 18404로 시작한다.
+2. 셸 B에서 목적지 포트만 18405로 바꿔 실행한다. 오류 메시지·종료 상태·서버의 accept 유무를 비교한다.
+3. 같은 클라이언트를 원래 포트로 되돌려 정상 응답을 확인한다. 서버가 시간 초과로 끝났으면 다시 시작한다.
+
+```sh
+python3 transport_lab.py tcp client --port 18405 --timeout 3
+echo $?
+python3 transport_lab.py tcp client --timeout 3
+```
+
+UDP도 새 UDP 서버를 18404로 시작한 뒤 동일하게 비교한다.
+
+```sh
+python3 transport_lab.py udp client --port 18405 --timeout 3
+echo $?
+python3 transport_lab.py udp client --timeout 3
+```
+
+빈 로컬 포트의 TCP는 보통 연결 거절을, UDP는 시간 초과 또는 운영체제의 ICMP 관련 오류를 보일 수 있다. **실제로 나온 오류를 읽는다.** UDP `sendto`가 성공해도 서버가 받았다는 뜻은 아니다. 응답이 없다는 사실만으로 네트워크 손실·잘못된 포트·앱 무응답을 일반적으로 구별할 수 없다. 이번에는 바꾼 포트와 서버 bind 출력을 알고 있으므로 원인을 좁힐 수 있다. [Q7 해설](ANSWERS.md#q7-포트-변경)과 비교한다.
+
+## 선택 · 제한된 루프백 캡처
+
+이미 `tcpdump`가 있고 본인 실습 캡처 권한이 확인된 경우에만 셸 C에서 실행한다. 설치·권한 변경은 필수가 아니다. 캡처를 먼저 켜고 서버·클라이언트를 다시 실행한다.
+
+```sh
+sudo timeout 15 tcpdump -i lo -nn -s 96 -c 24 'tcp port 18404 or udp port 18404'
+```
+
+SYN/SYN-ACK/ACK, 데이터의 seq·ack·length, FIN/ACK 또는 실제 나타난 종료를 같은 TCP 흐름으로 짝짓는다. UDP에서는 TCP 핸드셰이크가 있는지 구별한다. 15초·24패킷 제한은 조회용이며 Ctrl+C로 먼저 멈춰도 된다. 내용이 짧아 캡처 개수가 적을 수 있다. 루프백 캡처는 Ethernet ARP나 PC→VM 경로의 근거가 아니다. 재전송이 안 보이면 [합성 시간축](CONCEPTS.md#reliability)으로 손실을 분석한다.
+
+<span id="code-reading"></span>
+
+## 코드 읽기 · 입력에서 종료까지
+
+[실제 Python 원문](../../labs/week-04/transport_lab.py)을 옆에 둔다. 코드를 새로 구현하는 과제는 아니다. 필수 참가자 코드는 이 파일 하나이며 선택 캡처 명령은 코드 실행과 별개다.
+
+| 단계·함수 | 하는 일과 처음 읽을 문법 |
+| --- | --- |
+| `main` | argparse가 tcp/udp·server/client·포트를 읽는다. 잘못된 포트·대기 시간은 실행 전에 거부한다 |
+| `run_tcp`의 server 분기 | `with`가 소켓을 닫아 준다. bind→listen→accept 순이며 반환된 연결 소켓에서 읽는다 |
+| `run_tcp`의 client 분기 | connect→두 sendall→응답 읽기. `b'...'`는 바이트, `\n`은 앱 종료 구분자다 |
+| `read_line` | while로 개행까지 누적한다. recv 크기는 상한이다. EOF·64 byte 초과는 불완전/범위 오류로 중단한다 |
+| `run_udp` | SOCK_DGRAM과 sendto/recvfrom을 쓴다. for 반복 두 번은 두 데이터그램 처리이며 재전송 기능이 아니다 |
+| 오류·종료 | settimeout은 각 블로킹 작업의 대기를 제한한다. 예외를 알리고 코드 1, 입력 오류는 2, Ctrl+C는 130, 정상은 0으로 끝난다 |
+
+60초는 개별 소켓 작업의 시간 제한이며 전체 실행의 총시간 보장이 아니다. 이 코드는 고정된 짧은 메시지 하나(TCP) 또는 둘(UDP)을 위한 학습 예제다. 일반 채팅 서버·여러 메시지 파서·동시 서버·업무 재시도는 구현하지 않는다. `SO_REUSEADDR`는 본인 TCP 서버 재실행을 돕지만 이미 대기 중인 다른 프로세스를 종료하거나 포트를 빼앗지 않는다.
+
+자기 말로 확인한다. “왜 TCP만 개행까지 반복해서 읽는가?”, “with와 timeout이 없다면 어떤 종료가 어려울까?”, “작은 recv가 작은 패킷을 증명하는가?” 답이 막히면 [스트림 교재](CONCEPTS.md#stream)와 [Q2·Q8 해설](ANSWERS.md#q2-메시지-경계)로 돌아간다.
+
+## 오류·복구와 마무리
+
+파일 없음은 현재 폴더·파일명을, 연결 거절은 실행 위치·TCP 서버 대기·양쪽 포트를, 주소 사용 중은 `ss`와 본인 프로세스를 확인한다. 시간 초과는 서버 출력·시작 순서·같은 VM 여부를 확인한다. 다른 사람의 프로세스를 임의 종료하지 않는다. 본인 서버만 실행 셸에서 Ctrl+C로 끝내고 `ss`로 본인 대기 소켓이 남지 않았는지 확인한다. TIME-WAIT는 프로세스가 계속 실행된다는 뜻이 아니다.
+
+본인 정상/조건 변경/복구 출력과 실행 위치를 한 번 보관한다. 제공 분석만 했다면 직접 실행 보충을 남긴다. [학습 홈](README.md) · [복습](REVIEW.md) · [공식 출처](SOURCES.md).
+
+## C04 · 앞선 근거와 이어 설명하기
+
+기존 [1주차 HTTP 실습](../week-01/linux.html)의 200·404·서버 중지/복구 근거와 이번 TCP 전달 근거를 짝짓는다. [3주차 조회](../week-03/linux.html)의 본인 IP·경로·다음 홉도 다시 읽는다. 이번 루프백은 `ip -4 route get 127.0.0.1`로 로컬 경로를 확인할 수 있으며, 그 결과를 이전 원격 대상의 경로와 섞지 않는다. [Q6·Q9](REVIEW.md#c04-question)의 설명은 기존 실습·복습 시간을 대체한다. 본인 원격 요청/경로 근거가 없으면 해당 부분을 보충으로 남긴다.

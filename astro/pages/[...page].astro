@@ -5,7 +5,9 @@ import manifest from '../../.astro-input/manifest.json';
 export function getStaticPaths() {
   const modules = import.meta.glob('../../.astro-input/*.md', { eager: true });
   return manifest.map(page => ({
-    params: { page: page.output.replace(/\.html$/, '') },
+    // Render by unique ID; the assembler maps it to the registered public path.
+    // This also avoids Astro normalizing a requested /index route to its parent.
+    params: { page: page.id },
     props: { page, lesson: modules[`../../.astro-input/${page.id}.md`] }
   }));
 }

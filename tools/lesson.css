@@ -90,6 +90,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
   .messages, .contrast { grid-template-columns: 1fr; }
   figure { padding: 18px; }
   .toc-links, .document-layout .toc-links, .contents nav { grid-template-columns: 1fr; }
+  .save-bar button { margin-block: .3rem; }
 }
 @media print {
   :root { font-size: 10pt; }

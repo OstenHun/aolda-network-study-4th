@@ -1,7 +1,7 @@
 """Assemble legacy pages and Astro lessons, then validate the final public site."""
 from pathlib import Path, PurePosixPath
 from html.parser import HTMLParser
-from urllib.parse import urlsplit, unquote, quote
+from urllib.parse import urlsplit, unquote
 import json
 import re
 import shutil
@@ -16,9 +16,8 @@ from lesson_html import LessonHTML
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
 MD_LINK = re.compile(r'\[[^\]]*\]\(([^\s)]+)(?:\s+"[^\"]*")?\)')
-FAVICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#07548e"/><path d="M8 9h16M8 16h16M8 23h16M8 9v14" stroke="white" stroke-width="3"/></svg>'
-HEAD = '<meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' + quote(FAVICON, safe='') + '">'
-ALLOWED_SUFFIXES = {".html", ".md", ".txt", ".py", ".sh", ".mts", ".pcapng"}
+HEAD = '<meta name="robots" content="noindex,nofollow">'
+ALLOWED_SUFFIXES = {".html", ".md", ".txt", ".py", ".sh", ".mts", ".pcapng", ".svg"}
 
 
 class Page(HTMLParser):
@@ -172,12 +171,13 @@ def astro_lessons(catalog):
             name = path.relative_to(output_folder).as_posix()
             local_path(name)
             generated[name] = path.read_bytes()
-    expected = {page['output'] for page in catalog['lessons']}
+    expected = {page['id'] + '.html' for page in catalog['lessons']}
     if {name for name in generated if name.endswith('.html')} != expected:
         raise ValueError('Astro did not produce exactly the registered lesson pages')
     for lesson in catalog['lessons']:
         name = lesson['output']
-        generated[name] = LessonHTML(generated[name].decode(), lesson, catalog['documents'], resolve).rendered().encode()
+        raw = generated.pop(lesson['id'] + '.html')
+        generated[name] = LessonHTML(raw.decode(), lesson, catalog['documents'], resolve).rendered().encode()
         page = Page(generated[name].decode())
         if page.duplicate_ids:
             raise ValueError(f'{name}: duplicate anchors {sorted(page.duplicate_ids)}')
