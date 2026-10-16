@@ -4,3 +4,7 @@ __pycache__/
 .env
 .env.*
 .DS_Store
+node_modules/
+.astro/
+.astro-input/
+.astro-output/

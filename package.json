@@ -1,0 +1,12 @@
+{
+  "name": "aolda-network-study",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.22.0" },
+  "scripts": {
+    "build": "python tools/build-site.py",
+    "test": "python -m unittest discover -s tests -v",
+    "preview": "python -m http.server 8000 --directory dist"
+  },
+  "devDependencies": { "astro": "7.4.0" }
+}

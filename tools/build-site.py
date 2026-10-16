@@ -1,4 +1,4 @@
-"""Build the public learning site using only this repository and Python stdlib."""
+"""Assemble legacy pages and Astro lessons, then validate the final public site."""
 from pathlib import Path, PurePosixPath
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote, quote
@@ -6,12 +6,15 @@ import json
 import re
 import shutil
 import struct
+import os
+import subprocess
 
 from study_site_theme import apply_theme
+from site_catalog import read_catalog, validate_catalog, home_courses, local_path
+from lesson_html import LessonHTML
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
-OUT = ROOT / "dist"
 MD_LINK = re.compile(r'\[[^\]]*\]\(([^\s)]+)(?:\s+"[^\"]*")?\)')
 FAVICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#07548e"/><path d="M8 9h16M8 16h16M8 23h16M8 9v14" stroke="white" stroke-width="3"/></svg>'
 HEAD = '<meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' + quote(FAVICON, safe='') + '">'
@@ -23,6 +26,7 @@ class Page(HTMLParser):
         super().__init__()
         self.links = []
         self.ids = set()
+        self.duplicate_ids = set()
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -31,6 +35,8 @@ class Page(HTMLParser):
             if attrs.get(key):
                 self.links.append(attrs[key])
         if attrs.get("id"):
+            if attrs['id'] in self.ids:
+                self.duplicate_ids.add(attrs['id'])
             self.ids.add(attrs["id"])
 
 
@@ -96,10 +102,16 @@ def check_public_sources():
         "internal service": r"https?://(?:console\.aolda\.net|(?:app\.)?notion\.(?:com|so))",
         "email address": r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}",
     }
-    files = [ROOT / "README.md", ROOT / "AGENTS.md"]
-    for folder in ("content", "tools", "docs", ".github"):
-        files.extend(p for p in (ROOT / folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts)
+    files = [ROOT / name for name in ('README.md', 'AGENTS.md', 'package.json', 'package-lock.json', 'astro.config.mjs') if (ROOT / name).exists()]
+    for folder in ("content", "tools", "docs", ".github", "config", "astro", "tests"):
+        for path in (ROOT / folder).rglob('*'):
+            if path.is_symlink():
+                raise ValueError('Public source cannot contain symbolic links')
+            if path.is_file() and '__pycache__' not in path.parts:
+                files.append(path)
     for path in files:
+        if path.is_symlink():
+            raise ValueError('Public source cannot contain symbolic links')
         if path.suffix == ".pcapng":
             check_capture(path.read_bytes())
             continue
@@ -110,8 +122,7 @@ def check_public_sources():
     return len(files)
 
 
-def build():
-    source_count = check_public_sources()
+def collect_content():
     payload = {}
     for path in CONTENT.rglob("*"):
         if path.is_symlink():
@@ -120,9 +131,76 @@ def build():
             if path.suffix not in ALLOWED_SUFFIXES:
                 raise ValueError(f"Unexpected public input: {path.name}")
             payload[path.relative_to(CONTENT).as_posix()] = path.read_bytes()
+    return payload
+
+
+def generated_folder(name):
+    path = ROOT / name
+    if path.is_symlink() or path.resolve() != ROOT / name:
+        raise ValueError('Generated folders must stay inside this repository')
+    if path.exists():
+        shutil.rmtree(path)
+    path.mkdir()
+    return path
+
+
+def astro_lessons(catalog):
+    if not catalog['lessons']:
+        return {}
+    input_folder = generated_folder('.astro-input')
+    (input_folder / 'static').mkdir()
+    output_folder = generated_folder('.astro-output')
+    manifest = []
+    for lesson in catalog['lessons']:
+        metadata = '\n'.join(key + ': ' + json.dumps(lesson[key], ensure_ascii=False) for key in ('title', 'summary'))
+        (input_folder / (lesson['id'] + '.md')).write_text('---\n' + metadata + '\n---\n\n' + lesson['body'], encoding='utf-8')
+        manifest.append({key: value for key, value in lesson.items() if key != 'body'})
+    (input_folder / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False), encoding='utf-8')
+    cli = ROOT / 'node_modules/astro/bin/astro.mjs'
+    node = shutil.which('node')
+    if not node or not cli.is_file():
+        raise ValueError('Install Node.js 22.22+ and run npm ci before generating lessons')
+    environment = dict(os.environ, ASTRO_TELEMETRY_DISABLED='1', NO_COLOR='1')
+    run = subprocess.run([node, str(cli), 'build'], cwd=ROOT, env=environment, capture_output=True, text=True, encoding='utf-8', timeout=120)
+    if run.returncode:
+        raise ValueError('Astro build failed:\n' + run.stdout + run.stderr)
+    generated = {}
+    for path in output_folder.rglob('*'):
+        if path.is_symlink():
+            raise ValueError('Astro output cannot contain symbolic links')
+        if path.is_file():
+            name = path.relative_to(output_folder).as_posix()
+            local_path(name)
+            generated[name] = path.read_bytes()
+    expected = {page['output'] for page in catalog['lessons']}
+    if {name for name in generated if name.endswith('.html')} != expected:
+        raise ValueError('Astro did not produce exactly the registered lesson pages')
+    for lesson in catalog['lessons']:
+        name = lesson['output']
+        generated[name] = LessonHTML(generated[name].decode(), lesson, catalog['documents'], resolve).rendered().encode()
+        page = Page(generated[name].decode())
+        if page.duplicate_ids:
+            raise ValueError(f'{name}: duplicate anchors {sorted(page.duplicate_ids)}')
+    generated['assets/lesson.css'] = (ROOT / 'tools/lesson.css').read_bytes()
+    if any(page['kind'] == 'review' for page in catalog['lessons']):
+        generated['assets/lesson-answers.js'] = (ROOT / 'tools/lesson-answers.js').read_bytes()
+    return generated
+
+
+def make_payload(catalog=None, content=None):
+    payload = collect_content() if content is None else dict(content)
+    catalog = validate_catalog(read_catalog(ROOT) if catalog is None else catalog, payload)
+    generated = astro_lessons(catalog)
+    if set(payload) & set(generated):
+        raise ValueError('Generated assets cannot overwrite existing public files')
+    payload.update(generated)
     home = (ROOT / "tools/templates/study-home.html").read_text(encoding="utf-8")
-    payload["index.html"] = home.replace("__HEAD__", HEAD).encode()
-    apply_theme(payload, ROOT)
+    payload["index.html"] = home.replace("__HEAD__", HEAD).replace('__COURSE_PATH__', home_courses(catalog)).encode()
+    apply_theme(payload, ROOT, catalog)
+    return payload
+
+
+def validate_links(payload):
     pages = {name: Page(data.decode()) for name, data in payload.items() if name.endswith(".html")}
     links = 0
     for name, data in payload.items():
@@ -142,17 +220,21 @@ def build():
             fragment = unquote(urlsplit(href).fragment)
             if target in pages and fragment and fragment not in pages[target].ids:
                 raise ValueError(f"{name}: missing anchor {href}")
-    if OUT.is_symlink() or OUT.resolve() != ROOT / "dist":
-        raise ValueError("Output must be the repository dist folder")
-    if OUT.exists():
-        shutil.rmtree(OUT)
-    OUT.mkdir()
+    return len(pages), links
+
+
+def build():
+    source_count = check_public_sources()
+    payload = make_payload()
+    pages, links = validate_links(payload)
+    output = generated_folder('dist')
     payload[".nojekyll"] = b""
     for name, data in payload.items():
-        target = OUT / name
+        local_path(name)
+        target = output / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
-    print(json.dumps({"source_files_checked": source_count, "public_files": len(payload), "html_pages": len(pages), "local_links_checked": links}, ensure_ascii=False))
+    print(json.dumps({"source_files_checked": source_count, "public_files": len(payload), "html_pages": pages, "local_links_checked": links}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

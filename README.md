@@ -10,10 +10,12 @@ VM·SSH 준비, 1주차 요청과 응답, 2주차 IPv4·서브넷, 3주차 LAN·
 
 ## 소스와 빌드
 
-Python 3.12 이상과 표준 라이브러리만 사용한다.
+Python 3.12 이상과 Node.js 22.22 이상을 사용한다. CI는 Node.js 24를 사용하며 Astro 버전은 잠금 파일로 고정한다.
 
 ```sh
-python tools/build-site.py
+npm ci --ignore-scripts
+npm test
+npm run build
 python -m http.server 8000 --directory dist
 ```
 
@@ -22,6 +24,8 @@ python -m http.server 8000 --directory dist
 | 위치 | 역할 |
 | --- | --- |
 | `content/` | 공개 교재 Markdown, 페이지 HTML 원본, 실습 코드와 예제 캡처 |
+| `config/site.json` | 과정·메뉴·홈 연결과 새 교재의 입력/출력 경로 |
+| `astro/` | 새 Markdown 교재의 HTML·목차 생성 |
 | `tools/templates/study-home.html` | 학습 홈 원본 |
 | `tools/study_site_theme.py` | 공통 탐색·현재 위치·검색 색인 생성 |
 | `tools/study-site.css`, `tools/study-site.js` | 공통 디자인과 브라우저 동작 |
@@ -29,7 +33,9 @@ python -m http.server 8000 --directory dist
 | `.github/workflows/pages.yml` | 변경 검사와 Pages 자동 배포 |
 | `dist/` | 생성물. Git에 넣지 않고 Actions에서 생성 |
 
-공개 화면의 정본은 이 저장소다. 주차별 HTML은 공개용 페이지 원본으로 관리하며 같은 내용을 설명하는 Markdown과 함께 수정한다. 기존 내부 제작기의 자동 동기화를 전제하지 않는다. 공통 탐색·검색은 빌드할 때 생성하므로 각 HTML에 직접 넣지 않는다.
+공개 화면의 정본은 이 저장소다. 기존 주차의 HTML·Markdown은 그대로 유지한다. 다음에 제작하는 교재는 Markdown 한 벌을 Astro로 변환하며 HTML을 따로 작성하지 않는다. 공통 탐색·검색은 빌드할 때 생성하므로 각 교재에 직접 넣지 않는다. Python은 기존 페이지 보존·공통 조립·공개 정보와 링크 검사를 맡는다.
+
+[새 교재 작성 안내](docs/AUTHORING.md)에 Markdown 양식과 과정 등록 예시, 복습 답안·링크·검사 방법을 정리했다. 현재 실제 교재를 일괄 생성하거나 기존 주차를 이전하지 않았다.
 
 ## 수정과 게시
 

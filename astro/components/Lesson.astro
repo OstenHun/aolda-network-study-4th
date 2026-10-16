@@ -1,0 +1,43 @@
+---
+import { relative, dirname } from 'node:path/posix';
+const { page, title, summary, headings } = Astro.props;
+const href = target => relative(dirname(page.output), target);
+const toc = headings.filter(item => item.depth === 2 || item.depth === 3);
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content={summary} />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>{title} · 아올다</title>
+    <link rel="stylesheet" href={href('assets/lesson.css')} />
+  </head>
+  <body data-page={page.output.split('/').pop()}>
+    <main id="main" class="shell">
+      <div class="hero">
+        <p class="eyebrow">{page.group_label}</p>
+        <h1>{title}</h1>
+        <p>{summary}</p>
+      </div>
+      <div class="document-layout">
+        {toc.length > 0 && <nav class="toc" aria-label="이 페이지의 목차">
+          <strong>이 페이지의 목차</strong>
+          <div class="toc-links">{toc.map(item => <a href={'#' + item.slug}>{item.text}</a>)}</div>
+        </nav>}
+        <article><slot />
+          {page.kind === 'review' && <div class="save-bar">
+            <p><strong>입력 내용은 자동 저장되지 않습니다.</strong> 다른 페이지로 이동하기 전에 기록을 내려받고 파일을 열어 내용을 확인하세요. Markdown 파일은 메모장에서도 열 수 있습니다. 저장을 확인할 때까지 이동 경고를 유지합니다.</p>
+            <noscript><p>JavaScript가 꺼져 있으면 별도 메모장에 기록을 적어 저장하세요.</p></noscript>
+            <button class="js-only" type="button" id="download-answers">내 답안 Markdown 내려받기</button>{' '}
+            <button class="js-only" type="button" id="confirm-saved" disabled>저장한 파일 확인했어요</button>
+            <p id="download-status" role="status"></p>
+          </div>}
+          <div class="page-links"><a data-site-link download href={href(page.source)}>교재 원본 Markdown 내려받기</a></div>
+        </article>
+      </div>
+    </main>
+    {page.kind === 'review' && <script is:inline src={href('assets/lesson-answers.js')}></script>}
+  </body>
+</html>

@@ -1,0 +1,242 @@
+{
+  "groups": [
+    {
+      "id": "ssh-top-down",
+      "label": "VM·SSH 준비",
+      "prefix": "materials/ssh-top-down/",
+      "entry": "materials/ssh-top-down/index.html",
+      "section": "preparation",
+      "number": "준비",
+      "sidebar_title": "VM·SSH 접속 준비",
+      "nav": [
+        {
+          "path": "materials/ssh-top-down/index.html",
+          "label": "학습 안내"
+        },
+        {
+          "path": "materials/ssh-top-down/lesson.html",
+          "label": "VM·SSH 접속 교재"
+        },
+        {
+          "path": "materials/ssh-top-down/questions.html",
+          "label": "내 접속 기록"
+        },
+        {
+          "path": "materials/ssh-top-down/sources.html",
+          "label": "공식 참고자료"
+        }
+      ],
+      "home": {
+        "title": "내 PC에서 Linux VM까지",
+        "description_html": "VM·접속 주소 확인 → SSH 로그인 → <span class=\"keep-phrase\">연결한 서버 확인</span>",
+        "tag": "처음 시작한다면",
+        "arrow": "↗"
+      }
+    },
+    {
+      "id": "week-01",
+      "label": "1주차 · 요청과 응답",
+      "prefix": "materials/week-01/",
+      "entry": "materials/week-01/index.html",
+      "section": "common",
+      "number": "01",
+      "sidebar_title": "요청과 응답",
+      "nav": [
+        {
+          "path": "materials/week-01/index.html",
+          "label": "학습 안내"
+        },
+        {
+          "path": "materials/week-01/concepts.html",
+          "label": "개념 교재"
+        },
+        {
+          "path": "materials/week-01/linux.html",
+          "label": "Linux 실습"
+        },
+        {
+          "path": "materials/week-01/worksheet.html",
+          "label": "팀 활동"
+        },
+        {
+          "path": "materials/week-01/review.html",
+          "label": "복습 문제"
+        },
+        {
+          "path": "materials/week-01/answers.html",
+          "label": "해설"
+        }
+      ],
+      "home": {
+        "title": "요청 하나를 끝까지 따라가기",
+        "description_html": "클라이언트·서버 · IP와 포트 · <span class=\"keep-phrase\">HTTP 요청과 응답</span>",
+        "tag": "교재 · 실습 · 복습",
+        "arrow": "→"
+      }
+    },
+    {
+      "id": "week-02",
+      "label": "2주차 · IPv4와 서브넷",
+      "prefix": "materials/week-02/",
+      "entry": "materials/week-02/index.html",
+      "section": "common",
+      "number": "02",
+      "sidebar_title": "IPv4와 서브넷",
+      "nav": [
+        {
+          "path": "materials/week-02/index.html",
+          "label": "학습 안내"
+        },
+        {
+          "path": "materials/week-02/worksheet.html",
+          "label": "함께 찾을 질문"
+        },
+        {
+          "path": "materials/week-02/articles.html",
+          "label": "함께 찾아보기"
+        },
+        {
+          "path": "materials/week-02/essentials.html",
+          "label": "핵심 개념"
+        },
+        {
+          "path": "materials/week-02/concepts.html",
+          "label": "개념 교재"
+        },
+        {
+          "path": "materials/week-02/linux.html",
+          "label": "기존 VM 실습"
+        },
+        {
+          "path": "materials/week-02/review.html",
+          "label": "복습 문제"
+        },
+        {
+          "path": "materials/week-02/answers.html",
+          "label": "분리 해설"
+        }
+      ],
+      "home": {
+        "title": "IP가 비슷하면 같은 망일까?",
+        "description_html": "IPv4 · 서브넷과 CIDR · 내 VM의 주소와 경로",
+        "tag": "공동 질문 · 실습",
+        "arrow": "→"
+      }
+    },
+    {
+      "id": "week-03",
+      "label": "3주차 · LAN과 다음 홉",
+      "prefix": "materials/week-03/",
+      "entry": "materials/week-03/index.html",
+      "section": "common",
+      "number": "03",
+      "sidebar_title": "LAN과 다음 홉",
+      "nav": [
+        {
+          "path": "materials/week-03/index.html",
+          "label": "학습 안내"
+        },
+        {
+          "path": "materials/week-03/recall.html",
+          "label": "복습 진단"
+        },
+        {
+          "path": "materials/week-03/lan-mac.html",
+          "label": "LAN·MAC"
+        },
+        {
+          "path": "materials/week-03/next-hop.html",
+          "label": "다음 홉"
+        },
+        {
+          "path": "materials/week-03/arp.html",
+          "label": "ARP·캐시"
+        },
+        {
+          "path": "materials/week-03/icmp.html",
+          "label": "ICMP·ping"
+        },
+        {
+          "path": "materials/week-03/linux.html",
+          "label": "Linux 실험"
+        },
+        {
+          "path": "materials/week-03/worksheet.html",
+          "label": "함께 설명"
+        },
+        {
+          "path": "materials/week-03/review.html",
+          "label": "복습 문제"
+        },
+        {
+          "path": "materials/week-03/answers.html",
+          "label": "해설"
+        }
+      ],
+      "home": {
+        "title": "패킷은 누구에게 먼저 갈까?",
+        "description_html": "LAN·MAC · 다음 홉 · ARP와 ICMP",
+        "tag": "주제별 교재 · 실험",
+        "arrow": "→"
+      }
+    },
+    {
+      "id": "week-04",
+      "label": "4주차 · TCP (본문 일부)",
+      "prefix": "materials/week-04/",
+      "entry": "materials/week-04/concepts.html",
+      "section": "partial",
+      "number": "04",
+      "sidebar_title": "TCP와 RTT",
+      "nav": [],
+      "home_partial_title": "04 TCP · RTT"
+    },
+    {
+      "id": "week-06",
+      "label": "6주차 · HTTP (본문 일부)",
+      "prefix": "materials/week-06/",
+      "entry": "materials/week-06/concepts.html",
+      "section": "partial",
+      "number": "06",
+      "sidebar_title": "HTTP 연결 재사용",
+      "nav": [],
+      "home_partial_title": "06 HTTP · 연결 재사용"
+    }
+  ],
+  "documents": {
+    "materials/ssh-top-down/FACILITATOR.md": "materials/ssh-top-down/facilitator.html",
+    "materials/ssh-top-down/LESSON.md": "materials/ssh-top-down/lesson.html",
+    "materials/ssh-top-down/QUESTIONS.md": "materials/ssh-top-down/questions.html",
+    "materials/ssh-top-down/SOURCES.md": "materials/ssh-top-down/sources.html",
+    "materials/week-01/ANSWERS.md": "materials/week-01/answers.html",
+    "materials/week-01/CONCEPTS.md": "materials/week-01/concepts.html",
+    "materials/week-01/ESSENTIALS.md": "materials/week-01/essentials.html",
+    "materials/week-01/FACILITATOR.md": "materials/week-01/facilitator.html",
+    "materials/week-01/REVIEW.md": "materials/week-01/review.html",
+    "materials/week-01/SOURCES.md": "materials/week-01/sources.html",
+    "materials/week-01/WORKSHEET.md": "materials/week-01/worksheet.html",
+    "materials/week-02/ANSWERS.md": "materials/week-02/answers.html",
+    "materials/week-02/CONCEPTS.md": "materials/week-02/concepts.html",
+    "materials/week-02/ESSENTIALS.md": "materials/week-02/essentials.html",
+    "materials/week-02/EXPLORATIONS.md": "materials/week-02/explorations.html",
+    "materials/week-02/FACILITATOR.md": "materials/week-02/facilitator.html",
+    "materials/week-02/REVIEW.md": "materials/week-02/review.html",
+    "materials/week-02/SOURCES.md": "materials/week-02/sources.html",
+    "materials/week-02/WORKSHEET.md": "materials/week-02/worksheet.html",
+    "materials/week-03/ANSWERS.md": "materials/week-03/answers.html",
+    "materials/week-03/ESSENTIALS.md": "materials/week-03/essentials.html",
+    "materials/week-03/EXPLORATIONS.md": "materials/week-03/explorations.html",
+    "materials/week-03/FACILITATOR.md": "materials/week-03/facilitator.html",
+    "materials/week-03/LINUX.md": "materials/week-03/linux.html",
+    "materials/week-03/REVIEW.md": "materials/week-03/review.html",
+    "materials/week-03/SOURCES.md": "materials/week-03/sources.html",
+    "materials/week-03/VALIDATION.md": "materials/week-03/validation.html",
+    "materials/week-03/WORKSHEET.md": "materials/week-03/worksheet.html",
+    "materials/week-04/ANSWERS.md": "materials/week-04/answers.html",
+    "materials/week-04/CONCEPTS.md": "materials/week-04/concepts.html",
+    "materials/week-06/ANSWERS.md": "materials/week-06/answers.html",
+    "materials/week-06/CONCEPTS.md": "materials/week-06/concepts.html",
+    "materials/CONCEPT_INDEX.md": "materials/week-01/concept-index.html"
+  },
+  "lessons": []
+}

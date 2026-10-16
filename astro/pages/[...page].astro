@@ -1,0 +1,19 @@
+---
+import Lesson from '../components/Lesson.astro';
+import manifest from '../../.astro-input/manifest.json';
+
+export function getStaticPaths() {
+  const modules = import.meta.glob('../../.astro-input/*.md', { eager: true });
+  return manifest.map(page => ({
+    params: { page: page.output.replace(/\.html$/, '') },
+    props: { page, lesson: modules[`../../.astro-input/${page.id}.md`] }
+  }));
+}
+const { page, lesson } = Astro.props;
+if (!lesson) throw new Error(`Missing compiled lesson: ${page.id}`);
+const { Content, frontmatter } = lesson;
+const headings = await lesson.getHeadings();
+---
+<Lesson page={page} title={frontmatter.title} summary={frontmatter.summary} headings={headings}>
+  <Content />
+</Lesson>
