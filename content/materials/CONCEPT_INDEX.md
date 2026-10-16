@@ -1,6 +1,6 @@
 # 네트워크 핵심 개념 색인
 
-요약: 공개 교재의 핵심 개념과 이후 학습 주제를 찾는 색인이다. 현재 1~10주차를 연결하며 후속 이론·심화 교재의 계획을 구별한다.
+요약: 공개 교재의 핵심 개념과 이후 학습 주제를 찾는 색인이다. 현재 1~11주차를 연결하며 후속 이론·심화 교재의 계획을 구별한다.
 
 - 사용법: 처음에는 해당 주차 교재와 함께 읽고, 복습할 때는 아래에서 막힌 개념을 찾는다. 개념별 설명과 답은 연결된 교재에서 읽는다.
 
@@ -18,6 +18,7 @@
 | 8 · W08-K1~K3 | 캐시/연결별 전체 흐름·손실 모형·IPv6/NDP | DNS/HTTP 캐시와 연결, 교육 모형과 TCP·ARP와 NDP | [교재](week-08/CONCEPTS.md) · [단일 장애 실습](week-08/LINUX.md) · [개발 질문 해설](week-08/ANSWERS.md#development) |
 | 9 · W09-K1~K3 | MAC 학습·VLAN·STP 루프 방지·LACP 논리 링크 | VLAN과 서브넷, STP와 집성·오류 검출과 인증 | [교재](week-09/CONCEPTS.md) · [직접 시뮬레이터 실습](week-09/LINUX.md) · [개발 질문 해설](week-09/ANSWERS.md#development) |
 | 10 · W10-K1~K3 | LS/DV 계산·OSPF 이웃/cost/수렴·AS/BGP 정책 | 계산과 정보 교환, 이웃/경로와 요청 성공 | [교재](week-10/CONCEPTS.md) · [OSPF 직접 실습](week-10/LINUX.md) · [개발 질문 해설](week-10/ANSWERS.md#development) |
+| 11 · W11-K1~K3 | NAT/PAT 대응·접근 방향/순서·연결 추적 | 변환과 허용, 기존 연결과 새 요청·서버 중지/DROP | [교재](week-11/CONCEPTS.md) · [정책 직접 실습](week-11/LINUX.md) · [개발 질문 해설](week-11/ANSWERS.md#development) |
 
 ## 이후 주차에 이어갈 범위
 
@@ -42,4 +43,4 @@
 
 기억 문장을 가리고 현상을 먼저 설명한다. 다음에는 조건 하나를 바꾸어 결론이 유지되는지 묻는다. 답이 막히면 해당 개념의 원문·그림·분리 해설로 돌아간다. 다음 주 시작의 기존 복습 시간에 앞 주차 질문 하나를 다시 사용한다. 읽기를 마쳤거나 해설을 보았다는 이유만으로 학습을 통과했다고 기록하지 않는다.
 
-외부 문제를 찾을 때는 [면접·개발 참고자료 선정](INTERVIEW_REFERENCES.md)을 사용한다. 학습 홈: [1주차](week-01/index.html) · [2주차](week-02/index.html) · [3주차](week-03/index.html) · [4주차](week-04/README.md) · [5주차](week-05/README.md) · [6주차](week-06/README.md) · [7주차](week-07/README.md) · [8주차](week-08/README.md) · [9주차](week-09/README.md) · [10주차](week-10/README.md).
+외부 문제를 찾을 때는 [면접·개발 참고자료 선정](INTERVIEW_REFERENCES.md)을 사용한다. 학습 홈: [1주차](week-01/index.html) · [2주차](week-02/index.html) · [3주차](week-03/index.html) · [4주차](week-04/README.md) · [5주차](week-05/README.md) · [6주차](week-06/README.md) · [7주차](week-07/README.md) · [8주차](week-08/README.md) · [9주차](week-09/README.md) · [10주차](week-10/README.md) · [11주차](week-11/README.md).

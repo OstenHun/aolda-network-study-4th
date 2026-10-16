@@ -1,0 +1,30 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.txt
+    cap_add: [NET_ADMIN]
+    command: ["sh", "-c", "sh /lab/policy.sh allow && exec sleep infinity"]
+    networks:
+      practice:
+        ipv4_address: 172.30.111.20
+  client-a:
+    build:
+      context: .
+      dockerfile: Dockerfile.txt
+    networks:
+      practice:
+        ipv4_address: 172.30.111.11
+  client-b:
+    build:
+      context: .
+      dockerfile: Dockerfile.txt
+    networks:
+      practice:
+        ipv4_address: 172.30.111.12
+networks:
+  practice:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.111.0/24

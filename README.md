@@ -37,7 +37,9 @@ IP 주소와 포트를 배웠어도 연결 실패와 HTTP 오류를 구별하기
 - **[9주차 · 링크·VLAN·STP·LACP](https://ostenhun.github.io/aolda-network-study-4th/materials/week-09/index.html)**: MAC 학습·VLAN·STP 경로·LACP 멤버 전환과 오류 검출을 다룬다. 같은 스위치인데 왜 닿지 않을까?
 - **[10주차 · 동적 라우팅·OSPF](https://ostenhun.github.io/aolda-network-study-4th/materials/week-10/index.html)**: LS/DV 계산·AS/BGP 정책과 실제 FRR 세 라우터의 이웃·경로·링크 전환을 다룬다. 링크가 끊기면 경로표는 누가 고칠까?
 
-16주 공통 과정을 순서대로 준비하고 있다. 현재 공개 범위는 VM·SSH 준비와 1~10주차 자료다. 전체 과정과 후속 SRE·플랫폼·클라우드 심화 자료는 아직 모두 갖춰지지 않았다. 실습 완료 여부는 각자가 실행한 결과로 확인한다.
+- **[11주차 · NAT·접근 정책](https://ostenhun.github.io/aolda-network-study-4th/materials/week-11/index.html)**: NAT/PAT의 왕복 대응과 접근 규칙의 방향·순서·상태를 배우고, 격리 HTTP 서버의 허용·차단·복구를 직접 비교한다.
+
+16주 공통 과정을 순서대로 준비하고 있다. 현재 공개 범위는 VM·SSH 준비와 1~11주차 자료다. 전체 과정과 후속 SRE·플랫폼·클라우드 심화 자료는 아직 모두 갖춰지지 않았다. 실습 완료 여부는 각자가 실행한 결과로 확인한다.
 
 ## 어떻게 공부하면 좋을까
 

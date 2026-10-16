@@ -1,0 +1,4 @@
+flow,protocol,inside_source,inside_sport,outside_source,outside_sport,remote_destination,remote_dport
+A,TCP,10.11.0.11,51000,198.51.100.20,40001,203.0.113.80,443
+B,TCP,10.11.0.12,51000,198.51.100.20,40002,203.0.113.80,443
+C,UDP,10.11.0.11,53000,198.51.100.20,41001,203.0.113.53,53
