@@ -14,27 +14,23 @@ IP 주소와 포트를 배웠어도 연결 실패와 HTTP 오류를 구별하기
 
 홈에서 주차를 고르면 왼쪽 학습 메뉴로 교재·실습·복습을 오갈 수 있다. 특정 개념만 다시 찾을 때는 상단 **자료 검색**이나 **전체 개념 색인**을 사용한다. 모바일에서는 **학습 메뉴**를 열어 이동한다.
 
-| 자료 | 무엇을 할 수 있나 |
-| --- | --- |
-| 학습 안내·탐구 질문 | 이번 주에 설명할 현상을 정하고, 무엇을 찾아볼지 잡는다. |
-| 개념 교재·핵심 정리 | 원리와 예시를 읽고, 비슷해 보이지만 다른 개념을 구별한다. |
-| Linux 실습·코드 읽기 | 주소·경로·소켓·로그·패킷을 확인하고, 코드가 어떤 관찰을 만드는지 따라간다. |
-| 브라우저 실습 모형 | 제공된 모형에서 조건을 바꾸며 결과를 예상한다. 실제 VM 관찰과 구별해서 사용한다. |
-| 복습 문제·분리 해설 | 먼저 자기 말로 답하고 해설과 비교한다. 답안 입력 화면에서는 기록을 Markdown으로 내려받을 수 있다. |
-| 공식 출처·참고자료 | 교재의 설명을 원문과 대조하고 더 깊이 읽을 부분을 찾는다. |
+- **학습 안내·탐구 질문**: 이번 주에 설명할 현상을 정하고, 무엇을 찾아볼지 잡는다.
+- **개념 교재·핵심 정리**: 원리와 예시를 읽고, 비슷해 보이지만 다른 개념을 구별한다.
+- **Linux 실습·코드 읽기**: 주소·경로·소켓·로그·패킷을 확인하고, 코드가 어떤 관찰을 만드는지 따라간다.
+- **브라우저 실습 모형**: 제공된 모형에서 조건을 바꾸며 결과를 예상한다. 실제 VM 관찰과 구별해서 사용한다.
+- **복습 문제·분리 해설**: 먼저 자기 말로 답하고 해설과 비교한다. 답안 입력 화면에서는 기록을 Markdown으로 내려받을 수 있다.
+- **공식 출처·참고자료**: 교재의 설명을 원문과 대조하고 더 깊이 읽을 부분을 찾는다.
 
 주차마다 자료의 이름과 구성이 조금씩 다르다. 교재와 복습은 브라우저로 읽을 수 있으며, Linux 직접 실습에는 본인이 사용할 수 있는 환경이 필요하다. 사이트의 주소와 출력 예시는 실제 접속 정보나 직접 측정한 결과로 간주하지 않는다.
 
 ## 지금 읽을 수 있는 주제
 
-| 시작점 | 배우는 내용 | 따라갈 질문 |
-| --- | --- | --- |
-| [VM·SSH 준비](https://ostenhun.github.io/aolda-network-study-4th/materials/ssh-top-down/index.html) | Linux VM, 접속 주소, 서버 신뢰와 SSH 인증 | 내 PC에서 어느 서버에 접속한 것일까? |
-| [1주차 · 요청과 응답](https://ostenhun.github.io/aolda-network-study-4th/materials/week-01/index.html) | 클라이언트·서버, IP와 포트, HTTP, 로그와 패킷 | 요청 하나는 어디로 가고 어떤 응답을 받을까? |
-| [2주차 · IPv4와 서브넷](https://ostenhun.github.io/aolda-network-study-4th/materials/week-02/index.html) | IPv4, 서브넷 마스크, CIDR, 주소 범위와 경로 | IP가 비슷하면 같은 네트워크일까? |
-| [3주차 · LAN과 다음 홉](https://ostenhun.github.io/aolda-network-study-4th/materials/week-03/index.html) | LAN, MAC 주소, 다음 홉, ARP 캐시, ICMP와 ping | 패킷은 누구에게 먼저 갈까? |
-| [4주차 · TCP와 UDP](https://ostenhun.github.io/aolda-network-study-4th/materials/week-04/index.html) | 소켓, RTT, 연결 수립, 바이트 스트림과 데이터그램, SEQ/ACK | TCP가 데이터를 전달하면 프로그램의 처리도 끝난 것일까? |
-| [6주차 · HTTP 연결 재사용](https://ostenhun.github.io/aolda-network-study-4th/materials/week-06/concepts.html) | HTTP 메시지, 연결 재사용과 요청 비용 | 연결을 재사용하면 무엇이 줄어들까? |
+- **[VM·SSH 준비](https://ostenhun.github.io/aolda-network-study-4th/materials/ssh-top-down/index.html)**: Linux VM, 접속 주소, 서버 신뢰와 SSH 인증을 다룬다. 내 PC에서 어느 서버에 접속한 것일까?
+- **[1주차 · 요청과 응답](https://ostenhun.github.io/aolda-network-study-4th/materials/week-01/index.html)**: 클라이언트·서버, IP와 포트, HTTP, 로그와 패킷을 다룬다. 요청 하나는 어디로 가고 어떤 응답을 받을까?
+- **[2주차 · IPv4와 서브넷](https://ostenhun.github.io/aolda-network-study-4th/materials/week-02/index.html)**: IPv4, 서브넷 마스크, CIDR, 주소 범위와 경로를 다룬다. IP가 비슷하면 같은 네트워크일까?
+- **[3주차 · LAN과 다음 홉](https://ostenhun.github.io/aolda-network-study-4th/materials/week-03/index.html)**: LAN, MAC 주소, 다음 홉, ARP 캐시, ICMP와 ping을 다룬다. 패킷은 누구에게 먼저 갈까?
+- **[4주차 · TCP와 UDP](https://ostenhun.github.io/aolda-network-study-4th/materials/week-04/index.html)**: 소켓, RTT, 연결 수립, 바이트 스트림과 데이터그램, SEQ/ACK를 다룬다. TCP가 데이터를 전달하면 프로그램의 처리도 끝난 것일까?
+- **[6주차 · HTTP 연결 재사용](https://ostenhun.github.io/aolda-network-study-4th/materials/week-06/concepts.html)**: HTTP 메시지, 연결 재사용과 요청 비용을 다룬다. 연결을 재사용하면 무엇이 줄어들까?
 
 16주 공통 과정을 순서대로 준비하고 있다. 현재 공개 범위는 VM·SSH 준비와 1~4주차 자료, 6주차 본문 일부다. 전체 과정과 후속 SRE·플랫폼·클라우드 심화 자료가 모두 갖춰진 상태는 아니다. 공개 자료의 존재와 참가자의 실제 학습·실습 완료도 구별한다.
 
