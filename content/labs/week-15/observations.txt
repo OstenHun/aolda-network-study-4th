@@ -1,0 +1,23 @@
+15주차 가공 관찰 사례 — 실제 참가자 로그가 아니다.
+
+소켓 프로토콜: 한 연결 한 메시지, UTF-8 본문 최대256바이트 + LF.
+line hello: recv 길이 예 3,3 → frame_ok/message hello → client reply/exit0
+eof hello: recv 길이 예 3,2,0 → eof_incomplete → client reply/exit1
+원복 line hello: frame_ok/message hello → exit0
+hold hello: LF/EOF 없음 → 서버 수신 약2초 뒤 timeout 판정 응답 → exit1
+이 recv 길이는 설명용이며 세그먼트 수가 아니다.
+서버 delay0.8 / client timeout0.2: server received frame_ok,
+client 최상위 timeout이 함께 가능. 서버 로컬 쓰기 성공은 수신 증명이 아니다.
+
+HTTP 수동 /echo?message=w15: 200, {"message":"w15"}, curl --fail 없음 exit0
+자동 같은 경로 count3: http_success/status200 3줄, exit0
+수동 /missing: 404, 오류 JSON, curl --fail 없음 exit0 가능
+자동 /missing count3: http_error/status404 3줄, exit1
+자기 서버 중지 후 같은 정상 경로: communication_error/status null 3줄, exit1
+재시작 뒤 같은 정상 경로: http_success/status200 3줄, exit0
+시간 수치는 환경마다 다르다. 상태 수신 뒤 본문 오류면 status가 있어도 성공이 아니다.
+자동 반복은 예정된 관찰이며 오류 재시도가 아니다. 총량/부하/가용성의 일반 근거가 아니다.
+
+가공 멱등성 사례: 1증가 요청이 처리된 뒤 응답만 늦으면 재전송으로 중복 증가 가능.
+7로설정의 의도한 효과는 반복해도 같지만 동시성/로그 등 모든 부수 효과를 보장하지 않는다.
+별도 재시도 정책 예: 최초1+추가최대2=총최대3, 대기/중단기한과 서버 계약 필요.
