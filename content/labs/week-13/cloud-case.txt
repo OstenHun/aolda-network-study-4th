@@ -1,0 +1,51 @@
+W13-CLOUD: 자체 학습용 가공 기록. 실제 클라우드 조회/패킷/참가자 결과가 아니다.
+모든 이름/주소/ID는 설명용이다. 아래 주소를 실제 접속 대상으로 쓰지 않는다.
+가정: 단일 IPv4 경로, 프록시 없음, 보안 그룹 stateful, port security 활성.
+관리 SSH 경로는 별도이며 변경하지 않는다. 물리 호스트/overlay 방식은 미확인.
+
+[C0: 자원과 경로]
+project: example-project
+network: example-net
+subnet: 192.0.2.0/24, gateway 192.0.2.1
+server: example-vm-b, port example-port-b, fixed_ip 192.0.2.20
+client: example-vm-a, fixed_ip 192.0.2.10
+router: example-router; subnet interface 192.0.2.1
+server port security groups: example-management, example-http
+example-management: ingress TCP22 from 허가된 관리 출발지, TCP8080 허용 없음
+example-http: ingress IPv4 TCP8080 from 192.0.2.10/32 (rule r-owned-before)
+그 밖의 ingress TCP8080/전체프로토콜/remote-group 중복 허용 없음.
+client egress와 host firewall은 이 요청/반환을 허용한다.
+client route get 192.0.2.20: 192.0.2.20 dev eth0 src 192.0.2.10
+server route get 192.0.2.10: 192.0.2.10 dev eth0 src 192.0.2.20
+동일 subnet의 이 두 VM 요청은 gateway를 다음 홉으로 쓰지 않는다.
+외부 접근 설명용: 198.51.100.20 -> DNAT -> fixed_ip 192.0.2.20.
+이 외부 주소는 문서용이고, 위 VM 간 요청에는 floating IP/NAT를 쓰지 않는다.
+
+[C1: 정상]
+ss: LISTEN 192.0.2.20:8080
+client request: http://192.0.2.20:8080/echo?message=w13-before
+client: exit=0, HTTP200, {"message": "w13-before"}
+server: {"event":"response","client":["192.0.2.10",45010],"path":"/echo?message=w13-before","status":200,"bytes":25}
+
+[C2: 본인 테스트 허용 rule r-owned-before만 제거]
+최신 조회: 해당 rule 없음, 나머지 설정 C1과 동일; 새 curl 프로세스로 요청.
+client request: http://192.0.2.20:8080/echo?message=w13-block
+client: exit=28, HTTP 응답 없음 (제공 사례의 제한 시간 실패)
+server: LISTEN 유지, w13-block HTTP 로그 없음
+주의: 로그 없음 하나로 특정 차단 위치를 증명하지 않는다.
+
+[C3: 같은 조건 복구, 새 rule r-owned-after]
+ingress IPv4 TCP8080 from 192.0.2.10/32 복구; ID는 달라짐.
+client request: http://192.0.2.20:8080/echo?message=w13-after
+client: exit=0, HTTP200, {"message": "w13-after"}
+server: {"event":"response","client":["192.0.2.10",45022],"path":"/echo?message=w13-after","status":200,"bytes":24}
+
+[C4: 같은 경로의 이름과 TLS 확인 방법]
+테스트 이름 study.test의 A=192.0.2.20이라는 준비 조건을 따로 확인한다.
+getent ahostsv4 study.test의 주소와 실제 curl 목적지를 대조한다.
+TLS listener 192.0.2.20:8443, SAN DNS:study.test, 신뢰 CA와 유효기간 확인.
+--resolve study.test:8443:192.0.2.20는 DNS 질의를 우회하는 비교다.
+정상 이름: 검증 켬/exit0/200/서버 GET 로그.
+wrong.test: 같은 주소/CA/port, 이름 불일치/exit60/HTTP 없음.
+study.test 복구: 검증 켬/exit0/200/새 GET 로그.
+이 행은 실행 결과가 아닌 분석용 가정이다. 실제 DNS/TLS 근거를 대신하지 않는다.
