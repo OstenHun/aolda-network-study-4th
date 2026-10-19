@@ -30,3 +30,16 @@
 질문·해설·parity/checksum/CRC 작은 값·삼각형과 Python 시뮬레이터는 이 교재의 자체 학습 예제다. 특정 기업 기출이나 실제 운영 측정 결과가 아니다. 코드에는 외부 구현을 복사하지 않았으며 표준 프로토콜의 완전 구현을 주장하지 않는다. 공식 문서의 장문·그림·슬라이드를 재배포하지 않고 링크와 지정 제목으로 찾는다.
 
 모델은 명령마다 현재 구성·학습 상태를 계산한다. 시뮬레이터에서 직접 변경·복구한 근거와 제공 예시를 읽은 근거, 실제 장비 패킷·시간·성능 근거를 구별한다. [실습의 지원 기능/한계](LINUX.md)와 [교재의 조건](CONCEPTS.md)을 함께 읽는다.
+
+<span id="real-l2"></span>
+## 실제 STP·LACP 실습의 근거
+
+확인일: 2026-10-19. [실제 도구 안내](REAL_L2.md)는 아래 구현·명령 문서에 근거한 자체 구성이다. 외부 랩 파일을 복제하지 않았다.
+
+- [Linux kernel Ethernet Bridging](https://docs.kernel.org/networking/bridge.html)의 VLAN filtering·STP port states·bridge timers: 커널의 실제 포트 전환과 BPDU 처리. netlink 타이머의 clock_t/USER_HZ 단위를 확인한다. 제공 Alpine/iproute2의 값 `100/600/400`은 각각1/6/4초이며 다른 버전에서 명령 해석을 재확인한다.
+- [ip-link(8)](https://man7.org/linux/man-pages/man8/ip-link.8.html), [bridge(8)](https://man7.org/linux/man-pages/man8/bridge.8.html), [ip-netns(8)](https://man7.org/linux/man-pages/man8/ip-netns.8.html): veth·bridge·VLAN·포트 상태와 독립된 두 호스트의 IP 통신. 실제 지원·권한은 실행 환경에서 확인한다.
+- [OVS DB 매뉴얼](https://www.openvswitch.org/support/dist-docs/ovs-vswitchd.conf.db.5.html)의 Port LACP·bond mode·VLAN, [OVS bonding](https://docs.openvswitch.org/en/latest/topics/bonding/), [ovs-vswitchd(8)](https://www.openvswitch.org/support/dist-docs/ovs-vswitchd.8.html)의 lacp/show·bond/show: 양끝 active/passive·fast·fallback 비활성과 실제 협상 상태. 문서의 최신 버전과 설치된 OVS2.17 계열의 차이를 구별한다.
+- [OVS STP FAQ](https://docs.openvswitch.org/en/latest/faq/issues/): STP 구현의 시험 한계를 확인했다. DB 매뉴얼의 STP bond 포트 제약도 있어 이 키트는 STP는 Linux bridge, LACP는 별도 OVS 구성으로 나눈다.
+- [tcpdump 공식 원문](https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/master/tcpdump.1.in)의 -i/-s/-U/-w, [Wireshark STP 필터](https://www.wireshark.org/docs/dfref/s/stp.html)·[LACP 필터](https://www.wireshark.org/docs/dfref/l/lacp.html): 본인 실습 링크의 pcap을 저장하고 실제 필드를 읽는 근거다. 예제·모형·자신의 캡처는 서로 다른 근거다.
+
+준비된 Alpine 이미지는 별도 오픈소스 도구를 설치해 사용한다. Linux kernel·iproute2·OVS·tcpdump의 코드 자체를 스터디 저작물로 주장하지 않는다. 도구의 라이선스는 각 프로젝트를 따르며 외부 이미지 재배포와 자체 설정 파일 제공을 구별한다. 실제 패킷·순서·수렴/응답 시간은 본인 실행에서 확인하며 물리 장비·호스트 장애·처리량으로 일반화하지 않는다.

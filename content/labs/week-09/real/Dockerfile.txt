@@ -1,0 +1,5 @@
+FROM alpine:3.22
+RUN apk add --no-cache iproute2 iputils tcpdump openvswitch
+COPY boot.sh lab.sh /lab/
+RUN chmod 755 /lab/boot.sh /lab/lab.sh
+ENTRYPOINT ["/bin/sh", "/lab/boot.sh"]

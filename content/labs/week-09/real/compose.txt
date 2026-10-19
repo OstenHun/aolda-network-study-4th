@@ -1,0 +1,10 @@
+services:
+  lab:
+    build:
+      context: .
+      dockerfile: Dockerfile.txt
+    network_mode: none
+    cap_add: [NET_ADMIN, NET_RAW, SYS_ADMIN]
+    # SYS_ADMIN is needed for ip netns, not for host administration.
+    # No host network, devices, ports, Docker socket, or host bind mounts.
+    stop_grace_period: 10s

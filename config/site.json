@@ -778,7 +778,15 @@
       "label": "격리 실습·코드 읽기"
     },
     {
-      "id": "week09-review",
+        "id": "week09-real-l2",
+        "source": "materials/week-09/REAL_L2.md",
+        "output": "materials/week-09/real-l2.html",
+        "group": "week-09",
+        "kind": "lesson",
+        "label": "실제 STP·LACP 관찰"
+      },
+      {
+        "id": "week09-review",
       "source": "materials/week-09/REVIEW.md",
       "output": "materials/week-09/review.html",
       "group": "week-09",
