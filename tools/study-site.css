@@ -16,12 +16,12 @@
 .study-site > .skip, .study-site .study-workspace .skip { display: none; }
 .study-site .study-topbar { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; margin: 0; padding: 0 36px; background: #fff; border-bottom: 1px solid var(--line); }
 .study-site .study-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 22px; font-weight: 800; color: var(--blue); letter-spacing: -.06em; }
-.study-site .study-logo { flex-shrink: 0; min-height: 44px; }
+.study-site .study-logo { flex-shrink: 1; min-width: 0; min-height: 44px; line-height: 1.4; }
 .study-site .study-brand-image { display: block; width: 119px; height: auto; object-fit: contain; flex-shrink: 0; }
 .study-site .study-footer-brand { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
 .study-site .study-footer-brand .study-brand-image { width: 95px; }
 .study-site .study-logo small { margin: 1px 0 0 9px; padding-left: 18px; border-left: 1px solid #d8e3eb; color: var(--muted); font-size: 14px; font-weight: 500; letter-spacing: 0; }
-.study-site .study-top-actions { display: flex; gap: 12px; align-items: center; }
+.study-site .study-top-actions { display: flex; flex-shrink: 0; gap: 12px; align-items: center; }
 .study-site .study-search-trigger, .study-site .study-menu { display: flex; align-items: center; justify-content: space-between; gap: 36px; min-height: 44px; padding: 6px 12px; background: #f7f9fb; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 14px; line-height: 1.5; cursor: pointer; }
 .study-site .study-search-trigger kbd { display: grid; place-items: center; width: 22px; height: 24px; background: white; border: 1px solid #d6e0e8; border-radius: 4px; color: #62778a; font: 14px/1 Consolas, monospace; }
 .study-site .study-menu { display: none; }
@@ -115,6 +115,7 @@
 .study-site .home-brand-symbol { position: absolute; right: 0; top: 38px; width: 160px; height: 160px; }
 .study-site .home-heading h1 { font-size: clamp(30px, 3.25vw, 48px); font-weight: 800; line-height: 1.45; margin: 0 0 18px; letter-spacing: -.055em; }
 .study-site .home-heading > p:last-child { color: var(--muted); font-size: 16px; line-height: 1.95; max-width: 46rem; margin: 0; }
+.study-site .home-origin { color: var(--muted); font-size: 14px; margin: 20px 0 0; }
 .study-site .home-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; padding: 36px; background: #edf5fb; border: 1px solid #d6e7f3; border-radius: 10px; }
 .study-site .section-label { font-size: 14px; font-weight: 700; color: #12689e; }
 .study-site .feature-copy h2 { font-size: clamp(25px, 2.4vw, 34px); line-height: 1.5; margin: 14px 0; letter-spacing: -.05em; }
@@ -193,7 +194,7 @@
 @media (max-width: 650px) {
   .study-site { font-size: 16px; }
   .study-site .study-topbar { padding-inline: 18px; gap: 10px; height: 64px; }
-  .study-site .study-logo { font-size: 20px; gap: 9px; }
+  .study-site .study-logo { font-size: 16px; gap: 9px; }
   .study-site .study-logo .study-brand-image { width: 99px; }
   .study-site .study-logo small { display: none; }
   .study-site .study-search-trigger { gap: 0; padding-inline: 10px; font-size: 14px; }

@@ -40,6 +40,9 @@ def apply_theme(payload, root, catalog):
         html = data.decode()
         if 'http-equiv="refresh"' in html:
             continue
+        # Retain legacy lesson sources while giving every published tab the site name.
+        html = re.sub(r'(<title>[^<]*?) · 아올다[^<]*(</title>)', r'\1 · 실습으로 배우는 네트워크\2', html, count=1)
+        html = re.sub(r'<footer\b[\s\S]*?</footer>', lambda match: match[0].replace('아올다 4기 네트워크 스터디', '실습으로 배우는 네트워크'), html)
         current_group = next((key for key in GROUPS if name.startswith(groups[key]['prefix'])), None)
 
         def href(target):
@@ -74,9 +77,9 @@ def apply_theme(payload, root, catalog):
         sidebar += '<span class="sidebar-group-title">다시 찾아보기</span>'
         sidebar += link('materials/week-01/concept-index.html', '전체 개념 색인')
         sidebar += link('materials/week-01/interview-references.html', '면접·개발 참고자료')
-        sidebar += '<div class="sidebar-foot">질문 → 함께 탐색 → 설명 → 확인<br>아올다 4기 네트워크 스터디</div>'
+        sidebar += '<div class="sidebar-foot">질문 → 탐색 → 설명 → 확인<br>실습으로 배우는 네트워크</div>'
         logo = '<img class="study-brand-image" src="' + href('assets/aolda-logo.svg') + '" alt="Aolda" width="119" height="30">'
-        topbar = '<a class="study-skip" href="#main">본문으로 건너뛰기</a><header class="study-topbar"><a class="study-logo" aria-label="아올다 학습 홈" href="' + href('index.html') + '">' + logo + '<small>네트워크 스터디 · 4기</small></a><div class="study-top-actions"><button class="study-search-trigger" type="button" aria-haspopup="dialog">자료 검색 <kbd aria-hidden="true">/</kbd></button><button class="study-menu" type="button" aria-expanded="false" aria-controls="study-sidebar">학습 메뉴</button></div></header><nav id="study-sidebar" class="study-sidebar" aria-label="전체 학습 경로">' + sidebar + '</nav>'
+        topbar = '<a class="study-skip" href="#main">본문으로 건너뛰기</a><header class="study-topbar"><a class="study-logo" aria-label="실습으로 배우는 네트워크 학습 홈" href="' + href('index.html') + '">실습으로 배우는 네트워크</a><div class="study-top-actions"><button class="study-search-trigger" type="button" aria-haspopup="dialog">자료 검색 <kbd aria-hidden="true">/</kbd></button><button class="study-menu" type="button" aria-expanded="false" aria-controls="study-sidebar">학습 메뉴</button></div></header><nav id="study-sidebar" class="study-sidebar" aria-label="전체 학습 경로">' + sidebar + '</nav>'
         breadcrumb = ''
         if name != 'index.html':
             breadcrumb = '<nav class="study-breadcrumb" aria-label="현재 위치">' + link('index.html', '학습 홈') + '<span aria-hidden="true">/</span>'
@@ -93,7 +96,7 @@ def apply_theme(payload, root, catalog):
         if not re.search(r'\bid="main"', html):
             html = re.sub(r'<main\b', '<main id="main"', html, count=1)
         html = re.sub(r'<body([^>]*)>', lambda match: '<body class="study-site"' + match[1] + '>' + topbar + '<div class="study-workspace">' + breadcrumb, html, count=1)
-        html = html.replace('</body>', '<div class="study-bottom"><div class="study-footer-brand">' + logo + '<span>아올다 4기 · 함께 배우는 네트워크</span></div>' + link('materials/week-01/concept-index.html', '개념 색인 ↗') + '</div></div>' + search + '</body>')
+        html = html.replace('</body>', '<div class="study-bottom"><div class="study-footer-brand">' + logo + '<span>아주대학교 클라우드 운영 소학회 아올다의<br>4기 네트워크 스터디에서 시작했습니다.</span></div>' + link('materials/week-01/concept-index.html', '개념 색인 ↗') + '</div></div>' + search + '</body>')
         # Use one official favicon instead of legacy page-specific placeholders.
         html = re.sub(r'<link\b(?=[^>]*\brel=[\"\'](?:shortcut )?icon[\"\'])[^>]*>', '', html, flags=re.I)
         html = html.replace('</head>', '<link rel="icon" type="image/svg+xml" href="' + href('assets/aolda-icon.svg') + '"></head>', 1)

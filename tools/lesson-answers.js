@@ -17,7 +17,7 @@
   });
   button.addEventListener('click', () => {
     const recordSummary = '작성자의 개인 답안이다. 직접 수행·제공 예제·미수행은 작성자가 구분해 적고, 빈칸은 미작성으로 남긴다.';
-    const lines = ['# ' + document.title.replace(/ · 아올다$/, '') + ' — 내 기록', '', '요약: ' + recordSummary, '', '작성일: ' + new Date().toLocaleDateString('ko-KR'), ''];
+    const lines = ['# ' + document.title.replace(/ · 실습으로 배우는 네트워크$/, '') + ' — 내 기록', '', '요약: ' + recordSummary, '', '작성일: ' + new Date().toLocaleDateString('ko-KR'), ''];
     fields.forEach(field => lines.push('## ' + field.dataset.answer, '', field.value.trim() || '미작성', ''));
     if (checks.length) { lines.push('## 완료 확인', ''); checks.forEach(box => lines.push('- [' + (box.checked ? 'x' : ' ') + '] ' + box.closest('li')?.textContent.trim())); lines.push(''); }
     const blob = new Blob([lines.join('\n')], {type:'text/markdown;charset=utf-8'});

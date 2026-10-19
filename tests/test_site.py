@@ -105,7 +105,7 @@ class IntegratedAuthoring(unittest.TestCase):
         for name in ('index.html', 'materials/week-01/concepts.html', 'materials/week-04/review.html'):
             html = self.payload[name].decode()
             self.assertNotIn('study-logo-mark', html)
-            self.assertIn('aria-label="아올다 학습 홈"', html)
+            self.assertIn('aria-label="실습으로 배우는 네트워크 학습 홈"', html)
             self.assertEqual(html.count('rel="icon"'), 1)
             self.assertIn('assets/aolda-logo.svg', html)
             self.assertIn('assets/aolda-icon.svg', html)
