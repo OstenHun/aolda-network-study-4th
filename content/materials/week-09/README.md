@@ -46,7 +46,7 @@
 ## 함께 사용할 순서
 
 1. [중심 질문](WORKSHEET.md)을 고르고, access/trunk와 STP의 지정 공식 절에서 근거를 찾는다.
-2. [개념 교재](CONCEPTS.md)의 W09-K1~K3와 혼동 두 가지를 읽고 한 사람이 설명한다.
+2. [개념 교재](CONCEPTS.md)의 W09-K1~K3와 혼동 두 가지를 읽고 자기 말로 설명한다.
 3. [필수 실습 A/B](LINUX.md)에서 각자 상태를 바꾸고 전달 결과·복구를 확인한다.
 4. [복습 문제](REVIEW.md)에 답한 뒤 [분리 해설](ANSWERS.md)과 비교한다. [진행자 안내](FACILITATOR.md)와 [출처](SOURCES.md)는 필요한 때 찾는다.
 

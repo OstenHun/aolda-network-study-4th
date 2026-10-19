@@ -1,6 +1,6 @@
 # 13주차 · 이름은 맞는데 왜 내 요청은 닿지 않을까?
 
-요약: DNS 성공 뒤 멈춘 요청을 실제 경로·바인딩·정책·TLS·로그로 나눠 탐색한다. 한 명이 근거로 설명하고 다른 사람이 출발지나 크기 한 조건을 바꿔 확인한다. 답은 분리 해설에 둔다.
+요약: DNS 성공 뒤 멈춘 요청을 실제 경로·바인딩·정책·TLS·로그로 나눠 탐색한다. 각자 근거로 설명하고 출발지나 크기 한 조건을 바꿔 확인한다. 모임에서는 근거와 해석을 비교한다. 답은 분리 해설에 둔다.
 
 ## 먼저 되짚기
 
@@ -10,7 +10,7 @@
 
 사설 테스트 이름이 예상한 주소를 반환한다. VM 화면은 실행 중이고 클라이언트의 HTTP 요청은 시간 제한에 걸렸다. 서버의 해당 GET 로그는 없다. **어떤 두 원인 가설을 세우고, 무엇을 어디서 관찰해 구별할까?** 아직 원인을 하나로 정하지 않는다.
 
-함께 [Neutron Subnets·Ports·Security groups](https://docs.openstack.org/neutron/latest/admin/intro-os-networking.html#subnets)와 [K1/K2](CONCEPTS.md#cloud-objects)를 찾는다. port의 주소/그룹과 TCP port, 서버의 대기 주소, 왕복 경로, 로그 위치를 짚는다. 한 명이 근거를 들어 설명하고 다른 사람이 다음 조건을 바꿔 묻는다.
+함께 [Neutron Subnets·Ports·Security groups](https://docs.openstack.org/neutron/latest/admin/intro-os-networking.html#subnets)와 [K1/K2](CONCEPTS.md#cloud-objects)를 찾는다. port의 주소/그룹과 TCP port, 서버의 대기 주소, 왕복 경로, 로그 위치를 짚는다. 각자 근거를 들어 설명하고 다음 조건을 바꿔 확인한다. 모임에서는 근거와 해석을 비교한다.
 
 ## 조건 하나 변경 · W13-D2
 
@@ -22,6 +22,6 @@
 
 ## 설명을 실습에 연결
 
-실습 A는 자기 자원/양끝 HTTP와 규칙 변경·복구, B는 제공 크기 사례다. [공식 지정 읽기 약10분](SOURCES.md)을 기존 공동 탐색에 배치한다. DNS/TLS가 막히면 [5주](../week-05/CONCEPTS.md)·[6주](../week-06/CONCEPTS.md) 근거로 돌아간다. 설명자를 교대하고 다른 사람도 출력/조건 변경을 짧게 설명한다.
+실습 A는 자기 자원/양끝 HTTP와 규칙 변경·복구, B는 제공 크기 사례다. [공식 지정 읽기 약10분](SOURCES.md)을 기존 공동 탐색에 배치한다. DNS/TLS가 막히면 [5주](../week-05/CONCEPTS.md)·[6주](../week-06/CONCEPTS.md) 근거로 돌아간다. 각자 출력/조건 변경을 짧게 설명하고 모임에서 근거를 비교한다.
 
 상세 근거는 개인 파일에 한 번 보관한다. 팀 기록·개인 마무리·발표 양식을 추가하지 않는다. 본인 실행·독립 설명이 없으면 미확인으로 남긴다. [복습](REVIEW.md)을 먼저 보고 [D1\~D3 해설](ANSWERS.md#development)을 연다.
