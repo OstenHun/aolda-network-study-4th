@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="중심 질문 하나를 공동 검색·공부·한 명 설명·조건 변경으로 다루고 기존 VM의 P1 조회·P2 계산/검산으로 확인한다. 공식 자료와 계산·조회 결과를 연결해 설명을 확인하며 격리 마스크 변경은 선택으로 다룬다."><title>2주차 진행자 안내 — 질문에서 기존 VM 실습으로 · 아올다 2주차</title><style>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="개인 공부에서 개념·문제·실습을 준비하고 오프라인 한 번에서 설명·조건 변경·직접 수행을 확인한다. 준비·복구와 제공 분석의 경계를 지키며 막힌 필수 항목을 보충한다."><title>2주차 진행자 안내 — 질문에서 기존 VM 실습으로 · 아올다 2주차</title><style>
 :root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
 .js-only{display:none}.js-ready .js-only{display:inline-block}
 </style><style>.cidr-model{border:1px solid var(--line);padding:22px;border-radius:12px;margin:28px 0;background:var(--wash)}.cidr-model h3{margin-top:0}.model-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}select{font:inherit;padding:8px;color:var(--blue);border:1px solid #91acbd;background:white;border-radius:6px}.subnet-blocks{display:flex;margin:20px 0;border:1px solid #07548e}.subnet-blocks>div{flex:1;min-width:0;padding:16px 8px;text-align:center;background:#e6f2fc;font-size:.85rem;overflow-wrap:anywhere}.subnet-blocks>div+div{border-left:1px solid #07548e}.subnet-blocks>div:nth-child(2){background:#fff}.subnet-blocks>div:nth-child(n+3){background:#f3f6f8;color:#435e70}@media(max-width:420px){.cidr-model{padding:14px}.subnet-blocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.subnet-blocks>div{border:1px solid #91acbd}}</style><style id="study-reading">/* Shared reading rules, embedded at build time for offline and hosted pages. */
@@ -96,12 +96,11 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
   .document-layout, .book-layout, .layout { display: block; }
   pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 }
-</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="facilitator.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 진행자 안내 — 질문에서 기존 VM 실습으로</h1><p>중심 질문 하나를 공동 검색·공부·한 명 설명·조건 변경으로 다루고 기존 VM의 P1 조회·P2 계산/검산으로 확인한다. 공식 자료와 계산·조회 결과를 연결해 설명을 확인하며 격리 마스크 변경은 선택으로 다룬다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#이번-주-목표">이번 주 목표</a><a href="#시작-전-준비">시작 전 준비</a><a href="#사전-공동학습-60분--같이-찾아-답하기">사전 공동학습 60분 — 같이 찾아 답하기</a><a href="#오프라인-60분--p1p2와-개인-확인">오프라인 60분 — P1·P2와 개인 확인</a><a href="#선택-데모와-완료-판정">선택 데모와 완료 판정</a><a href="#다음-주로-이어가기">다음 주로 이어가기</a></div></nav><article>
-<h2 id="이번-주-목표">이번 주 목표</h2>
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="facilitator.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 진행자 안내 — 질문에서 기존 VM 실습으로</h1><p>개인 공부에서 개념·문제·실습을 준비하고 오프라인 한 번에서 설명·조건 변경·직접 수행을 확인한다. 준비·복구와 제공 분석의 경계를 지키며 막힌 필수 항목을 보충한다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#이번-주-목표">이번 주 목표</a><a href="#시작-전-준비">시작 전 준비</a><a href="#한-주의-개인-공부와-오프라인-확인">한 주의 개인 공부와 오프라인 확인</a><a href="#선택-데모와-완료-판정">선택 데모와 완료 판정</a><a href="#다음-주로-이어가기">다음 주로 이어가기</a></div></nav><article><h2 id="이번-주-목표">이번 주 목표</h2>
 <p>중심 질문은 “IP가 비슷한 두 VM은 같은 망으로 바로 통신할 수 있을까?”다. CIDR과 비트로 주소 범위를 계산하고 자기 VM의 주소·경로를 읽는다. 설명을 확인할 때는 이유를 묻고, 접두사를 바꾼 뒤 무엇을 더 확인해야 할지 묻는다.</p>
-<p><a href="worksheet.html">공동 질문</a> → <a href="articles.html">공식 자료 찾기</a>·<a href="essentials.html">핵심 개념</a> → <a href="linux.html">P1·P2</a> → 자기 설명 → <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>로 연결한다. 핵심 3개·혼동 2개·개발 사례 1개는 이 흐름 안에서 재사용한다. 답이 막히면 해당 교재 절로 돌아가며 별도 발표·필수 문항을 더하지 않는다.</p>
+<p><a href="worksheet.html">공동 질문</a> → <a href="ARTICLE_LESSON.md">공식 자료 찾기</a>·<a href="essentials.html">핵심 개념</a> → <a href="../../labs/week-02/LINUX.md">P1·P2</a> → 자기 설명 → <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>로 연결한다. 핵심 3개·혼동 2개·개발 사례 1개는 이 흐름 안에서 재사용한다. 답이 막히면 해당 교재 절로 돌아가며 별도 발표·필수 문항을 더하지 않는다.</p>
 <h2 id="시작-전-준비">시작 전 준비</h2>
-<p>둘 또는 셋이 함께 자료를 읽고 설명·근거 확인 역할을 나눈다. 설명자는 질문이나 회차마다 바꾼다. 아래 시간표는 각 60분으로 진행할 때의 예시이며 이해와 실습 속도에 맞춰 조정한다.</p>
+<p>개인 공부에서 자료를 먼저 읽고 오프라인 소그룹에서 설명·근거 확인 역할을 교대한다. 실제 개인 공부와 막힌 지점을 기준으로 모임을 준비한다.</p>
 <ul>
 <li><input disabled="" type="checkbox"> 기존 승인 VM의 접속·<code>ip</code>·<code>python3</code>·검산기 파일 위치를 확인한다. 새 VM/서버 구축을 요구하지 않는다.</li>
 <li><input disabled="" type="checkbox"> 조회할 인터페이스와 허용 목적지를 정한다. 실제 이름·주소·기본 경로 유무는 출력으로 확인한다.</li>
@@ -111,85 +110,38 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <li><input disabled="" type="checkbox"> 공개 공유본에서 가릴 주소·이름을 안내하고 비밀번호/토큰을 기록하지 않게 한다.</li>
 <li><input disabled="" type="checkbox"> 선택 데모는 별도로 권한·격리·정상/변경/복구·정리를 검증한 경우에만 안내한다.</li>
 </ul>
-<h2 id="사전-공동학습-60분--같이-찾아-답하기">사전 공동학습 60분 — 같이 찾아 답하기</h2>
+<h2 id="한-주의-개인-공부와-오프라인-확인">한 주의 개인 공부와 오프라인 확인</h2>
+<p>개인 준비는 <a href="index.html#personal-notes">학습 홈의 정리 안내</a>에 따라 주요 질문과 내 답·헷갈리는 개념 비교·꼭 기억하고 이해할 핵심을 살핀다. 노트 분량을 평가하지 않고 이유·조건 변경·관련 실습 근거로 확인한다. 모임 뒤에는 틀린 설명과 남은 보충만 기존 개인 노트에서 고치며 중복 제출을 요구하지 않는다.</p>
+<p><a href="index.html#weekly-study">학습 홈의 개인 공부 범위와 세 확인 질문</a>을 오프라인 모임 전까지 준비한다. 모임은 그 주 학습을 마무리하고 남은 보충을 정하는 자리다. 개념·공식 지정 절·복습과 준비된 실습의 정상→변경→복구는 개인 공부에서 시도한다. 모임 전 완성 답안·발표 자료를 요구하지 않으며 막힌 질문과 본인 근거를 가져오게 한다. 진단 원인을 가리는 과제는 정상 기준과 도구까지만 준비한다.</p>
+<p>오프라인은 한 번의 모임에서 <strong>설명 → 새 조건 → 본인 실습/분석 확인 → 보충 결정</strong>으로 진행한다. 아래 60분은 시간 배분 예시이며 모임 길이나 추가 회차를 확정하는 표가 아니다.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
-<th>시간</th>
-<th>진행</th>
-<th>확인할 것</th>
+<th>시간 예시</th>
+<th>진행자가 확인할 것</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>0~5분</td>
-<td>중심 질문과 C1/C2 조건 확인. 필요하면 1주차 실행 위치만 짧게 복습</td>
-<td>무엇을 알고/모르는지</td>
+<td>0~10분</td>
+<td>개인 공부에서 막힌 질문과 2~4학습 단위 전 개념 하나를 골라 근거로 설명</td>
 </tr>
 <tr>
-<td>5~25분</td>
-<td><a href="articles.html">지정 공식 자료</a> 두 곳을 함께 탐색·공부하고 핵심 개념/그림을 읽기</td>
-<td>접두사 범위와 경로 조회의 역할</td>
+<td>10~25분</td>
+<td>학습 홈의 중심 질문 → 조건 변경. 소그룹에서 설명자/확인자 교대</td>
 </tr>
 <tr>
-<td>25~40분</td>
-<td>한 명이 근거로 답을 설명. 다른 사람이 A만 <code>/26</code> 등 조건을 바꿔 확인</td>
-<td>원리·이유·양쪽 판단·미확인 부분</td>
+<td>25~50분</td>
+<td>P1 자기 VM 주소·두 목적지 경로 조회, P2 C1/C2 손계산→Python 검산→카드 조건 하나 변경. 이미 수행했다면 근거를 보고 다른 한 조건의 판단·변경·복구 확인</td>
 </tr>
 <tr>
-<td>40~55분</td>
-<td>자기 VM에서 확인할 줄·허용 목적지·파일/도구를 점검하고 실습 결과 예상</td>
-<td>P1/P2 준비, 막히면 사용할 예제</td>
-</tr>
-<tr>
-<td>55~60분</td>
-<td>남은 질문을 확인하고 다음 실습 준비</td>
-<td>다음 확인과 필요한 환경</td>
+<td>50~60분</td>
+<td>정상 복구·받은 도움·미완료 구분, 개인 학습 노트에 필요한 보충과 다음 질문 연결</td>
 </tr>
 </tbody></table></div>
-<p>설명자는 다음 질문/회차에서 교대한다. 전원이 매 질문마다 발표하지 않는다. 검색에 막히면 진행자가 지정 절을 바로 열고 작은 개념 설명을 제공한다. 자료를 찾은 양보다 중심 질문에 이유·근거를 붙여 답할 수 있는지를 본다. 원문의 필요한 절은 공동 탐구 시간에 함께 읽는다.</p>
-<h2 id="오프라인-60분--p1p2와-개인-확인">오프라인 60분 — P1·P2와 개인 확인</h2>
-<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
-<thead>
-<tr>
-<th>시간</th>
-<th>활동</th>
-<th>완료 근거·전환 기준</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0~5분</td>
-<td>중심 질문의 임시 답·실습 조건과 기존 VM 확인</td>
-<td>실행 위치·허용 목적지</td>
-</tr>
-<tr>
-<td>5~20분</td>
-<td>P1: 각자 주소·경로·루프백/허용 목적지의 경로 조회</td>
-<td>본인 명령·출력·<code>dev/via/src</code>·없는 값/오류. 접속 문제 5분 초과 시 예제 분석으로 전환하고 본인 조회 보충</td>
-</tr>
-<tr>
-<td>20~38분</td>
-<td>P2: C1/C2 손계산 뒤 Python 검산</td>
-<td>양쪽 범위·방향별 포함 여부·검산 차이 수정</td>
-</tr>
-<tr>
-<td>38~50분</td>
-<td>종이/검산기 입력의 조건 하나를 바꾸어 독립 계산. 소그룹에서 1~2분 설명/출력 읽기</td>
-<td>각자의 조건 변경·이유·다음 관찰. 호스트 설정은 바꾸지 않음</td>
-</tr>
-<tr>
-<td>50~55분</td>
-<td>필요한 <a href="answers.html#%EA%B3%B5%EB%8F%99-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>과 비교하고 바뀐 설명 확인</td>
-<td>해설 확인과 독립 설명 구별</td>
-</tr>
-<tr>
-<td>55~60분</td>
-<td>실습 정리·필요한 파일 보관·보충 항목 확인</td>
-<td>다음에 확인할 조건</td>
-</tr>
-</tbody></table></div>
+<p>개인 학습 시간을 고정된 2~3시간으로 제한하지 않는다. 필수 범위를 먼저 공부하고 실제 막힘에 따라 시간을 배분한다. 주차를 미리 분할하거나 필수 기준을 낮추지 않으며, 개인 공부 후에도 해결되지 않는 항목만 보충한다. C04/C08/C12/C16은 해당 주 기존 설명·실습을 대체하고 점검을 별도로 더하지 않는다. 한 사람의 답·팀 합의·파일 제출은 개인 이해/직접 수행의 증거가 아니다.</p>
 <p>두 실험을 진행하고 각자의 이해를 확인하는 것이 필수다. 계산이나 조회에 시간이 더 걸리면 보조 질문·시험 연계·선택 데모를 줄인다. 환경 때문에 제공 자료로 공부했다면 개념 확인과 본인 실행 미완료를 나눈다. 긴 전체 발표를 추가해 실습을 밀어내지 않는다.</p>
 <h2 id="선택-데모와-완료-판정">선택 데모와 완료 판정</h2>
-<p>격리 마스크 변경은 필수 과제가 아니다. 선택 실험을 하지 않았다는 이유로 필수 실습을 미완료로 기록하지 않는다. 실행을 선택한 경우 <a href="linux.html">Linux 안내</a>의 격리 네임스페이스/veth에서 C1→A만 <code>/26</code>→C1 복구와 자원 정리를 확인한다. 기본 시연의 조회/요청 방향은 A→B이며 B→A를 실측했다고 쓰지 않는다. 실제 관찰하지 못한 동작은 예상/제공 분석으로 구분한다.</p>
+<p>격리 마스크 변경은 필수 과제가 아니다. 선택 실험을 하지 않았다는 이유로 필수 실습을 미완료로 기록하지 않는다. 실행을 선택한 경우 <a href="../../labs/week-02/LINUX.md">Linux 안내</a>의 격리 네임스페이스/veth에서 C1→A만 <code>/26</code>→C1 복구와 자원 정리를 확인한다. 기본 시연의 조회/요청 방향은 A→B이며 B→A를 실측했다고 쓰지 않는다. 실제 관찰하지 못한 동작은 예상/제공 분석으로 구분한다.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>

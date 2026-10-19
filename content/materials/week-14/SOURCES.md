@@ -35,6 +35,14 @@
 
 </div>
 
+## 운영 연결 사례의 선택 근거
+
+아래는 가공 분포·기존/새 연결 질문을 설명하는 참조다. 필수 읽기 분량과 실습을 늘리지 않는다.
+
+- [Google SRE · Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/): The Four Golden Signals와 Worrying About Your Tail. 평균·꼬리 지연, 성공/실패 지연·요청량·오류·포화를 구별한다. 100개 분포와 nearest-rank 계산은 자체 예다.
+- [getrlimit · RLIMIT_NOFILE](https://man7.org/linux/man-pages/man2/getrlimit.2.html), [listen · backlog/NOTES](https://man7.org/linux/man-pages/man2/listen.2.html), [connect · ERRORS](https://man7.org/linux/man-pages/man2/connect.2.html): FD 한도·연결 대기열·임시 포트 실패는 별도 자원 조건이다. 증상만으로 고갈을 확정하거나 한도를 변경하지 않는다.
+- [Google SRE · Handling Overload](https://sre.google/sre-book/handling-overload/): The Pitfalls of "Queries per Second". 요청률만으로 자원 여유를 판단하기 어려움을 후속 심화로 연결하며 이번 자료에서 실제 부하 실험을 요구하지 않는다.
+
 ## 재사용과 관찰의 경계
 
 1주 Handler·6주 HTTP 시간/연결·13주 동일 요청과 양끝 로그를 재사용한다. backend/proxy의 고정 포트·매 요청 health·후보 선택·재시도 없음은 **제공 코드의 동작**이며 일반 TCP/LB 표준이 아니다. 코드를 직접 읽고 실행해 확인한다. 운영 Nginx 등의 구성과 같다고 주장하지 않는다.

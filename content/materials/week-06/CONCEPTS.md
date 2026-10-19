@@ -2,6 +2,8 @@
 
 요약: HTTP 메시지·연결 재사용·캐시 재검증을 구별하고 RTT 비용을 계산한다. TLS의 보호 범위와 인증서 검증을 읽으며 SSH의 호스트 확인·사용자 인증을 HTTPS와 비교한다.
 
+[개인 공부 정리](README.md#personal-notes)에서는 이 교재의 핵심·혼동 구별을 주요 질문과 내 답에 연결한다. 먼저 설명하고 해설과 비교한 뒤, 확인한 근거와 고친 이해를 기존 개인 노트에 보완한다.
+
 - 선수 개념: [1주차 HTTP 응답](../week-01/ESSENTIALS.md), [4주차 TCP 연결 수립](../week-04/CONCEPTS.md)
 - 읽기: HTTP 메시지 → 연결 비용/캐시 → TLS/SSH → 혼동 구별 → 개발 질문 → [분리 해설](ANSWERS.md). [학습 홈](README.md) · [실습](LINUX.md).
 

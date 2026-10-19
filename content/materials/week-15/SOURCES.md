@@ -24,6 +24,10 @@ HOWTO는 소켓 원리의 입문 자료다. 중간의 ‘HTTP가 소켓을 한 �
 | [http.server](https://docs.python.org/3.14/library/http.server.html#http.server.BaseHTTPRequestHandler) | 기존 Handler 재사용, 학습용 루프백 서버. 운영 서비스 용도로 확대하지 않음 |
 | [curl --max-time](https://curl.se/docs/manpage.html#--max-time), [--fail](https://curl.se/docs/manpage.html#--fail)와 [Exit codes](https://curl.se/docs/manpage.html#EXIT) | 수동 요청 총시간 상한·HTTP 오류 때 종료 정책·연결 실패. --fail을 쓰지 않는 명령의 해석 |
 
+## 재시도 연결 사례의 선택 근거
+
+[AWS · Timeouts, retries, and backoff with jitter](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/)의 Timeouts·Retries and backoff·Jitter를 필요한 때 참조한다. timeout의 측정 범위, 계층별 재시도의 곱, 한 곳에서의 재시도, 멱등성과 대기 분산의 근거다. 필수 지정 읽기와 구현 과제를 추가하지 않는다. 3계층·27회 및 1초/1.6초는 자체 산술 조건이며 권장 설정이나 실측값이 아니다.
+
 ## 자료의 성격과 재사용
 
 공식 문서와 실제 코드 API를 대조해 자체 설명·LF 프로토콜·문항·가공 사례를 만들었다. 외부 코드나 문제 전체를 복제하지 않았다. Python 문서는 PSF License의 공식 참조이고 RFC 원문은 해당 문서의 저작권 고지를 따른다. Python 3.14를 기준으로 공통 API를 읽으며 Linux의 설치 버전은 실행 전에 확인한다. 이번 제공 사례는 실측 로그가 아니다.

@@ -96,7 +96,33 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
   .document-layout, .book-layout, .layout { display: block; }
   pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 }
-</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="index.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html" aria-current="page">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 — IP가 비슷하면 같은 망일까?</h1><p>함께 질문을 찾아 공부하고 CIDR·경로·도달성을 구별한다. 기존 VM 조회와 주소 카드 계산·검산으로 설명을 확인한 뒤 분리 해설로 복습한다. 기본 실습은 읽기 전용 조회·계산이며 격리 설정 변경은 선택이다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#이번-주-함께-풀-질문">이번 주 함께 풀 질문</a><a href="#질문에서-실습과-해설로">질문에서 실습과 해설로</a><a href="#필수선택과-완료-기준">필수·선택과 완료 기준</a><a href="#두-모임에서-사용하는-방법">두 모임에서 사용하는 방법</a><a href="#실습-파일과-선택-자료">실습 파일과 선택 자료</a><a href="#자료-읽기와-답안-보관">자료 읽기와 답안 보관</a></div></nav><article>
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="index.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 2주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html" aria-current="page">시작</a><a href="essentials.html">핵심 개념</a><a href="concepts.html">개념 교재</a><a href="articles.html">함께 찾아보기</a><a href="linux.html">Linux 실습</a><a href="worksheet.html">함께 찾을 질문</a><a href="review.html">복습 문제</a><a href="ccna-practice.html">기출·시험 연계</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">IPv4 · 서브넷 · CIDR</p><h1>2주차 — IP가 비슷하면 같은 망일까?</h1><p>함께 질문을 찾아 공부하고 CIDR·경로·도달성을 구별한다. 기존 VM 조회와 주소 카드 계산·검산으로 설명을 확인한 뒤 분리 해설로 복습한다. 기본 실습은 읽기 전용 조회·계산이며 격리 설정 변경은 선택이다.</p></div><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#개인-공부와-오프라인-확인">개인 공부와 오프라인 확인</a><a href="#이번-주-함께-풀-질문">이번 주 함께 풀 질문</a><a href="#질문에서-실습과-해설로">질문에서 실습과 해설로</a><a href="#필수선택과-완료-기준">필수·선택과 완료 기준</a><a href="#학습-범위를-조절하는-방법">학습 범위를 조절하는 방법</a><a href="#실습-파일과-선택-자료">실습 파일과 선택 자료</a><a href="#자료-읽기와-답안-보관">자료 읽기와 답안 보관</a></div></nav><article><p><span id="weekly-study"></span></p>
+<h2 id="개인-공부와-오프라인-확인">개인 공부와 오프라인 확인</h2>
+<p>오프라인 모임 전까지 아래 범위를 공부하고 실습을 시도한다. 모임은 그 주의 학습을 마무리하는 자리로, 막힌 이유와 조건을 바꾼 결과를 설명하고 남은 보충을 정한다. <a href="worksheet.html">공동 질문</a>은 개인 공부의 출발점으로 쓰고, 모임에서는 근거를 비교한다. 별도 사전 모임이나 발표 자료는 필요하지 않다.</p>
+<ul>
+<li><strong>개념·문제:</strong> IPv4·인터페이스·사설/공인/특수 주소, 비트·마스크·CIDR와 /24·/26 범위, 경로 조회와 도달성의 차이. <a href="concepts.html">교재</a> → <a href="sources.html">공식 지정 절</a> → <a href="review.html">복습</a> 순서로 읽고, 먼저 답한 뒤 <a href="answers.html">해설</a>과 비교한다.</li>
+<li><strong>실습·분석:</strong> P1 자기 VM 주소·두 목적지 경로 조회, P2 C1/C2 손계산→Python 검산→카드 조건 하나 변경. 마스크 실제 변경·VLSM·시험 연계는 선택. <a href="../../labs/week-02/LINUX.md">실행 안내</a>의 필수/선택과 제공 분석/직접 수행 구분을 따른다.</li>
+<li><strong>모임에 가져올 것:</strong> 본인의 근거에서 고른 출력·풀이와 아직 설명이 막힌 질문. 개인 학습 노트에 한 번 정리하고 원시 로그·pcap은 파일 링크로 연결해도 된다. 새 제출 양식은 만들지 않는다.</li>
+</ul>
+<p><span id="personal-notes"></span></p>
+<h3 id="개인-공부를-정리할-때">개인 공부를 정리할 때</h3>
+<p>기존 개인 학습 노트에 아래 세 가지를 중심으로 정리한다. 모임 전에는 현재 답과 막힌 지점을 남기고, 모임 뒤에는 확인한 차이와 보충할 부분을 고친다. 정해진 개수·분량이나 새 제출물은 없다.</p>
+<ul>
+<li><strong>주요 질문과 내 답:</strong> <a href="worksheet.html">공동 질문</a>과 아래 확인 질문에 먼저 내 말로 답한다. 이유·성립 조건과 공식 자료·실습 근거를 연결하고, <a href="answers.html">분리 해설</a>은 시도 뒤에 비교한다.</li>
+<li><strong>헷갈리는 개념 비교:</strong> <a href="essentials.html">핵심 설명</a>에서 CIDR 주소 범위와 실제 도달성의 역할·관찰 위치·성공 범위를 비교한다. 두 개념이 다른 결론을 내는 예를 들어 본다.</li>
+<li><strong>이번 주 꼭 기억하고 이해할 핵심 개념:</strong> <a href="essentials.html">핵심 정리</a>의 W02-K1~K3를 길잡이로 용어·역할·동작 순서를 추린다. 필요한 공식은 식·단위·성립 조건과 적용 이유를 함께 설명한다. 예제 주소·일회성 출력값을 외우는 목록으로 만들지 않는다.</li>
+</ul>
+<p>실습 근거는 해당 질문·개념 아래에 예상·실제 관찰·수정한 이해와 함께 연결한다. 제공 분석과 직접 실행을 구별하고 관찰하지 않은 결과는 채우지 않는다. 입력 화면을 썼다면 이동 전에 답안을 내려받는다. <a href="../week-01/concept-index.html#personal-study">전체 개념 색인의 정리 방법</a>은 다른 주차에도 같은 방식으로 쓸 수 있다.</p>
+<h3 id="오프라인에서-확인할-질문">오프라인에서 확인할 질문</h3>
+<ol>
+<li><strong>중심 질문:</strong> A=192.0.2.10/24, B=192.0.2.70/24에서 A만 /26이면 각 방향의 경로 판단은 어떻게 달라질까? 직접 연결 경로 외에 다른 경로는 없다고 가정한다.</li>
+<li><strong>조건을 바꾸면:</strong> 같은 접두사이고 인터페이스가 UP이어도 통신 실패가 가능한 이유와 다음 조회는?</li>
+<li><strong>앞 개념을 다시 쓰면:</strong> 1주 요청을 PC 셸과 VM 셸에서 실행할 때 127.0.0.1의 대상은 같은가?</li>
+</ol>
+<p>중심 질문을 먼저 설명하고 나머지는 짧은 후속 질문으로 사용한다. <a href="answers.html">분리 해설</a>과 실제 근거를 대조하되 답을 본 시도와 독립 설명을 구별한다. 개인 공부에서 마친 정상 실습을 전부 반복하지 않고, 막힌 항목과 한 조건 변경·복구를 각자 확인한다.</p>
+<p><span id="learning-path"></span></p>
+<h3 id="같은-개념을-더-깊게-연결하기">같은 개념을 더 깊게 연결하기</h3>
+<p>1주 실행 위치에 주소 범위와 경로 선택을 더한다. 3주에는 선택한 링크에서 받을 이웃을 찾는다. <a href="../week-01/concept-index.html#operations-progression">핵심 개념의 단계별 연결</a>에서 앞뒤 학습을 찾는다.</p>
 <h2 id="이번-주-함께-풀-질문">이번 주 함께 풀 질문</h2>
 <p><strong>IP가 비슷한 두 VM은 같은 망으로 바로 통신할 수 있을까?</strong></p>
 <p>1주차에서 사용한 VM에 다시 접속한다. 새 VM이나 서버를 만들지 않고, 기존 주소·접두사·경로를 읽어 질문의 답을 찾아간다. 이번에는 같은 VM의 주소와 경로를 읽는다.</p>
@@ -113,7 +139,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </thead>
 <tbody><tr>
 <td>1. 질문을 나누고 찾아보기</td>
-<td><a href="worksheet.html">중심 질문·선택 보조 질문</a> → <a href="articles.html">함께 찾아보기</a></td>
+<td><a href="worksheet.html">중심 질문·선택 보조 질문</a> → <a href="ARTICLE_LESSON.md">함께 찾아보기</a></td>
 <td>AWS의 CIDR 설명과 Linux 경로 조회 문서의 지정 부분에서 출발. 검색어·읽을 절·돌아올 질문을 안내한다</td>
 </tr>
 <tr>
@@ -123,7 +149,7 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </tr>
 <tr>
 <td>3. 내 인스턴스로 확인하기</td>
-<td><a href="linux.html">기존 VM 실습</a></td>
+<td><a href="../../labs/week-02/LINUX.md">기존 VM 실습</a></td>
 <td>자기 주소·경로 조회 한 묶음, C1/C2 손계산·Python 검산 한 묶음. 예제와 실제 출력을 구분한다</td>
 </tr>
 <tr>
@@ -174,19 +200,18 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 </tr>
 </tbody></table></div>
 <p><strong>VM 구조를 설명해 보기:</strong> 자기 VM의 주소/접두사·연결 경로·기본 경로와 아직 모르는 구간을 작은 그림으로 표시한다. 이 그림으로 VM이 연결된 구조를 설명한다. 정책·서비스·NAT가 정상인지는 별도로 확인해야 한다. “주소 범위 판단 / 커널이 선택한 경로 / 실제 상대의 응답” 중 무엇을 확인했는지 말한다. 이번 필수 실습은 첫 두 항목을 다룬다.</p>
-<p>원본 출력·손계산·검산은 <a href="linux.html#%EA%B0%9C%EC%9D%B8-%EC%8B%A4%EC%8A%B5-%EC%A6%9D%EA%B1%B0-%EB%B3%B4%EA%B4%80">개인 실습 증거</a>에 한 번 보관한다. 함께 찾은 답을 설명하고 조건 변경·실습 결과로 확인한다. 필요한 메모는 자유롭게 한다. 접속이 막히면 <a href="sample-output.html">제공 예제</a>를 분석하고 P1 직접 수행을 보충한다.</p>
-<h2 id="두-모임에서-사용하는-방법">두 모임에서 사용하는 방법</h2>
-<p>사전 공동학습은 질문 확인→공동 탐색/공부→한 명 설명→조건 변경·실습 준비에 60분을 제안한다. 오프라인은 P1·P2·소그룹 확인·기록 보관에 60분을 제안한다. 모임의 시간 배치는 <a href="facilitator.html">진행자 안내</a>를 참고한다.</p>
-<p>필수 실습이 밀리면 선택 데모·시험 연계를 줄이고 보충할 항목을 남긴다. 개인 학습 주 2~3시간 안에서 교재의 필요한 절·복습·재현을 배치하며 긴 발표 준비와 새로운 필수 읽기를 더하지 않는다.</p>
+<p>원본 출력·손계산·검산은 <a href="../../labs/week-02/LINUX.md#%EA%B0%9C%EC%9D%B8-%EC%8B%A4%EC%8A%B5-%EC%A6%9D%EA%B1%B0-%EB%B3%B4%EA%B4%80">개인 실습 증거</a>에 한 번 보관한다. 함께 찾은 답을 설명하고 조건 변경·실습 결과로 확인한다. 필요한 메모는 자유롭게 한다. 접속이 막히면 <a href="../../labs/week-02/SAMPLE_OUTPUT.md">제공 예제</a>를 분석하고 P1 직접 수행을 보충한다.</p>
+<h2 id="학습-범위를-조절하는-방법">학습 범위를 조절하는 방법</h2>
+<p>개인 공부에서 P1·P2의 정상 기준과 복습을 준비한다. 오프라인에서는 어려웠던 계산·출력과 조건 변경·복구를 확인한다. 선택 데모·시험 연계는 필수 이해와 수행 뒤에 진행한다. 구체적인 확인 순서는 <a href="facilitator.html">진행자 안내</a>를 따른다.</p>
 <h2 id="실습-파일과-선택-자료">실습 파일과 선택 자료</h2>
 <ul>
-<li><a href="../../labs/week-02/subnet_check.py" download>Python 검산기</a>: 기존 표준 라이브러리 도구. 손계산 뒤 사용하며 실제 통신을 시험하지 않는다.</li>
-<li><a href="code-reading.html">코드 읽기</a>: 입력·판단·출력과 선택 셸 실험의 흐름을 따라 읽는다.</li>
-<li><a href="../../labs/week-02/isolated_demo.sh" download>격리 데모</a>: 진행자가 권한·격리·복구를 사전 확인했을 때만 선택 실행. 관리 NIC·기본 경로를 변경하지 않는다.</li>
-<li><a href="explorations.html">추가 탐구</a> · <a href="ccna-practice.html">시험 연계</a>·<a href="ccna-answers.html">시험 해설</a>: 필수 완료 후 선택.</li>
-<li><a href="sources.html">출처와 지정 범위</a> · <a href="lab-sources.html">실습 출처</a>: 공식 근거·참고 글·자체 문제의 구분.</li>
+<li><a href="../../labs/week-02/subnet_check.py">Python 검산기</a>: 기존 표준 라이브러리 도구. 손계산 뒤 사용하며 실제 통신을 시험하지 않는다.</li>
+<li><a href="../../labs/week-02/CODE_READING.md">코드 읽기</a>: 입력·판단·출력과 선택 셸 실험의 흐름을 따라 읽는다.</li>
+<li><a href="../../labs/week-02/isolated_demo.sh">격리 데모</a>: 진행자가 권한·격리·복구를 사전 확인했을 때만 선택 실행. 관리 NIC·기본 경로를 변경하지 않는다.</li>
+<li><a href="explorations.html">추가 탐구</a> · <a href="CCNA_PRACTICE.md">시험 연계</a>·<a href="CCNA_ANSWERS.md">시험 해설</a>: 필수 완료 후 선택.</li>
+<li><a href="sources.html">출처와 지정 범위</a> · <a href="LAB_SOURCES.md">실습 출처</a>: 공식 근거·참고 글·자체 문제의 구분.</li>
 </ul>
 <h2 id="자료-읽기와-답안-보관">자료 읽기와 답안 보관</h2>
-<p>이 사이트에서 질문·개념·실습·해설을 이어서 읽는다. 외부 원문에는 인터넷이 필요하다. 공동 질문은 함께 읽고 설명하는 자료다. 복습·시험 연계 화면에서 답안을 입력했다면 이동 전에 Markdown으로 내려받고 파일을 확인한다.</p><p>기존 VM의 읽기 전용 P1 조회와 P2 손계산·검산이 필수다. 격리 설정 변경은 선택이며 실제 Linux 수행·개인별 설명 여부는 각자의 근거로 확인한다.</p>
+<p><a href="index.html">학습 홈</a>에서 읽는다. 외부 원문에는 인터넷이 필요하다. 복습·시험 연계 화면에 답안을 입력했다면 이동 전에 내려받고 파일을 확인한다.</p>
 <p>다음은 <a href="../week-03/index.html">3주차 LAN·MAC·ARP·ICMP</a>다. “어느 경로로 보낼까?”에서 “그 링크의 다음 상대를 어떻게 찾을까?”로 이어간다. 개념 화면의 모형은 <strong>양쪽 접두사 동시 변경</strong>, C2와 선택 데모는 <strong>A만 변경</strong>이므로 조건을 구분한다.</p>
 </article></div></main><footer class="footer"><div class="shell"><a href="index.html">2주차 입구</a><a href="sources.html">출처와 읽을 범위</a><a href="#main">맨 위로</a></div></footer><script>(()=>{const select=document.querySelector('#prefix');if(!select)return;select.addEventListener('change',()=>{const p=Number(select.value);const blocks=document.querySelector('#blocks');blocks.innerHTML=p===24?'<div>0~255<br>A .10 · B .70</div>':'<div>0~63<br>A .10</div><div>64~127<br>B .70</div><div>128~191</div><div>192~255</div>';document.querySelector('#cidr-result').textContent=p===24?'/24: A와 B는 모두 192.0.2.0/24에 포함됩니다. 실제 통신 성공은 확인하지 않았습니다.':'/26: A는 192.0.2.0/26, B는 192.0.2.64/26입니다. 서로 다른 서브넷이며 실제 도달성은 경로와 환경을 확인해야 합니다.';});})();</script></body></html>

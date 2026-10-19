@@ -30,9 +30,13 @@ Q3에서 rwnd만40,000byte로 줄인다. 다음에는 그 상태에서 RTT만50m
 
 [제공 사례](../../labs/week-14/observations.txt)의 latency에서 요청 수·HTTP 오류 수와 각 단계 시간 범위를 읽어라. `first_s−connect_s`가 순수 망 RTT인지 판단하고 서로 다른 가설 두 개·구별할 관찰을 말하라. 본인 실험이 있으면 실제 명령/로그와도 대조하라.
 
+조건을 바꿔 [가공 분포](CONCEPTS.md#operational-bridge)의 A·B를 비교하라. 평균·p95·p99를 주어진 nearest-rank 방식으로 구하고, 평균과 HTTP 오류 수만으로 일부 사용자의 대기를 판단할 수 있는지 설명하라.
+
 ## Q7. 살아 있지만 제외된 서버
 
 enabled=[a], health={a:true,b:true}, eligible=[a]다. 실제 요청6회의 X-Backend는 모두a이고 HTTP200이다. b가 고장났다고 결론 낼 수 있는가? 복귀를 확인할 구체적 근거는 무엇인가?
+
+다른 조건에서 기존 연결의 GET은200, 같은 출발지·목적지의 새 TCP 연결은 timeout이다. [연결 사례](CONCEPTS.md#operational-bridge)에서 정책·상태와 자원 부족을 경쟁 가설로 세우고, 둘을 구별할 다음 관찰을 골라라. 증상만으로 원인을 확정하지 않는다.
 
 ## Q8. 상태 조회와 서비스
 

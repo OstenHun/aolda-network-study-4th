@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="두 번의 60분 모임을 제안한다. 조회 한 묶음과 짧은 ARP/ICMP 관찰 두 실험에 집중하고, 환경이 막히면 가상 패킷 예제로 개념 학습을 이어간다."><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"><title>3주차 진행자 안내 — LAN의 다음 상대 · 아올다 3주차</title><style>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="개인 공부에서 개념·문제·실습을 준비하고 오프라인 한 번에서 설명·조건 변경·직접 수행을 확인한다. 준비·복구와 제공 분석의 경계를 지키며 막힌 필수 항목을 보충한다."><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"><title>3주차 진행자 안내 — LAN의 다음 상대 · 아올다 3주차</title><style>
 :root{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:17px;line-height:1.85;color:#172f40;background:#fff;--blue:#07548e;--brand:#0e76c4;--line:#d8e3eb;--wash:#f3f8fc}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}:focus-visible{outline:3px solid #9c5900;outline-offset:4px}.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:3}.skip:focus{top:12px}.shell{max-width:1180px;margin:auto;padding:0 24px}.site-header{border-bottom:1px solid var(--line)}.header-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;color:var(--brand);font-size:1.45rem;text-decoration:none;letter-spacing:-.04em}.brand small{font-size:.72rem;color:var(--blue);letter-spacing:0;margin-left:12px}.top-nav{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:.86rem}.top-nav a[aria-current]{font-weight:800;text-decoration-thickness:2px}.hero{padding-top:38px;padding-bottom:24px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--blue);font-weight:700;font-size:.88rem;margin:0 0 8px}h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.25;letter-spacing:-.045em;text-wrap:balance;margin:0 0 16px}h2{font-size:clamp(1.4rem,2.5vw,1.85rem);line-height:1.45;letter-spacing:-.03em;margin:48px 0 18px}h3{font-size:1.18rem;line-height:1.5;margin:32px 0 14px}h4{font-size:1.04rem;margin:28px 0 12px}h1,h2,h3,h4{word-break:keep-all;overflow-wrap:anywhere;scroll-margin-top:20px}p,li{max-width:68ch;word-break:keep-all;overflow-wrap:anywhere}p{margin:13px 0}li{margin:5px 0}ul,ol{padding-left:1.55rem}article{max-width:880px;padding:20px 0 65px}article>h1:first-child{display:none}strong{color:#113f60}code,pre{font-family:Consolas,"Courier New",monospace}code{font-size:.93em;overflow-wrap:anywhere}pre{max-width:100%;overflow:auto;background:#f3f6f8;border-left:2px solid #a6c7d9;padding:18px;font-size:.88rem;line-height:1.65;border-radius:0 8px 8px 0}pre code{overflow-wrap:normal}blockquote{margin:20px 0;padding:3px 20px;border-left:3px solid var(--brand);background:var(--wash)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:9px;margin:20px 0}.table-scroll:focus{outline-offset:2px}table{width:100%;border-collapse:collapse;min-width:500px;font-size:.9rem;line-height:1.6}td,th{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}tr:last-child td{border-bottom:0}th{background:var(--wash)}.source-code{margin:24px 0}.source-code summary{cursor:pointer;color:var(--blue);font-weight:700;padding:12px;background:var(--wash);border-radius:8px}.page-links{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}.page-links a,.button-link,button{display:inline-block;border:1px solid #8aabba;color:var(--blue);background:white;border-radius:10px;padding:9px 14px;text-decoration:none;font:inherit;cursor:pointer}.page-links a:hover,.button-link:hover,button:hover{background:#e7f2f9;text-decoration:underline}.toc{max-width:880px;margin:20px 0;padding:12px 16px;background:var(--wash);border:1px solid var(--line);border-radius:10px}.toc strong{display:block;margin-bottom:5px}.toc-links{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem}.toc a{white-space:normal}.source-type{font-size:.84em}.answer-box{margin:17px 0 24px;padding:15px;background:var(--wash);border-radius:10px}.answer-box label{display:block;font-weight:700;color:var(--blue);margin-bottom:7px}.answer-box textarea{display:block;width:100%;min-height:8rem;resize:vertical;border:1px solid #91acbd;border-radius:6px;padding:12px;font:inherit;line-height:1.5;background:#fff;color:#172f40}.task-check{cursor:pointer}.task-check input{min-width:1.1rem;min-height:1.1rem;accent-color:var(--blue)}.questions .answer-box{margin:10px 0 25px}.save-bar{border-top:3px solid var(--brand);background:var(--wash);padding:20px;margin-top:38px;border-radius:0 12px 12px 0}.save-bar p{margin:0 0 14px}.save-bar button{background:var(--blue);color:white;border-color:var(--blue);font-weight:700;min-height:44px}.save-bar button:hover{background:#063d67;color:white}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}.flow-card{border:1px solid var(--line);border-top:3px solid var(--brand);border-radius:10px;padding:19px;background:white}.flow-card h2{font-size:1.25rem;margin:0 0 8px}.flow-card p{margin:0 0 12px}.flow-card a{font-weight:700}.note{background:var(--wash);padding:18px 22px;border-radius:10px}.footer{border-top:1px solid var(--line);padding:25px 0 45px;font-size:.85rem;color:#435e70}.footer a{margin-right:18px}@media(max-width:620px){.shell{padding:0 17px}.header-row{display:block}.top-nav{margin-top:8px;gap:5px 13px}.hero{padding-top:27px}.flow{grid-template-columns:1fr}pre{padding:12px}article{padding-bottom:42px}h2{margin-top:38px}}@media(max-width:360px){.brand small{display:block;margin:0}.top-nav{font-size:.82rem}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{html{scroll-behavior:auto}.site-header,.page-links,.toc,.footer,.save-bar button,.skip{display:none!important}.shell{max-width:none;padding:0}article{max-width:none}.hero{padding:0}.answer-box{break-inside:avoid}.answer-box textarea{min-height:5rem}.table-scroll{overflow:visible}table{min-width:0}a{color:inherit;text-decoration:underline}}
 .js-only{display:none}.js-ready .js-only{display:inline-block}
 
@@ -100,10 +100,10 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 }
 
 .topic-path,.page-links{display:flex;flex-wrap:wrap;gap:.5rem 1rem}.topic-path{border-bottom:1px solid var(--line);padding:1rem 0;font-size:.85rem}.topic-path [aria-current]{font-weight:800;text-decoration-thickness:3px}.next-hop-model{background:var(--wash);padding:1.25rem;border-left:3px solid var(--brand);margin-bottom:2rem}.next-hop-model h2{margin-top:0}.next-hop-model select{font:inherit;color:var(--blue);max-width:100%;padding:.5rem}.frame-diagram{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}.frame-diagram>div{border:1px solid var(--line);background:white;padding:1rem}.local-status{font-size:.85rem;color:#466477}button:disabled{opacity:.65;cursor:default}@media(max-width:650px){.frame-diagram{grid-template-columns:1fr}}
-</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="facilitator.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 3주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실험</a><a href="worksheet.html">함께 찾을 질문</a><a href="personal-record.html">개인 기록</a><a href="review.html">복습 문제</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">LAN · MAC · ARP · ICMP</p><h1>3주차 진행자 안내 — LAN의 다음 상대</h1><p>두 번의 60분 모임을 제안한다. 조회 한 묶음과 짧은 ARP/ICMP 관찰 두 실험에 집중하고, 환경이 막히면 가상 패킷 예제로 개념 학습을 이어간다.</p></div><nav class="topic-path" aria-label="개념 학습 순서"><a href="recall.html">1. 복습 진단</a><a href="lan-mac.html">2. LAN·MAC</a><a href="next-hop.html">3. 다음 홉</a><a href="arp.html">4. ARP·캐시</a><a href="icmp.html">5. ICMP·ping</a></nav><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#핵심-개념과-질문-연결">핵심 개념과 질문 연결</a><a href="#시작-전-준비">시작 전 준비</a><a href="#사전-공동학습-60분--중심-질문을-함께-탐구">사전 공동학습 60분 — 중심 질문을 함께 탐구</a><a href="#오프라인-실습-60분--필수-두-실험">오프라인 실습 60분 — 필수 두 실험</a><a href="#판정과-다음-질문">판정과 다음 질문</a></div></nav><article><h2 id="핵심-개념과-질문-연결">핵심 개념과 질문 연결</h2>
+</style><meta name="robots" content="noindex,nofollow"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2307548e%22%2F%3E%3Cpath%20d%3D%22M8%209h16M8%2016h16M8%2023h16M8%209v14%22%20stroke%3D%22white%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E"></head><body data-page="facilitator.html"><div style="padding:10px 20px;border-bottom:1px solid #d8e3eb;background:#f3f8fc;font:15px/1.7 sans-serif"><a href="../../index.html">스터디 학습 홈</a></div><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="shell header-row"><a class="brand" href="index.html">아올다 <small>4기 네트워크 · 3주차</small></a><nav class="top-nav" aria-label="주요 자료"><a href="index.html">시작</a><a href="essentials.html">핵심·혼동·개발 질문</a><a href="linux.html">Linux 실험</a><a href="worksheet.html">함께 찾을 질문</a><a href="personal-record.html">개인 기록</a><a href="review.html">복습 문제</a></nav></div></header><main id="main" class="shell"><div class="hero"><p class="eyebrow">LAN · MAC · ARP · ICMP</p><h1>3주차 진행자 안내 — LAN의 다음 상대</h1><p>개인 공부에서 개념·문제·실습을 준비하고 오프라인 한 번에서 설명·조건 변경·직접 수행을 확인한다. 준비·복구와 제공 분석의 경계를 지키며 막힌 필수 항목을 보충한다.</p></div><nav class="topic-path" aria-label="개념 학습 순서"><a href="recall.html">1. 복습 진단</a><a href="lan-mac.html">2. LAN·MAC</a><a href="next-hop.html">3. 다음 홉</a><a href="arp.html">4. ARP·캐시</a><a href="icmp.html">5. ICMP·ping</a></nav><div class="document-layout"><nav class="toc" aria-label="이 페이지의 목차"><strong>이 페이지의 목차</strong><div class="toc-links"><a href="#핵심-개념과-질문-연결">핵심 개념과 질문 연결</a><a href="#시작-전-준비">시작 전 준비</a><a href="#한-주의-개인-공부와-오프라인-확인">한 주의 개인 공부와 오프라인 확인</a><a href="#판정과-다음-질문">판정과 다음 질문</a></div></nav><article><h2 id="핵심-개념과-질문-연결">핵심 개념과 질문 연결</h2>
 <p><a href="essentials.html">핵심 3·혼동 2·개발 사례 1</a>을 읽기 마지막 5분에 사용한다. 공통 질문 하나에 개발 사례의 설명 → 조건을 바꾼 질문 → 원인을 좁히는 질문을 연결하고 추가 기록 과제로 만들지 않는다. 답은 <a href="answers.html#%EA%B0%9C%EB%B0%9C-%EC%A7%88%EB%AC%B8-%ED%95%B4%EC%84%A4">분리 해설</a>로 확인한다. 다음 주에 다시 물을 질문: “게이트웨이의 MAC이 보이는데도 IP 목적지는 원격 서버로 남을 수 있는 이유는?”</p>
 <h2 id="시작-전-준비">시작 전 준비</h2>
-<p>아래 시간표는 개념 학습과 실습을 각 60분으로 나눌 때의 예시다. 준비 상태와 학습 속도에 맞춰 조정한다.</p>
+<p>개인 공부에서 개념과 실습을 먼저 시도하고, 오프라인에서는 준비 상태와 실제로 막힌 부분을 확인한다.</p>
 <ul>
 <li><input disabled="" type="checkbox"> 허용된 Linux VM 접속과 <code>ip</code>·<code>ping</code>·<code>tcpdump</code>·<code>timeout</code>을 확인한다. 설치·권한 변경은 기본 실습이 아니다.</li>
 <li><input disabled="" type="checkbox"> 허용할 IPv4 대상과 범위를 확인한다. 다른 참가자 VM은 이미 존재하고 같은 네트워크이며 양측 권한이 확인된 경우에만 쓴다.</li>
@@ -111,84 +111,37 @@ textarea { font-family: inherit; font-size: 1rem; line-height: 1.8; }
 <li><input disabled="" type="checkbox"> 제한된 필터와 <code>sudo -n</code> 캡처 권한을 사전 확인한다. 캡처 권한이 없으면 패킷 분석에만 <a href="../../labs/week-03/sample-trace.txt">가상 패킷 예제</a>를 쓰고 가능한 조회·ping은 직접 수행한다.</li>
 <li><input disabled="" type="checkbox"> 공유할 기록에서 실제 주소·호스트명·계정과 비밀정보를 가렸는지 확인한다.</li>
 </ul>
-<p><a href="linux.html">실행 절차</a>의 중단 조건과 권한 경계를 먼저 확인한다. 예제의 결과를 본인 환경의 관찰로 기록하지 않는다.</p>
-<h2 id="사전-공동학습-60분--중심-질문을-함께-탐구">사전 공동학습 60분 — 중심 질문을 함께 탐구</h2>
+<p><a href="../../labs/week-03/LINUX.md">실행 절차</a>의 중단 조건과 권한 경계를 먼저 확인한다. 예제의 결과를 본인 환경의 관찰로 기록하지 않는다.</p>
+<h2 id="한-주의-개인-공부와-오프라인-확인">한 주의 개인 공부와 오프라인 확인</h2>
+<p>개인 준비는 <a href="index.html#personal-notes">학습 홈의 정리 안내</a>에 따라 주요 질문과 내 답·헷갈리는 개념 비교·꼭 기억하고 이해할 핵심을 살핀다. 노트 분량을 평가하지 않고 이유·조건 변경·관련 실습 근거로 확인한다. 모임 뒤에는 틀린 설명과 남은 보충만 기존 개인 노트에서 고치며 중복 제출을 요구하지 않는다.</p>
+<p><a href="index.html#weekly-study">학습 홈의 개인 공부 범위와 세 확인 질문</a>을 오프라인 모임 전까지 준비한다. 모임은 그 주 학습을 마무리하고 남은 보충을 정하는 자리다. 개념·공식 지정 절·복습과 준비된 실습의 정상→변경→복구는 개인 공부에서 시도한다. 모임 전 완성 답안·발표 자료를 요구하지 않으며 막힌 질문과 본인 근거를 가져오게 한다. 진단 원인을 가리는 과제는 정상 기준과 도구까지만 준비한다.</p>
+<p>오프라인은 한 번의 모임에서 <strong>설명 → 새 조건 → 본인 실습/분석 확인 → 보충 결정</strong>으로 진행한다. 아래 60분은 시간 배분 예시이며 모임 길이나 추가 회차를 확정하는 표가 아니다.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
 <thead>
 <tr>
-<th>시간</th>
-<th>진행·질문</th>
-<th>확인할 것</th>
+<th>시간 예시</th>
+<th>진행자가 확인할 것</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>0~10분</td>
-<td>2주차 경로와 1주차 lo를 짧게 복습하고 <a href="worksheet.html">중심 질문</a>을 확인</td>
-<td>막히는 앞 개념과 필요한 교재</td>
+<td>개인 공부에서 막힌 질문과 2~4학습 단위 전 개념 하나를 골라 근거로 설명</td>
 </tr>
 <tr>
-<td>10~30분</td>
-<td>LAN·MAC → 다음 홉 → ARP에서 필요한 절과 RFC 826의 Packet Generation·An Example을 함께 탐색</td>
-<td>자료의 절·주장·해당 조건</td>
+<td>10~25분</td>
+<td>학습 홈의 중심 질문 → 조건 변경. 소그룹에서 설명자/확인자 교대</td>
 </tr>
 <tr>
-<td>30~45분</td>
-<td>한 명이 목적지 IP와 링크의 다음 상대를 그림으로 설명하고 다른 사람은 근거를 질문</td>
-<td>프레임·패킷, PC·VM의 구분</td>
+<td>25~50분</td>
+<td>A 자기 주소/경로/이웃 조회와 B 승인 대상의 제한된 ping. 이미 수행했다면 근거를 보고 다른 한 조건의 판단·변경·복구 확인</td>
 </tr>
 <tr>
-<td>45~55분</td>
-<td>같은 링크/게이트웨이 사례를 비교. 필요하면 캐시·ping의 보조 질문과 RFC 792를 선택</td>
-<td>바꾼 조건과 예상, 실제 확인 방법</td>
-</tr>
-<tr>
-<td>55~60분</td>
-<td>허용 대상·VM·도구·캡처 권한 점검</td>
-<td>실습에 필요한 환경과 막힌 항목</td>
+<td>50~60분</td>
+<td>정상 복구·받은 도움·미완료 구분, 개인 학습 노트에 필요한 보충과 다음 질문 연결</td>
 </tr>
 </tbody></table></div>
-<p>시간은 제안이며 공동 탐색이 더 필요하면 보조 질문을 줄인다. 공식 절은 <a href="sources.html">출처</a>, 탐색이 막힐 때는 주제별 한국어 교재를 사용한다. 한 명의 설명 뒤 다른 사람이 조건을 바꾸어 묻고 설명자는 질문·회차마다 교대한다. 가상 패킷 예제를 실제 아올다 관찰로 쓰지 않는다. 장비 역할은 교육용 모형이며 현재 아올다의 물리/가상망 구성을 확정하지 않는다.</p>
-<h2 id="오프라인-실습-60분--필수-두-실험">오프라인 실습 60분 — 필수 두 실험</h2>
-<div class="table-scroll" role="region" tabindex="0" aria-label="가로로 스크롤할 수 있는 표"><table>
-<thead>
-<tr>
-<th>시간</th>
-<th>활동과 전환 기준</th>
-<th>개인 증거</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0~6분</td>
-<td>승인 대상·실습 NIC·직접 실행 가능 여부 확인. 대상이 없으면 가상 패킷 예제로 전환</td>
-<td>환경·출처를 개인 기록에 표시</td>
-</tr>
-<tr>
-<td>6~17분</td>
-<td>실험 A: 각자 예상 뒤 주소·경로·이웃 조회. <code>dev</code>·<code>via</code>·<code>link/ether</code> 확인</td>
-<td>상세 명령·출력은 개인 기록/원파일</td>
-</tr>
-<tr>
-<td>17~30분</td>
-<td>실험 B: 승인 대상 ping 2회·전후 이웃 비교. 패킷은 12초/16패킷 이내 직접 캡처 또는 제공 trace 분석</td>
-<td>본인 ping·이웃 조회와 직접 캡처 또는 제공 분석의 출처</td>
-</tr>
-<tr>
-<td>30~45분</td>
-<td><a href="worksheet.html">중심 질문</a>을 이번 출력·패킷 또는 제공 trace와 대조하고 예상과 비교</td>
-<td>IP 목적지와 다음 홉 MAC의 구분·수정한 설명</td>
-</tr>
-<tr>
-<td>45~55분</td>
-<td>짝·3인 소그룹에서 각자 2분 독립 설명. 각자 경로·이웃을 다시 조회하거나 같은 제공된 패킷 예제를 도움 없이 재분석하고 확인자를 남긴다</td>
-<td>본인의 재현·2분 설명·짝의 근거 질문. 원본 출력은 개인 기록</td>
-</tr>
-<tr>
-<td>55~60분</td>
-<td>실험 정리·파일 보관·다음 확인 질문과 미완료 보충 점검</td>
-<td>직접 수행·제공 분석·보충 상태</td>
-</tr>
-</tbody></table></div>
-<p>환경 문제 해결이 5분을 넘으면 가능한 직접 조회·ping을 먼저 진행하고 막힌 부분만 제공 trace로 분석한다. 캡처 도구·권한만 없는 경우 조회·ping을 건너뛰지 않는다. 캡처 미실행과 실제 0패킷을 구분한다. 원본 출력과 예상·패킷 분석, 스스로 다시 확인한 결과는 <a href="personal-record.html">개인 실습 메모</a> 또는 별도 파일에 한 번 보관한다. 실습 메모 양식은 참고용이며 자유로운 노트를 사용해도 된다. 진행자가 설명한 결과를 참가자별 완료로 집계하지 않는다. 주소·경로·방화벽·SSH 관리·이웃 캐시 삭제는 수행하지 않는다.</p>
+<p>개인 학습 시간을 고정된 2~3시간으로 제한하지 않는다. 필수 범위를 먼저 공부하고 실제 막힘에 따라 시간을 배분한다. 주차를 미리 분할하거나 필수 기준을 낮추지 않으며, 개인 공부 후에도 해결되지 않는 항목만 보충한다. C04/C08/C12/C16은 해당 주 기존 설명·실습을 대체하고 점검을 별도로 더하지 않는다. 한 사람의 답·팀 합의·파일 제출은 개인 이해/직접 수행의 증거가 아니다.</p>
+<p>캡처 도구·권한만 없으면 직접 조회·제한된 ping을 먼저 확인한다. 캡처 미실행과 실제 0패킷을 구분한다. 주소·경로·방화벽·SSH 관리·이웃 캐시 삭제는 수행하지 않는다. 제공 trace 분석과 본인 실행을 나누어 개인 학습 노트에 남긴다.</p>
 <h2 id="판정과-다음-질문">판정과 다음 질문</h2>
 <p>필수 실습을 마쳤는지 <strong>각자</strong> 확인한다. A의 조회 결과, B의 허용 대상 ping 결과와 직접 캡처 또는 제공 trace 분석, 실행하지 못한 단계의 이유, 목적지 IP와 다음 홉 MAC을 표시한 그림을 살펴본다. 질문에 답한 설명과 스스로 다시 확인한 결과도 함께 본다. 조회·ping 없이 제공 예제만 분석했다면 직접 수행은 보충으로 남긴다. 직접 조회·ping과 제공 패킷 분석을 마쳤다면 직접 캡처를 추가 필수로 요구하지 않는다. <code>INCOMPLETE</code>·<code>FAILED</code>·행 없음·ARP 미관찰은 실패를 숨길 이유가 아니다. ping 응답만으로 HTTP 서비스 성공을 결론 내리지 않는지 확인한다. 다음 주 TCP/UDP에서 “IP 패킷이 도착한 뒤 어느 프로그램으로 가는가?”로 연결한다.</p>
 </article></div></main><footer class="footer"><div class="shell"><a href="../week-02/index.html">2주차 복습</a><a href="../ssh-top-down/index.html">SSH 준비</a><a href="sources.html">출처</a><a href="validation.html">검증 상태</a><a href="#main">맨 위로</a></div></footer><script>(() => {
