@@ -650,6 +650,14 @@
       "label": "경로 실습·코드 읽기"
     },
     {
+      "id": "week07-real-route",
+      "source": "materials/week-07/REAL_ROUTE.md",
+      "output": "materials/week-07/real-route.html",
+      "group": "week-07",
+      "kind": "lesson",
+      "label": "실제 반환 경로·링크 관찰"
+    },
+    {
       "id": "week07-review",
       "source": "materials/week-07/REVIEW.md",
       "output": "materials/week-07/review.html",

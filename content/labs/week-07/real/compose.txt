@@ -1,0 +1,9 @@
+services:
+  lab:
+    build:
+      context: .
+      dockerfile: Dockerfile.txt
+    network_mode: none
+    cap_add: [NET_ADMIN, NET_RAW, SYS_ADMIN]
+    # Only internal veth/netns/captures; no host network, mounts, ports or socket.
+    stop_grace_period: 10s

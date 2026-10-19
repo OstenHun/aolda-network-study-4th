@@ -33,3 +33,16 @@ RFC 1812는 1995년 IPv4 라우터 요구사항이다. 이번에는 위 두 규�
 [2주 CIDR](../week-02/CONCEPTS.md)·[3주 다음 홉/ARP](../week-03/topics/03-next-hop.md)·[4주 TCP](../week-04/CONCEPTS.md)·[5주 이름](../week-05/CONCEPTS.md)·[6주 TLS/HTTP](../week-06/CONCEPTS.md)의 정상 자료를 선수 설명으로 재사용한다. 반환 경로 필요성은 각 방향의 다음 홉 선택 원리를 고정 구성에 적용한 자체 추론이다. 제공 예제를 실제 수행 근거로 바꾸지 않는다.
 
 긴 원문·외부 코드·그림을 재배포하지 않고 필요한 공식 절로 연결한다. 다른 자료를 추가 복사할 때는 해당 원문의 이용 조건을 확인한다. 이 자료가 대학 평가·특정 기업 기출·자격증 전체 범위를 대표하지 않는다.
+
+<span id="real-route"></span>
+## 실제 반환 경로·링크 실습의 근거
+
+확인일: 2026-10-19. [실제 Linux 안내](REAL_ROUTE.md)는 아래 공개 도구 문서를 근거로 만든 자체 구성이다. 외부 랩 파일을 복제하지 않았다.
+
+- [ip-netns(8)](https://man7.org/linux/man-pages/man8/ip-netns.8.html)의 DESCRIPTION·exec·delete, [veth(4)](https://man7.org/linux/man-pages/man4/veth.4.html): 독립된 네트워크 스택·veth 연결·프로세스 종료와 정리. 여러 장치를 한 커널의 네임스페이스로 만들며 물리 장비·호스트 전체 장애와 구별한다.
+- [ip-route(8)](https://man7.org/linux/man-pages/man8/ip-route.8.html)의 get·del·replace, [ip-link(8)](https://man7.org/linux/man-pages/man8/ip-link.8.html)의 up/down: 실제 경로 변경·조회와 링크 관리. 조회 성공을 실제 전달 성공으로 쓰지 않는다.
+- [Linux v6.18 fib_frontend.c](https://github.com/torvalds/linux/blob/v6.18/net/ipv4/fib_frontend.c)의 fib_netdev_event·NETDEV_DOWN/NETDEV_CHANGE: admin down의 경로 처리와 carrier 변화는 같은 동작이 아니다. 링크 up 뒤 정적 경로의 복귀를 가정하지 않고 실제 표를 확인하는 근거다. 설치 커널의 세부 패치는 다를 수 있다.
+- [Linux IP sysctl](https://docs.kernel.org/networking/ip-sysctl.html)의 ip_forward·rp_filter: 준비 구성에서 전달을 켜고 역방향 검사를 꺼 반환 경로 삭제만 관찰한다. 운영 환경의 권장 보안 설정이라는 뜻은 아니다. 필터·정책·NAT가 있는 다른 망에는 실패 양상이 달라질 수 있다.
+- [iputils ping](https://man7.org/linux/man-pages/man8/ping.8.html)의 -c/-W/-e, [tcpdump 원문](https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/master/tcpdump.1.in)의 -i/-s/-U/-w, [Wireshark ICMP 필드](https://www.wireshark.org/docs/dfref/i/icmp.html): 실제 Echo와 Identifier/Sequence, 양끝 저장 패킷을 대응한다. ICMP 오류가 인용하는 내부 패킷을 별도 왕복 성공으로 세지 않는다.
+
+설치 패키지 버전과 실제 결과는 본인 실행에서 확인한다. Linux·iproute2·iputils·tcpdump 구현을 스터디 자체 코드로 주장하지 않는다. 본 안내는 IPv4 정적 단일 경로를 다루며 정책 라우팅·동적 우회·정밀 성능은 범위 밖이다.
